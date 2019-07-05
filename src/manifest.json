@@ -1,0 +1,37 @@
+{
+  "manifest_version": 2,
+  "name": "Container proxy",
+  "version": "0.1.0",
+  "description": "Assign a proxy to a container",
+  "applications": {
+    "gecko": {
+      "id": "contaner-proxy@bekh-ivanov.me",
+      "strict_min_version": "67.0"
+    }
+  },
+  "browser_action": {
+  },
+  "icons": {
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true,
+    "browser_style": false
+  },
+
+  "permissions": [
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "storage",
+    "contextualIdentities",
+    "cookies",
+    "proxy"
+  ],
+
+  "background": {
+    "scripts": ["store/Store.js", "background-script.js"]
+  }
+
+}
