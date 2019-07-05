@@ -1,3 +1,4 @@
+[Extension page](https://addons.mozilla.org/en-US/firefox/addon/container-proxy/)
 
 ## Permissions
 
