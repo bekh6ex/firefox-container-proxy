@@ -26,20 +26,14 @@ const ProxyForm = {
     view: function () {
         return m(
             "form",
-            {
-                class: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4',
-                onsubmit: function (e) {
-                    e.preventDefault()
-                    ProxyModel.save()
-                }
-            },
+            {class: style.form},
             [
                 m('.mb-4', [
                     m("label.label", "Title (optional)"),
                     m(
                         "input.title",
                         {
-                            class: textInputClass,
+                            class: style.textInput,
                             value: ProxyModel.current.title,
                             oninput: (e) => ProxyModel.current.title = e.target.value,
                         }
@@ -57,16 +51,16 @@ const ProxyForm = {
                 ]),
                 m('.mb-4', [
                     m("label.label", "Host/IP"),
-                    m("input.host", {
-                        class: textInputClass,
+                    m("input.host[required]", {
+                        class: style.textInput,
                         value: ProxyModel.current.host,
                         oninput: (e) => ProxyModel.current.host = e.target.value
                     }),
                 ]),
                 m('.mb-4', [
                     m("label.label", "Port"),
-                    m("input.port", {
-                        class: textInputClass,
+                    m("input.port[type=number]", {
+                        class: style.textInput,
                         value: ProxyModel.current.port,
                         oninput: (e) => ProxyModel.current.port = e.target.value
                     }),
@@ -74,7 +68,7 @@ const ProxyForm = {
                 m('.mb-4', [
                     m("label.label", "Username"),
                     m("input.username", {
-                        class: textInputClass,
+                        class: style.textInput,
                         value: ProxyModel.current.username,
                         oninput: (e) => ProxyModel.current.username = e.target.value
                     }),
@@ -82,7 +76,7 @@ const ProxyForm = {
                 m('.mb-4', [
                     m("label.label", "Password"),
                     m("input.password", {
-                        class: textInputClass,
+                        class: style.textInput,
                         value: ProxyModel.current.password,
                         oninput: (e) => ProxyModel.current.password = e.target.value
                     }),
@@ -100,14 +94,15 @@ const ProxyForm = {
                 m('.mb-4', [
                     m("label.label", "Failover Timeout (in seconds)"),
                     m("input.failoverTimeout[type=number]", {
-                        class: textInputClass,
+                        class: style.textInput,
                         value: ProxyModel.current.failoverTimeout,
                         oninput: (e) => ProxyModel.current.failoverTimeout = Number.parseInt(e.target.value, 10)
                     }),
                 ]),
                 m('.mb-4', [
                     m("button[type=button]", {
-                        class: buttonClasses.join(' '), onclick: async () => {
+                        class: style.action, 
+                        onclick: async () => {
                             await ProxyModel.save()
                             m.route.set("/proxies")
                         }

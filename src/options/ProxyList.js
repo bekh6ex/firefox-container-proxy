@@ -13,15 +13,15 @@ const ProxyListModel = {
 
 function renderProxyItem(p) {
     const text = p.title ? p.title : `${p.host}:${p.port}`;
-    const editButton = m('a.edit', {
+    const editButton = m('button.edit[type=button]', {
         href: '/proxies/' + p.id,
         oncreate: m.route.link,
-        class: 'bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'
+        class:  style.action
     }, 'edit');
     const deleteButton = m('button.delete[type=button]', {
         oncreate: m.route.link,
         onclick: () => ProxyListModel.delete(p.id),
-        class: 'bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'
+        class: style.action
     }, 'delete');
     return m('.proxy-list-item', [text, editButton, deleteButton])
 }
@@ -32,7 +32,7 @@ const ProxyList = {
     view: () => {
         const items = ProxyListModel.list.map(renderProxyItem);
         const actions = m('.actions', [
-            m('a[href=/proxies/new]', {oncreate: m.route.link}, "New")
+            m('a[href=/proxies/new]', {oncreate: m.route.link, class: style.action }, "+")
         ])
         return [...items, actions]
     }
