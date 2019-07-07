@@ -12,6 +12,8 @@
   "browser_action": {
   },
   "icons": {
+    "48": "icon.svg",
+    "96": "icon.svg"
   },
   "options_ui": {
     "page": "options/options.html",
