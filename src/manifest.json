@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Container proxy",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Assign a proxy to a container",
   "applications": {
     "gecko": {
