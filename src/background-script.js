@@ -1,10 +1,11 @@
-
 const store = new Store()
 
-function initializeAuthListener(tabId, proxy) {
+function initializeAuthListener(cookieStoreId, proxy) {
 
     const listener = (details) => {
-        if (!details.isProxy) return {};
+        if (!details.isProxy) return {}
+
+        if (details.cookieStoreId !== cookieStoreId) return {}
 
         const info = details.proxyInfo;
         if (info.host !== proxy.host || info.port !== proxy.port || info.type !== proxy.type) return {}
@@ -13,12 +14,13 @@ function initializeAuthListener(tabId, proxy) {
         const result = {authCredentials: {username: proxy.username, password: proxy.password}};
 
         browser.webRequest.onAuthRequired.removeListener(listener)
-        
+
         return result
-    };
+    }
+    
     browser.webRequest.onAuthRequired.addListener(
-        listener,                   
-        {urls: ['<all_urls>'], tabId: tabId},                    
+        listener,
+        {urls: ['<all_urls>']},
         ['blocking']
     )
 }
@@ -29,21 +31,21 @@ function openPreferences() {
 
 async function onRequest(requestDetails) {
 
-    const tabId = requestDetails.tabId;
+    const cookieStoreId = requestDetails.cookieStoreId
+    if (!cookieStoreId) {
+        console.error("cookieStoreId is not defined",requestDetails)
+        return [];
+    }
     
-    const tab = await browser.tabs.get(tabId)
-    const cookieStoreId = tab.cookieStoreId;
-    console.log(cookieStoreId)
     const proxies = await store.getProxiesForContainer(cookieStoreId);
-    
-    console.log('proxies', proxies )
+
     if (proxies.length > 0) {
         proxies.forEach(p => {
             if (p.type === 'http' || p.type === 'https') {
-                initializeAuthListener(tabId, p)
+                initializeAuthListener(cookieStoreId, p)
             }
         })
-    
+
         return proxies/*.map(p => {
             return {type: p.type, host:p.host, port: p.port, username: p.username, password: p.password, proxyDNS: p.proxyDNS, failoverTimeout: Number.parseInt(p.failoverTimeout, 10)}
         })*/
@@ -56,7 +58,7 @@ async function onRequest(requestDetails) {
 const filter = {urls: ["<all_urls>"]}
 
 
-browser.proxy.onRequest.addListener(onRequest,filter)
+browser.proxy.onRequest.addListener(onRequest, filter)
 
 browser.browserAction.onClicked.addListener(openPreferences);
 

@@ -25,7 +25,6 @@
     "<all_urls>",
     "webRequest",
     "webRequestBlocking",
-    "tabs",
     "storage",
     "contextualIdentities",
     "cookies",

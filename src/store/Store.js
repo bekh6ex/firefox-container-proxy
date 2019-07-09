@@ -39,7 +39,6 @@ Store.prototype.getRelations = async function getRelations() {
 
 Store.prototype.getProxiesForContainer = async function getProxiesForContainer(cookieStoreId) {
     const relations = await this.getRelations()
-    console.log(relations)
     
     const proxyIds = relations[cookieStoreId] || []
     
@@ -48,12 +47,10 @@ Store.prototype.getProxiesForContainer = async function getProxiesForContainer(c
     }
     
     const proxies = await this.getAllProxies()
-    console.log(proxies)
     const proxyById = {};
     proxies.forEach(p => proxyById[p.id] = p)
 
     const result = proxyIds.map(pId => proxyById[pId])
         .filter(p => !!p);
-    console.log(result)
     return result
 }
