@@ -1,4 +1,6 @@
-const ContainerListView = (() => {
+import m from './lib/mithril.js'
+        
+export const ContainerListView = (() => {
 
     const ContainerListModel = {
         containers: [],
@@ -70,3 +72,4 @@ const ContainerListView = (() => {
 
     return ContainerListView
 })()
+

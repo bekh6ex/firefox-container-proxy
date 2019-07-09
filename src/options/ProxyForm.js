@@ -1,6 +1,9 @@
+import m from './lib/mithril.js'
+import {uuidv4} from './util.js'
+import {style, proxyTypes} from './constants.js'
 
-const ProxyForm = (()=>{
-    
+export const ProxyForm = (() => {
+
     const ProxyModel = {
         current: {},
         load: async (id) => {
@@ -114,6 +117,6 @@ const ProxyForm = (()=>{
             )
         }
     }
-    
+
     return ProxyForm
 })()

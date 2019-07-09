@@ -54,3 +54,5 @@ Store.prototype.getProxiesForContainer = async function getProxiesForContainer(c
         .filter(p => !!p);
     return result
 }
+
+window.Store = Store

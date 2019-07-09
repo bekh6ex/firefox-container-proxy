@@ -1,4 +1,7 @@
-const ProxyList = (()=>{
+import m from './lib/mithril.js'
+import {style} from './constants.js'
+
+export const ProxyList = (()=>{
     
     const ProxyListModel = {
         list: [],

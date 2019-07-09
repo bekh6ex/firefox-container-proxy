@@ -1,6 +1,12 @@
+import '../store/Store.js'
+import m from './lib/mithril.js'
+import {Layout} from './Layout.js'
+import {ContainerListView} from './ContainerListView.js'
+import {ProxyList} from './ProxyList.js'
+import {ProxyForm} from './ProxyForm.js'
 
-const store =  new Store()
-
+const Store = window.Store
+window.store =  new Store()
 
 
 m.route(document.body, "/containers", {

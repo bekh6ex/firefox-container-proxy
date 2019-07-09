@@ -1,4 +1,8 @@
-const Layout = {
+import m from './lib/mithril.js'
+import {style} from './constants.js'
+
+
+export const Layout = {
     view: function (vnode) {
         const title = m('h1', 'Container proxies')
         const warning = m('h2', {style: 'background: yellow; text-align: center'}, 'It\'s ugly, but it\'s working!')
