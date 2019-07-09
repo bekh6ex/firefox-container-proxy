@@ -21,6 +21,10 @@ function initializeAuthListener(tabId, proxy) {
     )
 }
 
+function openPreferences() {
+    browser.runtime.openOptionsPage()
+}
+
 async function onRequest(requestDetails) {
 
     const tabId = requestDetails.tabId;
@@ -51,6 +55,9 @@ const filter = {urls: ["<all_urls>"]}
 
 
 browser.proxy.onRequest.addListener(onRequest,filter)
+
+browser.browserAction.onClicked.addListener(openPreferences);
+
 
 browser.proxy.onError.addListener((e) => {
     console.error("Proxy error", e)
