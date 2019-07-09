@@ -11,9 +11,7 @@ function initializeAuthListener(tabId, proxy) {
 
 
         const result = {authCredentials: {username: proxy.username, password: proxy.password}};
-
-        browser.webRequest.onAuthRequired.removeListener(listener)
-
+        
         return result
     };
     browser.webRequest.onAuthRequired.addListener(
