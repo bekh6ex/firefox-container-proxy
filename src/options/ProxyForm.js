@@ -63,7 +63,7 @@ const ProxyForm = (()=>{
                         m("input.port[type=number]", {
                             class: style.textInput,
                             value: ProxyModel.current.port,
-                            oninput: (e) => ProxyModel.current.port = e.target.value
+                            oninput: (e) => ProxyModel.current.port = Number.parseInt(e.target.value, 10)
                         }),
                     ]),
                     m('.mb-4', [
