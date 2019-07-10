@@ -8,21 +8,25 @@ import {ProxyForm} from './ProxyForm.js'
 const Store = window.Store
 window.store =  new Store()
 
+const layout = new Layout()
+const containerListView = new ContainerListView()
+const proxyList = new ProxyList();
+const proxyForm = new ProxyForm()
 
 m.route(document.body, "/containers", {
     "/containers": {
         render: function () {
-            return m(Layout, m(ContainerListView))
+            return m(layout, m(containerListView))
         }
     },
     "/proxies": {
         render: function () {
-            return m(Layout, m(ProxyList))
+            return m(layout, m(proxyList))
         }
     },
     "/proxies/:id": {
         render: function (vnode) {
-            return m(Layout, m(ProxyForm, vnode.attrs))
+            return m(layout, m(proxyForm, vnode.attrs))
         }
     },
 })

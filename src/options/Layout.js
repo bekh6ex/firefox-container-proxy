@@ -1,9 +1,8 @@
 import m from './lib/mithril.js'
 import {style} from './constants.js'
 
-
-export const Layout = {
-    view: function (vnode) {
+export class Layout {   
+    view(vnode) {
         const title = m('h1', 'Container proxies')
         const warning = m('h2', {style: 'background: yellow; text-align: center'}, 'It\'s ugly, but it\'s working!')
         const main = m("main.layout.px-2.flex.-mx-2", [
