@@ -2,30 +2,41 @@ import m from './lib/mithril.js'
 import {uuidv4} from './util.js'
 import {style, proxyTypes} from './constants.js'
 
-const ProxyModel = {
-    current: {},
-    load: async (id) => {
+class ProxyModel {
+    constructor() {
+        this.current = {}
+    }
+
+    async load(id) {
         if (id === 'new') {
-            ProxyModel.current = {id: 'new'}
+            this.current = {id: 'new'}
             m.redraw()
             return
         }
-        ProxyModel.current = await store.getProxyById(id) || {id: 'new'}
+        this.current = await store.getProxyById(id) || {id: 'new'}
         m.redraw()
-    },
-    save: async () => {
-        if (ProxyModel.current.id === 'new') {
-            ProxyModel.current.id = uuidv4()
+    }
+    async save() {
+        if (this.current.id === 'new') {
+            this.current.id = uuidv4()
         }
-        await store.putProxy(ProxyModel.current)
+        await store.putProxy(this.current)
+    }
+    
+    accessProperty(property) {
+        return {
+            getValue: () => this.current[property],
+            setValue: (v) => this.current[property] = v
+        }
     }
 }
 
 class Input {
     constructor(props) {
         this.title = props.title
-        this.property = props.property
         this.required = !!props.required
+        this.getValue = props.getValue
+        this.setValue = props.setValue
         this.type = "text"
     }
     
@@ -42,9 +53,9 @@ class Input {
                     type: this.type,
                     class: style.textInput,
                     required: this.required,
-                    value: ProxyModel.current[this.property],
-                    oninput: (e) => ProxyModel.current[this.property] = e.target.value,
-                    onchange: (e) => ProxyModel.current[this.property] = this.normalizeValue(e.target.value),
+                    value: this.getValue(),
+                    oninput: (e) => this.setValue(e.target.value),
+                    onchange: (e) => this.setValue(this.normalizeValue(e.target.value)),
                 }
             ),
         ]
@@ -83,18 +94,21 @@ class PasswordInput extends Input {
 
 export class ProxyForm {
     constructor() {
-        this.titleInput = new TrimmedTextInput({title: "Title (optional)", property: 'title'})
-        this.hostInput = new TrimmedTextInput({title: 'Host/IP', property: 'host', required: true})
-        this.portInput = new PositiveNumberInput({title: 'Port', property: 'port', required: true})
-        this.usernameInput = new TrimmedTextInput({title: "Username", property: 'username'})
-        this.passwordInput = new PasswordInput({title: "Password", property: 'password'})
+        const model = new ProxyModel();
+        this.model = model
+        
+        this.titleInput = new TrimmedTextInput({title: "Title (optional)", ...model.accessProperty('title')})
+        this.hostInput = new TrimmedTextInput({title: 'Host/IP', ...model.accessProperty('host'), required: true})
+        this.portInput = new PositiveNumberInput({title: 'Port', ...model.accessProperty('port'), required: true})
+        this.usernameInput = new TrimmedTextInput({title: "Username", ...model.accessProperty('username')})
+        this.passwordInput = new PasswordInput({title: "Password", ...model.accessProperty('password')})
         this.failoverTimeoutInput = new PositiveNumberInput({
             title: 'Failover Timeout (in seconds)',
-            property: 'failoverTimeout'
+            ...model.accessProperty('failoverTimeout')
         })
     }
     oninit(vnode) {
-        ProxyModel.load(vnode.attrs.id)
+        this.model.load(vnode.attrs.id)
     }
     view() {
         return m(
@@ -107,8 +121,8 @@ export class ProxyForm {
                     m(
                         "select.type",
                         {
-                            value: ProxyModel.current.type,
-                            oninput: (e) => ProxyModel.current.type = e.target.value
+                            value: this.model.current.type,
+                            oninput: (e) => this.model.current.type = e.target.value
                         },
                         proxyTypes.map(t => m('option', {value: t}, t.toUpperCase()))),
                 ]),
@@ -120,8 +134,8 @@ export class ProxyForm {
                     m("label.label", {class: 'md:w-2/3 block'}, [
                         m("input.proxyDNS[type=checkbox]", {
                             class: 'mr-2 leading-tight',
-                            value: ProxyModel.current.proxyDNS,
-                            oninput: (e) => ProxyModel.current.proxyDNS = e.target.value
+                            value: this.model.current.proxyDNS,
+                            oninput: (e) => this.model.current.proxyDNS = e.target.value
                         }),
                         "Proxy DNS (for sock5 and sock4 only)"
                     ]),
@@ -131,7 +145,7 @@ export class ProxyForm {
                     m("button[type=button]", {
                         class: style.action,
                         onclick: async () => {
-                            await ProxyModel.save()
+                            await this.model.save()
                             m.route.set("/proxies")
                         }
                     }, "Save"),
