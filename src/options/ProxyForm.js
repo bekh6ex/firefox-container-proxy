@@ -135,9 +135,9 @@ export class ProxyForm {
                         m("input.proxyDNS[type=checkbox]", {
                             class: 'mr-2 leading-tight',
                             value: this.model.current.proxyDNS,
-                            oninput: (e) => this.model.current.proxyDNS = e.target.value
+                            oninput: (e) => this.model.current.proxyDNS = !!e.target.checked
                         }),
-                        "Proxy DNS (for sock5 and sock4 only)"
+                        "Proxy DNS (for socks5 and socks4 only)"
                     ]),
                 ]),
                 m('.mb-4', [m(this.failoverTimeoutInput)]),
