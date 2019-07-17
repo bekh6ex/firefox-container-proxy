@@ -4,7 +4,6 @@ import {style} from './constants.js'
 class ProxyListModel {
     constructor() {
         this.list = []
-        this.current = {}
     }
     async loadList() {
         this.list = await store.getAllProxies()
@@ -27,8 +26,8 @@ export class ProxyList {
     
     view() {
         const items = this.model.list.map(this.renderProxyItem.bind(this));
-        const actions = m('.actions', [
-            m('a[href=/proxies/new]', {oncreate: m.route.link, class: style.action }, "+")
+        const actions = m('div', [
+            m('a[href=/proxies/new]', {oncreate: m.route.link, class: style.primaryButton }, "+")
         ])
         return [...items, actions]
     }
@@ -38,14 +37,14 @@ export class ProxyList {
         const editButton = m('button.edit[type=button]', {
             href: '/proxies/' + p.id,
             oncreate: m.route.link,
-            class:  style.action
+            class:  style.button
         }, 'edit');
         const deleteButton = m('button.delete[type=button]', {
             onclick: async () => {
                 await this.model.delete(p.id)
                 m.redraw()
             },
-            class: style.action
+            class: style.button
         }, 'delete');
         
         return m('.proxy-list-item', [text, editButton, deleteButton])

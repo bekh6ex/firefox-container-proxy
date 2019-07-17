@@ -1,0 +1,13 @@
+@import url('photon-colors.css');
+
+.shadow-10 {
+  box-shadow: 0 1px 4px var(--grey-90-a10);
+}
+
+.shadow-20 {
+  box-shadow: 0 2px 8px var(--grey-90-a10);
+}
+
+.shadow-30 {
+  box-shadow: 0 4px 16px var(--grey-90-a10);
+}

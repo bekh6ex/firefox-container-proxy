@@ -1,0 +1,45 @@
+.tree {
+  padding: 0;
+  list-style-type: none;
+}
+
+.tree__item__children {
+  padding: 0 5px;
+  margin: 0 0 0 -10px;
+  border-left: 1.5px solid var(--blue-50);
+  list-style-type: none;
+}
+
+.tree__item {
+  position: relative;
+  padding-left: 20px;
+}
+
+.tree__item--collapsed .tree__item__children {
+  display: none;
+}
+
+.tree__item__handle {
+  position: absolute;
+  display: block;
+  top: 3px;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  background-position: center;
+  content: " ";
+  -moz-user-select: none;
+}
+
+.tree__item--withChildren__handle {
+  cursor: pointer;
+
+  /* TODO: get this icon into / from photon-icons? */
+  background-image: url(./arrow.svg?fill=grey-40);
+}
+
+.tree__item--withChildren__handle.tree__item--collapsed__handle {
+  top: 4px;
+  transform: rotate(-90deg);
+}

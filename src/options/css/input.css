@@ -1,0 +1,87 @@
+.input {
+  position: relative;
+}
+
+.input__field {
+  border-color: var(--grey-90-a20);
+  border-width: 1.5px;
+  border-radius: 2px;
+  border-style: solid;
+  color: var(--grey-90);
+  font-size: .833rem/1.4;
+  height: 32px;
+  padding: 8px;
+
+  /* TODO: figure out how to do a linear alpha gradient rather than ellipsis */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.input .input__field {
+  width: 100%;
+}
+
+.input__field:hover {
+  border-color: var(--grey-90-a30);
+}
+
+.input__field:focus {
+  border-color: var(--blue-50);
+  box-shadow: 0 0 0 1px #0a84ff, 0 0 0 4px rgba(10, 132, 255, .3);
+}
+
+.input__field::placeholder {
+  color: var(--grey-50);
+  font-size: .833rem/1.4;
+  margin-bottom: 8px;
+}
+
+.input--warning__field {
+  border-color: var(--yellow-60);
+  box-shadow: 0 0 0 1px #d7b600, 0 0 0 4px rgba(215, 182, 0, .3);
+}
+
+.input--error__field {
+  border-color: var(--red-60);
+  box-shadow: 0 0 0 1px #d70022, 0 0 0 4px rgba(251, 0, 34, .3);
+}
+
+.input--icon__field {
+  padding-left: 32px;
+  background-size: 16px 16px;
+  background-image: var(--icon);
+  background-repeat: no-repeat;
+  background-position: 8px center;
+}
+
+.input__label {
+  display: block;
+}
+
+/* TODO: this password reveal stuff needs a proper icon */
+
+.input__passwordVisibility,
+.input__clear {
+  cursor: pointer;
+  margin-left: -2em;
+  background: rgba(255, 255, 255, .7);
+}
+
+.input__clear {
+  margin-left: -2.5em;
+  padding: 6px 14px;
+  background-image: url(./searchfield-cancel.svg);
+  background-position: center;
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+}
+
+.input__passwordVisibility__hidden {
+  color: var(--grey-50);
+  text-decoration: line-through;
+}
+
+.input__passwordVisibility__revealed {
+  color: var(--blue-50);
+}

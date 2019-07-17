@@ -1,0 +1,26 @@
+.link {
+  color: #0a84ff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.link:visited {
+  color: #0060df;
+}
+
+.link:hover {
+  color: #0c0c0d;
+  text-decoration: underline;
+}
+
+.link:not([class])[href*="//"]::after {
+  background-image: url(./open-in-new-16.svg);
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  content: "";
+  display: inline-block;
+  height: 16px;
+  margin: -.3rem .15rem 0 .25rem;
+  vertical-align: middle;
+  width: 16px;
+}

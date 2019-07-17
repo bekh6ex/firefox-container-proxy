@@ -1,0 +1,124 @@
+button,
+a.button {
+  background-color: var(--grey-90-a10);
+  border: 0 none;
+  border-radius: 2px;
+  color: var(--grey-90);
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  height: 32px;
+  justify-content: center;
+  min-width: 132px;
+  padding: 0 8px;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  width: auto;
+}
+
+/* Primary style */
+
+button.button--primary,
+a.button.button--primary {
+  background-color: var(--blue-60);
+  color: #fff;
+  font-weight: 300;
+}
+
+button.button--primary:hover,
+a.button.button--primary:hover {
+  background-color: var(--blue-70);
+}
+
+button.button--primary:active,
+a.button.button--primary:active {
+  background-color: var(--blue-80);
+}
+
+/* Ghost style */
+
+button.button--ghost,
+a.button.button--ghost {
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  color: var(--grey-90-a80);
+  height: 32px;
+  min-width: auto;
+  padding: 8px;
+  width: 32px;
+}
+
+/* Micro size */
+
+button.button--micro,
+a.button.button--micro {
+  border-radius: 2px;
+  font-size: 11px;
+  height: 24px;
+  padding: 0 8px;
+  min-width: auto;
+}
+
+/* Puffy size */
+
+button.button--puffy,
+a.button.button--puffy {
+  border-radius: 4px;
+  font-size: 15px;
+  height: 48px;
+  min-width: auto;
+  padding: 0 16px;
+}
+
+/* Hover, Active states */
+
+button:focus,
+a.button:focus {
+  box-shadow:
+    0 0 0 1px var(--blue-50) inset,
+    0 0 0 1px var(--blue-50),
+    0 0 0 4px var(--blue-50-a30);
+}
+
+button:hover,
+a.button:hover {
+  box-shadow: none;
+  background-color: var(--grey-90-a20);
+}
+
+button:active,
+a.button:active {
+  box-shadow: none;
+  background-color: var(--grey-90-a30);
+}
+
+button.button--ghost:hover,
+a.button.button--ghost:hover {
+  background-color: var(--grey-90-a10);
+}
+
+button.button--ghost:active,
+a.button.button--ghost:active {
+  background-color: var(--grey-90-a20);
+}
+
+button::-moz-focusring {
+  outline: none;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+button[disabled],
+a.button[aria-disabled],
+a.button.button--disabled {
+  opacity: .4;
+  pointer-events: none;
+}

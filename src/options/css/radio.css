@@ -1,0 +1,56 @@
+.radio {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 100%;
+  border: 1px solid var(--grey-90-a30);
+  background-color: var(--grey-90-a10);
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-bottom: -2px;
+}
+
+.radio:hover {
+  background-color: var(--grey-90-a20);
+}
+
+.radio:active {
+  background-color: var(--grey-90-a30);
+}
+
+.radio:focus {
+  box-shadow: 0 0 0 1px #0a84ff inset, 0 0 0 1px #0a84ff, 0 0 0 4px rgba(10, 132, 255, .3);
+}
+
+.radio:checked {
+  background-color: var(--blue-60);
+
+  /* TODO: Replace this image with one from photon-icons when available */
+  background-image: url("./radiobutton-marker-16.svg");
+  background-position: center center;
+}
+
+.radio:checked:hover {
+  background-color: var(--blue-70);
+}
+
+.radio:checked:active {
+  background-color: var(--blue-80);
+}
+
+.radio:disabled {
+  opacity: .4;
+}
+
+.radio:disabled:hover {
+  background-color: var(--grey-90-a10);
+}
+
+.radio:disabled:checked:hover {
+  background-color: var(--blue-60);
+}
+
+.radio--disabled__label__text {
+  opacity: .4;
+}

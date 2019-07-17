@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--grey-10);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    'helvetica neue',
+    helvetica,
+    ubuntu,
+    roboto,
+    noto,
+    'segoe ui',
+    arial,
+    sans-serif;
+}
+
+:root {
+  /* BASELINE GRID */
+  --baseline-grid: 4px;
+
+  /* FONT-SIZES */
+  --body-10: 13px;
+  --body-20: calc(var(--body-10) * 1.15);
+  --body-30: calc(var(--body-20) * 1.15);
+
+  --title-10: var(--body-10);
+  --title-20: calc(var(--title-10) * 1.29);
+  --title-30: calc(var(--title-20) * 1.29);
+  --title-40: calc(var(--title-30) * 1.29);
+
+  --display-20: calc(var(--title-40) * 1.29);
+
+  /* SHADOWS */
+  --shadow-10: 0 1px 4px var(--grey-90-a10);
+  --shadow-20: 0 2px 8px var(--grey-90-a10);
+  --shadow-30: 0 4px 16px var(--grey-90-a10);
+}
+
+html {
+  font-size: var(--body-10);
+  line-height: 1.4;
+}
+
+h1 {
+  font-size: var(--display-20);
+  font-weight: 200;
+}
+
+h2 {
+  font-size: var(--title-30);
+  font-weight: 300;
+}
+
+h3 {
+  font-size: var(--title-20);
+  font-weight: 500;
+}

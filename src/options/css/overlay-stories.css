@@ -1,0 +1,8 @@
+.popup {
+  width: 500px;
+  height: 400px;
+  background: url(./sample-popup.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 40px auto;
+}

@@ -1,0 +1,51 @@
+.tabset {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.tabset__tab__handle {
+  min-width: 24px;
+  padding: 16px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--black);
+}
+
+.tabset__tab__handle:hover {
+  background-color: var(--grey-90-a10);
+  border-bottom: 2px solid var(--grey-90-a20);
+  text-decoration: none;
+}
+
+.tabset__tab__handle:active {
+  background-color: var(--grey-90-a20);
+  border-bottom: 2px solid var(--grey-90-a20);
+}
+
+.tabset__tab--selected__handle {
+  color: var(--blue-60);
+  border-bottom: 2px solid var(--blue-50);
+}
+
+.tabset__tab--selected__handle:hover {
+  background-color: var(--grey-90-a10);
+  border-bottom: 2px solid var(--blue-50);
+}
+
+.tabset__tab--selected__handle:active {
+  background-color: var(--grey-90-a20);
+}
+
+.tabset__tab__handle::-moz-focusring {
+  outline: none;
+}
+
+.tabset__tab__handle:focus {
+  box-shadow:
+    0 0 0 1px var(--blue-50) inset,
+    0 0 0 1px var(--blue-50),
+    0 0 0 4px var(--blue-50-a30);
+}

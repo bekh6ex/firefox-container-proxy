@@ -45,20 +45,20 @@ class Input {
     }
 
     view(vnode) {
-        return [
-            m("label", this.title),
+        return m('div', {class: 'input'}, [
+            m("label",{class: 'input__label'},  this.title),
             m(
                 "input",
                 {
                     type: this.type,
-                    class: style.textInput,
+                    class: 'input__field',
                     required: this.required,
                     value: this.getValue(),
                     oninput: (e) => this.setValue(e.target.value),
                     onchange: (e) => this.setValue(this.normalizeValue(e.target.value)),
                 }
             ),
-        ]
+        ])
     }
 }
 
@@ -113,10 +113,10 @@ export class ProxyForm {
     view() {
         return m(
             "form",
-            {class: style.form},
+            {},
             [
-                m('.mb-4', [m(this.titleInput)]),
-                m('.mb-4', [
+                m('div', [m(this.titleInput)]),
+                m('div', [
                     m("label.label", "Type"),
                     m(
                         "select.type",
@@ -126,24 +126,24 @@ export class ProxyForm {
                         },
                         proxyTypes.map(t => m('option', {value: t}, t.toUpperCase()))),
                 ]),
-                m('.mb-4', [m(this.hostInput)]),
-                m('.mb-4', [m(this.portInput)]),
-                m('.mb-4', [m(this.usernameInput)]),
-                m('.mb-4', [m(this.passwordInput)]),
-                m('.mb-4', [
-                    m("label.label", {class: 'md:w-2/3 block'}, [
-                        m("input.proxyDNS[type=checkbox]", {
-                            class: 'mr-2 leading-tight',
+                m('div', [m(this.hostInput)]),
+                m('div', [m(this.portInput)]),
+                m('div', [m(this.usernameInput)]),
+                m('div', [m(this.passwordInput)]),
+                m('div', [
+                    m("label", {class: 'input__label'}, [
+                        m("input[type=checkbox]", {
+                            class: 'checkbox',
                             value: this.model.current.proxyDNS,
                             oninput: (e) => this.model.current.proxyDNS = !!e.target.checked
                         }),
                         "Proxy DNS (for socks5 and socks4 only)"
                     ]),
                 ]),
-                m('.mb-4', [m(this.failoverTimeoutInput)]),
-                m('.mb-4', [
+                m('div', [m(this.failoverTimeoutInput)]),
+                m('div', [
                     m("button[type=button]", {
-                        class: style.action,
+                        class: style.button,
                         onclick: async () => {
                             await this.model.save()
                             m.route.set("/proxies")

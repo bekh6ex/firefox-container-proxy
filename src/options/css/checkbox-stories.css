@@ -1,0 +1,10 @@
+ul.checkbox-example {
+  list-style-type: none;
+  margin: 0;
+  width: 50%;
+}
+
+ul.checkbox-example li .checkbox__label {
+  width: 100%;
+  display: inline-block;
+}

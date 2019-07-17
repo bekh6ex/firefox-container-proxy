@@ -1,0 +1,18 @@
+.card {
+  background: var(--white-100);
+  border-radius: 4px;
+  padding: 0 calc(4 * var(--baseline-grid));
+  transition: box-shadow 150ms;
+}
+
+.card--size-large {
+  padding: 0 calc(5 * var(--baseline-grid));
+}
+
+.card:hover {
+  box-shadow: 0 0 0 5px var(--grey-30);
+}
+
+.card--shadow {
+  box-shadow: var(--shadow-10);
+}
