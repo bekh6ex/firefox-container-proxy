@@ -5,6 +5,8 @@
 @import "css/checkbox.css";
 @import "chrome://browser/skin/preferences/in-content/containers.css";
 
+@import "select.css";
+
 
 * {
     -moz-user-focus: ignore;
@@ -160,5 +162,10 @@ section {
     background-position: center center;
     
     margin-right: 4px;
+    
+}
+
+
+select {
     
 }
