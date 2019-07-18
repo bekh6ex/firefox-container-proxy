@@ -57,6 +57,7 @@
     background-color: initial;
     border-width: 0;
     width: 240px;
+    padding: 1px;
 }
 
 .navigation .item {
@@ -138,16 +139,28 @@ main {
 
 section {
     min-width: 664px;
+    padding: 0 28px 40px 28px;
 }
 
 .container-item {
     display: flex;
+    align-items: center;
+    
+    margin-right: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--grey-90-a30);
+}
+
+.container-item:last-of-type {
+    border-bottom: none;
 }
 
 .container-label {
     display:flex;
+    align-items: center;
     color: var(--identity-icon-color);
     min-width: 200px;
+    height: 40px;
 }
 
 .container-icon {
