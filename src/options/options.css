@@ -61,6 +61,11 @@
 }
 
 .navigation .item {
+    --color: var(--grey-90);
+    color: var(--color);
+    
+    
+    
     min-height: 48px;
     -moz-appearance: none;
     margin-inline-start: 34px;
@@ -86,11 +91,18 @@
     background-position: center center;
 
     margin-right: 4px;
+
+    -moz-context-properties: fill, fill-opacity;
+    fill: var(--color);
 }
 
 .navigation .item:hover {
     background-color: var(--in-content-category-background-hover);
     border-radius: 2px;
+}
+
+.navigation .item.active {
+    --color: var(--in-content-category-text-selected);
 }
 
 .navigation .item-label {
@@ -175,10 +187,5 @@ section {
     background-position: center center;
     
     margin-right: 4px;
-    
 }
 
-
-select {
-    
-}
