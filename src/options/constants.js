@@ -1,6 +1,6 @@
 
 export const style = {
-    navItem: 'button',
+    navItem: 'item item-label',
     button: 'button',
     primaryButton: 'button button--primary',
     textInput: 'input',

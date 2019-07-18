@@ -48,8 +48,11 @@ function renderContainerItem(container) {
 
     const proxies = ContainerListModel.relations[container.cookieStoreId] || [];
 
-    return m('.container-item', [
-        m('.container-name', container.name),
+    const classes = `identity-color-${container.color} identity-icon-${container.icon}`
+    const icon = m('.container-icon')
+    const name = m('.container-name', container.name)
+    return m('.container-item', {class: classes}, [
+        m('.container-label', [icon, name]),
         m('.attached-proxies', [
             renderSelectProxy(container.cookieStoreId, proxies[0])
         ]),
