@@ -56,6 +56,7 @@ class Input {
                     value: this.getValue(),
                     oninput: (e) => this.setValue(e.target.value),
                     onchange: (e) => this.setValue(this.normalizeValue(e.target.value)),
+                    onfocusout: (e) => this.setValue(this.normalizeValue(e.target.value)),
                 }
             ),
         ])
