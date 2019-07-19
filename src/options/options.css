@@ -9,8 +9,6 @@
 
 
 * {
-    -moz-user-focus: ignore;
-    -moz-user-select: none;
     box-sizing: border-box;
 }
 
