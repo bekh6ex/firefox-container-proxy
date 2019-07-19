@@ -1,18 +1,50 @@
+/**
+ * @typedef Proxy
+ * @type object
+ * @property {String} id
+ * @property {String} title
+ * @property {String} type
+ * @property {String} host
+ * @property {Number} port
+ * @property {String} username
+ * @property {String} password
+ * @property {Boolean} proxyDNS
+ * @property {Number} failoverTimeout
+ */
+
 const Store = function () {
 
 }
 
+/**
+ * @return {Promise<Proxy[]>}
+ */
 Store.prototype.getAllProxies = async function allProxies() {
     const result = await browser.storage.local.get('proxies');
     return result.proxies || [];
 }
 
+/**
+ * @param {String} id
+ * @return {Promise<Proxy>}
+ */
 Store.prototype.getProxyById = async function getProxyById(id) {
     const proxies = await this.getAllProxies();
     const index = proxies.findIndex(p => p.id === id)
     return proxies[index]
 }
+
+/**
+ * @param {Proxy} proxy
+ * @return {Promise<void>}
+ */
 Store.prototype.putProxy = async function putProxy(proxy) {
+    proxy.failoverTimeout = 5;
+    
+    if (proxy.type === 'socks' || proxy.type === 'socks4') {
+        proxy.proxyDNS = true;
+    }
+    
     const proxies = await this.getAllProxies();
     const index = proxies.findIndex(p => p.id === proxy.id)
     if (proxies[index]) {

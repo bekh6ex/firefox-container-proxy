@@ -102,10 +102,6 @@ export class ProxyForm {
         this.portInput = new PositiveNumberInput({title: 'Port', ...model.accessProperty('port'), required: true})
         this.usernameInput = new TrimmedTextInput({title: "Username", ...model.accessProperty('username')})
         this.passwordInput = new PasswordInput({title: "Password", ...model.accessProperty('password')})
-        this.failoverTimeoutInput = new PositiveNumberInput({
-            title: 'Failover Timeout (in seconds)',
-            ...model.accessProperty('failoverTimeout')
-        })
     }
     oninit(vnode) {
         this.model.load(vnode.attrs.id)
@@ -130,17 +126,6 @@ export class ProxyForm {
                 m('div', [m(this.portInput)]),
                 m('div', [m(this.usernameInput)]),
                 m('div', [m(this.passwordInput)]),
-                m('div', [
-                    m("label", {class: 'input__label'}, [
-                        m("input[type=checkbox]", {
-                            class: 'checkbox',
-                            value: this.model.current.proxyDNS,
-                            oninput: (e) => this.model.current.proxyDNS = !!e.target.checked
-                        }),
-                        "Proxy DNS (for socks5 and socks4 only)"
-                    ]),
-                ]),
-                m('div', [m(this.failoverTimeoutInput)]),
                 m('div', [
                     m("button[type=button]", {
                         class: style.button,
