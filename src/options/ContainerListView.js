@@ -24,7 +24,7 @@ function renderSelectProxy(cookieStoreId, proxyId) {
         value: p.id,
         selected: p.id === proxyId
     }, p.title ? p.title : `${p.host}:${p.port}`));
-    const defaultOption = m('option', {value: '', selected: !proxyId}, 'directly')
+    const defaultOption = m('option', {value: '', selected: !proxyId}, browser.i18n.getMessage('containerProxyDisabled'))
     return m(
         'select',
         {
@@ -68,7 +68,7 @@ export class ContainerListView {
         const items = ContainerListModel.containers.map(renderContainerItem);
         const defaultContainer = renderContainerItem({
             cookieStoreId: 'firefox-default',
-            name: 'default'
+            name: browser.i18n.getMessage('defaultContainerName')
         })
         return m('.containers', [...items, defaultContainer])
     }

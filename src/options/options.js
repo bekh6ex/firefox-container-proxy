@@ -31,4 +31,4 @@ m.route(document.body, "/containers", {
     },
 })
 
-
+document.title = browser.i18n.getMessage('optionPageTitle')

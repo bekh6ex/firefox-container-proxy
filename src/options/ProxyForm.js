@@ -38,6 +38,7 @@ class Input {
         this.getValue = props.getValue
         this.setValue = props.setValue
         this.type = "text"
+        this.props = {}
     }
     
     normalizeValue(v) {
@@ -50,6 +51,7 @@ class Input {
             m(
                 "input",
                 {
+                    ...this.props,
                     type: this.type,
                     class: 'input__field',
                     required: this.required,
@@ -71,16 +73,21 @@ class TrimmedTextInput extends Input {
     }
 }
 
-class PositiveNumberInput extends Input {
+class PortNumberInput extends Input {
     constructor(props) {
         super(props);
         this.type = 'number';
+        this.min = 1;
+        this.max = 65535;
+        this.props = { min: this.min, max: this.max };
     }
     
     normalizeValue(v) {
         let parsed = Number.parseInt(v, 10);
-        if (!parsed || parsed < 1) {
-            parsed = 1
+        if (!parsed || parsed < this.min) {
+            parsed = this.min
+        } else if (parsed > this.max) {
+            parsed = this.max
         }
         return parsed;
     }
@@ -98,11 +105,11 @@ export class ProxyForm {
         const model = new ProxyModel();
         this.model = model
         
-        this.titleInput = new TrimmedTextInput({title: "Title (optional)", ...model.accessProperty('title')})
-        this.hostInput = new TrimmedTextInput({title: 'Host/IP', ...model.accessProperty('host'), required: true})
-        this.portInput = new PositiveNumberInput({title: 'Port', ...model.accessProperty('port'), required: true})
-        this.usernameInput = new TrimmedTextInput({title: "Username", ...model.accessProperty('username')})
-        this.passwordInput = new PasswordInput({title: "Password", ...model.accessProperty('password')})
+        this.titleInput = new TrimmedTextInput({title: browser.i18n.getMessage('proxyFormTitle'), ...model.accessProperty('title')})
+        this.hostInput = new TrimmedTextInput({title: browser.i18n.getMessage('proxyFormServer'), ...model.accessProperty('host'), required: true})
+        this.portInput = new PortNumberInput({title: browser.i18n.getMessage('proxyFormPort'), ...model.accessProperty('port'), required: true})
+        this.usernameInput = new TrimmedTextInput({title: browser.i18n.getMessage('proxyFormUsername'), ...model.accessProperty('username')})
+        this.passwordInput = new PasswordInput({title: browser.i18n.getMessage('proxyFormPassword'), ...model.accessProperty('password')})
     }
     oninit(vnode) {
         this.model.load(vnode.attrs.id)
@@ -114,14 +121,16 @@ export class ProxyForm {
             [
                 m('div', [m(this.titleInput)]),
                 m('div', [
-                    m("label.label", "Type"),
-                    m(
-                        "select.type",
-                        {
-                            value: this.model.current.type,
-                            oninput: (e) => this.model.current.type = e.target.value
-                        },
-                        proxyTypes.map(t => m('option', {value: t}, t.toUpperCase()))),
+                    m('.input', [
+                        m("label.input__label", browser.i18n.getMessage('proxyFormProtocol')),
+                        m(
+                            "select.input__field",
+                            {
+                                value: this.model.current.type,
+                                oninput: (e) => this.model.current.type = e.target.value
+                            },
+                            proxyTypes.map(t => m('option', {value: t}, t.toUpperCase()))),
+                    ])
                 ]),
                 m('div', [m(this.hostInput)]),
                 m('div', [m(this.portInput)]),
@@ -134,7 +143,7 @@ export class ProxyForm {
                             await this.model.save()
                             m.route.set("/proxies")
                         }
-                    }, "Save"),
+                    }, browser.i18n.getMessage('proxyFormSave')),
                 ]),
 
             ]
