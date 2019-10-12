@@ -208,7 +208,7 @@ class TestResult {
  * @return {Promise<TestResult>}
  */
 async function test(parameters) {
-    //TODO Find decent HTTPS API to get geo data from
+    //TODO Use https://ipinfo.io/json  Seems OK.
     //TODO Figure out Firefox extension requirements regarding calling 3rd party services
     const url = 'http://ip-api.com/json/';
     const fetchParameters = {
