@@ -208,7 +208,7 @@ class TestResult {
  * @return {Promise<TestResult>}
  */
 async function test(parameters) {
-    //TODO Use https://ipinfo.io/json  Seems OK.
+    //TODO Use https://geoip-db.com/json  Seems to be even better
     //TODO Figure out Firefox extension requirements regarding calling 3rd party services
     const url = 'http://ip-api.com/json/';
     const fetchParameters = {
