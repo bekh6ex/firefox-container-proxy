@@ -1,6 +1,6 @@
 {
   "name": "container-proxy",
-  "version": "0.0.1",
+  "version": "0.1.9",
   "description": "[Extension page](https://addons.mozilla.org/en-US/firefox/addon/container-proxy/)",
   "main": "mithril.js",
   "scripts": {
