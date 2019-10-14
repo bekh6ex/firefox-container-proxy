@@ -1,6 +1,7 @@
 import m from './lib/mithril.js';
 import {uuidv4} from './util.js';
 import {proxyTypes, style} from './constants.js';
+import {SuccessfulTestResult, testProxySettings, TestResult} from './testProxySettings.js';
 
 class ProxyModel {
     constructor() {
@@ -103,8 +104,8 @@ export class ProxyForm {
     constructor() {
         const model = new ProxyModel();
         this.model = model
-        /** @type {TestResult} */
-        this.lastTestResult = null;
+        /** @type {TestResultBlock} */
+        this.lastTestResultBlock = null;
 
         this.titleInput = new TrimmedTextInput({title: "Title (optional)", ...model.accessProperty('title')})
         this.hostInput = new TrimmedTextInput({title: 'Host/IP', ...model.accessProperty('host'), required: true})
@@ -118,22 +119,8 @@ export class ProxyForm {
     view() {
 
         const testResultBlock = [];
-        if (this.lastTestResult) {
-            const result = this.lastTestResult;
-            const text = !result.success || result.ipsMatch ? "Error!" : "Success!"
-            const children = [text];
-            if (result.success) {
-                children.push(m('b', ["Your real IP: "]))
-                children.push(result.realIp)
-                children.push(m('b', ["Proxied IP: "]))
-                children.push(result.proxiedIp)
-            } else {
-                children.push(result.error.toString())
-            }
-            const testResult = m('.proxyFormTestResult', {}, [
-              ...children
-            ])
-            testResultBlock.push(testResult)
+        if (this.lastTestResultBlock) {
+            testResultBlock.push(m(this.lastTestResultBlock));
         }
 
         return m(
@@ -159,9 +146,9 @@ export class ProxyForm {
                     m("button[type=button]", {
                         class: style.button,
                         onclick: async () => {
-                            this.lastTestResult = null;
-                            const result = await test(this.model.getSettings());
-                            this.lastTestResult = result;
+                            this.lastTestResultBlock = null;
+                            const result = await testProxySettings(this.model.getSettings());
+                            this.lastTestResultBlock = new TestResultBlock(result);
                             m.redraw()
                         }
                     }, "Test"),
@@ -174,90 +161,33 @@ export class ProxyForm {
                     }, "Save"),
                 ]),
                 ...testResultBlock
-
             ]
         )
     }
 }
 
-class TestResult {
-    static success(realIp, proxiedIp) {
-        return new TestResult(true, {realIp, proxiedIp})
+class TestResultBlock {
+
+    /**
+     * @param {TestResult} testResult
+     */
+    constructor(testResult) {
+        this.testResult = testResult;
     }
 
-    static error(error) {
-        new TestResult(false, {error})
+    view() {
+        const result = this.testResult;
+        if (result instanceof SuccessfulTestResult) {
+            const text = result.ipsMatch ? "Error!" : "Success!";
+            return m('.proxyFormTestResult', {}, [
+                text,
+                m('b', ["Your real IP: "]),
+                result.direct.ip,
+                m('b', ["Proxied IP: "]),
+                result.proxied.ip,
+            ]);
+        } else {
+            throw new Error("Unknown result type");
+        }
     }
-    constructor(success, {realIp, proxiedIp, error}) {
-        this.success = success;
-        this.realIp = realIp;
-        this.proxiedIp = proxiedIp;
-        this.error = error;
-
-    }
-
-    get ipsMatch() {
-        return this.realIp === this.proxiedIp;
-    }
-}
-
-
-/**
- *
- * @param parameters
- * @return {Promise<TestResult>}
- */
-async function test(parameters) {
-    //TODO Use https://geoip-db.com/json  Seems to be even better
-    //TODO Figure out Firefox extension requirements regarding calling 3rd party services
-    const url = 'http://ip-api.com/json/';
-    const fetchParameters = {
-        cache: 'no-cache',
-        credentials: 'omit',
-        redirect: 'error',
-        referrer: 'no-referrer'
-    }
-
-    const realIpResponsePromise = fetch(url, fetchParameters)
-
-    const someId = uuidv4()
-
-    const proxiedUrl = url + "?__trackingId=" + someId;
-    const filter = {urls: [proxiedUrl]};
-    const proxyRequestPromise = new Promise((resolve, reject) => {
-        const listener = (requestDetails) => {
-            browser.proxy.onRequest.removeListener(listener)
-
-            return {...parameters, failoverTimeout: 1, proxyAuthorizationHeader:''}
-        };
-
-        const errorListener = (error) => {
-            browser.proxy.onRequest.removeListener(listener)
-
-
-            reject(error)
-        };
-
-        browser.proxy.onRequest.addListener(listener, filter);
-        browser.proxy.onError.addListener(errorListener)
-
-        const proxiedResultPromise = fetch(proxiedUrl, fetchParameters)
-        proxiedResultPromise.then(r => {
-            resolve(r)
-        }).catch(e => {
-            reject(e)
-        })
-    });
-
-
-    const realIp = (await (await realIpResponsePromise).json()).query;
-    try {
-        const proxiedIp = (await (await proxyRequestPromise).json()).query;
-        return TestResult.success(realIp, proxiedIp)
-
-    } catch (e) {
-        console.error(e);
-        return TestResult.error(e);
-    }
-
 }
