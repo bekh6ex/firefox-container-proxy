@@ -1,4 +1,4 @@
-import {uuidv4} from '/options/util.js';
+import {generateAuthorizationHeader, uuidv4} from '/options/util.js';
 
 
 export class TestResult {
@@ -118,10 +118,15 @@ async function fetchProxiedIpData(proxyConfig) {
   const filter = {urls: [proxiedUrl]};
   return new Promise((resolve, reject) => {
     const listener = (requestDetails) => {
-      //TODO support for HTTP(S)
+      //TODO Add support for HTTP
       browser.proxy.onRequest.removeListener(listener)
 
-      return {...proxyConfig, failoverTimeout: 1}
+      let proxyAuthorizationHeader = ''
+      if (proxyConfig.type === 'https') {
+        proxyAuthorizationHeader = generateAuthorizationHeader(proxyConfig.username, proxyConfig.password)
+      }
+
+      return {...proxyConfig, failoverTimeout: 1, proxyAuthorizationHeader}
     };
 
     const errorListener = (error) => {
