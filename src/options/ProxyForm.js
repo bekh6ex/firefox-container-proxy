@@ -177,17 +177,21 @@ class TestResultBlock {
 
     view() {
         const result = this.testResult;
+        let text;
+        let directBlock = [];
+        let proxiedBlock = [];
         if (result instanceof SuccessfulTestResult) {
-            const text = result.ipsMatch ? "Error!" : "Success!";
-            return m('.proxyFormTestResult', {}, [
-                text,
-                m('b', ["Your real IP: "]),
-                result.direct.ip,
-                m('b', ["Proxied IP: "]),
-                result.proxied.ip,
-            ]);
+          text = result.ipsMatch ? "Error!" : "Success!";
+          directBlock.push(m('b', ["Your real IP: "]), result.direct.ip)
+          proxiedBlock.push(m('b', ["Proxied IP: "]), result.proxied.ip)
         } else {
             throw new Error("Unknown result type");
         }
+
+      return m('.proxyFormTestResult', {}, [
+        text,
+        m('div', directBlock),
+        m('div', proxiedBlock),
+      ]);
     }
 }
