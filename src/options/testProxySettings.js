@@ -118,6 +118,7 @@ async function fetchProxiedIpData(proxyConfig) {
   const filter = {urls: [proxiedUrl]};
   return new Promise((resolve, reject) => {
     const listener = (requestDetails) => {
+      //TODO support for HTTP(S)
       browser.proxy.onRequest.removeListener(listener)
 
       return {...proxyConfig, failoverTimeout: 1}
