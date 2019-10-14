@@ -1,0 +1,29 @@
+{
+  "name": "container-proxy",
+  "version": "0.0.1",
+  "description": "[Extension page](https://addons.mozilla.org/en-US/firefox/addon/container-proxy/)",
+  "main": "mithril.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "codeStyle:fix": " standard --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bekh6ex/firefox-container-proxy.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/bekh6ex/firefox-container-proxy/issues"
+  },
+  "homepage": "https://github.com/bekh6ex/firefox-container-proxy#readme",
+  "devDependencies": {
+    "standard": "^14.3.1"
+  },
+  "standard": {
+    "globals": [ "browser", "store", "Store" ],
+    "ignore": [
+      "/src/options/lib/mithril-2.0.0-rc.6.js"
+    ]
+  }
+}
