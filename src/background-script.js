@@ -17,7 +17,7 @@ function initializeAuthListener(cookieStoreId, proxy) {
 
         return result
     }
-    
+
     browser.webRequest.onAuthRequired.addListener(
         listener,
         {urls: ['<all_urls>']},
@@ -36,12 +36,13 @@ async function onRequest(requestDetails) {
         console.error("cookieStoreId is not defined",requestDetails)
         return [];
     }
-    
+
     const proxies = await store.getProxiesForContainer(cookieStoreId);
 
     if (proxies.length > 0) {
         proxies.forEach(p => {
             if (p.type === 'http' || p.type === 'https') {
+                //TODO Use header for HTTPS proxies
                 initializeAuthListener(cookieStoreId, p)
             }
         })
