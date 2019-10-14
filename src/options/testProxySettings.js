@@ -25,8 +25,12 @@ export class SuccessfulTestResult extends TestResult {
 class SettingsErrorResult extends TestResult {
 }
 
-class ConnectionIssueResult extends TestResult {
-
+export class ConnectionIssueResult extends TestResult {
+  constructor({directError, proxiedError}) {
+    super()
+    this.directError = directError;
+    this.proxiedError = proxiedError;
+  }
 }
 
 class IpQueryResponse {
@@ -53,21 +57,30 @@ export async function testProxySettings(settings) {
   const realIpResponsePromise = fetchDirectIpData()
   const proxyRequestPromise = fetchProxiedIpData(settings)
 
-  let realIpQuery
-  realIpQuery = await realIpResponsePromise;
+  let directIpQuery
+  let directError
+  try {
+    directIpQuery = await realIpResponsePromise
+  } catch (e) {
+    directError = e
+  }
 
 
-  let proxiedIpQuery;
-  proxiedIpQuery = await proxyRequestPromise;
+  let proxiedIpQuery
+  let proxiedError
+  try {
+    proxiedIpQuery = await proxyRequestPromise
+  } catch (e) {
+    proxiedError = e
+  }
 
 
-  const realRequestFailed = !realIpQuery;
-  const proxyRequestFailed = !proxiedIpQuery;
+  const realRequestFailed = !directIpQuery
+  const proxyRequestFailed = !proxiedIpQuery
 
   if (realRequestFailed) {
     if (proxyRequestFailed) {
-      //connection issue
-      throw new Error("Not implemented")
+      return new ConnectionIssueResult({directError, proxiedError})
     } else {
       // not allowed to access internet directly?
       throw new Error("Not implemented")
@@ -77,8 +90,7 @@ export async function testProxySettings(settings) {
       //proxy settings are incorrect
       throw new Error("Not implemented")
     } else {
-      //All is good
-      return new SuccessfulTestResult({direct:realIpQuery, proxied:proxiedIpQuery})
+      return new SuccessfulTestResult({direct:directIpQuery, proxied:proxiedIpQuery})
     }
   }
 

@@ -1,7 +1,7 @@
 import m from './lib/mithril.js';
 import {uuidv4} from './util.js';
 import {proxyTypes, style} from './constants.js';
-import {SuccessfulTestResult, testProxySettings, TestResult} from './testProxySettings.js';
+import {ConnectionIssueResult, SuccessfulTestResult, testProxySettings, TestResult} from './testProxySettings.js';
 
 class ProxyModel {
     constructor() {
@@ -181,9 +181,11 @@ class TestResultBlock {
         let directBlock = [];
         let proxiedBlock = [];
         if (result instanceof SuccessfulTestResult) {
-          text = result.ipsMatch ? "Error!" : "Success!";
-          directBlock.push(m('b', ["Your real IP: "]), result.direct.ip)
-          proxiedBlock.push(m('b', ["Proxied IP: "]), result.proxied.ip)
+            text = result.ipsMatch ? "Error!" : "Success!";
+            directBlock.push(m('b', ["Your real IP: "]), result.direct.ip)
+            proxiedBlock.push(m('b', ["Proxied IP: "]), result.proxied.ip)
+        } else if(result instanceof ConnectionIssueResult) {
+            text = "Network error. Probably you are not connected to the internet"
         } else {
             throw new Error("Unknown result type");
         }
