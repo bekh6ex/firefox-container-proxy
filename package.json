@@ -1,8 +1,7 @@
 {
   "name": "container-proxy",
   "version": "0.1.9",
-  "description": "[Extension page](https://addons.mozilla.org/en-US/firefox/addon/container-proxy/)",
-  "main": "mithril.js",
+  "description": "[Firefox extension] Assign a proxy to a Firefox container [Extension page](https://addons.mozilla.org/en-US/firefox/addon/container-proxy/)",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "codeStyle:fix": " standard --fix",
@@ -12,12 +11,12 @@
     "type": "git",
     "url": "git+https://github.com/bekh6ex/firefox-container-proxy.git"
   },
-  "author": "",
+  "author": "Aleksei Bekh-Ivanov",
   "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/bekh6ex/firefox-container-proxy/issues"
   },
-  "homepage": "https://github.com/bekh6ex/firefox-container-proxy#readme",
+  "homepage": "https://addons.mozilla.org/en-US/firefox/addon/container-proxy/",
   "devDependencies": {
     "standard": "^14.3.1",
     "web-ext": "^3.2.0"
