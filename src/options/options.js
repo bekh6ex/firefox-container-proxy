@@ -1,11 +1,9 @@
-import {Store} from '../store/Store.js'
+import { Store } from '../store/Store.js'
 import m from '../lib/mithril.js'
 import { Layout } from './Layout.js'
 import { ContainerListView } from './ContainerListView.js'
 import { ProxyList } from './ProxyList.js'
 import { ProxyForm } from './ProxyForm.js'
-
-//TODO Edit form failing. Figure out why
 
 window.store = new Store()
 
@@ -16,8 +14,7 @@ const proxyForm = new ProxyForm()
 
 m.route(document.body, '/containers', {
   '/containers': {
-    render:  () => m(layout, m(containerListView))
-
+    render: () => m(layout, m(containerListView))
   },
   '/proxies': {
     render: () => m(layout, m(proxyList))
