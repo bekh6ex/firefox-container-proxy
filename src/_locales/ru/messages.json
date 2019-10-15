@@ -1,0 +1,62 @@
+{
+    "extensionDescription": {
+        "message": "Назначить прокси Firefox контейнеру",
+        "description": "Описание расширения."
+    },
+    "defaultContainerName": {
+        "message": "По умолчанию",
+        "description": "Имя контейнера по умолчанию"
+    },
+    "optionPageTitle": {
+        "message": "Container Proxy - настройки расширения",
+        "description": "Заголовок страницы параметров"
+    },
+    "optionTabAssign": {
+        "message": "Назначить",
+        "description": "Название элемента меню для назначения прокси Firefox контейнерам"
+    },
+    "optionTabProxies": {
+        "message": "Прокси",
+        "description": "Название элемента меню для списка конфигураций прокси"
+    },
+    "containerProxyDisabled": {
+        "message": "Напрямую",
+        "description": "Настройка контейнера чтобы тот не использовал прокси"
+    },
+    "proxyListEdit": {
+        "message": "Редактировать",
+        "description": "Кнопка Редактировать в списке прокси"
+    },
+    "proxyListDelete": {
+        "message": "Удалить",
+        "description": "Кнопка «Удалить» в списке прокси"
+    },
+    "proxyFormProtocol": {
+        "message": "Протокол",
+        "description": "Поле протокола в форме редактирования настроек прокси сервера"
+    },
+    "proxyFormTitle": {
+        "message": "Название (необязательно)",
+        "description": "Поле заголовка в форме редактирования настроек прокси сервера"
+    },
+    "proxyFormServer": {
+        "message": "Сервер",
+        "description": "Поле сервера в форме редактирования настроек прокси сервера"
+    },
+    "proxyFormPort": {
+        "message": "Порт",
+        "description": "Поле порта в форме редактирования настроек прокси сервера"
+    },
+    "proxyFormUsername": {
+        "message": "Имя пользователя",
+        "description": "Поле имени пользователя в форме редактирования настроек прокси сервера"
+    },
+    "proxyFormPassword": {
+        "message": "Пароль",
+        "description": "Поле пароля в форме редактирования настроек прокси сервера"
+    },
+    "proxyFormSave": {
+        "message": "Сохранить",
+        "description": "Кнопка Сохранить в форме редактирования настроек прокси сервера"
+    }
+}

@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "codeStyle:fix": " standard --fix",
-    "debug": "web-ext run -s src --browser-console --verbose --keep-profile-changes -p ./tmpProfile --start-url about:debugging"
+    "debug": "web-ext run -s src --verbose --keep-profile-changes -p ./tmpProfile --start-url about:debugging  #--pref=intl.locale.requested=ru --pref=intl.locale.matchOS=false"
   },
   "repository": {
     "type": "git",
