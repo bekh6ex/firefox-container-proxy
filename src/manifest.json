@@ -32,7 +32,7 @@
   ],
 
   "background": {
-    "scripts": ["store/Store.js", "background-script.js"]
+    "scripts": ["store/Store.js", "background-init.js"]
   }
 
 }

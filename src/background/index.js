@@ -1,3 +1,7 @@
+import { Store } from '/store/Store.js'
+
+console.log('Background script started')
+
 const store = new Store()
 
 function initializeAuthListener (cookieStoreId, proxy) {

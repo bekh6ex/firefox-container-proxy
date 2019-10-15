@@ -12,7 +12,7 @@
  * @property {Number} failoverTimeout
  */
 
-const Store = function () {
+export const Store = function () {
 
 }
 
