@@ -1,4 +1,4 @@
-import m from './lib/mithril.js'
+import m from '../lib/mithril.js'
 import { uuidv4 } from './util.js'
 import { style, proxyTypes } from './constants.js'
 
@@ -27,7 +27,7 @@ class ProxyModel {
   accessProperty (property) {
     return {
       getValue: () => this.current[property],
-      setValue: function (v) { this.current[property] = v }
+      setValue: (v) => this.current[property] = v
     }
   }
 }
@@ -120,7 +120,7 @@ export class ProxyForm {
             'select.type',
             {
               value: this.model.current.type,
-              oninput: function (e) { this.model.current.type = e.target.value }
+              oninput: (e) => this.model.current.type = e.target.value
             },
             proxyTypes.map(t => m('option', { value: t }, t.toUpperCase())))
         ]),

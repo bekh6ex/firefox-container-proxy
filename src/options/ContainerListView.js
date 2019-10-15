@@ -1,4 +1,4 @@
-import m from './lib/mithril.js'
+import m from '../lib/mithril.js'
 
 const ContainerListModel = {
   containers: [],
@@ -8,7 +8,7 @@ const ContainerListModel = {
   loadAll: async () => {
     ContainerListModel.containers = await browser.contextualIdentities.query({})
     ContainerListModel.proxies = await store.getAllProxies()
-    ContainerListModel.proxies.forEach(function (p) { ContainerListModel.proxiesById[p.id] = p })
+    ContainerListModel.proxies.forEach(p => { ContainerListModel.proxiesById[p.id] = p })
     const result = await browser.storage.local.get('relations')
     ContainerListModel.relations = result.relations || {}
     m.redraw()

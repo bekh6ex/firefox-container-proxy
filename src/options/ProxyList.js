@@ -1,4 +1,4 @@
-import m from './lib/mithril.js'
+import m from '../lib/mithril.js'
 import { style } from './constants.js'
 
 class ProxyListModel {
