@@ -5,7 +5,8 @@
   "main": "mithril.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "codeStyle:fix": " standard --fix"
+    "codeStyle:fix": " standard --fix",
+    "debug": "web-ext run -s src --browser-console --verbose --keep-profile-changes -p ./tmpProfile"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,8 @@
   },
   "homepage": "https://github.com/bekh6ex/firefox-container-proxy#readme",
   "devDependencies": {
-    "standard": "^14.3.1"
+    "standard": "^14.3.1",
+    "web-ext": "^3.2.0"
   },
   "standard": {
     "globals": [ "browser", "store", "Store" ],
