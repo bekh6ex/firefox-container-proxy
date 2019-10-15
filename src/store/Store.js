@@ -12,7 +12,7 @@
  * @property {Number} failoverTimeout
  */
 
-const Store = function () {
+export const Store = function () {
 
 }
 
@@ -80,7 +80,7 @@ Store.prototype.getProxiesForContainer = async function getProxiesForContainer (
 
   const proxies = await this.getAllProxies()
   const proxyById = {}
-  proxies.forEach(p => { proxyById[p.id] = p })
+  proxies.forEach(function (p) { proxyById[p.id] = p })
 
   const result = proxyIds.map(pId => proxyById[pId])
     .filter(p => !!p)

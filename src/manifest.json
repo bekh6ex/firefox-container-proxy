@@ -33,7 +33,7 @@
   ],
 
   "background": {
-    "scripts": ["store/Store.js", "background-script.js"]
+    "scripts": ["background-init.js"]
   }
 
 }

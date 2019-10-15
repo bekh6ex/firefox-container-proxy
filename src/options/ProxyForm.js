@@ -1,4 +1,4 @@
-import m from './lib/mithril.js'
+import m from '../lib/mithril.js'
 import { uuidv4 } from './util.js'
 import { style, proxyTypes } from './constants.js'
 
@@ -46,7 +46,7 @@ class Input {
     return v
   }
 
-  view (vnode) {
+  view () {
     return m('div', { class: 'input' }, [
       m('label', { class: 'input__label' }, this.title),
       m(
