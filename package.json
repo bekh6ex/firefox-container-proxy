@@ -28,7 +28,7 @@
       "store"
     ],
     "ignore": [
-      "/src/options/lib/mithril-2.0.0-rc.6.js"
+      "/src/lib/sources/*"
     ]
   }
 }
