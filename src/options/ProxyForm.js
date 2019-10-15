@@ -27,7 +27,7 @@ class ProxyModel {
   accessProperty (property) {
     return {
       getValue: () => this.current[property],
-      setValue: (v) => this.current[property] = v
+      setValue: (v) => { this.current[property] = v }
     }
   }
 }
@@ -45,7 +45,7 @@ class Input {
     return v
   }
 
-  view (vnode) {
+  view () {
     return m('div', { class: 'input' }, [
       m('label', { class: 'input__label' }, this.title),
       m(
@@ -120,7 +120,7 @@ export class ProxyForm {
             'select.type',
             {
               value: this.model.current.type,
-              oninput: (e) => this.model.current.type = e.target.value
+              oninput: (e) => { this.model.current.type = e.target.value }
             },
             proxyTypes.map(t => m('option', { value: t }, t.toUpperCase())))
         ]),
