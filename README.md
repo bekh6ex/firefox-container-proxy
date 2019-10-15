@@ -2,6 +2,8 @@
 
 [Extension page](https://addons.mozilla.org/en-US/firefox/addon/container-proxy/)
 
+[Translate to your language](https://poeditor.com/join/project/2fKMFsYkUe)
+
 ## Permissions
 
   * **cookies**: needed to identify to which container request belongs
