@@ -28,8 +28,7 @@ export class ProxyList {
 
   view () {
     const items = this.model.list.map(this.renderProxyItem.bind(this))
-    const actions = m('div.proxy-list-item', [
-      m('.proxy-name'),
+    const actions = m('div.proxy-list-actions', [
       m('.proxy-button', [
         m('a[href=/proxies/new]', { oncreate: m.route.link, class: style.primaryButton }, '+')
       ])

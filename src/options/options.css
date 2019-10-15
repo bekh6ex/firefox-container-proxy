@@ -20,7 +20,7 @@
 :root {
     --header-height: 240px;
     --left-margin: 34px;
-    
+
     text-rendering: optimizeLegibility;
     -moz-control-character-visibility: visible;
 }
@@ -66,9 +66,9 @@ body {
 .navigation .item {
     --color: var(--grey-90);
     color: var(--color);
-    
-    
-    
+
+
+
     min-height: 48px;
     -moz-appearance: none;
     margin-inline-start: 34px;
@@ -151,15 +151,25 @@ section {
 .container-item, .proxy-list-item {
     display: flex;
     align-items: center;
-    
+
     margin-right: 8px;
     padding-top: 4px;
     padding-bottom: 4px;
     border-bottom: 1px solid var(--grey-90-a30);
 }
 
-.container-item:last-of-type, .proxy-list-item:last-of-type {
+.container-item:last-of-type {
     border-bottom: none;
+}
+
+.proxy-list-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    margin-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 .container-label {
@@ -178,14 +188,14 @@ section {
 .container-icon {
     height: 24px;
     width: 24px;
-    
+
     background-image: var(--identity-icon);
     -moz-context-properties: fill;
     fill: var(--identity-icon-color);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
-    
+
     margin-right: 4px;
 }
 
