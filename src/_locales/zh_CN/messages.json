@@ -1,0 +1,47 @@
+{
+    "extensionDescription": {
+        "message": "为每个容器分配代理服务器"
+    },
+    "defaultContainerName": {
+        "message": "Default"
+    },
+    "optionPageTitle": {
+        "message": "Container Proxy 扩展设置"
+    },
+    "optionTabAssign": {
+        "message": "分配代理服务器"
+    },
+    "optionTabProxies": {
+        "message": "配置代理服务器"
+    },
+    "containerProxyDisabled": {
+        "message": "直接连接"
+    },
+    "proxyListEdit": {
+        "message": "编辑"
+    },
+    "proxyListDelete": {
+        "message": "删除"
+    },
+    "proxyFormProtocol": {
+        "message": "协议"
+    },
+    "proxyFormTitle": {
+        "message": "名称（可选）"
+    },
+    "proxyFormServer": {
+        "message": "服务器"
+    },
+    "proxyFormPort": {
+        "message": "端口"
+    },
+    "proxyFormUsername": {
+        "message": "用户名"
+    },
+    "proxyFormPassword": {
+        "message": "密码"
+    },
+    "proxyFormSave": {
+        "message": "保存"
+    }
+}

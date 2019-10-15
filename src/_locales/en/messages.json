@@ -1,0 +1,62 @@
+{
+    "extensionDescription": {
+        "message": "Assign a proxy to a container",
+        "description": "Description of the extension."
+    },
+    "defaultContainerName": {
+        "message": "Default",
+        "description": "Name of default container"
+    },
+    "optionPageTitle": {
+        "message": "Container Proxy extension settings",
+        "description": "Title of option page"
+    },
+    "optionTabAssign": {
+        "message": "Assign",
+        "description": "Tab title for assign proxy for containers"
+    },
+    "optionTabProxies": {
+        "message": "Proxies",
+        "description": "Tab title for config proxy list"
+    },
+    "containerProxyDisabled": {
+        "message": "Directly",
+        "description": "Config some containers not using proxy"
+    },
+    "proxyListEdit": {
+        "message": "Edit",
+        "description": "Edit button in proxy list"
+    },
+    "proxyListDelete": {
+        "message": "Delete",
+        "description": "Delete button in proxy list"
+    },
+    "proxyFormProtocol": {
+        "message": "Protocol",
+        "description": "Protocol field in proxy form"
+    },
+    "proxyFormTitle": {
+        "message": "Title (Optional)",
+        "description": "Title field in proxy form"
+    },
+    "proxyFormServer": {
+        "message": "Server",
+        "description": "Server field in proxy form"
+    },
+    "proxyFormPort": {
+        "message": "Port",
+        "description": "Port field in proxy form"
+    },
+    "proxyFormUsername": {
+        "message": "Username",
+        "description": "Username field in proxy form"
+    },
+    "proxyFormPassword": {
+        "message": "Password",
+        "description": "Password field in proxy form"
+    },
+    "proxyFormSave": {
+        "message": "Save",
+        "description": "Save button in proxy form"
+    }
+}

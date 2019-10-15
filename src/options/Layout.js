@@ -21,8 +21,8 @@ class NavItem {
 class Navigation {
   view (vnode) {
     return m('nav.navigation', [
-      m(new NavItem('/containers', 'Assign', 'assign')),
-      m(new NavItem('/proxies', 'Proxies', 'proxies'))
+      m(new NavItem('/containers', browser.i18n.getMessage('optionTabAssign'), 'assign')),
+      m(new NavItem('/proxies', browser.i18n.getMessage('optionTabProxies'), 'proxies'))
     ])
   }
 }
@@ -30,7 +30,7 @@ class Navigation {
 export class Layout {
   view (vnode) {
     const title = m('h1', browser.runtime.getManifest().name)
-    const desc = m('p.header-description', browser.runtime.getManifest().description)
+    const desc = m('p.header-description', browser.i18n.getMessage('extensionDescription'))
     const logo = m('.logo')
     const headerText = m('.header-text', [title, desc])
     const header = m('header', [logo, headerText])
