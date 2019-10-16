@@ -4,7 +4,8 @@
   "description": "[Firefox extension] Assign a proxy to a Firefox container [Extension page](https://addons.mozilla.org/en-US/firefox/addon/container-proxy/)",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "codeStyle:fix": " standard --fix",
+    "codeStyle:check": "standard",
+    "codeStyle:fix": "standard --fix",
     "debug": "web-ext run -s src --verbose --keep-profile-changes -p ./tmpProfile --start-url about:debugging  #--pref=intl.locale.requested=ru --pref=intl.locale.matchOS=false"
   },
   "repository": {
