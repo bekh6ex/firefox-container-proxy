@@ -1,61 +1,61 @@
 {
-    "extensionDescription": {
+    "General_extensionDescription": {
         "message": "Assign a proxy to a container",
         "description": "Description of the extension."
     },
-    "defaultContainerName": {
+    "ContainerList_defaultContainerName": {
         "message": "Default",
         "description": "Name of default container"
     },
-    "optionPageTitle": {
+    "OptionsPage_browserTabTitle": {
         "message": "Container Proxy extension settings",
         "description": "Title of option page"
     },
-    "optionTabAssign": {
+    "OptionsNavigation_assign": {
         "message": "Assign",
         "description": "Tab title for assign proxy for containers"
     },
-    "optionTabProxies": {
+    "OptionsNavigation_proxies": {
         "message": "Proxies",
         "description": "Tab title for config proxy list"
     },
-    "containerProxyDisabled": {
+    "ContainerList_proxyDisabled": {
         "message": "Directly",
         "description": "Config some containers not using proxy"
     },
-    "proxyListEdit": {
+    "ProxyList_edit": {
         "message": "Edit",
         "description": "Edit button in proxy list"
     },
-    "proxyListDelete": {
+    "ProxyList_delete": {
         "message": "Delete",
         "description": "Delete button in proxy list"
     },
-    "proxyFormProtocol": {
+    "ProxyForm_protocolFieldLabel": {
         "message": "Protocol",
         "description": "Protocol field in proxy form"
     },
-    "proxyFormTitle": {
+    "ProxyForm_titleFieldLabel": {
         "message": "Title (Optional)",
         "description": "Title field in proxy form"
     },
-    "proxyFormServer": {
+    "ProxyForm_serverFieldLabel": {
         "message": "Server",
         "description": "Server field in proxy form"
     },
-    "proxyFormPort": {
+    "ProxyForm_portFieldLabel": {
         "message": "Port",
         "description": "Port field in proxy form"
     },
-    "proxyFormUsername": {
+    "ProxyForm_usernameFieldLabel": {
         "message": "Username",
         "description": "Username field in proxy form"
     },
-    "proxyFormPassword": {
+    "ProxyForm_passwordFieldLabel": {
         "message": "Password",
         "description": "Password field in proxy form"
     },
-    "proxyFormSave": {
+    "ProxyForm_save": {
         "message": "Save",
         "description": "Save button in proxy form"
     }

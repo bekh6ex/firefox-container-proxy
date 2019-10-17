@@ -1,61 +1,61 @@
 {
-    "extensionDescription": {
+    "General_extensionDescription": {
         "message": "Назначить прокси Firefox контейнеру",
         "description": "Описание расширения."
     },
-    "defaultContainerName": {
+    "ContainerList_defaultContainerName": {
         "message": "По умолчанию",
         "description": "Имя контейнера по умолчанию"
     },
-    "optionPageTitle": {
+    "OptionsPage_browserTabTitle": {
         "message": "Container Proxy - настройки расширения",
         "description": "Заголовок страницы параметров"
     },
-    "optionTabAssign": {
+    "OptionsNavigation_assign": {
         "message": "Назначить",
         "description": "Название элемента меню для назначения прокси Firefox контейнерам"
     },
-    "optionTabProxies": {
+    "OptionsNavigation_proxies": {
         "message": "Прокси",
         "description": "Название элемента меню для списка конфигураций прокси"
     },
-    "containerProxyDisabled": {
+    "ContainerList_proxyDisabled": {
         "message": "Напрямую",
         "description": "Настройка контейнера чтобы тот не использовал прокси"
     },
-    "proxyListEdit": {
+    "ProxyList_edit": {
         "message": "Редактировать",
         "description": "Кнопка Редактировать в списке прокси"
     },
-    "proxyListDelete": {
+    "ProxyList_delete": {
         "message": "Удалить",
         "description": "Кнопка «Удалить» в списке прокси"
     },
-    "proxyFormProtocol": {
+    "ProxyForm_protocolFieldLabel": {
         "message": "Протокол",
         "description": "Поле протокола в форме редактирования настроек прокси сервера"
     },
-    "proxyFormTitle": {
+    "ProxyForm_titleFieldLabel": {
         "message": "Название (необязательно)",
         "description": "Поле заголовка в форме редактирования настроек прокси сервера"
     },
-    "proxyFormServer": {
+    "ProxyForm_serverFieldLabel": {
         "message": "Сервер",
         "description": "Поле сервера в форме редактирования настроек прокси сервера"
     },
-    "proxyFormPort": {
+    "ProxyForm_portFieldLabel": {
         "message": "Порт",
         "description": "Поле порта в форме редактирования настроек прокси сервера"
     },
-    "proxyFormUsername": {
+    "ProxyForm_usernameFieldLabel": {
         "message": "Имя пользователя",
         "description": "Поле имени пользователя в форме редактирования настроек прокси сервера"
     },
-    "proxyFormPassword": {
+    "ProxyForm_passwordFieldLabel": {
         "message": "Пароль",
         "description": "Поле пароля в форме редактирования настроек прокси сервера"
     },
-    "proxyFormSave": {
+    "ProxyForm_save": {
         "message": "Сохранить",
         "description": "Кнопка Сохранить в форме редактирования настроек прокси сервера"
     }

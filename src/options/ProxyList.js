@@ -42,14 +42,14 @@ export class ProxyList {
       href: '/proxies/' + p.id,
       oncreate: m.route.link,
       class: style.button
-    }, browser.i18n.getMessage('proxyListEdit'))
+    }, browser.i18n.getMessage('ProxyList_edit'))
     const deleteButton = m('button.delete[type=button]', {
       onclick: async () => {
         await this.model.delete(p.id)
         m.redraw()
       },
       class: style.button
-    }, browser.i18n.getMessage('proxyListDelete'))
+    }, browser.i18n.getMessage('ProxyList_delete'))
 
     return m('.proxy-list-item', [text, m('.proxy-button', [editButton, deleteButton])])
   }

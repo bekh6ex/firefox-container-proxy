@@ -104,11 +104,11 @@ export class ProxyForm {
     const model = new ProxyModel()
     this.model = model
 
-    this.titleInput = new TrimmedTextInput({ title: browser.i18n.getMessage('proxyFormTitle'), ...model.accessProperty('title') })
-    this.hostInput = new TrimmedTextInput({ title: browser.i18n.getMessage('proxyFormServer'), ...model.accessProperty('host'), required: true })
-    this.portInput = new PortNumberInput({ title: browser.i18n.getMessage('proxyFormPort'), ...model.accessProperty('port'), required: true })
-    this.usernameInput = new TrimmedTextInput({ title: browser.i18n.getMessage('proxyFormUsername'), ...model.accessProperty('username') })
-    this.passwordInput = new PasswordInput({ title: browser.i18n.getMessage('proxyFormPassword'), ...model.accessProperty('password') })
+    this.titleInput = new TrimmedTextInput({ title: browser.i18n.getMessage('ProxyForm_titleFieldLabel'), ...model.accessProperty('title') })
+    this.hostInput = new TrimmedTextInput({ title: browser.i18n.getMessage('ProxyForm_serverFieldLabel'), ...model.accessProperty('host'), required: true })
+    this.portInput = new PortNumberInput({ title: browser.i18n.getMessage('ProxyForm_portFieldLabel'), ...model.accessProperty('port'), required: true })
+    this.usernameInput = new TrimmedTextInput({ title: browser.i18n.getMessage('ProxyForm_usernameFieldLabel'), ...model.accessProperty('username') })
+    this.passwordInput = new PasswordInput({ title: browser.i18n.getMessage('ProxyForm_passwordFieldLabel'), ...model.accessProperty('password') })
   }
 
   oninit (vnode) {
@@ -123,7 +123,7 @@ export class ProxyForm {
         m('div', [m(this.titleInput)]),
         m('div', [
           m('.input', [
-            m('label.input__label', browser.i18n.getMessage('proxyFormProtocol')),
+            m('label.input__label', browser.i18n.getMessage('ProxyForm_protocol')),
             m(
               'select.input__field',
               {
@@ -144,7 +144,7 @@ export class ProxyForm {
               await this.model.save()
               m.route.set('/proxies')
             }
-          }, browser.i18n.getMessage('proxyFormSave'))
+          }, browser.i18n.getMessage('ProxyForm_save'))
         ])
 
       ]

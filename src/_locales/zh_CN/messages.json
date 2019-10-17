@@ -1,47 +1,47 @@
 {
-    "extensionDescription": {
+    "General_extensionDescription": {
         "message": "为每个容器分配代理服务器"
     },
-    "defaultContainerName": {
+    "ContainerList_defaultContainerName": {
         "message": "Default"
     },
-    "optionPageTitle": {
+    "OptionsPage_browserTabTitle": {
         "message": "Container Proxy 扩展设置"
     },
-    "optionTabAssign": {
+    "OptionsNavigation_assign": {
         "message": "分配代理服务器"
     },
-    "optionTabProxies": {
+    "OptionsNavigation_proxies": {
         "message": "配置代理服务器"
     },
-    "containerProxyDisabled": {
+    "ContainerList_proxyDisabled": {
         "message": "直接连接"
     },
-    "proxyListEdit": {
+    "ProxyList_edit": {
         "message": "编辑"
     },
-    "proxyListDelete": {
+    "ProxyList_delete": {
         "message": "删除"
     },
-    "proxyFormProtocol": {
+    "ProxyForm_protocolFieldLabel": {
         "message": "协议"
     },
-    "proxyFormTitle": {
+    "ProxyForm_titleFieldLabel": {
         "message": "名称（可选）"
     },
-    "proxyFormServer": {
+    "ProxyForm_serverFieldLabel": {
         "message": "服务器"
     },
-    "proxyFormPort": {
+    "ProxyForm_portFieldLabel": {
         "message": "端口"
     },
-    "proxyFormUsername": {
+    "ProxyForm_usernameFieldLabel": {
         "message": "用户名"
     },
-    "proxyFormPassword": {
+    "ProxyForm_passwordFieldLabel": {
         "message": "密码"
     },
-    "proxyFormSave": {
+    "ProxyForm_save": {
         "message": "保存"
     }
 }
