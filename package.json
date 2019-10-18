@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "codeStyle:check": "standard",
     "codeStyle:fix": "standard --fix",
-    "debug": "web-ext run -s src --verbose --keep-profile-changes -p ./tmpProfile --start-url about:debugging  #--pref=intl.locale.requested=ru --pref=intl.locale.matchOS=false"
+    "debug": "web-ext run -s src --verbose --keep-profile-changes -p ./tmpProfile --start-url about:debugging  #--pref=intl.locale.requested=ru --pref=intl.locale.matchOS=false",
+    "translations:push": "poeditor-cli"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,8 @@
   "homepage": "https://addons.mozilla.org/en-US/firefox/addon/container-proxy/",
   "devDependencies": {
     "standard": "^14.3.1",
-    "web-ext": "^3.2.0"
+    "web-ext": "^3.2.0",
+    "poeditor-cli": "^1.1.1"
   },
   "standard": {
     "globals": [
