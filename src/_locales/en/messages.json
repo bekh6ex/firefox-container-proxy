@@ -13,15 +13,15 @@
     },
     "OptionsNavigation_assign": {
         "message": "Assign",
-        "description": "Tab title for assign proxy for containers"
+        "description": "Navigation link title for assign proxy for containers"
     },
     "OptionsNavigation_proxies": {
         "message": "Proxies",
-        "description": "Tab title for config proxy list"
+        "description": "Navigation link title for config proxy list"
     },
     "ContainerList_proxyDisabled": {
         "message": "Directly",
-        "description": "Config some containers not using proxy"
+        "description": "Config containers to not use proxy"
     },
     "ProxyList_edit": {
         "message": "Edit",
