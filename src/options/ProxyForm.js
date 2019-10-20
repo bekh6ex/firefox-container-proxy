@@ -123,9 +123,9 @@ export class ProxyForm {
         m('div', [m(this.titleInput)]),
         m('div', [
           m('.input', [
-            m('label.input__label', browser.i18n.getMessage('ProxyForm_protocol')),
+            m('label.input__label', browser.i18n.getMessage('ProxyForm_protocolFieldLabel')),
             m(
-              'select.input__field',
+              'select',
               {
                 value: this.model.current.type,
                 oninput: (e) => { this.model.current.type = e.target.value }

@@ -43,6 +43,8 @@ Store.prototype.putProxy = async function putProxy (proxy) {
 
   if (proxy.type === 'socks' || proxy.type === 'socks4') {
     proxy.proxyDNS = true
+  } else {
+    delete proxy['proxyDNS']
   }
 
   const proxies = await this.getAllProxies()
