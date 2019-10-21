@@ -1,0 +1,75 @@
+{
+    "General_extensionDescription": {
+        "message": "Assign a proxy to a container",
+        "description": "Description of the extension."
+    },
+    "ContainerList_defaultContainerName": {
+        "message": "Default",
+        "description": "Name of default container"
+    },
+    "OptionsPage_browserTabTitle": {
+        "message": "Container Proxy extension settings",
+        "description": "Title of option page"
+    },
+    "OptionsNavigation_assign": {
+        "message": "Assign",
+        "description": "Navigation link title for assign proxy for containers"
+    },
+    "OptionsNavigation_proxies": {
+        "message": "Proxies",
+        "description": "Navigation link title for config proxy list"
+    },
+    "OptionsNavigation_support": {
+        "message": "Support",
+        "description": "Navigation link title for support information page"
+    },
+    "ContainerList_proxyDisabled": {
+        "message": "Directly",
+        "description": "Config containers to not use proxy"
+    },
+    "ProxyList_edit": {
+        "message": "Edit",
+        "description": "Edit button in proxy list"
+    },
+    "ProxyList_delete": {
+        "message": "Delete",
+        "description": "Delete button in proxy list"
+    },
+    "ProxyForm_protocolFieldLabel": {
+        "message": "Protocol",
+        "description": "Protocol field in proxy form"
+    },
+    "ProxyForm_titleFieldLabel": {
+        "message": "Title (Optional)",
+        "description": "Title field in proxy form"
+    },
+    "ProxyForm_serverFieldLabel": {
+        "message": "Server",
+        "description": "Server field in proxy form"
+    },
+    "ProxyForm_portFieldLabel": {
+        "message": "Port",
+        "description": "Port field in proxy form"
+    },
+    "ProxyForm_usernameFieldLabel": {
+        "message": "Username",
+        "description": "Username field in proxy form"
+    },
+    "ProxyForm_passwordFieldLabel": {
+        "message": "Password",
+        "description": "Password field in proxy form"
+    },
+    "ProxyForm_save": {
+        "message": "Save",
+        "description": "Save button in proxy form"
+    },
+    "SupportPage_gitterInvite": {
+        "message": "If you have any questions, have a problem or just want to chat you are welcome in our channel in $GITTER_NAME$:",
+        "description": "Gitter welcome message displayed on Support page",
+        "placeholders": {
+            "GITTER_NAME": {
+                "content": "Gitter"
+            }
+        }
+    }
+}

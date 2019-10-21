@@ -1,43 +1,17 @@
-import m from './lib/mithril.js'
+import m from '../lib/mithril.js'
+import Navigation from './nav/Navigation.js'
 
-class NavItem {
-    constructor(href, text, classes) {
-        this.href = href;
-        this.text = text;
-        this.classes = classes;
-    }
-    view(vnode) {
-        const path = m.route.get()
-        const active = path === this.href
-        const classes = this.classes + (active ? ' active' : '')
-        return m('div.item', {oncreate: m.route.link, class: classes, href:this.href}, [
-            m('.item-icon'),
-            m(".item-label", this.text),
-        ])
-    }
-}
-
-class Navigation {
-    view(vnode) {
-        return m("nav.navigation", [
-            m(new NavItem('/containers', "Assign", 'assign')),
-            m(new NavItem('/proxies', "Proxies", 'proxies')),
-        ])
-    }
-}
-
-
-export class Layout {   
-    view(vnode) {
-        const title = m('h1', browser.runtime.getManifest().name)
-        const desc = m('p.header-description', browser.runtime.getManifest().description)
-        const logo = m('.logo')
-        const headerText = m('.header-text', [title, desc])
-        const header = m('header', [logo, headerText]);
-        const main = m("main", [
-            m(new Navigation()),
-            m("section", vnode.children)
-        ]);
-        return [header, main]
-    }
+export class Layout {
+  view (vnode) {
+    const title = m('h1', browser.runtime.getManifest().name)
+    const desc = m('p.header-description', browser.i18n.getMessage('General_extensionDescription'))
+    const logo = m('.logo')
+    const headerText = m('.header-text', [title, desc])
+    const header = m('header', [logo, headerText])
+    const main = m('main', [
+      m(new Navigation()),
+      m('section.content', vnode.children)
+    ])
+    return [header, main]
+  }
 }

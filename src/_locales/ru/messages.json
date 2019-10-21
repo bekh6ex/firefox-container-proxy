@@ -1,0 +1,75 @@
+{
+    "General_extensionDescription": {
+        "message": "Назначить прокси Firefox контейнеру",
+        "description": "Описание расширения."
+    },
+    "ContainerList_defaultContainerName": {
+        "message": "По умолчанию",
+        "description": "Имя контейнера по умолчанию"
+    },
+    "OptionsPage_browserTabTitle": {
+        "message": "Container Proxy - настройки расширения",
+        "description": "Заголовок страницы параметров"
+    },
+    "OptionsNavigation_assign": {
+        "message": "Назначить",
+        "description": "Название элемента меню для назначения прокси Firefox контейнерам"
+    },
+    "OptionsNavigation_proxies": {
+        "message": "Прокси",
+        "description": "Название элемента меню для списка конфигураций прокси"
+    },
+    "OptionsNavigation_support": {
+        "message": "Помощь",
+        "description": "Название элемента меню для страницы помощи"
+    },
+    "ContainerList_proxyDisabled": {
+        "message": "Напрямую",
+        "description": "Настройка контейнера чтобы тот не использовал прокси"
+    },
+    "ProxyList_edit": {
+        "message": "Редактировать",
+        "description": "Кнопка Редактировать в списке прокси"
+    },
+    "ProxyList_delete": {
+        "message": "Удалить",
+        "description": "Кнопка «Удалить» в списке прокси"
+    },
+    "ProxyForm_protocolFieldLabel": {
+        "message": "Протокол",
+        "description": "Поле протокола в форме редактирования настроек прокси сервера"
+    },
+    "ProxyForm_titleFieldLabel": {
+        "message": "Название (необязательно)",
+        "description": "Поле заголовка в форме редактирования настроек прокси сервера"
+    },
+    "ProxyForm_serverFieldLabel": {
+        "message": "Сервер",
+        "description": "Поле сервера в форме редактирования настроек прокси сервера"
+    },
+    "ProxyForm_portFieldLabel": {
+        "message": "Порт",
+        "description": "Поле порта в форме редактирования настроек прокси сервера"
+    },
+    "ProxyForm_usernameFieldLabel": {
+        "message": "Имя пользователя",
+        "description": "Поле имени пользователя в форме редактирования настроек прокси сервера"
+    },
+    "ProxyForm_passwordFieldLabel": {
+        "message": "Пароль",
+        "description": "Поле пароля в форме редактирования настроек прокси сервера"
+    },
+    "ProxyForm_save": {
+        "message": "Сохранить",
+        "description": "Кнопка Сохранить в форме редактирования настроек прокси сервера"
+    },
+    "SupportPage_gitterInvite": {
+        "message": "Если у вас есть вопрос, возникла проблема или вы просто хотите пообщаться мы ждем вас в $GITTER_NAME$:",
+        "description": "Приветственное сообщение для Gitter канала на странице помощи",
+        "placeholders": {
+            "GITTER_NAME": {
+                "content": "Gitter"
+            }
+        }
+    }
+}

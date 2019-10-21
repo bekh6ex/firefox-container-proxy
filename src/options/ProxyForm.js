@@ -1,23 +1,24 @@
-import m from './lib/mithril.js';
-import {uuidv4} from './util.js';
-import {proxyTypes, style} from './constants.js';
+import m from '../lib/mithril.js';
+import { uuidv4 } from './util.js';
+import { proxyTypes, style} from './constants.js';
 import {ConnectionIssueResult, SuccessfulTestResult, testProxySettings, TestResult} from './testProxySettings.js';
 
 class ProxyModel {
-    constructor() {
-        this.current = {}
+  constructor () {
+    this.current = {}
 
-    }
+  }
 
-    async load(id) {
-        if (id === 'new') {
-            this.current = {id: 'new'}
-            m.redraw()
-            return
-        }
-        this.current = await store.getProxyById(id) || {id: 'new'}
-        m.redraw()
+  async load (id) {
+    if (id === 'new') {
+      this.current = { id: 'new' }
+      m.redraw()
+      return
     }
+    this.current = await store.getProxyById(id) || { id: 'new' }
+    m.redraw()
+  }
+
     async save() {
         if (this.current.id === 'new') {
             this.current.id = uuidv4()
@@ -28,9 +29,9 @@ class ProxyModel {
     accessProperty(property) {
         return {
             getValue: () => this.current[property],
-            setValue: (v) => this.current[property] = v
-        }
+      setValue: (v) => { this.current[property] = v }
     }
+  }
 
     getSettings() {
         const {type, host, port, username, password} = this.current;
@@ -39,113 +40,122 @@ class ProxyModel {
 }
 
 class Input {
-    constructor(props) {
-        this.title = props.title
-        this.required = !!props.required
-        this.getValue = props.getValue
-        this.setValue = props.setValue
-        this.type = "text"
+  constructor (props) {
+    this.title = props.title
+    this.required = !!props.required
+    this.getValue = props.getValue
+    this.setValue = props.setValue
+    this.type = 'text'
+    this.props = {}
     }
 
     normalizeValue(v) {
-        return v;
-    }
+    return v
+  }
 
-    view(vnode) {
-        return m('div', {class: 'input'}, [
-            m("label",{class: 'input__label'},  this.title),
-            m(
-                "input",
-                {
-                    type: this.type,
-                    class: 'input__field',
-                    required: this.required,
-                    value: this.getValue(),
-                    oninput: (e) => this.setValue(e.target.value),
-                    onchange: (e) => this.setValue(this.normalizeValue(e.target.value)),
-                    onfocusout: (e) => this.setValue(this.normalizeValue(e.target.value)),
-                }
-            ),
-        ])
-    }
+  view () {
+    return m('div', { class: 'input' }, [
+      m('label', { class: 'input__label' }, this.title),
+      m(
+        'input',
+        {
+          ...this.props,
+          type: this.type,
+          class: 'input__field',
+          required: this.required,
+          value: this.getValue(),
+          oninput: (e) => this.setValue(e.target.value),
+          onchange: (e) => this.setValue(this.normalizeValue(e.target.value)),
+          onfocusout: (e) => this.setValue(this.normalizeValue(e.target.value))
+        }
+      )
+    ])
+  }
 }
-
-
 
 class TrimmedTextInput extends Input {
-    normalizeValue(v) {
-        return v.trim();
-    }
+  normalizeValue (v) {
+    return v.trim()
+  }
 }
 
-class PositiveNumberInput extends Input {
-    constructor(props) {
-        super(props);
-        this.type = 'number';
+class PortNumberInput extends Input {
+  constructor (props) {
+    super(props)
+    this.type = 'number'
+    this.min = 1
+    this.max = 65535
+    this.props = { min: this.min, max: this.max }
     }
 
     normalizeValue(v) {
-        let parsed = Number.parseInt(v, 10);
-        if (!parsed || parsed < 1) {
-            parsed = 1
-        }
-        return parsed;
+    let parsed = Number.parseInt(v, 10)
+    if (!parsed || parsed < this.min) {
+      parsed = this.min
+    } else if (parsed > this.max) {
+      parsed = this.max
     }
+    return parsed
+  }
 }
 
 class PasswordInput extends Input {
-    constructor(props) {
-        super(props);
-        this.type = 'password';
-    }
+  constructor (props) {
+    super(props)
+    this.type = 'password'
+  }
 }
 
 export class ProxyForm {
-    constructor() {
-        const model = new ProxyModel();
-        this.model = model
+  constructor () {
+    const model = new ProxyModel()
+    this.model = model
         /** @type {TestResultBlock} */
         this.lastTestResultBlock = null;
 
-        this.titleInput = new TrimmedTextInput({title: "Title (optional)", ...model.accessProperty('title')})
-        this.hostInput = new TrimmedTextInput({title: 'Host/IP', ...model.accessProperty('host'), required: true})
-        this.portInput = new PositiveNumberInput({title: 'Port', ...model.accessProperty('port'), required: true})
-        this.usernameInput = new TrimmedTextInput({title: "Username", ...model.accessProperty('username')})
-        this.passwordInput = new PasswordInput({title: "Password", ...model.accessProperty('password')})
-    }
-    oninit(vnode) {
-        this.model.load(vnode.attrs.id)
-    }
-    view() {
+    this.titleInput = new TrimmedTextInput({ title: browser.i18n.getMessage('ProxyForm_titleFieldLabel'), ...model.accessProperty('title') })
+    this.hostInput = new TrimmedTextInput({ title: browser.i18n.getMessage('ProxyForm_serverFieldLabel'), ...model.accessProperty('host'), required: true })
+    this.portInput = new PortNumberInput({ title: browser.i18n.getMessage('ProxyForm_portFieldLabel'), ...model.accessProperty('port'), required: true })
+    this.usernameInput = new TrimmedTextInput({ title: browser.i18n.getMessage('ProxyForm_usernameFieldLabel'), ...model.accessProperty('username') })
+    this.passwordInput = new PasswordInput({ title: browser.i18n.getMessage('ProxyForm_passwordFieldLabel'), ...model.accessProperty('password') })
+  }
+
+  oninit (vnode) {
+    this.model.load(vnode.attrs.id)
+  }
+
+  view () {
 
         const testResultBlock = [];
         if (this.lastTestResultBlock) {
             testResultBlock.push(m(this.lastTestResultBlock));
         }
 
-        return m(
-            "form",
-            {},
-            [
-                m('div', [m(this.titleInput)]),
-                m('div', [
-                    m("label.label", "Type"),
-                    m(
-                        "select.type",
-                        {
-                            value: this.model.current.type,
-                            oninput: (e) => this.model.current.type = e.target.value
-                        },
-                        proxyTypes.map(t => m('option', {value: t}, t.toUpperCase()))),
-                ]),
-                m('div', [m(this.hostInput)]),
-                m('div', [m(this.portInput)]),
-                m('div', [m(this.usernameInput)]),
-                m('div', [m(this.passwordInput)]),
-                m('div', [
-                    m("button[type=button]", {
-                        class: style.button,
-                        onclick: async () => {
+    return m(
+      'form',
+      {},
+      [
+        m('div', [m(this.titleInput)]),
+        m('div', [
+          m('.input', [
+            m('label.input__label', browser.i18n.getMessage('ProxyForm_protocolFieldLabel')),
+            m(
+              'select',
+              {
+                value: this.model.current.type,
+                oninput: (e) => { this.model.current.type = e.target.value }
+              },
+              proxyTypes.map(t => m('option', { value: t }, t.toUpperCase())))
+          ])
+        ]),
+        m('div', [m(this.hostInput)]),
+        m('div', [m(this.portInput)]),
+        m('div', [m(this.usernameInput)]),
+        m('div', [m(this.passwordInput)]),
+        m('div', [
+          m('button[type=button]', {
+            class: style.button,
+            onclick: async () => {
                             this.lastTestResultBlock = null;
                             const result = await testProxySettings(this.model.getSettings());
                             this.lastTestResultBlock = new TestResultBlock(result);
@@ -155,15 +165,15 @@ export class ProxyForm {
                     m("button[type=button]", {
                         class: style.button,
                         onclick: async () => {
-                            await this.model.save()
-                            m.route.set("/proxies")
-                        }
-                    }, "Save"),
-                ]),
+              await this.model.save()
+              m.route.set('/proxies')
+            }
+          }, browser.i18n.getMessage('ProxyForm_save'))
+        ])
                 ...testResultBlock
-            ]
-        )
-    }
+      ]
+    )
+  }
 }
 
 class TestResultBlock {

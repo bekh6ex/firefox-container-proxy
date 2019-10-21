@@ -1,3 +1,5 @@
 .idea
 *.iml
 dist
+node_modules
+tmpProfile
