@@ -1,6 +1,6 @@
 {
   "name": "container-proxy",
-  "version": "0.1.10",
+  "version": "0.1.0",
   "description": "[Firefox extension] Assign a proxy to a Firefox container [Extension page](https://addons.mozilla.org/en-US/firefox/addon/container-proxy/)",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

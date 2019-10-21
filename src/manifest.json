@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Container proxy",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "__MSG_General_extensionDescription__",
   "default_locale": "en",
   "applications": {
