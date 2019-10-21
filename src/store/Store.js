@@ -13,11 +13,10 @@
  */
 
 export class Store {
-
   /**
    * @return {Promise<Proxy[]>}
    */
-  async getAllProxies() {
+  async getAllProxies () {
     const result = await browser.storage.local.get('proxies')
     return result.proxies || []
   }
@@ -26,7 +25,7 @@ export class Store {
    * @param {String} id
    * @return {Promise<Proxy>}
    */
-  async getProxyById(id) {
+  async getProxyById (id) {
     const proxies = await this.getAllProxies()
     const index = proxies.findIndex(p => p.id === id)
     return proxies[index]
@@ -36,7 +35,7 @@ export class Store {
    * @param {Proxy} proxy
    * @return {Promise<void>}
    */
-  async putProxy(proxy) {
+  async putProxy (proxy) {
     proxy.failoverTimeout = 5
 
     if (proxy.type === 'socks' || proxy.type === 'socks4') {
@@ -55,7 +54,7 @@ export class Store {
     await browser.storage.local.set({ proxies: proxies })
   }
 
-  async deleteProxyById(id) {
+  async deleteProxyById (id) {
     const proxies = await this.getAllProxies()
     const index = proxies.findIndex(p => p.id === id)
     if (proxies[index]) {
@@ -64,12 +63,12 @@ export class Store {
     }
   }
 
-  async getRelations() {
+  async getRelations () {
     const result = await browser.storage.local.get('relations')
     return result.relations || {}
   }
 
-  async getProxiesForContainer(cookieStoreId) {
+  async getProxiesForContainer (cookieStoreId) {
     const relations = await this.getRelations()
 
     const proxyIds = relations[cookieStoreId] || []

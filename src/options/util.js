@@ -6,6 +6,6 @@ export function uuidv4 () {
   })
 }
 
-export function generateAuthorizationHeader(username, password) {
-    return 'Basic ' + btoa(`${username}:${password}`)
+export function generateAuthorizationHeader (username, password) {
+  return 'Basic ' + btoa(`${username}:${password}`)
 }
