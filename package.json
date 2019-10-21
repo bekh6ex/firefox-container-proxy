@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "codeStyle:check": "standard",
     "codeStyle:fix": "standard --fix",
-    "debug": "web-ext run -s src --verbose --keep-profile-changes -p ./tmpProfile --start-url about:debugging  #--pref=intl.locale.requested=ru --pref=intl.locale.matchOS=false"
+    "debug": "web-ext run -s src --verbose --keep-profile-changes -p ./tmpProfile --start-url about:debugging --start-url about:addons  --pref=intl.locale.requested=en #--pref=intl.locale.matchOS=false"
   },
   "repository": {
     "type": "git",

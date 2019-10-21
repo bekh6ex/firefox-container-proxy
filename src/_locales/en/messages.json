@@ -19,6 +19,10 @@
         "message": "Proxies",
         "description": "Navigation link title for config proxy list"
     },
+    "OptionsNavigation_support": {
+        "message": "Support",
+        "description": "Navigation link title for support information page"
+    },
     "ContainerList_proxyDisabled": {
         "message": "Directly",
         "description": "Config containers to not use proxy"
@@ -58,5 +62,14 @@
     "ProxyForm_save": {
         "message": "Save",
         "description": "Save button in proxy form"
+    },
+    "SupportPage_gitterInvite": {
+        "message": "If you have any questions, have a problem or just want to chat you are welcome in our channel in $GITTER_NAME$:",
+        "description": "Gitter welcome message displayed on Support page",
+        "placeholders": {
+            "GITTER_NAME": {
+                "content": "Gitter"
+            }
+        }
     }
 }

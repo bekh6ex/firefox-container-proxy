@@ -4,6 +4,7 @@ import { Layout } from './Layout.js'
 import { ContainerListView } from './ContainerListView.js'
 import { ProxyList } from './ProxyList.js'
 import { ProxyForm } from './ProxyForm.js'
+import SupportPage from './pages/SupportPage.js'
 
 window.store = new Store()
 
@@ -21,6 +22,9 @@ m.route(document.body, '/containers', {
   },
   '/proxies/:id': {
     render: vnode => m(layout, m(proxyForm, vnode.attrs))
+  },
+  '/support': {
+    render: () => m(layout, m(SupportPage))
   }
 })
 

@@ -1,31 +1,5 @@
 import m from '../lib/mithril.js'
-
-class NavItem {
-  constructor (href, text, classes) {
-    this.href = href
-    this.text = text
-    this.classes = classes
-  }
-
-  view (vnode) {
-    const path = m.route.get()
-    const active = path === this.href
-    const classes = this.classes + (active ? ' active' : '')
-    return m('div.item', { oncreate: m.route.link, class: classes, href: this.href }, [
-      m('.item-icon'),
-      m('.item-label', this.text)
-    ])
-  }
-}
-
-class Navigation {
-  view (vnode) {
-    return m('nav.navigation', [
-      m(new NavItem('/containers', browser.i18n.getMessage('OptionsNavigation_assign'), 'assign')),
-      m(new NavItem('/proxies', browser.i18n.getMessage('OptionsNavigation_proxies'), 'proxies'))
-    ])
-  }
-}
+import Navigation from './nav/Navigation.js'
 
 export class Layout {
   view (vnode) {
@@ -36,7 +10,7 @@ export class Layout {
     const header = m('header', [logo, headerText])
     const main = m('main', [
       m(new Navigation()),
-      m('section', vnode.children)
+      m('section.content', vnode.children)
     ])
     return [header, main]
   }

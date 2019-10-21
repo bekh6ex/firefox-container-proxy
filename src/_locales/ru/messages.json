@@ -19,6 +19,10 @@
         "message": "Прокси",
         "description": "Название элемента меню для списка конфигураций прокси"
     },
+    "OptionsNavigation_support": {
+        "message": "Помощь",
+        "description": "Название элемента меню для страницы помощи"
+    },
     "ContainerList_proxyDisabled": {
         "message": "Напрямую",
         "description": "Настройка контейнера чтобы тот не использовал прокси"
@@ -58,5 +62,14 @@
     "ProxyForm_save": {
         "message": "Сохранить",
         "description": "Кнопка Сохранить в форме редактирования настроек прокси сервера"
+    },
+    "SupportPage_gitterInvite": {
+        "message": "Если у вас есть вопрос, возникла проблема или вы просто хотите пообщаться мы ждем вас в $GITTER_NAME$:",
+        "description": "Приветственное сообщение для Gitter канала на странице помощи",
+        "placeholders": {
+            "GITTER_NAME": {
+                "content": "Gitter"
+            }
+        }
     }
 }
