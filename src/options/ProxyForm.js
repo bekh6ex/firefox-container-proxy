@@ -168,9 +168,10 @@ export class ProxyForm {
               await this.model.save()
               m.route.set('/proxies')
             }
-          }, browser.i18n.getMessage('ProxyForm_save'))
+          }, browser.i18n.getMessage('ProxyForm_save')),
+          ...testResultBlock
         ])
-                ...testResultBlock
+
       ]
     )
   }
