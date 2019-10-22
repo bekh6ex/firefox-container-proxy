@@ -1,146 +1,102 @@
-import { generateAuthorizationHeader } from './util.js'
-
-export class TestResult {
-
-}
-
-export class SuccessfulTestResult extends TestResult {
-  /**
-   * @param {IpQueryResponse} direct
-   * @param {IpQueryResponse} proxied
-   */
-  constructor ({ direct, proxied }) {
-    super()
-    this.direct = direct
-    this.proxied = proxied
-  }
-
-  get ipsMatch () {
-    return this.direct.ip === this.proxied.ip
-  }
-}
-
-class SettingsErrorResult extends TestResult {
-}
-
-export class ConnectionIssueResult extends TestResult {
-  constructor ({ directError, proxiedError }) {
-    super()
-    this.directError = directError
-    this.proxiedError = proxiedError
-  }
-}
-
-class IpQueryResponse {
-  constructor ({ ip, location }) {
-    this.ip = ip
-    this.location = location
-  }
-}
-class NoDirectConnectionResult extends TestResult {
-  constructor ({ directError, proxied }) {
-    super()
-  }
-}
+import {generateAuthorizationHeader} from './util.js';
 
 /**
  *
  * @param settings
  * @return {Promise<TestResult>}
  */
-export async function testProxySettings (settings) {
+export async function testProxySettings(settings) {
   // TODO Figure out Firefox extension requirements regarding calling 3rd party services
 
-  const realIpResponsePromise = await fetchDirectIpData()
-  const proxyRequestPromise = await fetchProxiedIpData(settings)
+  const realIpResponsePromise = await fetchDirectIpData();
+  const proxyRequestPromise = await fetchProxiedIpData(settings);
 
-  let directIpQuery
-  let directError
+  let directIpQuery;
+  let directError;
   try {
-    directIpQuery = await realIpResponsePromise
+    directIpQuery = await realIpResponsePromise;
   } catch (e) {
-    directError = e
+    directError = e;
   }
 
-  let proxiedIpQuery
-  let proxiedError
+  let proxiedIpQuery;
+  let proxiedError;
   try {
-    proxiedIpQuery = await proxyRequestPromise
+    proxiedIpQuery = await proxyRequestPromise;
   } catch (e) {
-    proxiedError = e
+    proxiedError = e;
   }
 
-  const realRequestFailed = !directIpQuery
-  const proxyRequestFailed = !proxiedIpQuery
+  const realRequestFailed = !directIpQuery;
+  const proxyRequestFailed = !proxiedIpQuery;
 
   if (realRequestFailed) {
     if (proxyRequestFailed) {
-      return new ConnectionIssueResult({ directError, proxiedError })
+      return new ConnectionIssueResult({directError, proxiedError});
     } else {
-      // not allowed to access internet directly?
-      throw new Error('Not implemented')
+      return new NoDirectConnectionResult({directError, proxied: proxiedIpQuery});
     }
   } else {
     if (proxyRequestFailed) {
-      // proxy settings are incorrect
-      throw new Error('Not implemented')
+      return new SettingsErrorResult({directIpQuery, proxiedError});
     } else {
-      return new SuccessfulTestResult({ direct: directIpQuery, proxied: proxiedIpQuery })
+      return new SuccessfulTestResult({direct: directIpQuery, proxied: proxiedIpQuery});
     }
   }
 }
 
-const ipDataUrl = 'https://geoip-db.com/json/'
+const ipDataUrl = 'https://geoip-db.com/json/';
 
-function toQueryResponse (response) {
+function toQueryResponse(response) {
   // {"country_code":"DE","country_name":"Germany","city":"Berlin","postal":"10407","latitude":52.5336,"longitude":13.4492,"IPv4":"109.41.1.113","state":"Land Berlin"}
 
-  const ip = response.IPv4 ? response.IPv4 : response.IPv6
+  const ip = response.IPv4 ? response.IPv4 : response.IPv6;
 
-  const location = response.country_name + ', ' + response.city
+  const location = response.country_name + ', ' + response.city;
 
-  return new IpQueryResponse({ ip, location })
+  return new IpQueryResponse({ip, location});
 }
 
-async function fetchDirectIpData () {
-  return fetchIpData(ipDataUrl)
+async function fetchDirectIpData() {
+  return fetchIpData(ipDataUrl);
 }
 
-async function fetchProxiedIpData (proxyConfig) {
-  const proxiedUrl = ipDataUrl
-  const filter = { urls: [proxiedUrl] }
+async function fetchProxiedIpData(proxyConfig) {
+  const proxiedUrl = ipDataUrl;
+  const filter = {urls: [proxiedUrl]};
   return new Promise((resolve, reject) => {
     const listener = (requestDetails) => {
       // TODO Add support for HTTP
-      browser.proxy.onRequest.removeListener(listener)
+      browser.proxy.onRequest.removeListener(listener);
 
-      let proxyAuthorizationHeader = ''
+      let proxyAuthorizationHeader = '';
       if (proxyConfig.type === 'https') {
-        proxyAuthorizationHeader = generateAuthorizationHeader(proxyConfig.username, proxyConfig.password)
+        proxyAuthorizationHeader = generateAuthorizationHeader(proxyConfig.username, proxyConfig.password);
       }
 
-      return { ...proxyConfig, failoverTimeout: 1, proxyAuthorizationHeader }
-    }
+      return {...proxyConfig, failoverTimeout: 1, proxyAuthorizationHeader};
+    };
 
     const errorListener = (error) => {
-      browser.proxy.onRequest.removeListener(listener)
-      reject(error)
-    }
+      browser.proxy.onRequest.removeListener(listener);
+      reject(error);
+    };
 
-    browser.proxy.onRequest.addListener(listener, filter)
-    browser.proxy.onError.addListener(errorListener)
+    browser.proxy.onRequest.addListener(listener, filter);
+    browser.proxy.onError.addListener(errorListener);
 
-    const proxiedResultPromise = fetchIpData(proxiedUrl)
+    const proxiedResultPromise = fetchIpData(proxiedUrl);
     proxiedResultPromise.then(r => {
-      resolve(r)
+      resolve(r);
     }).catch(e => {
-      reject(e)
-    })
-  })
+      reject(e);
+    });
+  });
 }
 
-const ttl = 5000 // ms
-async function fetchIpData (url) {
+const ttlMs = 5000;
+
+async function fetchIpData(url) {
   // Send the most generic data to the service to prevent tracking
   const fetchParameters = {
     cache: 'no-cache',
@@ -152,28 +108,91 @@ async function fetchIpData (url) {
       Accept: 'application/json',
       'Accept-Language': 'en'
     }
-  }
+  };
+  // TODO Cancel fetch request on timeout
+  const ipResponsePromise = fetch(url, fetchParameters);
+  const timeout = timeoutPromise(ttlMs);
 
-  const ipResponsePromise = fetch(url, fetchParameters)
-  const timeout = timeoutPromise(ttl)
+  const result = Promise.race([ipResponsePromise, timeout]);
 
-  const result = Promise.race([ipResponsePromise, timeout])
-
-  const response = (await (await result).json())
-  return toQueryResponse(response)
+  const response = (await (await result).json());
+  return toQueryResponse(response);
 }
 
-function timeoutPromise (value) {
+function timeoutPromise(value) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      reject(new TimeoutError(value))
-    }, value)
-  })
+      reject(new TimeoutError(value));
+    }, value);
+  });
 }
 
 export class TimeoutError extends Error {
-  constructor (timeoutValue) {
-    super(`Reached timeout of ${timeoutValue} ms`)
-    this.timeoutValue = timeoutValue
+  constructor(timeoutValue) {
+    super(`Reached timeout of ${timeoutValue} ms`);
+    this.timeoutValue = timeoutValue;
+  }
+}
+
+class IpQueryResponse {
+  constructor({ip, location}) {
+    this.ip = ip;
+    this.location = location;
+  }
+}
+
+export class TestResult {
+
+}
+
+export class SuccessfulTestResult extends TestResult {
+  /**
+   * @param {IpQueryResponse} direct
+   * @param {IpQueryResponse} proxied
+   */
+  constructor({direct, proxied}) {
+    super();
+    this.direct = direct;
+    this.proxied = proxied;
+  }
+
+  get ipsMatch() {
+    return this.direct.ip === this.proxied.ip;
+  }
+}
+
+/**
+ * Proxy settings are incorrect
+ */
+class SettingsErrorResult extends TestResult {
+  directIpQuery;
+  proxiedError;
+
+  constructor({directIpQuery, proxiedError}) {
+    super();
+    this.directIpQuery = directIpQuery;
+    this.proxiedError = proxiedError;
+  }
+}
+
+export class ConnectionIssueResult extends TestResult {
+  constructor({directError, proxiedError}) {
+    super();
+    this.directError = directError;
+    this.proxiedError = proxiedError;
+  }
+}
+
+/**
+ * Probably, not allowed to access internet directly
+ */
+class NoDirectConnectionResult extends TestResult {
+  directError;
+  proxied;
+
+  constructor({directError, proxied}) {
+    super();
+    this.directError = directError;
+    this.proxied = proxied;
   }
 }
