@@ -1,7 +1,12 @@
 import m from '../lib/mithril.js'
 import { uuidv4 } from './util.js'
 import { proxyTypes, style } from './constants.js'
-import { ConnectionIssueResult, SuccessfulTestResult, testProxySettings, TestResult } from './testProxySettings.js'
+import {
+  ConnectionIssueResult,
+  NoDirectConnectionResult, SettingsErrorResult,
+  SuccessfulTestResult,
+  testProxySettings
+} from './testProxySettings.js'
 
 class ProxyModel {
   constructor () {
@@ -28,7 +33,9 @@ class ProxyModel {
   accessProperty (property) {
     return {
       getValue: () => this.current[property],
-      setValue: (v) => { this.current[property] = v }
+      setValue: (v) => {
+        this.current[property] = v
+      }
     }
   }
 
@@ -113,8 +120,16 @@ export class ProxyForm {
     this.lastTestResultBlock = null
 
     this.titleInput = new TrimmedTextInput({ title: browser.i18n.getMessage('ProxyForm_titleFieldLabel'), ...model.accessProperty('title') })
-    this.hostInput = new TrimmedTextInput({ title: browser.i18n.getMessage('ProxyForm_serverFieldLabel'), ...model.accessProperty('host'), required: true })
-    this.portInput = new PortNumberInput({ title: browser.i18n.getMessage('ProxyForm_portFieldLabel'), ...model.accessProperty('port'), required: true })
+    this.hostInput = new TrimmedTextInput({
+      title: browser.i18n.getMessage('ProxyForm_serverFieldLabel'),
+      ...model.accessProperty('host'),
+      required: true
+    })
+    this.portInput = new PortNumberInput({
+      title: browser.i18n.getMessage('ProxyForm_portFieldLabel'),
+      ...model.accessProperty('port'),
+      required: true
+    })
     this.usernameInput = new TrimmedTextInput({ title: browser.i18n.getMessage('ProxyForm_usernameFieldLabel'), ...model.accessProperty('username') })
     this.passwordInput = new PasswordInput({ title: browser.i18n.getMessage('ProxyForm_passwordFieldLabel'), ...model.accessProperty('password') })
   }
@@ -141,7 +156,9 @@ export class ProxyForm {
               'select',
               {
                 value: this.model.current.type,
-                oninput: (e) => { this.model.current.type = e.target.value }
+                oninput: (e) => {
+                  this.model.current.type = e.target.value
+                }
               },
               proxyTypes.map(t => m('option', { value: t }, t.toUpperCase())))
           ])
@@ -188,6 +205,8 @@ class TestResultBlock {
   }
 
   view () {
+    // TODO Add localization
+    // Improve design
     const result = this.testResult
     let text
     const directBlock = []
@@ -197,7 +216,17 @@ class TestResultBlock {
       directBlock.push(m('b', ['Your real IP: ']), result.direct.ip)
       proxiedBlock.push(m('b', ['Proxied IP: ']), result.proxied.ip)
     } else if (result instanceof ConnectionIssueResult) {
-      text = 'Network error. Probably you are not connected to the internet'
+      text = 'Network error! Probably, you are not connected to the internet'
+      directBlock.push(m('b', ['Direct request error: ']), result.directError.message)
+      proxiedBlock.push(m('b', ['Proxied request error: ']), result.proxiedError.message)
+    } else if (result instanceof NoDirectConnectionResult) {
+      text = 'Warning! Seems that connection to the Internet without proxy is not possible, but proxy settings are correct'
+      directBlock.push(m('b', ['Direct request error: ']), result.directError.message)
+      proxiedBlock.push(m('b', ['Proxied IP: ']), result.proxied.ip)
+    } else if (result instanceof SettingsErrorResult) {
+      text = 'Error! Could not connect to the proxy. Probably the settings are incorrect'
+      directBlock.push(m('b', ['Your real IP: ']), result.direct.ip)
+      proxiedBlock.push(m('b', ['Proxied request error: ']), result.proxiedError.message)
     } else {
       throw new Error('Unknown result type')
     }

@@ -8,13 +8,10 @@ import {generateAuthorizationHeader} from './util.js';
 export async function testProxySettings(settings) {
   // TODO Figure out Firefox extension requirements regarding calling 3rd party services
 
-  const realIpResponsePromise = await fetchDirectIpData();
-  const proxyRequestPromise = await fetchProxiedIpData(settings);
-
   let directIpQuery;
   let directError;
   try {
-    directIpQuery = await realIpResponsePromise;
+    directIpQuery = await fetchDirectIpData();
   } catch (e) {
     directError = e;
   }
@@ -22,7 +19,7 @@ export async function testProxySettings(settings) {
   let proxiedIpQuery;
   let proxiedError;
   try {
-    proxiedIpQuery = await proxyRequestPromise;
+    proxiedIpQuery = await fetchProxiedIpData(settings);
   } catch (e) {
     proxiedError = e;
   }
@@ -164,18 +161,28 @@ export class SuccessfulTestResult extends TestResult {
 /**
  * Proxy settings are incorrect
  */
-class SettingsErrorResult extends TestResult {
-  directIpQuery;
-  proxiedError;
+export class SettingsErrorResult extends TestResult {
+  direct
+  proxiedError
 
+  /**
+   *
+   * @param {IpQueryResponse} directIpQuery
+   * @param {Error} proxiedError
+   */
   constructor({directIpQuery, proxiedError}) {
     super();
-    this.directIpQuery = directIpQuery;
+    this.direct = directIpQuery;
     this.proxiedError = proxiedError;
   }
 }
 
 export class ConnectionIssueResult extends TestResult {
+  /**
+   *
+   * @param {Error} directError
+   * @param {Error} proxiedError
+   */
   constructor({directError, proxiedError}) {
     super();
     this.directError = directError;
@@ -186,10 +193,15 @@ export class ConnectionIssueResult extends TestResult {
 /**
  * Probably, not allowed to access internet directly
  */
-class NoDirectConnectionResult extends TestResult {
+export class NoDirectConnectionResult extends TestResult {
   directError;
   proxied;
 
+  /**
+   *
+   * @param {Error} directError
+   * @param {IpQueryResponse} proxied
+   */
   constructor({directError, proxied}) {
     super();
     this.directError = directError;
