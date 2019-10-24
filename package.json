@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "[Firefox extension] Assign a proxy to a Firefox container [Extension page](https://addons.mozilla.org/en-US/firefox/addon/container-proxy/)",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "codeStyle:check": "standard",
     "codeStyle:fix": "standard --fix",
     "debug": "web-ext run -s src --verbose --keep-profile-changes -p ./tmpProfile --start-url about:debugging --start-url about:addons  --pref=intl.locale.requested=en #--pref=intl.locale.matchOS=false"
@@ -19,6 +19,10 @@
   },
   "homepage": "https://addons.mozilla.org/en-US/firefox/addon/container-proxy/",
   "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "babel-jest": "^24.9.0",
+    "jest": "^24.9.0",
     "standard": "^14.3.1",
     "web-ext": "^3.2.0"
   },
