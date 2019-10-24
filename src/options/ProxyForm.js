@@ -7,6 +7,7 @@ import {
   SuccessfulTestResult,
   testProxySettings
 } from './testProxySettings.js'
+import { isDomainName, isIpV4Address, isIpV6Address } from './predicates.js'
 
 class ProxyModel {
   constructor () {
@@ -53,13 +54,38 @@ class Input {
     this.setValue = props.setValue
     this.type = 'text'
     this.props = {}
+    this.errorText = null
   }
 
   normalizeValue (v) {
     return v
   }
 
+  onChange(v) {
+    const normalizedValue = this.normalizeValue(v);
+    this.errorText = this.checkForError(normalizedValue)
+    this.setValue(normalizedValue)
+    m.redraw()
+  }
+
+  get valid() {
+    return this.errorText === null
+  }
+
+  /**
+   * @param v Value
+   * @return {string|null}
+   */
+  checkForError(v) {
+    return null
+  }
+
   view () {
+    const inputClasses = ['input__field']
+    if (!this.valid) {
+      inputClasses.push('input--error__field')
+    }
+
     return m('div', { class: 'input' }, [
       m('label', { class: 'input__label' }, this.title),
       m(
@@ -67,12 +93,13 @@ class Input {
         {
           ...this.props,
           type: this.type,
-          class: 'input__field',
+          class: inputClasses.join(' '),
           required: this.required,
+          title: this.errorText,
           value: this.getValue(),
           oninput: (e) => this.setValue(e.target.value),
-          onchange: (e) => this.setValue(this.normalizeValue(e.target.value)),
-          onfocusout: (e) => this.setValue(this.normalizeValue(e.target.value))
+          onchange: (e) => this.onChange(e.target.value),
+          onfocusout: (e) => this.onChange(e.target.value)
         }
       )
     ])
@@ -105,6 +132,29 @@ class PortNumberInput extends Input {
   }
 }
 
+class HostInput extends TrimmedTextInput {
+  constructor(props) {
+    super(props)
+  }
+
+  checkForError(v) {
+    // TODO Add localization
+    if (!v) {
+      return "Value cannot be empty";
+    }
+
+    const isIPv4 = isIpV4Address(v);
+    const isIPv6 = isIpV6Address(v);
+    const isDomain = isDomainName(v);
+
+    if (!isIPv4 && !isIPv6 && !isDomain) {
+      return "Should be either IP address or domain name"
+    }
+
+    return null;
+  }
+}
+
 class PasswordInput extends Input {
   constructor (props) {
     super(props)
@@ -120,7 +170,7 @@ export class ProxyForm {
     this.lastTestResultBlock = null
 
     this.titleInput = new TrimmedTextInput({ title: browser.i18n.getMessage('ProxyForm_titleFieldLabel'), ...model.accessProperty('title') })
-    this.hostInput = new TrimmedTextInput({
+    this.hostInput = new HostInput({
       title: browser.i18n.getMessage('ProxyForm_serverFieldLabel'),
       ...model.accessProperty('host'),
       required: true
