@@ -20,7 +20,6 @@ describe('isIpV4Address', () => {
 })
 
 describe('isIpV6Address', () => {
-
   const validIpv6Addresses = [
     '2001:0db8:85a3:0000:0000:8a2e:0370:7334',
     '2001:0DB8:85A3:0000:0000:8A2E:0370:7334',
@@ -40,7 +39,7 @@ describe('isIpV6Address', () => {
     '2001:0db8:85a3:0000:0000:8a2e:0.0.0.0',
     '::0.0.0.0',
     '::255.255.255.255',
-    '::123.45.67.178',
+    '::123.45.67.178'
   ]
   validIpv6Addresses.forEach(address => {
     it(`should return true for correct IP address: ${address}`, () => {
@@ -62,7 +61,7 @@ describe('isIpV6Address', () => {
     '::0.256.0.0',
     '::0.0.256.0',
     '::0.0.0.256',
-    'google.com',
+    'google.com'
   ]
 
   invalidIpV6Addresses.forEach(address => {
@@ -113,7 +112,7 @@ describe('isDomainName', () => {
     'xn--e1afmkfd.xn--80akhbyknj4f.xn--e1afmkfd',
     'xn--espaa-rta.xn--ca-ol-fsay5a',
     'xn--d1abbgf6aiiy.xn--p1ai',
-    '☎.com',
+    '☎.com'
   ]
 
   validDomainNames.forEach(domainName => {
@@ -130,7 +129,7 @@ describe('isDomainName', () => {
     '::1',
     'hello.☎/',
     'www.example.com.',
-    'exa mple.com',
+    'exa mple.com'
   ]
 
   invalidDomainNames.forEach(domainName => {

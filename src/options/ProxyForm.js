@@ -61,14 +61,14 @@ class Input {
     return v
   }
 
-  onChange(v) {
-    const normalizedValue = this.normalizeValue(v);
+  onChange (v) {
+    const normalizedValue = this.normalizeValue(v)
     this.errorText = this.checkForError(normalizedValue)
     this.setValue(normalizedValue)
     m.redraw()
   }
 
-  get valid() {
+  get valid () {
     return this.errorText === null
   }
 
@@ -76,7 +76,7 @@ class Input {
    * @param v Value
    * @return {string|null}
    */
-  checkForError(v) {
+  checkForError (v) {
     return null
   }
 
@@ -133,25 +133,21 @@ class PortNumberInput extends Input {
 }
 
 class HostInput extends TrimmedTextInput {
-  constructor(props) {
-    super(props)
-  }
-
-  checkForError(v) {
+  checkForError (v) {
     // TODO Add localization
     if (!v) {
-      return "Value cannot be empty";
+      return 'Value cannot be empty'
     }
 
-    const isIPv4 = isIpV4Address(v);
-    const isIPv6 = isIpV6Address(v);
-    const isDomain = isDomainName(v);
+    const isIPv4 = isIpV4Address(v)
+    const isIPv6 = isIpV6Address(v)
+    const isDomain = isDomainName(v)
 
     if (!isIPv4 && !isIPv6 && !isDomain) {
-      return "Should be either IP address or domain name"
+      return 'Should be either IP address or domain name'
     }
 
-    return null;
+    return null
   }
 }
 
