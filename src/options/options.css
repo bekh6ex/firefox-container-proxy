@@ -6,7 +6,7 @@
 @import "nav/Navigation.css";
 /*noinspection CssUnknownTarget*/
 @import "chrome://browser/skin/preferences/in-content/containers.css";
-@import "select.css";
+@import "ui-components/Select.css";
 
 
 * {

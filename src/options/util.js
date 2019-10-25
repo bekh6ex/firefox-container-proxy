@@ -5,3 +5,7 @@ export function uuidv4 () {
     return v.toString(16)
   })
 }
+
+export function generateAuthorizationHeader (username, password) {
+  return 'Basic ' + btoa(`${username}:${password}`)
+}
