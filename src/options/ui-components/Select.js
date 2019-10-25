@@ -7,7 +7,7 @@ export default class Select {
    * @param required
    * @param getValue
    * @param setValue
-   * @param {object} options
+   * @param {object[]} options
    * @param nonsetValueText
    */
   constructor ({ title, required, getValue, setValue, options, nonsetValueText }) {
