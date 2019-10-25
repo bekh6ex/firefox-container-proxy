@@ -6,6 +6,7 @@ import { PasswordInput, TrimmedTextInput } from '../ui-components/inputs.js'
 import PortNumberInput from './PortInput.js'
 import HostInput from './HostInput.js'
 import TestResultBlock from './TestResultBlock.js'
+import Select from '../ui-components/Select.js'
 
 const t = browser.i18n.getMessage
 
@@ -74,6 +75,11 @@ export default class ProxyForm {
     })
     this.usernameInput = new TrimmedTextInput({ title: t('ProxyForm_usernameFieldLabel'), ...model.accessProperty('username') })
     this.passwordInput = new PasswordInput({ title: t('ProxyForm_passwordFieldLabel'), ...model.accessProperty('password') })
+
+    const protocolOptions = proxyTypes.map(v => ({value:v, label: v.toUpperCase()}))
+
+    const nonsetValueText = "<select>" //TODO Localize
+    this.protocolSelect = new Select({title:t('ProxyForm_protocolFieldLabel'), required: true, ...model.accessProperty('type'), options: protocolOptions, nonsetValueText: nonsetValueText})
   }
 
   oninit (vnode) {
@@ -91,20 +97,7 @@ export default class ProxyForm {
       {},
       [
         m('div', [m(this.titleInput)]),
-        m('div', [
-          m('.input', [
-            m('label.input__label', t('ProxyForm_protocolFieldLabel')),
-            m(
-              'select',
-              {
-                value: this.model.current.type,
-                oninput: (e) => {
-                  this.model.current.type = e.target.value
-                }
-              },
-              proxyTypes.map(t => m('option', { value: t }, t.toUpperCase())))
-          ])
-        ]),
+        m('div', [m(this.protocolSelect)]),
         m('div', [m(this.hostInput)]),
         m('div', [m(this.portInput)]),
         m('div', [m(this.usernameInput)]),
