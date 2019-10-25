@@ -16,9 +16,9 @@ export default class TestResultBlock {
 
   view () {
     // TODO Add localization
-    // Improve design
+    // TODO Improve design
     const result = this.testResult
-    let text
+    let text = "Unexpected error"
     const directBlock = []
     const proxiedBlock = []
     if (result instanceof SuccessfulTestResult) {
@@ -30,7 +30,7 @@ export default class TestResultBlock {
       directBlock.push(m('b', ['Direct request error: ']), result.directError.message)
       proxiedBlock.push(m('b', ['Proxied request error: ']), result.proxiedError.message)
     } else if (result instanceof NoDirectConnectionResult) {
-      text = 'Warning! Seems that connection to the Internet without proxy is not possible, but proxy settings are correct'
+      text = 'Success! But... Seems that connection to the Internet without a proxy is not possible, but proxy settings are probably correct'
       directBlock.push(m('b', ['Direct request error: ']), result.directError.message)
       proxiedBlock.push(m('b', ['Proxied IP: ']), result.proxied.ip)
     } else if (result instanceof SettingsErrorResult) {
