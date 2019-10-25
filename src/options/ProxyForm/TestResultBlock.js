@@ -18,7 +18,7 @@ export default class TestResultBlock {
     // TODO Add localization
     // TODO Improve design
     const result = this.testResult
-    let text = "Unexpected error"
+    let text = 'Unexpected error'
     const directBlock = []
     const proxiedBlock = []
     if (result instanceof SuccessfulTestResult) {

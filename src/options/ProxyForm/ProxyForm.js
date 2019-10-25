@@ -76,10 +76,10 @@ export default class ProxyForm {
     this.usernameInput = new TrimmedTextInput({ title: t('ProxyForm_usernameFieldLabel'), ...model.accessProperty('username') })
     this.passwordInput = new PasswordInput({ title: t('ProxyForm_passwordFieldLabel'), ...model.accessProperty('password') })
 
-    const protocolOptions = proxyTypes.map(v => ({value:v, label: v.toUpperCase()}))
+    const protocolOptions = proxyTypes.map(v => ({ value: v, label: v.toUpperCase() }))
 
-    const nonsetValueText = "<select>" //TODO Localize
-    this.protocolSelect = new Select({title:t('ProxyForm_protocolFieldLabel'), required: true, ...model.accessProperty('type'), options: protocolOptions, nonsetValueText: nonsetValueText})
+    const nonsetValueText = '<select>' // TODO Localize
+    this.protocolSelect = new Select({ title: t('ProxyForm_protocolFieldLabel'), required: true, ...model.accessProperty('type'), options: protocolOptions, nonsetValueText: nonsetValueText })
   }
 
   oninit (vnode) {
