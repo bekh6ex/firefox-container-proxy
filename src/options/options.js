@@ -3,7 +3,7 @@ import m from '../lib/mithril.js'
 import { Layout } from './Layout.js'
 import { ContainerListView } from './ContainerListView.js'
 import { ProxyList } from './ProxyList.js'
-import { ProxyForm } from './ProxyForm.js'
+import ProxyForm from './ProxyForm/ProxyForm.js'
 import SupportPage from './pages/SupportPage.js'
 
 window.store = new Store()
