@@ -33,3 +33,6 @@
     padding-right: 4px;
 }
 
+.ProxyForm__actions > *:not(:first-child) {
+    margin-left: var(--baseline-grid);
+}

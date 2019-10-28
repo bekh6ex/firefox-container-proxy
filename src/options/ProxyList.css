@@ -1,0 +1,3 @@
+.ProxyList__item-actions > * {
+    margin-left: var(--baseline-grid);
+}

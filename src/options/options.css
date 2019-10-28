@@ -8,15 +8,11 @@
 @import "chrome://browser/skin/preferences/in-content/containers.css";
 @import "ui-components/Select.css";
 @import "ProxyForm/ProxyForm.css";
+@import "ProxyList.css";
 
 
 * {
     box-sizing: border-box;
-}
-
-.button {
-    /* TODO: Remove. Temporary */
-    margin: 4px;
 }
 
 :root {

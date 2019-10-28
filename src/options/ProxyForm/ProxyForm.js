@@ -113,7 +113,7 @@ export default class ProxyForm {
           m(this.usernameInput),
           m(this.passwordInput)
         ]),
-        m('div', [
+        m('div.ProxyForm__actions', [
           m('button[type=button]', {
             class: style.button,
             onclick: async () => {
