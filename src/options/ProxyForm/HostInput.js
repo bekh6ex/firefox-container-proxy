@@ -4,10 +4,6 @@ import { TrimmedTextInput } from '../ui-components/inputs.js'
 export default class HostInput extends TrimmedTextInput {
   checkForError (v) {
     // TODO Add localization
-    if (!v) {
-      return 'Value cannot be empty'
-    }
-
     const isIPv4 = isIpV4Address(v)
     const isIPv6 = isIpV6Address(v)
     const isDomain = isDomainName(v)
