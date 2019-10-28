@@ -47,6 +47,10 @@
         "message": "Server",
         "description": "Server field in proxy form"
     },
+    "ProxyForm_incorrectServerError": {
+        "message": "Value should be either IP address or domain name",
+        "description": "Error message displayed when incorrect server is entered"
+    },
     "ProxyForm_portFieldLabel": {
         "message": "Port",
         "description": "Port field in proxy form"
