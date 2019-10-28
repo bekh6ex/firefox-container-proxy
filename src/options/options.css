@@ -7,6 +7,7 @@
 /*noinspection CssUnknownTarget*/
 @import "chrome://browser/skin/preferences/in-content/containers.css";
 @import "ui-components/Select.css";
+@import "ProxyForm/ProxyForm.css";
 
 
 * {

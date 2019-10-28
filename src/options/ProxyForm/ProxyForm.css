@@ -1,0 +1,35 @@
+
+.ProxyForm__connectionSettings {
+    display: flex;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.ProxyForm__hostInput {
+    flex-grow: 1;
+}
+
+.ProxyForm__portInput {
+    flex-basis: 4em;
+}
+
+.ProxyForm__separator {
+    color: var(--grey-50);
+    align-self: end;
+    padding: 4px;
+}
+
+.ProxyForm__credentials {
+    display: flex;
+    margin-bottom: 8px;
+    justify-content: stretch;
+}
+
+.ProxyForm__credentials > * {
+    flex-grow: 1;
+}
+
+.ProxyForm__credentials > :first-child {
+    padding-right: 4px;
+}
+

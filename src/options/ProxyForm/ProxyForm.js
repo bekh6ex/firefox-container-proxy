@@ -79,7 +79,12 @@ export default class ProxyForm {
     const protocolOptions = proxyTypes.map(v => ({ value: v, label: v.toUpperCase() }))
 
     const nonsetValueText = '<select>' // TODO Localize
-    this.protocolSelect = new Select({ title: t('ProxyForm_protocolFieldLabel'), required: true, ...model.accessProperty('type'), options: protocolOptions, nonsetValueText: nonsetValueText })
+    this.protocolSelect = new Select({
+      title: t('ProxyForm_protocolFieldLabel'),
+      required: true, ...model.accessProperty('type'),
+      options: protocolOptions,
+      nonsetValueText: nonsetValueText
+    })
   }
 
   oninit (vnode) {
@@ -97,11 +102,17 @@ export default class ProxyForm {
       {},
       [
         m('div', [m(this.titleInput)]),
-        m('div', [m(this.protocolSelect)]),
-        m('div', [m(this.hostInput)]),
-        m('div', [m(this.portInput)]),
-        m('div', [m(this.usernameInput)]),
-        m('div', [m(this.passwordInput)]),
+        m('div.ProxyForm__connectionSettings', [
+          m(this.protocolSelect),
+          m('span.ProxyForm__separator', '://'),
+          m(this.hostInput, { class: 'ProxyForm__hostInput' }),
+          m('span.ProxyForm__separator', ':'),
+          m(this.portInput, { class: 'ProxyForm__portInput' })
+        ]),
+        m('div.ProxyForm__credentials', [
+          m(this.usernameInput),
+          m(this.passwordInput)
+        ]),
         m('div', [
           m('button[type=button]', {
             class: style.button,

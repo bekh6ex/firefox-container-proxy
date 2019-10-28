@@ -34,13 +34,14 @@ export class Input {
     return null
   }
 
-  view () {
+  view ({ attrs: { class: className = '' } }) {
     const inputClasses = ['input__field']
     if (!this.valid) {
       inputClasses.push('input--error__field')
     }
 
-    return m('div', { class: 'input' }, [
+    const topClasses = ['input', className]
+    return m('div', { class: topClasses.join(' ') }, [
       m('label', { class: 'input__label' }, this.title),
       m(
         'input',
