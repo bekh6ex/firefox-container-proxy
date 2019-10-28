@@ -21,8 +21,6 @@
     -webkit-appearance: none;
     appearance: none;
 
-
-    /* TODO Update color according to settings page */
     background-image: url("../icons/Arrowhead Down.svg");
     background-repeat: no-repeat;
     background-position: calc(100% - 4px) center;
