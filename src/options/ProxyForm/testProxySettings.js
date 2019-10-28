@@ -94,7 +94,7 @@ async function fetchProxiedIpData (proxyConfig) {
 const ttlMs = 5000
 
 async function fetchIpData (url) {
-  // Send the most generic data to the service to prevent tracking
+  // TODO Send the most generic data to the service to prevent tracking
   const fetchParameters = {
     cache: 'no-cache',
     credentials: 'omit',
