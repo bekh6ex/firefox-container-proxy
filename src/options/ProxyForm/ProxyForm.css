@@ -36,3 +36,13 @@
 .ProxyForm__actions > *:not(:first-child) {
     margin-left: var(--baseline-grid);
 }
+
+.ProxyForm__duckduckgo-attribution {
+    background-image: url("../icons/DuckDuckGo_logo.v107.min.svg");
+    background-repeat: no-repeat no-repeat;
+    background-position: 100%;
+    background-size: contain;
+    padding-right: 1.3em;
+
+    font-size: 80%;
+}

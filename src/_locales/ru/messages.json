@@ -67,6 +67,15 @@
         "message": "Сохранить",
         "description": "Кнопка Сохранить в форме редактирования настроек прокси сервера"
     },
+    "ProxyForm_duckduckgoAttribution": {
+        "message": "IP адреса определены $DUCKDUCKGO_NAME$",
+        "description": "Атрибуция DuckDuckGo за предоставление IP определения",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
     "SupportPage_gitterInvite": {
         "message": "Если у вас есть вопрос, возникла проблема или вы просто хотите пообщаться мы ждем вас в $GITTER_NAME$:",
         "description": "Приветственное сообщение для Gitter канала на странице помощи",

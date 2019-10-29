@@ -44,12 +44,7 @@ export async function testProxySettings (settings) {
 
 const ipDataUrl = 'https://api.duckduckgo.com/?q=ip&no_html=1&format=json&t=firefox-container-proxy-extension'
 
-// TODO Add attribution to DuckDuckGo
-
 function toQueryResponse (response) {
-
-  // {"country_code":"DE","country_name":"Germany","city":"Berlin","postal":"10407","latitude":52.5336,"longitude":13.4492,"IPv4":"109.41.1.113","state":"Land Berlin"}
-
   if (response.AnswerType === 'ip') {
     return new IpQueryResponse({ ip: response.Answer })
   } else {

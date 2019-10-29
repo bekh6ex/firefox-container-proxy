@@ -44,7 +44,16 @@ export default class TestResultBlock {
     return m('.proxyFormTestResult', {}, [
       text,
       m('div', directBlock),
-      m('div', proxiedBlock)
+      m('div', proxiedBlock),
+      m('div', [
+        m('p', [
+          m("a.ProxyForm__duckduckgo-attribution",
+            {href: "https://duckduckgo.com/?q=ip"},
+            browser.i18n.getMessage("ProxyForm_duckduckgoAttribution")
+          ),
+
+        ])
+      ])
     ])
   }
 }
