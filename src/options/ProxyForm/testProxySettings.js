@@ -42,16 +42,19 @@ export async function testProxySettings (settings) {
   }
 }
 
-const ipDataUrl = 'https://geoip-db.com/json/'
+const ipDataUrl = 'https://api.duckduckgo.com/?q=ip&no_html=1&format=json&t=firefox-container-proxy-extension'
+
+// TODO Add attribution to DuckDuckGo
 
 function toQueryResponse (response) {
+
   // {"country_code":"DE","country_name":"Germany","city":"Berlin","postal":"10407","latitude":52.5336,"longitude":13.4492,"IPv4":"109.41.1.113","state":"Land Berlin"}
 
-  const ip = response.IPv4 ? response.IPv4 : response.IPv6
-
-  const location = response.country_name + ', ' + response.city
-
-  return new IpQueryResponse({ ip, location })
+  if (response.AnswerType === 'ip') {
+    return new IpQueryResponse({ ip: response.Answer })
+  } else {
+    throw new Error(`Unexpected response type: ${response.AnswerType}`)
+  }
 }
 
 async function fetchDirectIpData () {
@@ -94,16 +97,13 @@ async function fetchProxiedIpData (proxyConfig) {
 const ttlMs = 5000
 
 async function fetchIpData (url) {
-  // TODO Send the most generic data to the service to prevent tracking
   const fetchParameters = {
     cache: 'no-cache',
     credentials: 'omit',
     redirect: 'error',
     referrer: 'no-referrer',
     headers: {
-      'User-Agent': 'node-fetch/1.0 (+https://github.com/bitinn/node-fetch)',
       Accept: 'application/json',
-      'Accept-Language': 'en'
     }
   }
   // TODO Cancel fetch request on timeout
@@ -132,9 +132,8 @@ export class TimeoutError extends Error {
 }
 
 class IpQueryResponse {
-  constructor ({ ip, location }) {
+  constructor ({ ip }) {
     this.ip = ip
-    this.location = location
   }
 }
 
