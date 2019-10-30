@@ -1,0 +1,58 @@
+{
+    "ContainerList_defaultContainerName": {
+        "message": "Standardeinstellung"
+    },
+    "OptionsPage_browserTabTitle": {
+        "message": "Einstellungen für Container-Proxy-Erweiterung"
+    },
+    "OptionsNavigation_assign": {
+        "message": "Zuweisen"
+    },
+    "OptionsNavigation_proxies": {
+        "message": "Proxies"
+    },
+    "ContainerList_proxyDisabled": {
+        "message": "Direkt"
+    },
+    "ProxyList_edit": {
+        "message": "Bearbeiten"
+    },
+    "ProxyList_delete": {
+        "message": "Löschen"
+    },
+    "ProxyForm_protocolFieldLabel": {
+        "message": "Protokoll"
+    },
+    "ProxyForm_titleFieldLabel": {
+        "message": "Name (optional)"
+    },
+    "ProxyForm_serverFieldLabel": {
+        "message": "Server"
+    },
+    "ProxyForm_portFieldLabel": {
+        "message": "Port"
+    },
+    "ProxyForm_usernameFieldLabel": {
+        "message": "Benutzername"
+    },
+    "ProxyForm_passwordFieldLabel": {
+        "message": "Passwort"
+    },
+    "ProxyForm_save": {
+        "message": "Speichern"
+    },
+    "General_extensionDescription": {
+        "message": "Container mit einem Proxy verwenden"
+    },
+    "OptionsNavigation_support": {
+        "message": "Support"
+    },
+    "SupportPage_gitterInvite": {
+        "message": "Bei Fragen, Problemen, oder einfach nur zum Chatten schaut in unserem $GITTER_NAME$ Channel vorbei!",
+        "placeholders": {
+            "GITTER_NAME": {
+                "content": "Gitter"
+            }
+        }
+    }
+}
