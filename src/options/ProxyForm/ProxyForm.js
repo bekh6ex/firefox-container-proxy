@@ -74,6 +74,7 @@ export default class ProxyForm {
       ...model.accessProperty('port'),
       required: true
     })
+    // TODO Add username/password pair validation
     this.usernameInput = new TrimmedTextInput({ title: t('ProxyForm_usernameFieldLabel'), ...model.accessProperty('username') })
     this.passwordInput = new PasswordInput({ title: t('ProxyForm_passwordFieldLabel'), ...model.accessProperty('password') })
 
