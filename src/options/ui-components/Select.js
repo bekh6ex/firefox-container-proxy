@@ -36,9 +36,9 @@ export default class Select {
   }
 
   view () {
-    const selectClasses = ['select__field']
+    const selectClasses = ['input__field']
     if (!this.valid) {
-      selectClasses.push('select--error__field')
+      selectClasses.push('input--error__field')
     }
 
     const value = this.getValue()
@@ -47,7 +47,7 @@ export default class Select {
     })
 
     return m('.select', [
-      m('label.select__label', this.title),
+      m('label.input__label', this.title),
       m(
         'select',
         {
