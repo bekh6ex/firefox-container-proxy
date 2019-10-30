@@ -84,7 +84,7 @@ export default class ProxyForm {
       title: t('ProxyForm_protocolFieldLabel'),
       required: true,
       ...model.accessProperty('type'),
-      options: protocolOptions,
+      options: protocolOptions
     })
   }
 
@@ -118,7 +118,7 @@ export default class ProxyForm {
           m('button[type=button]', {
             class: style.button,
             onclick: async () => {
-              const confirmed = confirm(t("ProxyForm_testProxySettingsConfirmationText"))
+              const confirmed = confirm(t('ProxyForm_testProxySettingsConfirmationText'))
               if (!confirmed) {
                 return
               }
@@ -130,7 +130,7 @@ export default class ProxyForm {
               this.lastTestResultBlock = new TestResultBlock(result)
               m.redraw()
             }
-          }, t("ProxyForm_testProxySettingsLabel") + ' β'),
+          }, t('ProxyForm_testProxySettingsLabel') + ' β'),
           m('button[type=button]', {
             class: style.button,
             onclick: async () => {
