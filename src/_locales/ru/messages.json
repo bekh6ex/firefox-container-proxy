@@ -63,6 +63,20 @@
         "message": "Пароль",
         "description": "Поле пароля в форме редактирования настроек прокси сервера"
     },
+
+    "ProxyForm_testProxySettingsConfirmationText": {
+        "message": "Чтобы проверить настройки необходимо совершить пару запросов к $DUCKDUCKGO_NAME$. Продолжить?",
+        "description": "Текст отображаемый при клике пользователя по кнопке проверки настроек. Осведомляет пользователя о запросе к стороннему сервису.",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxyForm_testProxySettingsLabel": {
+        "message": "Проверить настройки",
+        "description": "Кнопка Проверить настройки в форме редактирования настроек прокси сервера"
+    },
     "ProxyForm_save": {
         "message": "Сохранить",
         "description": "Кнопка Сохранить в форме редактирования настроек прокси сервера"

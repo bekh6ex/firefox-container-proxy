@@ -50,6 +50,7 @@ class ProxyModel {
     const settings = this.getSettings()
     if (settings.type === 'http') {
       alert('Testing HTTP proxies is not supported for now')
+      return
     }
     return testProxySettings(settings)
   }
@@ -118,12 +119,19 @@ export default class ProxyForm {
           m('button[type=button]', {
             class: style.button,
             onclick: async () => {
+              const confirmed = confirm(t("ProxyForm_testProxySettingsConfirmationText"))
+              if (!confirmed) {
+                return
+              }
               this.lastTestResultBlock = null
               const result = await this.model.testSettings()
+              if (!result) {
+                return
+              }
               this.lastTestResultBlock = new TestResultBlock(result)
               m.redraw()
             }
-          }, 'Test β'),
+          }, t("ProxyForm_testProxySettingsLabel") + ' β'),
           m('button[type=button]', {
             class: style.button,
             onclick: async () => {

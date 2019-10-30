@@ -63,6 +63,19 @@
         "message": "Password",
         "description": "Password field in proxy form"
     },
+    "ProxyForm_testProxySettingsConfirmationText": {
+        "message": "To test settings it is required to make a couple of requests to $DUCKDUCKGO_NAME$. Proceed?",
+        "description": "Text shown when a user clicks Test settings button notifying user about request to 3rd party service",
+      "placeholders": {
+        "DUCKDUCKGO_NAME": {
+          "content": "DuckDuckGo"
+        }
+      }
+    },
+    "ProxyForm_testProxySettingsLabel": {
+        "message": "Test settings",
+        "description": "Settings test button label in proxy form"
+    },
     "ProxyForm_save": {
         "message": "Save",
         "description": "Save button in proxy form"
