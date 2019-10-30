@@ -49,7 +49,7 @@ export default class Select {
     })
 
     return m('.select', [
-      m('label.input__label', {for: this.id},this.title),
+      m('label.input__label', { for: this.id }, this.title),
       m(
         'select',
         {

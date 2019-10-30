@@ -2,7 +2,7 @@ import m from '../../lib/mithril.js'
 import { uuidv4 } from '../util.js'
 
 export class Input {
-  constructor ({title, required, getValue, setValue, id}) {
+  constructor ({ title, required, getValue, setValue, id }) {
     this.title = title
     this.required = !!required
     this.getValue = getValue

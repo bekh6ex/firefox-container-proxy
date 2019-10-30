@@ -98,7 +98,7 @@ async function fetchIpData (url) {
     redirect: 'error',
     referrer: 'no-referrer',
     headers: {
-      Accept: 'application/json',
+      Accept: 'application/json'
     }
   }
   // TODO Cancel fetch request on timeout

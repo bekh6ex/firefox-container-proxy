@@ -81,7 +81,8 @@ export default class ProxyForm {
     const nonsetValueText = '<select>' // TODO Localize
     this.protocolSelect = new Select({
       title: t('ProxyForm_protocolFieldLabel'),
-      required: true, ...model.accessProperty('type'),
+      required: true,
+      ...model.accessProperty('type'),
       options: protocolOptions,
       nonsetValueText: nonsetValueText
     })
