@@ -1,11 +1,13 @@
 import m from '../../lib/mithril.js'
+import { uuidv4 } from '../util.js'
 
 export class Input {
-  constructor (props) {
-    this.title = props.title
-    this.required = !!props.required
-    this.getValue = props.getValue
-    this.setValue = props.setValue
+  constructor ({title, required, getValue, setValue, id}) {
+    this.title = title
+    this.required = !!required
+    this.getValue = getValue
+    this.setValue = setValue
+    this.id = id || uuidv4()
     this.type = 'text'
     this.props = {}
     this.errorText = null
@@ -42,11 +44,12 @@ export class Input {
 
     const topClasses = ['input', className]
     return m('div', { class: topClasses.join(' ') }, [
-      m('label', { class: 'input__label' }, this.title),
+      m('label', { class: 'input__label', for: this.id }, this.title),
       m(
         'input',
         {
           ...this.props,
+          id: this.id,
           type: this.type,
           class: inputClasses.join(' '),
           required: this.required,

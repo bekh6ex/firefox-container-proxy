@@ -1,4 +1,5 @@
 import m from '../../lib/mithril.js'
+import { uuidv4 } from '../util.js'
 
 export default class Select {
   /**
@@ -10,12 +11,13 @@ export default class Select {
    * @param {object[]} options
    * @param nonsetValueText
    */
-  constructor ({ title, required, getValue, setValue, options, nonsetValueText }) {
+  constructor ({ title, required, getValue, setValue, options, nonsetValueText, id }) {
     this.title = title
     this.required = !!required
     this.getValue = getValue
     this.setValue = setValue
     this.options = options
+    this.id = id || uuidv4()
     this.nonsetValueText = nonsetValueText
     this.props = {}
     this.valid = true
@@ -47,12 +49,13 @@ export default class Select {
     })
 
     return m('.select', [
-      m('label.input__label', this.title),
+      m('label.input__label', {for: this.id},this.title),
       m(
         'select',
         {
           ...this.props,
           class: selectClasses.join(' '),
+          id: this.id,
           required: this.required,
           title: this.errorText,
           value: value,
