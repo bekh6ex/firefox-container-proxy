@@ -9,16 +9,14 @@ export default class Select {
    * @param getValue
    * @param setValue
    * @param {object[]} options
-   * @param nonsetValueText
    */
-  constructor ({ title, required, getValue, setValue, options, nonsetValueText, id }) {
+  constructor ({ title, required, getValue, setValue, options, id }) {
     this.title = title
     this.required = !!required
     this.getValue = getValue
     this.setValue = setValue
     this.options = options
     this.id = id || uuidv4()
-    this.nonsetValueText = nonsetValueText
     this.props = {}
     this.valid = true
   }
@@ -63,7 +61,6 @@ export default class Select {
           onfocusout: (e) => this.onChange(e.target.value)
         },
         [
-          m('option', { value: '' }, this.nonsetValueText),
           ...options
         ]
       )

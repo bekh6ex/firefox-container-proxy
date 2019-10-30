@@ -80,13 +80,11 @@ export default class ProxyForm {
 
     const protocolOptions = proxyTypes.map(v => ({ value: v, label: v.toUpperCase() }))
 
-    const nonsetValueText = '<select>' // TODO Localize
     this.protocolSelect = new Select({
       title: t('ProxyForm_protocolFieldLabel'),
       required: true,
       ...model.accessProperty('type'),
       options: protocolOptions,
-      nonsetValueText: nonsetValueText
     })
   }
 
