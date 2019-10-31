@@ -6,7 +6,7 @@ import { generateAuthorizationHeader } from './../util.js'
  * @return {Promise<TestResult>}
  */
 export async function testProxySettings (settings) {
-  // TODO Figure out Firefox extension requirements regarding calling 3rd party services
+  // TODO Refine user interaction according to https://extensionworkshop.com/documentation/publish/add-on-policies-2019-12/
 
   let directIpQuery
   let directError
