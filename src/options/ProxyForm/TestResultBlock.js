@@ -6,6 +6,8 @@ import {
 } from './testProxySettings.js'
 import m from '../../lib/mithril.js'
 
+const t = browser.i18n.getMessage
+
 export default class TestResultBlock {
   /**
    * @param {TestResult} testResult
@@ -16,25 +18,26 @@ export default class TestResultBlock {
 
   view () {
     // TODO Add localization
+    // TODO Add ru translations
     // TODO Improve design
     const result = this.testResult
     let text = 'Unexpected error'
     const directBlock = []
     const proxiedBlock = []
     if (result instanceof SuccessfulTestResult) {
-      text = result.ipsMatch ? 'Error!' : 'Success!'
+      text = t('ProxySettingsTestResult_settingsAreCorrect')
       directBlock.push(m('b', ['Your real IP: ']), result.direct.ip)
       proxiedBlock.push(m('b', ['Proxied IP: ']), result.proxied.ip)
     } else if (result instanceof ConnectionIssueResult) {
-      text = 'Network error! Probably, you are not connected to the internet'
+      text = t('ProxySettingsTestResult_notConnectedToTheInternet')
       directBlock.push(m('b', ['Direct request error: ']), result.directError.message)
       proxiedBlock.push(m('b', ['Proxied request error: ']), result.proxiedError.message)
     } else if (result instanceof NoDirectConnectionResult) {
-      text = 'Success! But... Seems that connection to the Internet without a proxy is not possible, but proxy settings are probably correct'
+      text = t('ProxySettingsTestResult_noDirectConnection')
       directBlock.push(m('b', ['Direct request error: ']), result.directError.message)
       proxiedBlock.push(m('b', ['Proxied IP: ']), result.proxied.ip)
     } else if (result instanceof SettingsErrorResult) {
-      text = 'Error! Could not connect to the proxy. Probably the settings are incorrect'
+      text = t('ProxySettingsTestResult_incorrectSettings')
       directBlock.push(m('b', ['Your real IP: ']), result.direct.ip)
       proxiedBlock.push(m('b', ['Proxied request error: ']), result.proxiedError.message)
     } else {
@@ -49,9 +52,8 @@ export default class TestResultBlock {
         m('p', [
           m('a.ProxyForm__duckduckgo-attribution',
             { href: 'https://duckduckgo.com/?q=ip' },
-            browser.i18n.getMessage('ProxyForm_duckduckgoAttribution')
+            t('ProxyForm_duckduckgoAttribution')
           )
-
         ])
       ])
     ])

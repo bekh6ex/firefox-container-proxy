@@ -89,6 +89,34 @@
             }
         }
     },
+  "ProxySettingsTestResult_settingsAreCorrect": {
+    "message": "Settings are correct!",
+    "description": "Text displayed when result of testing proxy settings was successful in proxy form"
+  },
+  "ProxySettingsTestResult_error": {
+    "message": "Error!",
+    "description": "Generic text meaning there is an error"
+  },
+  "ProxySettingsTestResult_notConnectedToTheInternet": {
+    "message": "Error! Probably, you are not connected to the internet.",
+    "description": "Text displayed when both direct and proxied requests failed to succeed"
+  },
+  "ProxySettingsTestResult_noDirectConnection": {
+    "message": "Settings are correct! But it seems that connection to the Internet without a proxy is not possible.",
+    "description": "Text displayed when proxied request succeeded, but direct request failed"
+  },
+  "ProxySettingsTestResult_incorrectSettings": {
+    "message": "Error! Could not connect to the proxy. Probably the settings are incorrect.",
+    "description": "Text displayed when direct request is successful, but proxied request failed"
+  },
+  "ProxySettingsTestResult_directRequest": {
+    "message": "Direct request:",
+    "description": "Direct request header"
+  },
+  "ProxySettingsTestResult_proxiedRequest": {
+    "message": "Proxied request:",
+    "description": "Proxied request header"
+  },
     "SupportPage_gitterInvite": {
         "message": "If you have any questions, have a problem or just want to chat you are welcome in our channel in $GITTER_NAME$:",
         "description": "Gitter welcome message displayed on Support page",
