@@ -17,7 +17,6 @@ const ContainerListModel = {
     await browser.storage.local.set({ relations: ContainerListModel.relations })
   }
 }
-// TODO Fix select fields look
 function renderSelectProxy (cookieStoreId, proxyId) {
   const proxyOptions = ContainerListModel.proxies.map(p => m('option', {
     value: p.id,
