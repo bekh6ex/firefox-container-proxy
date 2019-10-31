@@ -1,6 +1,6 @@
-#Notes for reviewer
+# Notes to Reviewer
 
-##Proof of library code origin
+## Proof of library code origin
 ```shell script
 curl https://unpkg.com/punycode@2.1.1/punycode.js | md5
 cat src/lib/punycode.js | md5
