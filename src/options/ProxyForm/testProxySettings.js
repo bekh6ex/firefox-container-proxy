@@ -98,7 +98,8 @@ async function fetchIpData (url) {
     redirect: 'error',
     referrer: 'no-referrer',
     headers: {
-      Accept: 'application/json'
+      Accept: 'application/json',
+      'Accept-Language': 'en-US,en' // Blur the fingerprint a bit
     }
   }
   // TODO Cancel fetch request on timeout
