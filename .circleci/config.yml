@@ -19,4 +19,5 @@ jobs:
 
       # run tests!
       - run: npm test
+      - run: npm run test:func
       - run: npm run codeStyle:check

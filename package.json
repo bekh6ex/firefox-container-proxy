@@ -7,7 +7,7 @@
     "bundle": "web-ext -s src -a dist build --overwrite-dest",
     "test:karma": "NODE_ENV=test karma start",
     "test:unit": "NODE_ENV=test karma start",
-    "test:func": "mocha __tests__/functional/",
+    "test:func": "mocha test/functional/",
     "codeStyle:check": "standard",
     "codeStyle:fix": "standard --fix",
     "debug": "web-ext run -s src --verbose --browser-console --keep-profile-changes -p ./tmpProfile --start-url about:debugging --start-url about:addons  --pref=intl.locale.requested=en #--pref=intl.locale.matchOS=false"
