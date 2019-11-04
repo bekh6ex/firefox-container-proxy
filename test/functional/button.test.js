@@ -72,7 +72,7 @@ describe('Example WebExtension', function () {
 
     await helper1.saveButton().click()
 
-    return await geckodriver.wait(async () => {
+    return geckodriver.wait(async () => {
       const row = await geckodriver.wait(until.elementLocated(
         By.css('.proxy-list-item:first-of-type')
       ), 2000)
@@ -133,7 +133,7 @@ class Helper {
 
     await this.driver.switchTo().window(handles[handles.length - 1])
 
-    return await this.driver.wait(async () => {
+    return this.driver.wait(async () => {
       const header = await this.driver.wait(until.elementLocated(
         this.el.header
       ), 2000)
@@ -186,7 +186,7 @@ class Helper {
   }
 
   async pause (time) {
-    return await this.driver.wait(async () => {
+    return this.driver.wait(async () => {
       return false
     }, time, 'Pause and fail')
   }
