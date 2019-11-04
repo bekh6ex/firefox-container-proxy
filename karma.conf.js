@@ -9,7 +9,7 @@ module.exports = function (config) {
 
     files: [
       { pattern: 'src/**/*.js', type: 'module', included: false },
-      { pattern: 'test/unit/*.test.js', type: 'module' },
+      { pattern: 'test/unit/*.test.js', type: 'module' }
     ],
     plugins: [
       'karma-firefox-launcher',

@@ -12,7 +12,6 @@ describe('Example WebExtension', function () {
   this.timeout(15000)
 
   before(async () => {
-
     const webExtension = await webExtensionsGeckoDriver(manifestPath)
     geckodriver = webExtension.geckodriver
     helper = {
