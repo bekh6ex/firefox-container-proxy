@@ -133,6 +133,7 @@ export default class ProxyForm {
           }, t('ProxyForm_testProxySettingsLabel') + ' β'),
           m('button[type=button]', {
             class: style.button,
+            'data-testid': 'save',
             onclick: async () => {
               await this.model.save()
               m.route.set('/proxies')
