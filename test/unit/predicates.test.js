@@ -1,21 +1,21 @@
-import { isNotEmpty, isIpV4Address, isIpV6Address, isDomainName } from '../src/options/predicates.js'
+import { isNotEmpty, isIpV4Address, isIpV6Address, isDomainName } from '../../src/options/predicates.js'
 
 describe('isNotEmpty', () => {
   it('should return true for non-empty strings', () => {
-    expect(isNotEmpty(' ')).toBe(true)
-    expect(isNotEmpty('asd')).toBe(true)
+    expect(isNotEmpty(' ')).to.be.equal(true)
+    expect(isNotEmpty('asd')).to.be.equal(true)
   })
 })
 
 describe('isIpV4Address', () => {
   it('should return true for correct IP addresses', () => {
-    expect(isIpV4Address('0.0.0.0')).toBe(true)
-    expect(isIpV4Address('255.255.255.255')).toBe(true)
-    expect(isIpV4Address('25.25.25.25')).toBe(true)
+    expect(isIpV4Address('0.0.0.0')).to.be.equal(true)
+    expect(isIpV4Address('255.255.255.255')).to.be.equal(true)
+    expect(isIpV4Address('25.25.25.25')).to.be.equal(true)
   })
   it('should return false for not an IPv4 address', () => {
-    expect(isIpV4Address('google.com')).toBe(false)
-    expect(isIpV4Address('asds')).toBe(false)
+    expect(isIpV4Address('google.com')).to.be.equal(false)
+    expect(isIpV4Address('asds')).to.be.equal(false)
   })
 })
 
@@ -43,7 +43,7 @@ describe('isIpV6Address', () => {
   ]
   validIpv6Addresses.forEach(address => {
     it(`should return true for correct IP address: ${address}`, () => {
-      expect(isIpV6Address(address)).toBe(true)
+      expect(isIpV6Address(address)).to.be.equal(true)
     })
   })
 
@@ -66,14 +66,14 @@ describe('isIpV6Address', () => {
 
   invalidIpV6Addresses.forEach(address => {
     it(`should return false for invalid IP address: ${address}`, () => {
-      expect(isIpV6Address(address)).toBe(false)
+      expect(isIpV6Address(address)).to.be.equal(false)
     })
   })
 
   it('should return false for not an IPv6 address', () => {
-    expect(isIpV6Address('google.com')).toBe(false)
-    expect(isIpV6Address('asds')).toBe(false)
-    expect(isIpV6Address('9.9.9.9')).toBe(false)
+    expect(isIpV6Address('google.com')).to.be.equal(false)
+    expect(isIpV6Address('asds')).to.be.equal(false)
+    expect(isIpV6Address('9.9.9.9')).to.be.equal(false)
   })
 })
 
@@ -117,7 +117,7 @@ describe('isDomainName', () => {
 
   validDomainNames.forEach(domainName => {
     it(`${domainName}: valid - returns true`, () => {
-      expect(isDomainName(domainName)).toBe(true)
+      expect(isDomainName(domainName)).to.be.equal(true)
     })
   })
 
@@ -134,7 +134,7 @@ describe('isDomainName', () => {
 
   invalidDomainNames.forEach(domainName => {
     it(`should return false for invalid domain name: ${domainName}`, () => {
-      expect(isDomainName(domainName)).toBe(false)
+      expect(isDomainName(domainName)).to.be.equal(false)
     })
   })
 })
