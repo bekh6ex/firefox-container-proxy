@@ -46,6 +46,16 @@ describe('Example WebExtension', function () {
 
       return currentUrl.endsWith('options/options.html#!/containers')
     }, 5000, 'Should have loaded options.html')
+
+    await geckodriver.wait(async () => {
+      const header = await geckodriver.wait(until.elementLocated(
+        By.css('.header-text h1')
+      ), 1000)
+
+      const text = await header.getText()
+
+      return text === 'Container proxy'
+    }, 5000, 'Should show the header')
   })
 
   after(function () {
