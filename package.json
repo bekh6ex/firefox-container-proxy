@@ -43,10 +43,11 @@
   "standard": {
     "env": {
       "browser": true,
-      "jest": true
+      "mocha": true
     },
     "globals": [
       "browser",
+      "expect",
       "store"
     ],
     "ignore": [

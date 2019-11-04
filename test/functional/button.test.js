@@ -25,7 +25,7 @@ describe('Example WebExtension', function () {
 
   it('should have a Toolbar Button', async () => {
     const button = await helper.toolbarButton()
-    assert.equal(await button.getAttribute('tooltiptext'), 'Container proxy')
+    assert.strictEqual(await button.getAttribute('tooltiptext'), 'Container proxy')
   })
 
   it('should open extension options if the Toolbar Button is clicked', async () => {
