@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:12-browsers
+      - image: vimagick/dante
     working_directory: ~/repo
     steps:
       - checkout
@@ -19,5 +20,9 @@ jobs:
 
       # run tests!
       - run: npm test
-      - run: npm run test:func
+      - run:
+          command: |
+            useradd user && echo user:password | chpasswd
+            sockd -f /etc/sockd.conf -p /tmp/sockd.pid -N 2 &
+            npm run test:func
       - run: npm run codeStyle:check
