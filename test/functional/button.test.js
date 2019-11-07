@@ -1,3 +1,6 @@
+const PageObject = require('./PageObject.js')
+const OptionsPageObject = require('./OptionsPageObject.js')
+
 const path = require('path')
 const assert = require('assert')
 
@@ -58,9 +61,9 @@ describe('Example WebExtension', function () {
   it('should add a proxy', async () => {
     const helper1 = new Helper(geckodriver)
 
-    await helper1.openOptionsPage()
+    const options = await helper1.openOptionsPage()
 
-    await helper1.openProxyList()
+    await options.openProxyList()
 
     await (await helper1.addProxyButton()).click()
 
@@ -91,16 +94,12 @@ describe('Example WebExtension', function () {
   })
 })
 
-class Helper {
+class Helper extends PageObject {
   constructor (driver) {
-    this.driver = driver
-
+    super(driver)
     this.el = {
       toolbarButton: By.id('contaner-proxy_bekh-ivanov_me-browser-action'),
-      header: By.css('.header-text h1'),
-      nav: {
-        proxies: By.css('.nav__item.proxies')
-      },
+
       proxyList: {
         add: By.css('.proxy-list-actions .button.button--primary')
       },
@@ -125,6 +124,9 @@ class Helper {
     )
   }
 
+  /**
+   * @return {Promise<OptionsPageObject>}
+   */
   async openOptionsPage () {
     const button = await this.toolbarButton()
     await button.click()
@@ -138,28 +140,11 @@ class Helper {
 
     await this.driver.switchTo().window(handles[handles.length - 1])
 
-    return this.driver.wait(async () => {
-      const header = await this.driver.wait(until.elementLocated(
-        this.el.header
-      ), 2000)
-
-      const text = await header.getText()
-      return text === 'Container proxy'
-    }, 1000, 'Should have loaded options.html with header')
-  }
-
-  async openProxyList () {
-    const proxies = await this.waitForElement(this.el.nav.proxies)
-    return proxies.click()
+    return OptionsPageObject.create(this.driver)
   }
 
   async addProxyButton () {
     return this.waitForElement(this.el.proxyList.add)
-  }
-
-  async waitForElement (el) {
-    await this.driver.wait(until.elementLocated(el), 100)
-    return this.driver.findElement(el)
   }
 
   async selectProtocol (value) {
@@ -216,11 +201,5 @@ class Helper {
 
   saveButton () {
     return this.driver.findElement(this.el.proxyForm.save)
-  }
-
-  async pause (time) {
-    return this.driver.wait(async () => {
-      return false
-    }, time, 'Pause and fail')
   }
 }
