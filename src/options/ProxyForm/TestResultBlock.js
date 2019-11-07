@@ -26,8 +26,15 @@ export default class TestResultBlock {
     const proxiedBlock = []
     if (result instanceof SuccessfulTestResult) {
       text = t('ProxySettingsTestResult_settingsAreCorrect')
-      directBlock.push(m('b', ['Your real IP: ']), result.direct.ip)
-      proxiedBlock.push(m('b', ['Proxied IP: ']), result.proxied.ip)
+      directBlock.push(m('b', ['Your real IP: ']),
+        m('span[data-testid=directResult]', [
+          result.direct.ip
+        ])
+      )
+      proxiedBlock.push(m('b', ['Proxied IP: ']),
+        m('span[data-testid=proxiedResult]', [
+          result.proxied.ip
+        ]))
     } else if (result instanceof ConnectionIssueResult) {
       text = t('ProxySettingsTestResult_notConnectedToTheInternet')
       directBlock.push(m('b', ['Direct request error: ']), result.directError.message)

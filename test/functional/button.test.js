@@ -68,7 +68,9 @@ describe('Example WebExtension', function () {
     await helper1.typeInServer('localhost')
     await helper1.typeInPort(1080)
     await helper1.typeInUsername('user')
-    await helper1.typeInPassword('pass')
+    await helper1.typeInPassword('password')
+
+    await helper1.testSettings()
 
     await helper1.saveButton().click()
 
@@ -108,16 +110,19 @@ class Helper {
         port: By.css('.ProxyForm__portInput input'),
         username: By.css('.ProxyForm__credentials .input:first-of-type input'),
         password: By.css('.ProxyForm__credentials .input:last-of-type input'),
-        save: By.css('button[data-testid=save]')
+        testSettings: By.css('button[data-testid=testSettings]'),
+        save: By.css('button[data-testid=save]'),
+        directTestResult: By.css('[data-testid=directResult]'),
+        proxiedTestResult: By.css('[data-testid=proxiedResult]'),
       }
     }
   }
 
   async toolbarButton () {
     await this.driver.setContext(firefox.Context.CHROME)
-    return this.driver.wait(until.elementLocated(
+    return await this.waitForElement(
       this.el.toolbarButton
-    ), 1000)
+    )
   }
 
   async openOptionsPage () {
@@ -144,16 +149,21 @@ class Helper {
   }
 
   async openProxyList () {
-    const proxies = this.driver.findElement(this.el.nav.proxies)
+    const proxies = await this.waitForElement(this.el.nav.proxies)
     return proxies.click()
   }
 
   async addProxyButton () {
-    return this.driver.findElement(this.el.proxyList.add)
+    return await this.waitForElement(this.el.proxyList.add)
+  }
+
+  async waitForElement (el) {
+    await this.driver.wait(until.elementLocated(el), 100)
+    return this.driver.findElement(el)
   }
 
   async selectProtocol (value) {
-    const select = this.driver.findElement(this.el.proxyForm.protocol)
+    const select = await this.waitForElement(this.el.proxyForm.protocol)
     return select.findElement(By.css(`option[value="${value}"]`)).click()
   }
 
@@ -179,6 +189,29 @@ class Helper {
     const input = this.driver.findElement(this.el.proxyForm.password)
 
     return input.sendKeys(value)
+  }
+
+  async testSettings () {
+    const testSettingsButton = this.driver.findElement(this.el.proxyForm.testSettings)
+    await testSettingsButton.click()
+
+    await this.driver.wait(until.alertIsPresent(), 500)
+    const confirm = await this.driver.switchTo().alert()
+    await confirm.accept()
+
+    const directTestResult = await this.driver.wait(until.elementLocated(
+      this.el.proxyForm.directTestResult
+    ), 11000)
+    const directText = await directTestResult.getText()
+
+    const testResultPattern = /^Your IP address is/
+    assert.equal(testResultPattern.test(directText), true)
+
+    const proxiedTestResult = this.driver.findElement(this.el.proxyForm.proxiedTestResult)
+
+    const proxiedText = await proxiedTestResult.getText()
+
+    assert.equal(proxiedText, directText)
   }
 
   saveButton () {
