@@ -113,14 +113,14 @@ class Helper {
         testSettings: By.css('button[data-testid=testSettings]'),
         save: By.css('button[data-testid=save]'),
         directTestResult: By.css('[data-testid=directResult]'),
-        proxiedTestResult: By.css('[data-testid=proxiedResult]'),
+        proxiedTestResult: By.css('[data-testid=proxiedResult]')
       }
     }
   }
 
   async toolbarButton () {
     await this.driver.setContext(firefox.Context.CHROME)
-    return await this.waitForElement(
+    return this.waitForElement(
       this.el.toolbarButton
     )
   }
@@ -154,7 +154,7 @@ class Helper {
   }
 
   async addProxyButton () {
-    return await this.waitForElement(this.el.proxyList.add)
+    return this.waitForElement(this.el.proxyList.add)
   }
 
   async waitForElement (el) {
@@ -205,13 +205,13 @@ class Helper {
     const directText = await directTestResult.getText()
 
     const testResultPattern = /^Your IP address is/
-    assert.equal(testResultPattern.test(directText), true)
+    assert.strictEqual(testResultPattern.test(directText), true)
 
     const proxiedTestResult = this.driver.findElement(this.el.proxyForm.proxiedTestResult)
 
     const proxiedText = await proxiedTestResult.getText()
 
-    assert.equal(proxiedText, directText)
+    assert.strictEqual(proxiedText, directText)
   }
 
   saveButton () {
