@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: circleci/node:12-browsers
       - image: vimagick/dante
-        command: useradd user && echo user:password | chpasswd && sockd -f $CFGFILE -p $PIDFILE -N $WORKERS
+        command: useradd user && echo user:password | chpasswd && sockd -f /etc/sockd.conf -p /tmp/sockd.pid -N 2
     working_directory: ~/repo
     steps:
       - checkout
