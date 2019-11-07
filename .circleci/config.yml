@@ -22,7 +22,7 @@ jobs:
       - run: npm test
       - run:
           command: |
-            useradd user && echo user:password | chpasswd
+            sudo useradd user && echo user:password | sudo chpasswd
             sockd -f /etc/sockd.conf -p /tmp/sockd.pid -N 2 &
             npm run test:func
       - run: npm run codeStyle:check
