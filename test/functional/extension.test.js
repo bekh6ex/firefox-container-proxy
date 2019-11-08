@@ -67,8 +67,8 @@ class Helper extends PageObject {
   }
 
   async toolbarButton () {
-    await this.driver.setContext(firefox.Context.CHROME)
-    return this.waitForElement(
+    await this._driver.setContext(firefox.Context.CHROME)
+    return this.waitFor(
       this.el.toolbarButton
     )
   }
@@ -79,16 +79,16 @@ class Helper extends PageObject {
   async openOptionsPage () {
     const button = await this.toolbarButton()
     await button.click()
-    await this.driver.setContext(firefox.Context.CONTENT)
+    await this._driver.setContext(firefox.Context.CONTENT)
 
     let windowHandle
-    await this.driver.wait(async () => {
-      windowHandle = await this.driver.getWindowHandle()
+    await this._driver.wait(async () => {
+      windowHandle = await this._driver.getWindowHandle()
       return true
     }, 2000, 'Should have opened a new tab')
 
-    await this.driver.switchTo().window(windowHandle)
+    await this._driver.switchTo().window(windowHandle)
 
-    return OptionsPageObject.create(this.driver)
+    return OptionsPageObject.create(this._driver)
   }
 }

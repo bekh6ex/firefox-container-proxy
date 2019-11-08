@@ -23,81 +23,70 @@ class ProxyFormPageObject extends PageObject {
     return By.css('button[data-testid=save]')
   }
 
-  constructor (driver) {
-    super(driver)
-
-    this.el = {
-      protocol: By.css('.ProxyForm__connectionSettings select'),
-      server: By.css('.ProxyForm__hostInput input'),
-      port: By.css('.ProxyForm__portInput input'),
-      username: By.css('.ProxyForm__credentials .input:first-of-type input'),
-      password: By.css('.ProxyForm__credentials .input:last-of-type input'),
-      testSettings: By.css('button[data-testid=testSettings]'),
-      save: ProxyFormPageObject.saveButtonSelector(),
-      directTestResult: By.css('[data-testid=directResult]'),
-      proxiedTestResult: By.css('[data-testid=proxiedResult]')
-    }
-  }
+  protocol = '.ProxyForm__connectionSettings select'
+  server = '.ProxyForm__hostInput input'
+  port = '.ProxyForm__portInput input'
+  username = '.ProxyForm__credentials .input:first-of-type input'
+  password = '.ProxyForm__credentials .input:last-of-type input'
+  testSettingsButton = 'button[data-testid=testSettings]'
+  saveButton = ProxyFormPageObject.saveButtonSelector()
+  directTestResult = '[data-testid=directResult]'
+  proxiedTestResult = '[data-testid=proxiedResult]'
 
   async selectProtocol (value) {
-    const select = await this.waitForElement(this.el.protocol)
+    const select = await this.waitFor(this.protocol)
     return select.findElement(By.css(`option[value="${value}"]`)).click()
   }
 
   async typeInServer (value) {
-    const input = this.driver.findElement(this.el.server)
-
-    return input.sendKeys(value)
+    return this.find(this.server).sendKeys(value)
   }
 
   async typeInPort (value) {
-    const input = this.driver.findElement(this.el.port)
-
-    return input.sendKeys(value)
+    return this.find(this.port).sendKeys(value)
   }
 
   async typeInUsername (value) {
-    const input = this.driver.findElement(this.el.username)
-
-    return input.sendKeys(value)
+    return this.find(this.username).sendKeys(value)
   }
 
   async typeInPassword (value) {
-    const input = this.driver.findElement(this.el.password)
+    const input = this.find(this.password)
 
     return input.sendKeys(value)
   }
 
   async testSettings () {
-    const testSettingsButton = this.driver.findElement(this.el.testSettings)
-    await testSettingsButton.click()
+    await this.click(this.testSettingsButton)
 
-    await this.driver.wait(until.alertIsPresent(), 500)
-    const confirm = await this.driver.switchTo().alert()
-    await confirm.accept()
+    await this.confirmPrompt()
 
-    const directTestResult = await this.driver.wait(until.elementLocated(
-      this.el.directTestResult
-    ), 11000)
+    const directTestResult = await this.waitFor(this.directTestResult, 11000)
     const directText = await directTestResult.getText()
 
     const testResultPattern = /^Your IP address is/
     assert.strictEqual(testResultPattern.test(directText), true)
 
-    const proxiedTestResult = this.driver.findElement(this.el.proxiedTestResult)
+    const proxiedTestResult = this.find(this.proxiedTestResult)
 
     const proxiedText = await proxiedTestResult.getText()
 
     assert.strictEqual(proxiedText, directText)
   }
 
+  async confirmPrompt () {
+    await this._driver.wait(until.alertIsPresent(), 500)
+    const confirm = await this._driver.switchTo().alert()
+    await confirm.accept()
+  }
+
   /**
    * @return {Promise<ProxyListPageObject>}
    */
   async saveSettings () {
-    await this.driver.findElement(this.el.save).click()
+    await this.click(this.saveButton)
     const ProxyListPageObject = require('./ProxyListPageObject.js')
-    return ProxyListPageObject.create(this.driver)
+    return ProxyListPageObject.create(this._driver)
   }
 }
 

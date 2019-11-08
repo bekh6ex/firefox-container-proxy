@@ -20,21 +20,15 @@ class ProxyListPageObject extends PageObject {
     return new ProxyListPageObject(driver)
   }
 
+  addButton = ProxyListPageObject.addButtonSelector()
+
   static addButtonSelector () {
     return By.css('.proxy-list-actions .button.button--primary')
   }
 
-  constructor (driver) {
-    super(driver)
-
-    this.el = {
-      add: ProxyListPageObject.addButtonSelector()
-    }
-  }
-
   async openAddProxyForm () {
-    await (await this.waitForElement(this.el.add)).click()
-    return ProxyFormPageObject.create(this.driver)
+    await this.click(this.addButton)
+    return ProxyFormPageObject.create(this._driver)
   }
 }
 

@@ -25,6 +25,7 @@
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
+    "babel-eslint": "^10.0.3",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "esm": "^3.2.25",
@@ -43,6 +44,7 @@
     "webextensions-geckodriver": "^0.6.1"
   },
   "standard": {
+    "parser": "babel-eslint",
     "env": {
       "browser": true,
       "mocha": true

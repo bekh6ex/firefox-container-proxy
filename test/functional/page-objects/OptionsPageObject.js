@@ -21,23 +21,14 @@ class OptionsPageObject extends PageObject {
     return By.css('.header-text h1')
   }
 
-  constructor (driver) {
-    super(driver)
-    this.el = {
-      header: OptionsPageObject.headerSelector,
-      nav: {
-        proxies: By.css('.nav__item.proxies')
-      }
-    }
-  }
+  proxies = '.nav__item.proxies'
 
   /**
    * @return {Promise<ProxyListPageObject>}
    */
   async openProxyList () {
-    const proxies = await this.waitForElement(this.el.nav.proxies)
-    await proxies.click()
-    return ProxyListPageObject.create(this.driver)
+    await this.click(this.proxies)
+    return ProxyListPageObject.create(this._driver)
   }
 }
 
