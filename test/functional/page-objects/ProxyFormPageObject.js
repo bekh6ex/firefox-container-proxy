@@ -91,10 +91,6 @@ class ProxyFormPageObject extends PageObject {
     assert.strictEqual(proxiedText, directText)
   }
 
-  saveButton () {
-    return this.driver.findElement(this.el.save)
-  }
-
   /**
    * @return {Promise<ProxyListPageObject>}
    */
