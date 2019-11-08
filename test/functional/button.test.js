@@ -1,5 +1,5 @@
-const PageObject = require('./PageObject.js')
-const OptionsPageObject = require('./OptionsPageObject.js')
+const PageObject = require('./page-objects/PageObject.js')
+const OptionsPageObject = require('./page-objects/OptionsPageObject.js')
 
 const path = require('path')
 const assert = require('assert')
@@ -63,9 +63,9 @@ describe('Example WebExtension', function () {
 
     const options = await helper1.openOptionsPage()
 
-    await options.openProxyList()
+    const proxyList = await options.openProxyList()
 
-    await (await helper1.addProxyButton()).click()
+    const proxyForm = await proxyList.openAddProxyForm()
 
     await helper1.selectProtocol('socks')
     await helper1.typeInServer('localhost')

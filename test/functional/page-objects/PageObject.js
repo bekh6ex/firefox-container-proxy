@@ -8,6 +8,9 @@ class PageObject {
   }
 
   async waitForElement (el) {
+    if (typeof el === 'string') {
+      el = By.css(el)
+    }
     await this.driver.wait(until.elementLocated(el), 100)
     return this.driver.findElement(el)
   }
