@@ -1,6 +1,6 @@
 const webExtensionsGeckoDriver = require('webextensions-geckodriver')
 const { webdriver } = webExtensionsGeckoDriver
-const { until } = webdriver
+const { until, By } = webdriver
 
 class PageObject {
   constructor (driver) {

@@ -63,19 +63,19 @@ describe('Example WebExtension', function () {
 
     const options = await helper1.openOptionsPage()
 
-    const proxyList = await options.openProxyList()
+    let proxyList = await options.openProxyList()
 
     const proxyForm = await proxyList.openAddProxyForm()
 
-    await helper1.selectProtocol('socks')
-    await helper1.typeInServer('localhost')
-    await helper1.typeInPort(1080)
-    await helper1.typeInUsername('user')
-    await helper1.typeInPassword('password')
+    await proxyForm.selectProtocol('socks')
+    await proxyForm.typeInServer('localhost')
+    await proxyForm.typeInPort(1080)
+    await proxyForm.typeInUsername('user')
+    await proxyForm.typeInPassword('password')
 
-    await helper1.testSettings()
+    await proxyForm.testSettings()
 
-    await helper1.saveButton().click()
+    proxyList = await proxyForm.saveSettings()
 
     return geckodriver.wait(async () => {
       const row = await geckodriver.wait(until.elementLocated(
@@ -145,61 +145,5 @@ class Helper extends PageObject {
 
   async addProxyButton () {
     return this.waitForElement(this.el.proxyList.add)
-  }
-
-  async selectProtocol (value) {
-    const select = await this.waitForElement(this.el.proxyForm.protocol)
-    return select.findElement(By.css(`option[value="${value}"]`)).click()
-  }
-
-  async typeInServer (value) {
-    const input = this.driver.findElement(this.el.proxyForm.server)
-
-    return input.sendKeys(value)
-  }
-
-  async typeInPort (value) {
-    const input = this.driver.findElement(this.el.proxyForm.port)
-
-    return input.sendKeys(value)
-  }
-
-  async typeInUsername (value) {
-    const input = this.driver.findElement(this.el.proxyForm.username)
-
-    return input.sendKeys(value)
-  }
-
-  async typeInPassword (value) {
-    const input = this.driver.findElement(this.el.proxyForm.password)
-
-    return input.sendKeys(value)
-  }
-
-  async testSettings () {
-    const testSettingsButton = this.driver.findElement(this.el.proxyForm.testSettings)
-    await testSettingsButton.click()
-
-    await this.driver.wait(until.alertIsPresent(), 500)
-    const confirm = await this.driver.switchTo().alert()
-    await confirm.accept()
-
-    const directTestResult = await this.driver.wait(until.elementLocated(
-      this.el.proxyForm.directTestResult
-    ), 11000)
-    const directText = await directTestResult.getText()
-
-    const testResultPattern = /^Your IP address is/
-    assert.strictEqual(testResultPattern.test(directText), true)
-
-    const proxiedTestResult = this.driver.findElement(this.el.proxyForm.proxiedTestResult)
-
-    const proxiedText = await proxiedTestResult.getText()
-
-    assert.strictEqual(proxiedText, directText)
-  }
-
-  saveButton () {
-    return this.driver.findElement(this.el.proxyForm.save)
   }
 }

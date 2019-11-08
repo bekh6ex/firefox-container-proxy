@@ -1,8 +1,8 @@
 const PageObject = require('./PageObject.js')
+const ProxyFormPageObject = require('./ProxyFormPageObject.js')
 const { webdriver: { until, By } } = require('webextensions-geckodriver')
 
 class ProxyListPageObject extends PageObject {
-
   /**
    * @param driver
    * @return {Promise<ProxyListPageObject>}
@@ -34,7 +34,7 @@ class ProxyListPageObject extends PageObject {
 
   async openAddProxyForm () {
     await (await this.waitForElement(this.el.add)).click()
-
+    return ProxyFormPageObject.create(this.driver)
   }
 }
 
