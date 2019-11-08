@@ -89,6 +89,6 @@ class Helper extends PageObject {
 
     await this._driver.switchTo().window(windowHandle)
 
-    return OptionsPageObject.create(this._driver)
+    return this.createPageObject(OptionsPageObject)
   }
 }

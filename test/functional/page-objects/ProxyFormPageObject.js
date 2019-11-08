@@ -3,35 +3,17 @@ const { webdriver: { until, By } } = require('webextensions-geckodriver')
 const assert = require('assert')
 
 class ProxyFormPageObject extends PageObject {
-  /**
-   * @param driver
-   * @return {Promise<ProxyFormPageObject>}
-   */
-  static async create (driver) {
-    await driver.wait(async () => {
-      const el = await driver.wait(until.elementLocated(
-        ProxyFormPageObject.saveButtonSelector()
-      ), 2000)
-
-      return !!el
-    }, 1000, 'Should have opened ProxyForm')
-
-    return new ProxyFormPageObject(driver)
-  }
-
-  static saveButtonSelector () {
-    return By.css('button[data-testid=save]')
-  }
-
   protocol = '.ProxyForm__connectionSettings select'
   server = '.ProxyForm__hostInput input'
   port = '.ProxyForm__portInput input'
   username = '.ProxyForm__credentials .input:first-of-type input'
   password = '.ProxyForm__credentials .input:last-of-type input'
   testSettingsButton = 'button[data-testid=testSettings]'
-  saveButton = ProxyFormPageObject.saveButtonSelector()
+  saveButton = 'button[data-testid=save]'
   directTestResult = '[data-testid=directResult]'
   proxiedTestResult = '[data-testid=proxiedResult]'
+
+  stableSelector = this.saveButton
 
   async selectProtocol (value) {
     const select = await this.waitFor(this.protocol)
@@ -86,7 +68,7 @@ class ProxyFormPageObject extends PageObject {
   async saveSettings () {
     await this.click(this.saveButton)
     const ProxyListPageObject = require('./ProxyListPageObject.js')
-    return ProxyListPageObject.create(this._driver)
+    return this.createPageObject(ProxyListPageObject)
   }
 }
 

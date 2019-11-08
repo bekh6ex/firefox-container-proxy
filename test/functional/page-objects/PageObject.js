@@ -7,6 +7,10 @@ class PageObject {
     this._driver = driver
   }
 
+  get stableSelector () {
+    throw new Error('Override, please')
+  }
+
   async waitFor (el, timeout = 100) {
     return this._driver.wait(until.elementLocated(this.selector(el)), timeout)
   }
@@ -25,6 +29,13 @@ class PageObject {
   async click (el) {
     const found = await this.waitFor(el)
     await found.click()
+  }
+
+  async createPageObject (PageObjectClass) {
+    /** @var {PageObject} */
+    const newPageObject = new PageObjectClass(this._driver)
+    await this.waitFor(newPageObject.stableSelector, 1000)
+    return newPageObject
   }
 
   async pause (time) {

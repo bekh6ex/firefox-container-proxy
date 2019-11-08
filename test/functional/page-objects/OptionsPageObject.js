@@ -1,26 +1,23 @@
 const PageObject = require('./PageObject.js')
+const assert = require('assert')
 const ProxyListPageObject = require('./ProxyListPageObject.js')
 
-const { webdriver: { until, By } } = require('webextensions-geckodriver')
+const { webdriver: { until } } = require('webextensions-geckodriver')
 
 class OptionsPageObject extends PageObject {
-  static async create (driver) {
-    await driver.wait(async () => {
-      const el = await driver.wait(until.elementLocated(
-        OptionsPageObject.headerSelector
+  get stableSelector () {
+    return async () => {
+      const el = await this._driver.wait(until.elementLocated(
+        this.selector(this.header)
       ), 2000)
 
       const text = await el.getText()
-      return text === 'Container proxy'
-    }, 1000, 'Should have loaded options.html with header')
-
-    return new OptionsPageObject(driver)
+      assert.strictEqual(text, 'Container proxy')
+      return el
+    }
   }
 
-  static get headerSelector () {
-    return By.css('.header-text h1')
-  }
-
+  header = '.header-text h1'
   proxies = '.nav__item.proxies'
 
   /**
@@ -28,7 +25,7 @@ class OptionsPageObject extends PageObject {
    */
   async openProxyList () {
     await this.click(this.proxies)
-    return ProxyListPageObject.create(this._driver)
+    return this.createPageObject(ProxyListPageObject)
   }
 }
 
