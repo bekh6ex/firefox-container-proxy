@@ -27,7 +27,7 @@ class ProxyFormPageObject extends PageObject {
     await this.typeInUsername(username)
     await this.typeInPassword(password)
 
-    return await this.saveSettings()
+    return this.saveSettings()
   }
 
   async typeInTitle (value) {

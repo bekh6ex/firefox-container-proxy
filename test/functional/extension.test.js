@@ -83,42 +83,52 @@ describe('Container Proxy extension', function () {
     await helper.assertCanGetTheIpAddress()
   })
 
+  it('should fail with incorrect SOCKS5 proxy settings', async () => {
+    const helper = new Helper(geckodriver)
+
+    const optionsPage = await helper.openOptionsPage()
+    const proxyList = await optionsPage.openProxyList()
+    const addProxyForm = await proxyList.openAddProxyForm()
+    const title = 'Incorrectly setup SOCKS5 proxy'
+    await addProxyForm.addProxy({
+      title: title,
+      type: 'socks',
+      server: 'localhost',
+      port: 999,
+      username: 'user',
+      password: 'password'
+    })
+
+    const assignProxy = await optionsPage.openAssignProxy()
+    await assignProxy.selectForDefaultContainer(title)
+    await helper.assertProxyFailure()
+  })
+
   after(function () {
     geckodriver.quit()
   })
 })
 
 class Helper extends PageObject {
-  constructor (driver) {
-    super(driver)
-    this.el = {
-      toolbarButton: By.id('contaner-proxy_bekh-ivanov_me-browser-action'),
-
-      proxyList: {
-        add: By.css('.proxy-list-actions .button.button--primary')
-      }
-    }
-  }
-
-  async toolbarButton () {
-    await this._driver.setContext(firefox.Context.CHROME)
-    return this.waitFor(
-      this.el.toolbarButton
-    )
-  }
+  toolbarButton = By.id('contaner-proxy_bekh-ivanov_me-browser-action')
 
   /**
    * @return {Promise<OptionsPageObject>}
    */
   async openOptionsPage () {
-    const button = await this.toolbarButton()
-    await button.click()
+    await this._driver.setContext(firefox.Context.CHROME)
+    await this.click(this.toolbarButton)
     await this._driver.setContext(firefox.Context.CONTENT)
 
     let windowHandle
     await this._driver.wait(async () => {
-      windowHandle = await this._driver.getWindowHandle()
-      await this._driver.switchTo().window(windowHandle)
+      const windowHandles = await this._driver.getAllWindowHandles()
+      windowHandle = windowHandles[windowHandles.length - 1]
+      try {
+        await this._driver.switchTo().window(windowHandle)
+      } catch (e) {
+        return false
+      }
       const title = await this._driver.getTitle()
       return title === 'Container Proxy extension settings'
     }, 2000, 'Should have opened Container Proxy extension settings')
@@ -132,5 +142,16 @@ class Helper extends PageObject {
     const text = await this._driver.getPageSource()
 
     assert.ok(text.includes('Your IP address is'))
+  }
+
+  async assertProxyFailure () {
+    await this._driver.setContext(firefox.Context.CONTENT)
+    try {
+      await this._driver.get('https://api.duckduckgo.com/?q=ip&no_html=1&format=json&t=firefox-container-proxy-extension')
+    } catch (e) {
+    }
+    const text = await this._driver.getPageSource()
+
+    assert.ok(text.includes('The proxy server is refusing connections'))
   }
 }
