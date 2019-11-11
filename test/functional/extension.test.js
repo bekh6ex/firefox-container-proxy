@@ -11,14 +11,14 @@ const manifestPath = path.resolve(path.join(__dirname, '../../src/manifest.json'
 
 describe('Container Proxy extension', function () {
   let geckodriver
-  this.timeout(15000)
+  this.timeout(30000)
 
   before(async () => {
     const webExtension = await webExtensionsGeckoDriver(manifestPath)
     geckodriver = webExtension.geckodriver
   })
 
-  it('should add a proxy', async () => {
+  it('should add a proxy', async (done) => {
     const helper = new Helper(geckodriver)
 
     const options = await helper.openOptionsPage()
@@ -37,7 +37,7 @@ describe('Container Proxy extension', function () {
 
     proxyList = await proxyForm.saveSettings()
 
-    return geckodriver.wait(async () => {
+    await geckodriver.wait(async () => {
       const row = await geckodriver.wait(until.elementLocated(
         By.css('.proxy-list-item:first-of-type')
       ), 2000)
@@ -47,6 +47,12 @@ describe('Container Proxy extension', function () {
       const text = await label.getText()
       return text === 'localhost:1080'
     }, 1000, 'Should show proxy in the list')
+
+    const assign = await options.openAssignProxy()
+    const defaultContainerSelect = await assign.defaultContainerSelect()
+    await defaultContainerSelect.selectByLabel('localhost:1080')
+
+    done()
   })
 
   after(function () {
