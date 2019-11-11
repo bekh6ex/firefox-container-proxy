@@ -62,6 +62,27 @@ describe('Container Proxy extension', function () {
     assert.ok(text.includes('Your IP address is'))
   })
 
+  it('should successfully use SOCKS5 proxy for default container', async () => {
+    const helper = new Helper(geckodriver)
+
+    const optionsPage = await helper.openOptionsPage()
+    const proxyList = await optionsPage.openProxyList()
+    const addProxyForm = await proxyList.openAddProxyForm()
+    const title = 'Valid SOCKS5 proxy'
+    await addProxyForm.addProxy({
+      title: title,
+      type: 'socks',
+      server: 'localhost',
+      port: 1080,
+      username: 'user',
+      password: 'password'
+    })
+
+    const assignProxy = await optionsPage.openAssignProxy()
+    await assignProxy.selectForDefaultContainer(title)
+    await helper.assertCanGetTheIpAddress()
+  })
+
   after(function () {
     geckodriver.quit()
   })
@@ -97,11 +118,19 @@ class Helper extends PageObject {
     let windowHandle
     await this._driver.wait(async () => {
       windowHandle = await this._driver.getWindowHandle()
-      return true
-    }, 2000, 'Should have opened a new tab')
-
-    await this._driver.switchTo().window(windowHandle)
+      await this._driver.switchTo().window(windowHandle)
+      const title = await this._driver.getTitle()
+      return title === 'Container Proxy extension settings'
+    }, 2000, 'Should have opened Container Proxy extension settings')
 
     return this.createPageObject(OptionsPageObject)
+  }
+
+  async assertCanGetTheIpAddress () {
+    await this._driver.setContext(firefox.Context.CONTENT)
+    await this._driver.get('https://api.duckduckgo.com/?q=ip&no_html=1&format=json&t=firefox-container-proxy-extension')
+    const text = await this._driver.getPageSource()
+
+    assert.ok(text.includes('Your IP address is'))
   }
 }

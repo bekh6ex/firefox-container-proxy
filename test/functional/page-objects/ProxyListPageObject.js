@@ -6,6 +6,9 @@ class ProxyListPageObject extends PageObject {
 
   stableSelector = this.addButton
 
+  /**
+   * @return {Promise<ProxyFormPageObject>}
+   */
   async openAddProxyForm () {
     await this.click(this.addButton)
     return this.createPageObject(ProxyFormPageObject)

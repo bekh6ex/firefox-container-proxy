@@ -16,6 +16,11 @@ class AssignPageObject extends PageObject {
 
     return new SelectElementPageObject(this._driver, select)
   }
+
+  async selectForDefaultContainer (value) {
+    const selectElementPageObject = await this.defaultContainerSelect()
+    await selectElementPageObject.selectByLabel(value)
+  }
 }
 
 module.exports = AssignPageObject

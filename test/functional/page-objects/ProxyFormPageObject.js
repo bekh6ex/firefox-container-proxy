@@ -4,6 +4,7 @@ const assert = require('assert')
 
 class ProxyFormPageObject extends PageObject {
   protocol = '.ProxyForm__connectionSettings select'
+  title = '.ProxyForm__titleInput input'
   server = '.ProxyForm__hostInput input'
   port = '.ProxyForm__portInput input'
   username = '.ProxyForm__credentials .input:first-of-type input'
@@ -14,6 +15,24 @@ class ProxyFormPageObject extends PageObject {
   proxiedTestResult = '[data-testid=proxiedResult]'
 
   stableSelector = this.saveButton
+
+  /**
+   * @return {Promise<ProxyListPageObject>}
+   */
+  async addProxy ({ title, type, server, port, username, password }) {
+    await this.typeInTitle(title)
+    await this.selectProtocol(type)
+    await this.typeInServer(server)
+    await this.typeInPort(port)
+    await this.typeInUsername(username)
+    await this.typeInPassword(password)
+
+    return await this.saveSettings()
+  }
+
+  async typeInTitle (value) {
+    return this.find(this.title).sendKeys(value)
+  }
 
   async selectProtocol (value) {
     const select = await this.waitFor(this.protocol)

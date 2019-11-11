@@ -102,7 +102,7 @@ export default class ProxyForm {
       'form',
       {},
       [
-        m('div', [m(this.titleInput)]),
+        m('div', [m(this.titleInput, { class: 'ProxyForm__titleInput' })]),
         m('div.ProxyForm__connectionSettings', [
           m(this.protocolSelect),
           m('span.ProxyForm__separator', '://'),
