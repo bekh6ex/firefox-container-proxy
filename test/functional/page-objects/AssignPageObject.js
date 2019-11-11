@@ -1,10 +1,8 @@
 const PageObject = require('./PageObject.js')
-const { webdriver: { until, By } } = require('webextensions-geckodriver')
-const assert = require('assert')
+const { webdriver: { By } } = require('webextensions-geckodriver')
 const SelectElementPageObject = require('./SelectElementPageObject.js')
 
 class AssignPageObject extends PageObject {
-
   stableSelector = '.containers'
 
   defaultContainerRow = '.container-item:last-of-type'

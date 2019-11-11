@@ -1,9 +1,7 @@
 const PageObject = require('./PageObject.js')
-const { webdriver: { until, By } } = require('webextensions-geckodriver')
-const assert = require('assert')
+const { webdriver: { By } } = require('webextensions-geckodriver')
 
 class SelectElementPageObject extends PageObject {
-
   selectElement
 
   constructor (driver, element) {
@@ -14,7 +12,7 @@ class SelectElementPageObject extends PageObject {
   async selectByLabel (label) {
     const options = await this.selectElement.findElements(By.css('option'))
     let found
-    for (let option of options) {
+    for (const option of options) {
       const text = await option.getText()
       if (text === label) {
         found = option
