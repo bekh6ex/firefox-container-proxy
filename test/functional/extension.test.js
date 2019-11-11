@@ -2,6 +2,7 @@ const PageObject = require('./page-objects/PageObject.js')
 const OptionsPageObject = require('./page-objects/OptionsPageObject.js')
 
 const path = require('path')
+const assert = require('assert')
 
 const webExtensionsGeckoDriver = require('webextensions-geckodriver')
 const { webdriver, firefox } = webExtensionsGeckoDriver
@@ -18,7 +19,7 @@ describe('Container Proxy extension', function () {
     geckodriver = webExtension.geckodriver
   })
 
-  it('should add a proxy', async (done) => {
+  it('should add a proxy', async () => {
     const helper = new Helper(geckodriver)
 
     const options = await helper.openOptionsPage()
@@ -51,8 +52,14 @@ describe('Container Proxy extension', function () {
     const assign = await options.openAssignProxy()
     const defaultContainerSelect = await assign.defaultContainerSelect()
     await defaultContainerSelect.selectByLabel('localhost:1080')
+  })
 
-    done()
+  it('should contain IP address text', async () => {
+    await geckodriver.setContext(firefox.Context.CONTENT)
+    await geckodriver.get('https://api.duckduckgo.com/?q=ip&no_html=1&format=json&t=firefox-container-proxy-extension')
+    const text = await geckodriver.getPageSource()
+
+    assert.ok(text.includes('Your IP address is'))
   })
 
   after(function () {
