@@ -2,7 +2,8 @@ const PageObject = require('./page-objects/PageObject.js')
 const OptionsPageObject = require('./page-objects/OptionsPageObject.js')
 
 const path = require('path')
-const assert = require('assert')
+const assert = require('chai')
+const expect = assert.expect
 
 const webExtensionsGeckoDriver = require('webextensions-geckodriver')
 const { webdriver, firefox } = webExtensionsGeckoDriver
@@ -59,7 +60,7 @@ describe('Container Proxy extension', function () {
     await geckodriver.get('https://api.duckduckgo.com/?q=ip&no_html=1&format=json&t=firefox-container-proxy-extension')
     const text = await geckodriver.getPageSource()
 
-    assert.ok(text.includes('Your IP address is'))
+    expect(text).to.include('Your IP address is')
   })
 
   it('should successfully use SOCKS5 proxy for default container', async () => {
@@ -141,7 +142,7 @@ class Helper extends PageObject {
     await this._driver.get('https://api.duckduckgo.com/?q=ip&no_html=1&format=json&t=firefox-container-proxy-extension')
     const text = await this._driver.getPageSource()
 
-    assert.ok(text.includes('Your IP address is'))
+    expect(text).to.include('Your IP address is')
   }
 
   async assertProxyFailure () {
@@ -152,6 +153,6 @@ class Helper extends PageObject {
     }
     const text = await this._driver.getPageSource()
 
-    assert.ok(text.includes('The proxy server is refusing connections'))
+    expect(text).to.include('The proxy server is refusing connections')
   }
 }
