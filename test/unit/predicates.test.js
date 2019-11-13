@@ -1,5 +1,7 @@
 import { isNotEmpty, isIpV4Address, isIpV6Address, isDomainName } from '../../src/options/predicates.js'
 
+const { expect } = require('chai')
+
 describe('isNotEmpty', () => {
   it('should return true for non-empty strings', () => {
     expect(isNotEmpty(' ')).to.be.equal(true)

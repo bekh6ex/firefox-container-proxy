@@ -5,9 +5,8 @@
   "scripts": {
     "test": "npm run test:unit",
     "bundle": "web-ext -s src -a dist build --overwrite-dest",
-    "test:karma": "NODE_ENV=test karma start",
-    "test:unit": "NODE_ENV=test karma start",
     "test:func": "mocha test/functional/",
+    "test:unit": "mocha --require esm test/unit/",
     "codeStyle:check": "standard",
     "codeStyle:fix": "standard --fix",
     "debug": "web-ext run -s src --verbose --browser-console --keep-profile-changes -p ./tmpProfile --start-url about:debugging --start-url about:addons  --pref=intl.locale.requested=en #--pref=intl.locale.matchOS=false"
@@ -29,18 +28,13 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "esm": "^3.2.25",
-    "karma": "^3.0.0",
-    "karma-chai": "^0.1.0",
-    "karma-chai-plugins": "^0.9.0",
-    "karma-firefox-launcher": "^1.1.0",
-    "karma-mocha": "^1.3.0",
-    "karma-mocha-reporter": "^2.2.5",
     "mocha": "*",
     "selenium-webdriver": "^4.0.0-alpha.1",
-    "sinon": "^7.3.1",
+    "sinon": "^7.5.0",
     "sinon-chai": "^3.2.0",
     "standard": "^14.3.1",
     "web-ext": "^3.2.0",
+    "webextensions-api-fake": "^0.9.1",
     "webextensions-geckodriver": "^0.6.1"
   },
   "standard": {
