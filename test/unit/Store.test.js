@@ -12,11 +12,8 @@ describe('Store', () => {
     delete global.browser
   })
 
-  it('should put and get the proxy back', async () => {
-    const store = new Store()
-
-    const id = 'someId'
-    const proxy = {
+  function someProxyWith (id) {
+    return {
       id: id,
       title: 'some title',
       type: 'socks',
@@ -27,11 +24,29 @@ describe('Store', () => {
       proxyDNS: true,
       failoverTimeout: 5
     }
+  }
+
+  it('should put and get the proxy back', async () => {
+    const store = new Store()
+
+    const id = 'someId'
+    const proxy = someProxyWith(id)
 
     await store.putProxy(proxy)
 
     const gotProxy = await store.getProxyById(id)
 
     expect(gotProxy).to.be.equal(proxy)
+  })
+
+  it('should be able to delete proxy', async () => {
+    const store = new Store()
+    const id = 'someId'
+    await store.putProxy(someProxyWith(id))
+    await store.deleteProxyById(id)
+
+    const result = await store.getProxyById(id)
+
+    expect(result).to.be.null
   })
 })

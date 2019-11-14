@@ -23,12 +23,12 @@ export class Store {
 
   /**
    * @param {String} id
-   * @return {Promise<Proxy>}
+   * @return {Promise<?Proxy>}
    */
   async getProxyById (id) {
     const proxies = await this.getAllProxies()
     const index = proxies.findIndex(p => p.id === id)
-    return proxies[index]
+    return proxies[index] || null
   }
 
   /**
