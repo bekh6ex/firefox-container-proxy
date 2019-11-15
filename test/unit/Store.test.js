@@ -4,6 +4,8 @@ import webExtensionsApiFake from 'webextensions-api-fake'
 const { expect } = require('chai')
 
 describe('Store', () => {
+  const store = new Store()
+
   beforeEach(() => {
     global.browser = webExtensionsApiFake()
   })
@@ -27,8 +29,6 @@ describe('Store', () => {
   }
 
   it('should put and get the proxy back', async () => {
-    const store = new Store()
-
     const id = 'someId'
     const proxy = someProxyWith(id)
 
@@ -40,7 +40,6 @@ describe('Store', () => {
   })
 
   it('should be able to delete proxy', async () => {
-    const store = new Store()
     const id = 'someId'
     await store.putProxy(someProxyWith(id))
     await store.deleteProxyById(id)
@@ -49,4 +48,45 @@ describe('Store', () => {
 
     expect(result).to.be.null
   })
+
+  describe('getProxiesForContainer', () => {
+    it('should find proxy by container id if one present', async () => {
+      const cookieStoreId = 'container-1'
+      const proxyId = 'proxy-1'
+      // TODO Store should probably take care of this
+      const relations = {
+        [cookieStoreId]: [proxyId]
+      }
+      const givenProxy = someProxyWith(proxyId)
+      await store.putProxy(givenProxy)
+
+      await browser.storage.local.set({ relations: relations })
+
+      const [gotProxy] = await store.getProxiesForContainer(cookieStoreId)
+
+      expect(gotProxy).to.be.equal(givenProxy)
+    })
+
+    it('should return empty array if proxy not set for the container', async () => {
+      const cookieStoreId = 'container-1'
+
+      const result = await store.getProxiesForContainer(cookieStoreId)
+
+      expect(result).to.be.empty
+    })
+
+    it('should return empty array if proxy is set for the container but does not exist', async () => {
+      const cookieStoreId = 'container-1'
+      const proxyId = 'something-absent'
+      const relations = {
+        [cookieStoreId]: [proxyId]
+      }
+      await browser.storage.local.set({ relations: relations })
+
+      const result = await store.getProxiesForContainer(cookieStoreId)
+
+      expect(result).to.be.empty
+    })
+  })
+
 })
