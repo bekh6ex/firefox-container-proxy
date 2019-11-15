@@ -88,5 +88,4 @@ describe('Store', () => {
       expect(result).to.be.empty
     })
   })
-
 })

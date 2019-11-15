@@ -7,8 +7,8 @@
     "bundle": "web-ext -s src -a dist build --overwrite-dest",
     "test:func": "mocha test/functional/",
     "test:unit": "mocha --require esm test/unit/",
-    "codeStyle:check": "standard",
-    "codeStyle:fix": "standard --fix",
+    "codeStyle:check": "standardx",
+    "codeStyle:fix": "standardx --fix",
     "debug": "web-ext run -s src --verbose --browser-console --keep-profile-changes -p ./tmpProfile --start-url about:debugging --start-url about:addons  --pref=intl.locale.requested=en #--pref=intl.locale.matchOS=false"
   },
   "repository": {
@@ -32,12 +32,13 @@
     "selenium-webdriver": "^4.0.0-alpha.1",
     "sinon": "^7.5.0",
     "sinon-chai": "^3.2.0",
-    "standard": "^14.3.1",
+    "standardx": "^5.0.0",
     "web-ext": "^3.2.0",
     "webextensions-api-fake": "^0.9.1",
     "webextensions-geckodriver": "^0.6.1"
   },
-  "standard": {
+  "standardx": {
+    "cache": false,
     "parser": "babel-eslint",
     "env": {
       "browser": true,
@@ -50,6 +51,21 @@
     ],
     "ignore": [
       "/src/lib/*"
+    ]
+  },
+  "eslintConfig": {
+    "rules": {
+      "no-unused-expressions": "error"
+    },
+    "overrides": [
+      {
+        "files": [
+          "*.test.js"
+        ],
+        "rules": {
+          "no-unused-expressions": "off"
+        }
+      }
     ]
   }
 }
