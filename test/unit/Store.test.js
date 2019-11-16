@@ -97,4 +97,24 @@ describe('Store', () => {
       expect(result).to.be.empty
     })
   })
+
+  describe('setContainerProxyRelation', function () {
+    it('should set the relation', async () => {
+      await store.setContainerProxyRelation('container1', 'proxy1')
+
+      const relations = await store.getRelations()
+
+      expect(relations['container1']).to.be.deep.equal(['proxy1'])
+    })
+
+    it('should not remove existing relations', async () => {
+      await store.setContainerProxyRelation('container1', 'proxy1')
+      await store.setContainerProxyRelation('container2', 'proxy2')
+
+      const relations = await store.getRelations()
+
+      expect(relations['container1']).to.be.deep.equal(['proxy1'])
+      expect(relations['container2']).to.be.deep.equal(['proxy2'])
+    })
+  })
 })

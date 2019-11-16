@@ -68,6 +68,13 @@ export class Store {
     return result.relations || {}
   }
 
+  async setContainerProxyRelation(cookieStoreId, proxyId) {
+    const relations = await this.getRelations()
+    relations[cookieStoreId] = [proxyId]
+
+    await browser.storage.local.set({ relations: relations })
+  }
+
   async getProxiesForContainer (cookieStoreId) {
     const relations = await this.getRelations()
 
