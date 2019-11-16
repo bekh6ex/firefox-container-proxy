@@ -28,6 +28,15 @@ describe('Store', () => {
     }
   }
 
+  describe('getAllProxies', function () {
+    it('should return empty array if nothing is saved', async () => {
+      const proxies = await store.getAllProxies()
+
+      expect(proxies).to.be.an('array')
+      expect(proxies).to.be.empty
+    })
+  })
+
   it('should put and get the proxy back', async () => {
     const id = 'someId'
     const proxy = someProxyWith(id)
