@@ -13,16 +13,14 @@ describe('BackgroundMain', function () {
     delete global.browser
   })
 
-  let backgroundMain = new BackgroundMain({ store: new Store() })
+  const backgroundMain = new BackgroundMain({ store: new Store() })
 
   describe('onRequest', function () {
     it('should return empty array if no proxy is set up', async () => {
-
-      let result = await backgroundMain.onRequest({cookieStoreId: 'firefox-default'})
+      const result = await backgroundMain.onRequest({ cookieStoreId: 'firefox-default' })
 
       expect(result).to.be.an('array')
       expect(result).to.be.empty
     })
   })
-
 })

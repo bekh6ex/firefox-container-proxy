@@ -104,7 +104,7 @@ describe('Store', () => {
 
       const relations = await store.getRelations()
 
-      expect(relations['container1']).to.be.deep.equal(['proxy1'])
+      expect(relations.container1).to.be.deep.equal(['proxy1'])
     })
 
     it('should not remove existing relations', async () => {
@@ -113,8 +113,8 @@ describe('Store', () => {
 
       const relations = await store.getRelations()
 
-      expect(relations['container1']).to.be.deep.equal(['proxy1'])
-      expect(relations['container2']).to.be.deep.equal(['proxy2'])
+      expect(relations.container1).to.be.deep.equal(['proxy1'])
+      expect(relations.container2).to.be.deep.equal(['proxy2'])
     })
   })
 })
