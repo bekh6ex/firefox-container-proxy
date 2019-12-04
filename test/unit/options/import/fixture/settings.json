@@ -1,0 +1,80 @@
+{
+  "2qxgg21575444396719": {
+    "type": 4,
+    "color": "#66cc66",
+    "title": "Socks4 title",
+    "active": true,
+    "address": "socks4.proxy.com",
+    "port": 1080,
+    "proxyDNS": false,
+    "username": "socks4-username",
+    "password": "socks4-password",
+    "whitePatterns": [],
+    "blackPatterns": [],
+    "pacURL": "",
+    "index": 1234589
+  },
+  "9h1efk1575444425336": {
+    "type": 1,
+    "color": "#66cc66",
+    "title": "HTTP title",
+    "active": true,
+    "address": "http.proxy.com",
+    "port": 80,
+    "proxyDNS": false,
+    "username": "http-username",
+    "password": "htt-password",
+    "whitePatterns": [],
+    "blackPatterns": [],
+    "pacURL": "",
+    "index": 1234588
+  },
+  "a1karg1575481147257": {
+    "type": 5,
+    "color": "#66cc66",
+    "title": "Direct title",
+    "active": true,
+    "whitePatterns": [],
+    "blackPatterns": [],
+    "pacURL": "http://example.com",
+    "index": 1234586
+  },
+  "eagpv1575444364594": {
+    "type": 3,
+    "color": "#66cc66",
+    "title": "Socks5 title",
+    "active": true,
+    "address": "socks5.proxy.com",
+    "port": 1080,
+    "proxyDNS": true,
+    "username": "socks5-username",
+    "password": "socks5-password",
+    "whitePatterns": [],
+    "blackPatterns": [],
+    "pacURL": "",
+    "index": 1234590
+  },
+  "logging": {
+    "size": 100,
+    "active": false
+  },
+  "mode": "disabled",
+  "wtjizy1575444454301": {
+    "type": 2,
+    "color": "#66cc66",
+    "title": "HTTPS title",
+    "active": true,
+    "address": "https.proxy.com",
+    "port": 443,
+    "proxyDNS": false,
+    "username": "https-username",
+    "password": "https-password",
+    "whitePatterns": [],
+    "blackPatterns": [],
+    "pacURL": "",
+    "index": 1234587
+  },
+  "browserVersion": "70.0.1",
+  "foxyProxyVersion": "7.4.1",
+  "foxyProxyEdition": "standard"
+}

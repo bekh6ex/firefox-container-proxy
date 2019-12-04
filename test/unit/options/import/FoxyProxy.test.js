@@ -1,6 +1,8 @@
 import FoxyProxyConverter from '../../../../src/options/import/FoxyProxyConverter.js'
 
 const { expect } = require('chai')
+const fs = require('fs')
+const path = require('path')
 
 describe('FoxyProxy converter', () => {
   const foxyProxyConverter = new FoxyProxyConverter()
@@ -160,5 +162,24 @@ describe('FoxyProxy converter', () => {
 
     expect(proxies).to.be.an('array')
     expect(proxies.length).to.be.equal(0)
+  })
+
+  it('should parse only known proxy types', () => {
+    const fixture = JSON.parse(fs.readFileSync(path.join(__dirname, '/fixture/settings.json')))
+
+    const proxies = foxyProxyConverter.convert(fixture)
+
+    expect(proxies).to.be.an('array')
+    expect(proxies.length).to.be.equal(4)
+    proxies.forEach((result) => {
+      expect(result.id).to.be.a('string')
+      expect(result.type).to.be.a('string')
+      expect(result.title).to.be.a('string')
+      expect(result.host).to.be.a('string')
+      expect(result.port).to.be.a('number')
+      expect(result.username).to.be.a('string')
+      expect(result.password).to.be.a('string')
+      expect(result.failoverTimeout).to.be.equal(defaultFailoverTimeout)
+    })
   })
 })
