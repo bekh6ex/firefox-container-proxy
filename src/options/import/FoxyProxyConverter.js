@@ -8,6 +8,10 @@ const typeMapping = {
 }
 
 export default class FoxyProxyConverter {
+  /**
+   * @param {object} config FoxyProxy config
+   * @return {Proxy[]}
+   */
   convert (config) {
     const proxiesToImport = Object.entries(config)
       .filter(([_key, value]) => typeMapping[value.type])
