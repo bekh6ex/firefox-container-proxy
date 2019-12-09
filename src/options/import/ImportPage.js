@@ -64,8 +64,8 @@ export default class ImportPage {
       await this.store.putProxy(proxy)
     }
 
+    m.route.set('/proxies')
     this.reset()
-    // TODO Go to proxy list
   }
 
   reset () {
