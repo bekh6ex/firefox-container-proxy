@@ -1,6 +1,9 @@
 import m from '../../lib/mithril.js'
 
 import FoxyProxyConverter from './FoxyProxyConverter.js'
+import { uuidv4 } from '../util.js'
+
+const t = browser.i18n.getMessage
 
 export default class ImportPage {
   /**
@@ -13,13 +16,24 @@ export default class ImportPage {
    */
   store
 
+  cleanUp
+
+  foxyProxyFileInput
+
   constructor ({ store }) {
     this.store = store
+    this.foxyProxyFileInput = new FileInput({
+      title: t('ImportPage_foxyProxyInputLabel'),
+      onChange: this.onChooseFile.bind(this)
+    })
   }
 
   onChooseFile (event) {
     this.proxiesToImport = undefined
     const input = event.target
+    this.cleanUp = () => {
+      input.value = ''
+    }
 
     if (input.files.length === 0) {
       return
@@ -50,23 +64,29 @@ export default class ImportPage {
       await this.store.putProxy(proxy)
     }
 
+    this.reset()
+    // TODO Go to proxy list
+  }
+
+  reset () {
     this.proxiesToImport = undefined
+    if (this.cleanUp) {
+      this.cleanUp()
+    }
     m.redraw()
   }
 
   view () {
-    let text = 'Select a file'
+    let text = t('ImportPage_importButtonNoFileSelected')
     const canImport = this.proxiesToImport && this.proxiesToImport.length > 0
     if (canImport) {
-      text = `Import ${this.proxiesToImport.length} proxies`
+      text = t('ImportPage_importButtonDoImport', this.proxiesToImport.length)
     }
 
-    // TODO Fix texts and add translations
-
     return m('section', [
-      m('h2', 'Import'),
+      m('h2', t('ImportPage_heading')),
       m('form', [
-        m('input', { type: 'file', onchange: this.onChooseFile.bind(this) }),
+        m(this.foxyProxyFileInput),
         m('button.button.button--primary', {
           disabled: !canImport,
           onclick: () => {
@@ -74,6 +94,38 @@ export default class ImportPage {
           }
         }, text)
       ])
+    ])
+  }
+}
+
+class FileInput {
+  id
+  title
+  onChange
+
+  constructor ({ title, onChange }) {
+    this.title = title
+    this.id = uuidv4()
+    this.onChange = onChange
+  }
+
+  view ({ attrs: { class: className = '' } }) {
+    const inputClasses = ['input__field']
+
+    // TODO Add error handling
+
+    const topClasses = ['input', className]
+    return m('div', { class: topClasses.join(' ') }, [
+      m('label', { class: 'input__label', for: this.id }, this.title),
+      m(
+        'input',
+        {
+          id: this.id,
+          type: 'file',
+          class: inputClasses.join(' '),
+          onchange: this.onChange
+        }
+      )
     ])
   }
 }

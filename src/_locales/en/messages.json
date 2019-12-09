@@ -117,13 +117,34 @@
     "message": "Proxied request:",
     "description": "Proxied request header"
   },
-    "SupportPage_gitterInvite": {
-        "message": "If you have any questions, have a problem or just want to chat you are welcome in our channel in $GITTER_NAME$:",
-        "description": "Gitter welcome message displayed on Support page",
-        "placeholders": {
-            "GITTER_NAME": {
-                "content": "Gitter"
-            }
-        }
+  "SupportPage_gitterInvite": {
+    "message": "If you have any questions, have a problem or just want to chat you are welcome in our channel in $GITTER_NAME$:",
+    "description": "Gitter welcome message displayed on Support page",
+    "placeholders": {
+      "GITTER_NAME": {
+        "content": "Gitter"
+      }
     }
+  },
+  "ImportPage_heading": {
+    "message": "Import proxies",
+    "description": "Header of import proxies page"
+  },
+  "ImportPage_foxyProxyInputLabel": {
+    "message": "FoxyProxy settings",
+    "description": "Label of FoxyProxy settings file input"
+  },
+  "ImportPage_importButtonNoFileSelected": {
+    "message": "Select a file",
+    "description": "Text displayed on Import button when no file is selected or the file is invalid"
+  },
+  "ImportPage_importButtonDoImport": {
+    "message": "Import $NUMBER$ proxies",
+    "description": "Text displayed on Import button when there is something to import",
+    "placeholders": {
+      "NUMBER": {
+        "content": "$1"
+      }
+    }
+  }
 }

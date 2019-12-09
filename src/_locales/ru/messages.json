@@ -98,5 +98,26 @@
                 "content": "Gitter"
             }
         }
+    },
+    "ImportPage_heading": {
+        "message": "Импорт прокси",
+        "description": "Заголовок страницы импорта"
+    },
+    "ImportPage_foxyProxyInputLabel": {
+        "message": "настройки FoxyProxy",
+        "description": "Название поля файла настроек FoxyProxy"
+    },
+    "ImportPage_importButtonNoFileSelected": {
+        "message": "Выберите файл",
+        "description": "Текст отображаемый на кнопке импорта если файл не выбран или некорректный"
+    },
+    "ImportPage_importButtonDoImport": {
+        "message": "Импортировать $NUMBER$ прокси",
+        "description": "Текст отображаемый на кнопке импорта если есть что импортировать",
+        "placeholders": {
+            "NUMBER": {
+                "content": "$1"
+            }
+        }
     }
 }
