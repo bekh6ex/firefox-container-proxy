@@ -1,3 +1,17 @@
 .ProxyList__item-actions > * {
     margin-left: var(--baseline-grid);
 }
+
+.ProxyList__list-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    margin-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.ProxyList__list-actions > * {
+    margin-left: var(--baseline-grid);
+}

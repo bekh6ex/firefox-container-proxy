@@ -101,16 +101,6 @@ main {
     border-bottom: none;
 }
 
-.proxy-list-actions {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-
-    margin-right: 8px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-}
-
 .container-label {
     display: flex;
     align-items: center;
