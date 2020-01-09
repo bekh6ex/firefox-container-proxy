@@ -2,7 +2,7 @@ const PageObject = require('./PageObject.js')
 const ProxyFormPageObject = require('./ProxyFormPageObject.js')
 
 class ProxyListPageObject extends PageObject {
-  addButton = '.proxy-list-actions .button.button--primary'
+  addButton = '.ProxyList__list-actions .button.button--primary'
 
   stableSelector = this.addButton
 

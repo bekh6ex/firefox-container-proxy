@@ -24,29 +24,26 @@ export default class TestResultBlock {
     let text = 'Unexpected error'
     const directBlock = []
     const proxiedBlock = []
+
+    const direct = (v) => m('span[data-testid=directResult]', [v])
+    const proxied = (v) => m('span[data-testid=proxiedResult]', [v])
+
     if (result instanceof SuccessfulTestResult) {
       text = t('ProxySettingsTestResult_settingsAreCorrect')
-      directBlock.push(m('b', ['Your real IP: ']),
-        m('span[data-testid=directResult]', [
-          result.direct.ip
-        ])
-      )
-      proxiedBlock.push(m('b', ['Proxied IP: ']),
-        m('span[data-testid=proxiedResult]', [
-          result.proxied.ip
-        ]))
+      directBlock.push(m('b', ['Your real IP: ']), direct(result.direct.ip))
+      proxiedBlock.push(m('b', ['Proxied IP: ']), proxied(result.proxied.ip))
     } else if (result instanceof ConnectionIssueResult) {
       text = t('ProxySettingsTestResult_notConnectedToTheInternet')
-      directBlock.push(m('b', ['Direct request error: ']), result.directError.message)
-      proxiedBlock.push(m('b', ['Proxied request error: ']), result.proxiedError.message)
+      directBlock.push(m('b', ['Direct request error: ']), direct(result.directError.message))
+      proxiedBlock.push(m('b', ['Proxied request error: ']), proxied(result.proxiedError.message))
     } else if (result instanceof NoDirectConnectionResult) {
       text = t('ProxySettingsTestResult_noDirectConnection')
-      directBlock.push(m('b', ['Direct request error: ']), result.directError.message)
-      proxiedBlock.push(m('b', ['Proxied IP: ']), result.proxied.ip)
+      directBlock.push(m('b', ['Direct request error: ']), direct(result.directError.message))
+      proxiedBlock.push(m('b', ['Proxied IP: ']), proxied(result.proxied.ip))
     } else if (result instanceof SettingsErrorResult) {
       text = t('ProxySettingsTestResult_incorrectSettings')
-      directBlock.push(m('b', ['Your real IP: ']), result.direct.ip)
-      proxiedBlock.push(m('b', ['Proxied request error: ']), result.proxiedError.message)
+      directBlock.push(m('b', ['Your real IP: ']), direct(result.direct.ip))
+      proxiedBlock.push(m('b', ['Proxied request error: ']), proxied(result.proxiedError.message))
     } else {
       throw new Error('Unknown result type')
     }

@@ -55,7 +55,7 @@ describe('Container Proxy extension', function () {
     await defaultContainerSelect.selectByLabel('localhost:1080')
   })
 
-  it('should contain IP address text', async () => {
+  it.skip('should contain IP address text', async () => {
     await geckodriver.setContext(firefox.Context.CONTENT)
     await geckodriver.get('https://api.duckduckgo.com/?q=ip&no_html=1&format=json&t=firefox-container-proxy-extension')
     const text = await geckodriver.getPageSource()
@@ -139,10 +139,10 @@ class Helper extends PageObject {
 
   async assertCanGetTheIpAddress () {
     await this._driver.setContext(firefox.Context.CONTENT)
-    await this._driver.get('https://api.duckduckgo.com/?q=ip&no_html=1&format=json&t=firefox-container-proxy-extension')
+    await this._driver.get('https://www.google.com/search?q=ip')
     const text = await this._driver.getPageSource()
 
-    expect(text).to.include('Your IP address is')
+    expect(text).to.include('Your public IP address')
   }
 
   async assertProxyFailure () {
