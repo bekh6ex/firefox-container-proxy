@@ -1,3 +1,5 @@
+import { generateAuthorizationHeader } from '../options/util.js'
+
 export default class BackgroundMain {
   constructor ({ store }) {
     this.store = store
@@ -44,12 +46,18 @@ export default class BackgroundMain {
     if (proxies.length > 0) {
       proxies.forEach(p => {
         if (p.type === 'http' || p.type === 'https') {
-          // TODO Use header for HTTPS proxies
           this.initializeAuthListener(cookieStoreId, p)
         }
       })
 
-      return proxies
+      return proxies.map(p => {
+        if (p.type === 'https' && p.username && p.password) {
+          const proxyAuthorizationHeader = generateAuthorizationHeader(p.username, p.password)
+          return { proxyAuthorizationHeader, ...p }
+        } else {
+          return p
+        }
+      })
     }
 
     return []
