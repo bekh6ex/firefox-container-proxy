@@ -31,7 +31,7 @@ describe('FoxyProxy converter', () => {
 
     expect(proxies).to.be.an('array')
     const result = proxies[0]
-    expect(result.id).to.be.a('string')
+    expect(result.id).to.be.equal('some-id-1')
     expect(result.type).to.be.equal('socks')
     expect(result.title).to.be.equal('Socks5 title')
     expect(result.host).to.be.equal('socks5.proxy.com')
@@ -65,7 +65,7 @@ describe('FoxyProxy converter', () => {
 
     expect(proxies).to.be.an('array')
     const result = proxies[0]
-    expect(result.id).to.be.a('string')
+    expect(result.id).to.be.equal('some-id-2')
     expect(result.type).to.be.equal('socks4')
     expect(result.title).to.be.equal('Socks4 title')
     expect(result.host).to.be.equal('socks4.proxy.com')
@@ -99,7 +99,7 @@ describe('FoxyProxy converter', () => {
 
     expect(proxies).to.be.an('array')
     const result = proxies[0]
-    expect(result.id).to.be.a('string')
+    expect(result.id).to.be.equal('some-id-3')
     expect(result.type).to.be.equal('http')
     expect(result.title).to.be.equal('HTTP title')
     expect(result.host).to.be.equal('http.proxy.com')
@@ -133,7 +133,7 @@ describe('FoxyProxy converter', () => {
 
     expect(proxies).to.be.an('array')
     const result = proxies[0]
-    expect(result.id).to.be.a('string')
+    expect(result.id).to.be.equal('some-id-4')
     expect(result.type).to.be.equal('https')
     expect(result.title).to.be.equal('HTTPS title')
     expect(result.host).to.be.equal('https.proxy.com')

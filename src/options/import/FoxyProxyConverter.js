@@ -1,5 +1,3 @@
-import { uuidv4 } from '../util.js'
-
 const typeMapping = {
   1: 'http',
   2: 'https',
@@ -15,12 +13,11 @@ export default class FoxyProxyConverter {
   convert (config) {
     const proxiesToImport = Object.entries(config)
       .filter(([_key, value]) => typeMapping[value.type])
-      .map(([_key, value]) => value)
 
-    return proxiesToImport.map(p => {
+    return proxiesToImport.map(([id, p]) => {
       const type = typeMapping[p.type]
       const result = {
-        id: uuidv4(),
+        id: id,
         type: type,
         title: p.title,
         host: p.address,
