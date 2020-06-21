@@ -64,7 +64,7 @@ async function fetchProxiedIpData (proxyConfig) {
       // TODO Add support for HTTP
       browser.proxy.onRequest.removeListener(listener)
 
-      let auth = {}
+      const auth = {}
       if (proxyConfig.type === 'https') {
         auth.proxyAuthorizationHeader = generateAuthorizationHeader(proxyConfig.username, proxyConfig.password)
       }
