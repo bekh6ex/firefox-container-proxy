@@ -9,6 +9,7 @@
     "test:unit": "mocha --require esm test/unit/",
     "codeStyle:check": "standardx",
     "codeStyle:fix": "standardx --fix",
+    "lint": "addons-linter src",
     "debug": "web-ext run -s src --verbose --browser-console --keep-profile-changes -p ./tmpProfile --start-url about:debugging --start-url about:addons  --pref=intl.locale.requested=en #--pref=intl.locale.matchOS=false"
   },
   "repository": {
@@ -67,5 +68,8 @@
         }
       }
     ]
+  },
+  "dependencies": {
+    "addons-linter": "^1.26.0"
   }
 }
