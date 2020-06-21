@@ -139,10 +139,10 @@ class Helper extends PageObject {
 
   async assertCanGetTheIpAddress () {
     await this._driver.setContext(firefox.Context.CONTENT)
-    await this._driver.get('https://www.google.com/search?q=ip')
+    await this._driver.get('https://duckduckgo.com/?q=ip&ia=answer&atb=v150-1')
     const text = await this._driver.getPageSource()
 
-    expect(text).to.include('Your public IP address')
+    expect(text).to.include('Your IP address is')
   }
 
   async assertProxyFailure () {
