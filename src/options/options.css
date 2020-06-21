@@ -5,7 +5,7 @@
 @import "css/checkbox.css";
 @import "nav/Navigation.css";
 /*noinspection CssUnknownTarget*/
-@import "chrome://browser/skin/preferences/in-content/containers.css";
+@import "chrome://browser/skin/preferences/containers.css";
 @import "ProxyForm/ProxyForm.css";
 @import "ProxyList.css";
 @import "select.css";
