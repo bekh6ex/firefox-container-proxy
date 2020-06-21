@@ -28,9 +28,10 @@ export class ProxyList {
   view () {
     const items = this.model.list.map(this.renderProxyItem.bind(this))
     const actions = m('div.ProxyList__list-actions', [
-      m('.proxy-button', [
-        m('a[href=/proxies/import]', { oncreate: m.route.link, class: 'button' }, 'Import')
-      ]),
+      // TODO: Finish import features
+      // m('.proxy-button', [
+      //   m('a[href=/proxies/import]', { oncreate: m.route.link, class: 'button' }, 'Import')
+      // ]),
       m('.proxy-button', [
         m('a[href=/proxies/new]', { oncreate: m.route.link, class: 'button button--primary' }, '+')
       ])
