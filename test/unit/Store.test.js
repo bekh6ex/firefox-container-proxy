@@ -45,7 +45,7 @@ describe('Store', () => {
 
     const gotProxy = await store.getProxyById(id)
 
-    expect(gotProxy).to.be.equal(proxy)
+    expect(gotProxy).to.be.deep.equal(proxy)
   })
 
   it('should be able to delete proxy', async () => {
@@ -73,7 +73,7 @@ describe('Store', () => {
 
       const [gotProxy] = await store.getProxiesForContainer(cookieStoreId)
 
-      expect(gotProxy).to.be.equal(givenProxy)
+      expect(gotProxy).to.be.deep.equal(givenProxy)
     })
 
     it('should return empty array if proxy not set for the container', async () => {
