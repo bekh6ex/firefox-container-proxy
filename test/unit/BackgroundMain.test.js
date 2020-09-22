@@ -1,4 +1,4 @@
-import BackgroundMain from '../../src/background/BackgroundMain'
+import BackgroundMain, { doNotProxy } from '../../src/background/BackgroundMain'
 import { Store } from '../../src/store/Store'
 import webExtensionsApiFake from 'webextensions-api-fake'
 
@@ -21,8 +21,7 @@ describe('BackgroundMain', function () {
     it('should return empty array if no proxy is set up', async () => {
       const result = await backgroundMain.onRequest({ cookieStoreId: 'firefox-default', url: 'https://google.com' })
 
-      expect(result).to.be.an('array')
-      expect(result).to.be.empty
+      expect(result).to.be.deep.equal(doNotProxy)
     })
 
     it('should return proxy if proxy is set up', async () => {
@@ -64,8 +63,7 @@ describe('BackgroundMain', function () {
 
         const result = await backgroundMain.onRequest({ cookieStoreId: 'container1', url })
 
-        expect(result).to.be.an('array')
-        expect(result).to.be.empty
+        expect(result).to.be.deep.equal(doNotProxy)
       })
     })
   })

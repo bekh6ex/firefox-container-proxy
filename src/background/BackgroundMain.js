@@ -2,7 +2,7 @@ import { generateAuthorizationHeader } from '../options/util.js'
 
 const localhosts = new Set(['localhost', '127.0.0.1', '[::1]'])
 
-const doNotProxy = [] // Same as [{ type: 'direct' }]
+export const doNotProxy = [{ type: 'direct' }]
 
 export default class BackgroundMain {
   constructor ({ store }) {
