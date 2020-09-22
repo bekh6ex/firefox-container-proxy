@@ -10,7 +10,11 @@
     "codeStyle:check": "standardx",
     "codeStyle:fix": "standardx --fix",
     "lint": "addons-linter src",
-    "debug": "web-ext run -s src --verbose --browser-console --keep-profile-changes -p ./tmpProfile --start-url about:debugging --start-url about:addons  --pref=intl.locale.requested=en #--pref=intl.locale.matchOS=false"
+    "debug": "web-ext run -s src --verbose --browser-console --keep-profile-changes -p ./tmpProfile --start-url about:debugging --start-url about:addons  --pref=intl.locale.requested=en #--pref=intl.locale.matchOS=false",
+    "ci:test-unit": "npm run test:unit",
+    "ci:test-func": "npm run test:func",
+    "ci:style-check": "npm run codeStyle:check",
+    "ci:lint": "npm run lint"
   },
   "repository": {
     "type": "git",

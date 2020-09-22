@@ -20,8 +20,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: npm test
-      - run:
-          command: npm run test:func
-      - run: npm run codeStyle:check
-      - run: npm run lint
+      - run: npm run ci:test-unit
+      - run: npm run ci:test-func
+      - run: npm run ci:style-check
+      - run: npm run ci:lint
