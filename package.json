@@ -35,7 +35,7 @@
     "sinon-chai": "^3.5.0",
     "standardx": "^5.0.0",
     "web-ext": "^4.3.0",
-    "webextensions-api-fake": "^0.9.1",
+    "webextensions-api-fake": "^1.2.0",
     "webextensions-geckodriver": "^0.6.1"
   },
   "standardx": {
