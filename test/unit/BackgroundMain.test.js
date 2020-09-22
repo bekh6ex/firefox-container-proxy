@@ -34,6 +34,16 @@ describe('BackgroundMain', function () {
       expect(result).to.be.not.empty
     })
 
+    it('should return proxy for the container if url is invalid', async () => {
+      // To be more on a safe side
+      await givenSomeProxyIsSetUpForContainer('firefox-default')
+
+      const result = await backgroundMain.onRequest({ cookieStoreId: 'firefox-default', url: 'np-protocol-url.com' })
+
+      expect(result).to.be.an('array')
+      expect(result).to.be.not.empty
+    })
+
     // Connections to localhost, 127.0.0.1, and ::1 are never proxied. (From FF settings)
     const localAddresses = [
       'http://localhost/index.html',
