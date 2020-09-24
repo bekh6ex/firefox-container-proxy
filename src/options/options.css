@@ -73,6 +73,7 @@ header {
     display: flex;
     flex-direction: row;
     font-size: 1.36em;
+    flex-shrink: 0;
 }
 
 main {
