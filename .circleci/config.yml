@@ -4,10 +4,10 @@ workflows:
   commit:
     jobs:
       - test
-  weekly:
+  nightly:
     triggers:
       - schedule:
-          cron: "50 * * * 4"
+          cron: "50 3 * * *"
           filters:
             branches:
               only:
