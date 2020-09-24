@@ -1,6 +1,22 @@
 version: 2
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - test
+  weekly:
+    triggers:
+      - schedule:
+          cron: "45 11 * * 4"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - test
+
 jobs:
-  build:
+  test:
     docker:
       - image: circleci/node:12-browsers
       - image: vimagick/dante
