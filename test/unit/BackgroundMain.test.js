@@ -25,7 +25,7 @@ describe('BackgroundMain', function () {
     })
 
     it('should return proxy if proxy is set up', async () => {
-      await givenSomeProxyIsSetUpForContainer('firefox-default')
+      await givenSomeProxyIsSetUpForContainer({ containerId: 'firefox-default' })
 
       const result = await backgroundMain.onRequest({ cookieStoreId: 'firefox-default', url: 'https://google.com' })
 
@@ -35,7 +35,7 @@ describe('BackgroundMain', function () {
 
     it('should return proxy for the container if url is invalid', async () => {
       // To be more on a safe side
-      await givenSomeProxyIsSetUpForContainer('firefox-default')
+      await givenSomeProxyIsSetUpForContainer({ containerId: 'firefox-default' })
 
       const result = await backgroundMain.onRequest({ cookieStoreId: 'firefox-default', url: 'np-protocol-url.com' })
 
@@ -57,26 +57,45 @@ describe('BackgroundMain', function () {
       'http://[::1]:123/test'
     ]
 
-    localAddresses.forEach(url => {
-      it(`should return empty array if the address is local: ${url}`, async () => {
-        await givenSomeProxyIsSetUpForContainer('container1')
+    describe('proxying of local addresses is disabled', () => {
+      localAddresses.forEach(url => {
+        it(`should return empty array if the address is local: ${url}`, async () => {
+          await givenSomeProxyIsSetUpForContainer({ containerId: 'container1', doNotProxyLocal: true })
 
-        const result = await backgroundMain.onRequest({ cookieStoreId: 'container1', url })
+          const result = await backgroundMain.onRequest({ cookieStoreId: 'container1', url })
 
-        expect(result).to.be.deep.equal(doNotProxy)
+          expect(result).to.be.deep.equal(doNotProxy)
+        })
+      })
+    })
+
+    describe('proxying of local addresses is enabled', () => {
+      localAddresses.forEach(url => {
+        it(`should return array with proxy: ${url}`, async () => {
+          const host = 'proxyX.example.com'
+          await givenSomeProxyIsSetUpForContainer({ host, containerId: 'container1', doNotProxyLocal: false })
+
+          const result = await backgroundMain.onRequest({ cookieStoreId: 'container1', url })
+
+          expect(result[0].host).to.be.equal(host)
+        })
       })
     })
   })
 })
 
-async function givenSomeProxyIsSetUpForContainer (containerId) {
+async function givenSomeProxyIsSetUpForContainer ({ host, containerId, doNotProxyLocal }) {
   const proxyId = 'proxy1'
-  await store.putProxy({
+  const proxy = {
     id: proxyId,
     type: 'socks',
-    host: 'example.com',
+    host: host || 'example.com',
     port: 1080
-  })
+  }
+  if (typeof doNotProxyLocal !== 'undefined') {
+    proxy.doNotProxyLocal = doNotProxyLocal
+  }
+  await store.putProxy(proxy)
 
   await store.setContainerProxyRelation(containerId, proxyId)
 }

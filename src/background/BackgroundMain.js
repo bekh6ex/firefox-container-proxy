@@ -2,7 +2,7 @@ import { generateAuthorizationHeader } from '../options/util.js'
 
 const localhosts = new Set(['localhost', '127.0.0.1', '[::1]'])
 
-export const doNotProxy = [{ type: 'direct' }]
+export const doNotProxy = []
 
 export default class BackgroundMain {
   constructor ({ store }) {
@@ -45,17 +45,6 @@ export default class BackgroundMain {
       return doNotProxy
     }
 
-    try {
-      const documentUrl = new URL(requestDetails.url)
-      if (localhosts.has(documentUrl.hostname)) {
-        // "Connections to localhost, 127.0.0.1, and ::1 are never proxied."
-        // Quote from Firefox settings
-        return doNotProxy
-      }
-    } catch (e) {
-      console.error(e)
-    }
-
     const proxies = await this.store.getProxiesForContainer(cookieStoreId)
 
     if (proxies.length > 0) {
@@ -65,14 +54,31 @@ export default class BackgroundMain {
         }
       })
 
-      return proxies.map(p => {
+      const result = proxies.map(p => {
         if (p.type === 'https' && p.username && p.password) {
           const proxyAuthorizationHeader = generateAuthorizationHeader(p.username, p.password)
           return { proxyAuthorizationHeader, ...p }
         } else {
           return p
         }
+      }).filter(p => {
+        try {
+          const documentUrl = new URL(requestDetails.url)
+          const isLocalhost = localhosts.has(documentUrl.hostname)
+          if (isLocalhost && p.doNotProxyLocal) {
+            return false
+          }
+        } catch (e) {
+          console.error(e)
+        }
+
+        return true
       })
+
+      if (result.length === 0) {
+        return doNotProxy
+      }
+      return result
     }
 
     return doNotProxy

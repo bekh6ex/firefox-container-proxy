@@ -24,7 +24,8 @@ describe('Store', () => {
       username: 'user',
       password: 'password',
       proxyDNS: true,
-      failoverTimeout: 5
+      failoverTimeout: 5,
+      doNotProxyLocal: true
     }
   }
 
@@ -46,6 +47,30 @@ describe('Store', () => {
     const gotProxy = await store.getProxyById(id)
 
     expect(gotProxy).to.be.deep.equal(proxy)
+  })
+
+  it('when get, returns doNotProxyLocal `true` if was not set when put', async () => {
+    const id = 'someId'
+    const proxy = someProxyWith(id)
+    delete proxy.doNotProxyLocal
+
+    await store.putProxy(proxy)
+
+    const gotProxy = await store.getProxyById(id)
+
+    expect(gotProxy.doNotProxyLocal).to.be.equal(true)
+  })
+
+  it('stores doNotProxyLocal value', async () => {
+    const id = 'someId'
+    const proxy = someProxyWith(id)
+    proxy.doNotProxyLocal = false
+
+    await store.putProxy(proxy)
+
+    const gotProxy = await store.getProxyById(id)
+
+    expect(gotProxy.doNotProxyLocal).to.be.equal(false)
   })
 
   it('should be able to delete proxy', async () => {
@@ -74,6 +99,24 @@ describe('Store', () => {
       const [gotProxy] = await store.getProxiesForContainer(cookieStoreId)
 
       expect(gotProxy).to.be.deep.equal(givenProxy)
+    })
+
+    it('doNotProxyLocal should be `true` if not set', async () => {
+      const cookieStoreId = 'container-1'
+      const proxyId = 'proxy-1'
+      // TODO Store should probably take care of this
+      const relations = {
+        [cookieStoreId]: [proxyId]
+      }
+      const givenProxy = someProxyWith(proxyId)
+      delete givenProxy.doNotProxyLocal
+      await store.putProxy(givenProxy)
+
+      await browser.storage.local.set({ relations: relations })
+
+      const [gotProxy] = await store.getProxiesForContainer(cookieStoreId)
+
+      expect(gotProxy.doNotProxyLocal).to.be.equal(true)
     })
 
     it('should return empty array if proxy not set for the container', async () => {

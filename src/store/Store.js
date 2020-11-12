@@ -1,3 +1,4 @@
+
 /**
  * @typedef Proxy
  * @type object
@@ -10,6 +11,7 @@
  * @property {String} password
  * @property {Boolean} proxyDNS
  * @property {Number} failoverTimeout
+ * @property {?Boolean} doNotProxyLocal
  */
 
 export class Store {
@@ -28,7 +30,8 @@ export class Store {
   async getProxyById (id) {
     const proxies = await this.getAllProxies()
     const index = proxies.findIndex(p => p.id === id)
-    return proxies[index] || null
+    const proxy = fillInDefaults(proxies[index])
+    return proxy || null
   }
 
   /**
@@ -88,8 +91,24 @@ export class Store {
     const proxyById = {}
     proxies.forEach(function (p) { proxyById[p.id] = p })
 
-    const result = proxyIds.map(pId => proxyById[pId])
+    return proxyIds.map(pId => proxyById[pId])
       .filter(p => !!p)
-    return result
+      .map(fillInDefaults)
   }
+}
+
+/**
+ *
+ * @param {?Proxy} proxy
+ * @return {?Proxy}
+ */
+function fillInDefaults (proxy) {
+  if (!proxy) {
+    return proxy
+  }
+
+  if (typeof proxy.doNotProxyLocal === 'undefined') {
+    proxy.doNotProxyLocal = true
+  }
+  return proxy
 }
