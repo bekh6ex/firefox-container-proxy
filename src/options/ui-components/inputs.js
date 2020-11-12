@@ -76,3 +76,38 @@ export class PasswordInput extends Input {
     this.type = 'password'
   }
 }
+
+export class CheckboxInput extends Input {
+  constructor (props) {
+    super(props)
+    this.type = 'checkbox'
+  }
+
+  view ({ attrs: { class: className = '' } }) {
+    const inputClasses = ['checkbox']
+    if (!this.valid) {
+      inputClasses.push('input--error__field')
+    }
+
+    const topClasses = ['checkbox-top', className]
+    return m('div', { class: topClasses.join(' ') }, [
+
+      m(
+        'input',
+        {
+          ...this.props,
+          id: this.id,
+          type: 'checkbox',
+          class: inputClasses.join(' '),
+          required: this.required,
+          title: this.errorText,
+          checked: this.getValue(),
+          oninput: (e) => this.setValue(e.target.checked),
+          onchange: (e) => this.onChange(e.target.checked),
+          onfocusout: (e) => this.onChange(e.target.checked)
+        }
+      ),
+      m('label', { class: 'input__label', for: this.id, style: 'display: inline' }, this.title)
+    ])
+  }
+}

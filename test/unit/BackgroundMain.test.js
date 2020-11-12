@@ -33,6 +33,14 @@ describe('BackgroundMain', function () {
       expect(result).to.be.not.empty
     })
 
+    it('should remove doNotProxyLocal flag from proxy settings if proxy is set up', async () => {
+      await givenSomeProxyIsSetUpForContainer({ containerId: 'firefox-default' })
+
+      const result = await backgroundMain.onRequest({ cookieStoreId: 'firefox-default', url: 'https://google.com' })
+
+      expect(result[0].doNotProxyLocal).to.be.undefined
+    })
+
     it('should return proxy for the container if url is invalid', async () => {
       // To be more on a safe side
       await givenSomeProxyIsSetUpForContainer({ containerId: 'firefox-default' })

@@ -37,26 +37,30 @@
     },
     "ProxyForm_protocolFieldLabel": {
         "message": "Protocol",
-        "description": "Protocol field in proxy form"
+      "description": "Protocol field in proxy form"
     },
-    "ProxyForm_titleFieldLabel": {
-        "message": "Title (Optional)",
-        "description": "Title field in proxy form"
-    },
-    "ProxyForm_serverFieldLabel": {
-        "message": "Server",
-        "description": "Server field in proxy form"
-    },
-    "ProxyForm_incorrectServerError": {
-        "message": "Value should be either IP address or domain name",
-        "description": "Error message displayed when incorrect server is entered"
-    },
-    "ProxyForm_portFieldLabel": {
-        "message": "Port",
-        "description": "Port field in proxy form"
-    },
-    "ProxyForm_usernameFieldLabel": {
-        "message": "Username",
+  "ProxyForm_titleFieldLabel": {
+    "message": "Title (Optional)",
+    "description": "Title field in proxy form"
+  },
+  "ProxyForm_serverFieldLabel": {
+    "message": "Server",
+    "description": "Server field in proxy form"
+  },
+  "ProxyForm_doNotProxyLocalFieldLabel": {
+    "message": "Do not proxy local addresses (localhost, 127.0.0.1, ::1)",
+    "description": "`Do not proxy local addresses` field in the proxy form"
+  },
+  "ProxyForm_incorrectServerError": {
+    "message": "Value should be either IP address or domain name",
+    "description": "Error message displayed when incorrect server is entered"
+  },
+  "ProxyForm_portFieldLabel": {
+    "message": "Port",
+    "description": "Port field in proxy form"
+  },
+  "ProxyForm_usernameFieldLabel": {
+    "message": "Username",
         "description": "Username field in proxy form"
     },
     "ProxyForm_passwordFieldLabel": {

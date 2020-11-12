@@ -2,7 +2,7 @@ import m from '../../lib/mithril.js'
 import { uuidv4 } from './../util.js'
 import { proxyTypes, style } from './../constants.js'
 import { testProxySettings } from './testProxySettings.js'
-import { PasswordInput, TrimmedTextInput } from '../ui-components/inputs.js'
+import { CheckboxInput, PasswordInput, TrimmedTextInput } from '../ui-components/inputs.js'
 import PortNumberInput from './PortInput.js'
 import HostInput from './HostInput.js'
 import TestResultBlock from './TestResultBlock.js'
@@ -16,12 +16,13 @@ class ProxyModel {
   }
 
   async load (id) {
+    const newProxy = { id: 'new', doNotProxyLocal: true }
     if (id === 'new') {
-      this.current = { id: 'new' }
+      this.current = newProxy
       m.redraw()
       return
     }
-    this.current = await store.getProxyById(id) || { id: 'new' }
+    this.current = await store.getProxyById(id) || newProxy
     m.redraw()
   }
 
@@ -86,6 +87,11 @@ export default class ProxyForm {
       ...model.accessProperty('type'),
       options: protocolOptions
     })
+
+    this.doNotProxyLocalCheckbox = new CheckboxInput({
+      title: t('ProxyForm_doNotProxyLocalFieldLabel'),
+      ...model.accessProperty('doNotProxyLocal')
+    })
   }
 
   oninit (vnode) {
@@ -113,6 +119,9 @@ export default class ProxyForm {
         m('div.ProxyForm__credentials', [
           m(this.usernameInput),
           m(this.passwordInput)
+        ]),
+        m('div.ProxyForm__advanced', [
+          m(this.doNotProxyLocalCheckbox)
         ]),
         m('div.ProxyForm__actions', [
           m('button[type=button]', {

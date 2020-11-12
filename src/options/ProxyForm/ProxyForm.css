@@ -33,6 +33,20 @@
     padding-right: 4px;
 }
 
+.ProxyForm__advanced {
+    display: flex;
+    margin-bottom: 8px;
+    justify-content: stretch;
+}
+
+.ProxyForm__advanced > * {
+    flex-grow: 1;
+}
+
+.ProxyForm__advanced > :first-child {
+    padding-right: 4px;
+}
+
 .ProxyForm__actions > *:not(:first-child) {
     margin-left: var(--baseline-grid);
 }

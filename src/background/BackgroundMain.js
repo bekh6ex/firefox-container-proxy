@@ -73,6 +73,9 @@ export default class BackgroundMain {
         }
 
         return true
+      }).map(p => {
+        delete p.doNotProxyLocal
+        return p
       })
 
       if (result.length === 0) {
