@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    //    "noImplicitAny": true,
+    "module": "ES2020",
+    "moduleResolution": "classic",
+    "noEmitOnError": true,
+    "strictNullChecks": true,
+    "target": "es6",
+    "sourceMap": true,
+    "allowJs": true,
+    "baseUrl": "."
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

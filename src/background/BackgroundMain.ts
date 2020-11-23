@@ -1,15 +1,18 @@
 import { generateAuthorizationHeader } from '../options/util.js'
 
 const localhosts = new Set(['localhost', '127.0.0.1', '[::1]'])
+const browser = (globalThis as any).browser
 
 export const doNotProxy = []
 
 export default class BackgroundMain {
-  constructor ({ store }) {
+  store
+
+  constructor({store}) {
     this.store = store
   }
 
-  initializeAuthListener (cookieStoreId, proxy) {
+  initializeAuthListener(cookieStoreId, proxy) {
     const listener = (details) => {
       if (!details.isProxy) return {}
 

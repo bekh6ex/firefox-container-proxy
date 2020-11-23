@@ -7,13 +7,13 @@ import ProxyForm from './ProxyForm/ProxyForm.js'
 import SupportPage from './pages/SupportPage.js'
 import ImportPage from './import/ImportPage.js'
 
-window.store = new Store()
+globalThis.store = new Store()
 
 const layout = new Layout()
 const containerListView = new ContainerListView()
 const proxyList = new ProxyList()
 const proxyForm = new ProxyForm()
-const importPage = new ImportPage({ store })
+const importPage = new ImportPage({store: globalThis.store})
 
 m.route(document.body, '/containers', {
   '/containers': {
@@ -33,4 +33,4 @@ m.route(document.body, '/containers', {
   }
 })
 
-document.title = browser.i18n.getMessage('OptionsPage_browserTabTitle')
+document.title = (globalThis as any).browser.i18n.getMessage('OptionsPage_browserTabTitle')

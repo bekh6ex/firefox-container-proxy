@@ -9,7 +9,7 @@ const webExtensionsGeckoDriver = require('webextensions-geckodriver')
 const { webdriver, firefox } = webExtensionsGeckoDriver
 const { until, By } = webdriver
 
-const manifestPath = path.resolve(path.join(__dirname, '../../src/manifest.json'))
+const manifestPath = path.resolve(path.join(__dirname, '../../dist/manifest.json'))
 
 describe('Container Proxy extension', function () {
   let geckodriver

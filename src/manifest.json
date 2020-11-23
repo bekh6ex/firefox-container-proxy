@@ -33,7 +33,9 @@
   ],
 
   "background": {
-    "scripts": ["background-init.js"]
+    "scripts": [
+      "background/index.js"
+    ]
   }
 
 }

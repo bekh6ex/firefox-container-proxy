@@ -1,4 +1,4 @@
-import BackgroundMain, { doNotProxy } from '../../src/background/BackgroundMain'
+import BackgroundMain, { doNotProxy } from '../../src/background/BackgroundMain.ts'
 import { Store } from '../../src/store/Store'
 import webExtensionsApiFake from 'webextensions-api-fake'
 

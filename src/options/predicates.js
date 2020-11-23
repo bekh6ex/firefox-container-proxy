@@ -1,4 +1,4 @@
-import { toASCII } from '../lib/punycode.js'
+import { toASCII } from 'punycode/'
 
 export function isNotEmpty (value) {
   return !!value
