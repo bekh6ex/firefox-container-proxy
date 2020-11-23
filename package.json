@@ -7,14 +7,14 @@
     "bundle": "web-ext -s dist build --overwrite-dest",
     "test:func": "npm run build && mocha test/functional/",
     "test:unit": "ts-mocha --require esm test/unit/",
-    "codeStyle:check": "standardx",
-    "codeStyle:fix": "standardx --fix",
+    "codeStyle:check": "standardx && ts-standard",
+    "codeStyle:fix": "standardx --fix && ts-standard --fix",
     "lint": "addons-linter dist",
     "debug": "web-ext run -s dist --verbose --browser-console --keep-profile-changes -p ./tmpProfile --start-url about:debugging --start-url about:addons  --pref=intl.locale.requested=en #--pref=intl.locale.matchOS=false",
     "ci:test-unit": "npm run test:unit",
     "ci:test-func": "npm run test:func",
     "ci:style-check": "npm run codeStyle:check",
-    "ci:lint": "npm run lint",
+    "ci:lint": "npm run build && npm run lint",
     "build": "webpack",
     "clean": "rm -rf ./dist"
   },
@@ -57,7 +57,8 @@
     "copy-webpack-plugin": "^6.1.1",
     "@types/source-map": "^0.5.2",
     "addons-linter": "^1.26.0",
-    "ts-standard": "^9.0.0"
+    "ts-standard": "^9.0.0",
+    "@types/firefox-webext-browser": "^82.0.0"
   },
   "standardx": {
     "cache": false,
