@@ -67,7 +67,6 @@
         "message": "Пароль",
         "description": "Поле пароля в форме редактирования настроек прокси сервера"
     },
-
     "ProxyForm_testProxySettingsConfirmationText": {
         "message": "Чтобы проверить настройки необходимо совершить пару запросов к $DUCKDUCKGO_NAME$. Продолжить?",
         "description": "Текст отображаемый при клике пользователя по кнопке проверки настроек. Осведомляет пользователя о запросе к стороннему сервису.",
@@ -123,5 +122,13 @@
                 "content": "$1"
             }
         }
+    },
+    "ProxySettingsTestResult_error": {
+        "message": "Ошибка!",
+        "description": "Generic text meaning there is an error"
+    },
+    "ProxySettingsTestResult_settingsAreCorrect": {
+        "message": "Настройки верны!",
+        "description": "Text displayed when result of testing proxy settings was successful in proxy form"
     }
 }
