@@ -63,9 +63,6 @@
       }
     }
   },
-  "ProxyForm_incorrectServerError": {
-    "description": "Message d'erreur quand un serveur incorrect est ajouté"
-  },
   "ProxyForm_testProxySettingsConfirmationText": {
     "message": "Pour tester les paramètres il est nécessaire de faire quelques requêtes à $DUCKDUCKGO_NAME$. Continuer ?",
     "description": "Texte affiché quand un utilisateur clique sur le bouton Tester les paramètres afin de le notifier qu'il va lancer une requête à un service tiers.",
