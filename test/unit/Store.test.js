@@ -1,4 +1,4 @@
-import { Store } from '../../src/store/Store.js'
+import { Store } from '../../src/store/Store'
 import webExtensionsApiFake from 'webextensions-api-fake'
 
 const { expect } = require('chai')
