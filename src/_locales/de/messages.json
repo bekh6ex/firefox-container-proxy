@@ -48,7 +48,7 @@
         "message": "Support"
     },
     "SupportPage_gitterInvite": {
-        "message": "Bei Fragen, Problemen, oder einfach nur zum Chatten schaut in unserem $GITTER_NAME$ Channel vorbei!",
+        "message": "Bei Fragen, Problemen, oder einfach nur zum Chatten schaut in unserem $GITTER_NAME$ Channel vorbei:",
         "placeholders": {
             "GITTER_NAME": {
                 "content": "Gitter"

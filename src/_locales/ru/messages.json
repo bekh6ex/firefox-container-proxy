@@ -130,5 +130,25 @@
     "ProxySettingsTestResult_settingsAreCorrect": {
         "message": "Настройки верны!",
         "description": "Text displayed when result of testing proxy settings was successful in proxy form"
+    },
+    "ProxySettingsTestResult_proxiedRequest": {
+        "message": "Проксированный запрос:",
+        "description": "Proxied request header"
+    },
+    "ProxySettingsTestResult_directRequest": {
+        "message": "Прямой запрос:",
+        "description": "Direct request header"
+    },
+    "ProxySettingsTestResult_incorrectSettings": {
+        "message": "Ошибка! Не удалось подключиться к прокси-серверу. Вероятно, настройки неверны.",
+        "description": "Text displayed when direct request is successful, but proxied request failed"
+    },
+    "ProxySettingsTestResult_noDirectConnection": {
+        "message": "Настройки верные! Но похоже, что подключение к Интернету без прокси невозможно.",
+        "description": "Text displayed when proxied request succeeded, but direct request failed"
+    },
+    "ProxySettingsTestResult_notConnectedToTheInternet": {
+        "message": "Ошибка! Возможно, вы не подключены к Интернету.",
+        "description": "Text displayed when both direct and proxied requests failed to succeed"
     }
 }
