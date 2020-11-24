@@ -2,28 +2,27 @@ import {
   ConnectionIssueResult,
   NoDirectConnectionResult,
   SettingsErrorResult,
-  SuccessfulTestResult
-} from './testProxySettings.js'
-import m from '../../lib/mithril.js'
+  SuccessfulTestResult, TestResult
+} from './testProxySettings'
+import m, {Component, Vnode} from 'mithril'
 
 const t = browser.i18n.getMessage
 
-export default class TestResultBlock {
-  /**
-   * @param {TestResult} testResult
-   */
-  constructor (testResult) {
+export default class TestResultBlock implements Component {
+  testResult: TestResult
+
+  constructor(testResult: TestResult) {
     this.testResult = testResult
   }
 
-  view () {
+  view() {
     // TODO Add localization
     // TODO Add ru translations
     // TODO Improve design
     const result = this.testResult
     let text = 'Unexpected error'
-    const directBlock = []
-    const proxiedBlock = []
+    const directBlock: Vnode[] = []
+    const proxiedBlock: Vnode[] = []
 
     const direct = (v) => m('span[data-testid=directResult]', [v])
     const proxied = (v) => m('span[data-testid=proxiedResult]', [v])

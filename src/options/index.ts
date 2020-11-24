@@ -1,11 +1,11 @@
-import { Store } from '../store/Store.js'
-import m from '../lib/mithril.js'
-import { Layout } from './Layout.js'
-import { ContainerListView } from './ContainerListView.js'
-import { ProxyList } from './ProxyList.js'
-import ProxyForm from './ProxyForm/ProxyForm.js'
-import SupportPage from './pages/SupportPage.js'
-import ImportPage from './import/ImportPage.js'
+import {Store} from '../store/Store'
+import m from 'mithril'
+import {Layout} from './Layout'
+import {ContainerListView} from './ContainerListView'
+import {ProxyList} from './ProxyList'
+import ProxyForm from './ProxyForm/ProxyForm'
+import SupportPage from './pages/SupportPage'
+import ImportPage from './import/ImportPage'
 
 globalThis.store = new Store()
 

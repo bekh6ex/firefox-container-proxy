@@ -1,7 +1,17 @@
-import m from '../../lib/mithril.js'
-import { uuidv4 } from '../util.js'
+import m, {Component, Vnode} from 'mithril'
+import {uuidv4} from '../util'
 
-export default class Select {
+export default class Select implements Component {
+  private readonly title: string
+  private readonly required: boolean
+  private readonly getValue: any
+  private readonly setValue: any
+  private readonly options: any
+  private readonly id: string
+  private readonly props: {}
+  private valid: boolean
+  private readonly errorText: string
+
   /**
    *
    * @param title
@@ -10,7 +20,7 @@ export default class Select {
    * @param setValue
    * @param {object[]} options
    */
-  constructor ({ title, required, getValue, setValue, options, id }) {
+  constructor({title, required, getValue, setValue, options, id}: { title: any, required: any, getValue: any, setValue: any, options: object[], id?: string }) {
     this.title = title
     this.required = !!required
     this.getValue = getValue
@@ -29,21 +39,21 @@ export default class Select {
     }
   }
 
-  onChange (v) {
+  onChange(v): void {
     this.validate(v)
     this.setValue(v)
     m.redraw()
   }
 
-  view () {
+  view(): Vnode {
     const selectClasses = ['input__field']
     if (!this.valid) {
       selectClasses.push('input--error__field')
     }
 
     const value = this.getValue()
-    const options = this.options.map(({ value, label }) => {
-      return m('option', { value: value }, label)
+    const options = this.options.map(({value, label}) => {
+      return m('option', {value: value}, label)
     })
 
     return m('.select', [

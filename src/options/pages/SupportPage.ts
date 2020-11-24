@@ -1,4 +1,4 @@
-import m from '../../lib/mithril.js'
+import m, {Component} from 'mithril'
 
 export default class SupportPage {
   static view () {

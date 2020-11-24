@@ -1,22 +1,30 @@
-import m from '../lib/mithril.js'
+import m from 'mithril'
+import {ProxyDao, Store} from '../store/Store'
 
-const ContainerListModel = {
-  containers: [],
-  proxies: [],
-  proxiesById: {},
-  relations: {},
-  loadAll: async () => {
+class ContainerListModel {
+  static containers: any[] = []
+  static proxies: ProxyDao[] = []
+  static proxiesById: { [key: string]: ProxyDao } = {}
+  static relations: { [key: string]: any } = {}
+
+  static async loadAll(): Promise<void> {
+    debugger
     ContainerListModel.containers = await browser.contextualIdentities.query({})
+    const store: Store = (window as any).store
     ContainerListModel.proxies = await store.getAllProxies()
-    ContainerListModel.proxies.forEach(p => { ContainerListModel.proxiesById[p.id] = p })
+    ContainerListModel.proxies.forEach(p => {
+      ContainerListModel.proxiesById[p.id] = p
+    })
     const result = await browser.storage.local.get('relations')
-    ContainerListModel.relations = result.relations || {}
+    ContainerListModel.relations = result.relations ?? {}
     m.redraw()
-  },
-  saveRelations: async () => {
-    await browser.storage.local.set({ relations: ContainerListModel.relations })
+  }
+
+  static async saveRelations(): Promise<void> {
+    await browser.storage.local.set({relations: ContainerListModel.relations})
   }
 }
+
 function renderSelectProxy (cookieStoreId, proxyId) {
   const proxyOptions = ContainerListModel.proxies.map(p => m('option', {
     value: p.id,
@@ -57,11 +65,15 @@ function renderContainerItem (container) {
 }
 
 export class ContainerListView {
-  oninit () {
-    ContainerListModel.loadAll()
+  async oninit() {
+    await ContainerListModel.loadAll()
+    m.redraw()
   }
 
-  view () {
+  view() {
+    if (ContainerListModel.containers === undefined) {
+      return
+    }
     const items = ContainerListModel.containers.map(renderContainerItem)
     const defaultContainer = renderContainerItem({
       cookieStoreId: 'firefox-default',

@@ -1,8 +1,8 @@
-import {generateAuthorizationHeader} from '../options/util.js'
+import {generateAuthorizationHeader} from '../options/util'
+import {ProxyDao, Store} from '../store/Store'
 import BlockingResponse = browser.webRequest.BlockingResponse
 import _OnAuthRequiredDetails = browser.webRequest._OnAuthRequiredDetails
 import _OnRequestDetails = browser.proxy._OnRequestDetails
-import {Store} from "../store/Store";
 
 const localhosts = new Set(['localhost', '127.0.0.1', '[::1]'])
 
@@ -63,7 +63,8 @@ export default class BackgroundMain {
         }
       })
 
-      const result = proxies.map(p => {
+      const result = proxies.map((p: ProxyDao) => {
+        // @ts-expect-error
         if (p.type === 'https' && p.username as boolean && p.password as boolean) {
           const proxyAuthorizationHeader = generateAuthorizationHeader(p.username, p.password)
           return {proxyAuthorizationHeader, ...p}

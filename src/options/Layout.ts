@@ -1,8 +1,8 @@
-import m from '../lib/mithril.js'
-import Navigation from './nav/Navigation.js'
+import m, {Component} from 'mithril'
+import Navigation from './nav/Navigation'
 
-export class Layout {
-  view (vnode) {
+export class Layout implements Component {
+  view(vnode) {
     const title = m('h1', browser.runtime.getManifest().name)
     const desc = m('p.header-description', browser.i18n.getMessage('General_extensionDescription'))
     const logo = m('.logo')

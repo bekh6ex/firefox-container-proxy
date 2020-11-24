@@ -1,16 +1,16 @@
 import { toASCII } from 'punycode/'
 
-export function isNotEmpty (value) {
+export function isNotEmpty(value): boolean {
   return !!value
 }
 
-export function isIpV4Address (value) {
+export function isIpV4Address(value): boolean {
   const regex = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
 
   return regex.test(value)
 }
 
-export function isIpV6Address (value) {
+export function isIpV6Address(value): boolean {
   const lowerCase = value.toLowerCase()
 
   // Taken from https://community.helpsystems.com/forums/intermapper/miscellaneous-topics/5acc4fcf-fa83-e511-80cf-0050568460e4
@@ -19,7 +19,7 @@ export function isIpV6Address (value) {
   return regex.test(lowerCase)
 }
 
-export function isDomainName (value) {
+export function isDomainName(value): boolean {
   const punicodedDomain = toASCII(value).toLowerCase()
 
   const regex = /^(:?[a-z][a-z0-9\-_]*|xn--[a-z0-9]+)(:?\.(:?[a-z][a-z0-9\-_]*|xn--[a-z0-9]+))*$/

@@ -1,4 +1,4 @@
-import FoxyProxyConverter from '../../../../src/options/import/FoxyProxyConverter.js'
+import FoxyProxyConverter from '../../../../src/options/import/FoxyProxyConverter.ts'
 
 const { expect } = require('chai')
 const fs = require('fs')

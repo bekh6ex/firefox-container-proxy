@@ -3,13 +3,14 @@
     "outDir": "./dist/",
     //    "noImplicitAny": true,
     "module": "ES2020",
-    "moduleResolution": "classic",
+    "moduleResolution": "node",
     "noEmitOnError": true,
     "strictNullChecks": true,
     "target": "es6",
     "sourceMap": true,
     "allowJs": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "src/**/*"

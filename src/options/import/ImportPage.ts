@@ -1,7 +1,7 @@
-import m from '../../lib/mithril.js'
+import m from 'mithril'
 
-import FoxyProxyConverter from './FoxyProxyConverter.js'
-import { uuidv4 } from '../util.js'
+import FoxyProxyConverter from './FoxyProxyConverter'
+import {uuidv4} from '../util'
 
 const t = browser.i18n.getMessage
 
@@ -10,16 +10,16 @@ export default class ImportPage {
    * @type {Proxy[]}
    */
 
-  // proxiesToImport
+  proxiesToImport
 
   /**
    * @type {Store}
    */
-  // store
+  store
 
-  // cleanUp
+  cleanUp
 
-  // foxyProxyFileInput
+  foxyProxyFileInput
 
   constructor ({ store }) {
     this.store = store
@@ -47,7 +47,8 @@ export default class ImportPage {
     const reader = new FileReader()
     reader.readAsText(file, 'UTF-8')
     reader.onload = (evt) => {
-      const fileContents = evt.target.result
+      // @ts-expect-error
+      const fileContents = evt.target.result as string // TODO: `target` might be null, needs verification
       const converter = new FoxyProxyConverter()
       this.proxiesToImport = converter.convert(JSON.parse(fileContents))
 
@@ -100,17 +101,17 @@ export default class ImportPage {
 }
 
 class FileInput {
-  // id
-  // title
-  // onChange
+  id: string
+  title: string
+  onChange: any
 
-  constructor ({ title, onChange }) {
+  constructor({title, onChange}) {
     this.title = title
     this.id = uuidv4()
     this.onChange = onChange
   }
 
-  view ({ attrs: { class: className = '' } }) {
+  view({attrs: {class: className = ''}}) {
     const inputClasses = ['input__field']
 
     // TODO Add error handling

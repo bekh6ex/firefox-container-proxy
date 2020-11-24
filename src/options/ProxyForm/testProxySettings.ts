@@ -1,20 +1,20 @@
-import { generateAuthorizationHeader } from './../util.js'
+import {generateAuthorizationHeader} from '../util'
 
 /**
  *
  * @param settings
  * @return {Promise<TestResult>}
  */
-export async function testProxySettings (settings) {
-  // TODO Refine user interaction according to https://extensionworkshop.com/documentation/publish/add-on-policies-2019-12/
+export async function testProxySettings(settings): Promise<TestResult> {
+    // TODO Refine user interaction according to https://extensionworkshop.com/documentation/publish/add-on-policies-2019-12/
 
-  let directIpQuery
-  let directError
-  try {
-    directIpQuery = await fetchDirectIpData()
-  } catch (e) {
-    directError = e
-  }
+    let directIpQuery
+    let directError
+    try {
+        directIpQuery = await fetchDirectIpData()
+    } catch (e) {
+        directError = e
+    }
 
   let proxiedIpQuery
   let proxiedError
@@ -53,23 +53,23 @@ function toQueryResponse (response) {
 }
 
 async function fetchDirectIpData () {
-  return fetchIpData(ipDataUrl)
+    return await fetchIpData(ipDataUrl)
 }
 
 async function fetchProxiedIpData (proxyConfig) {
   const proxiedUrl = ipDataUrl
   const filter = { urls: [proxiedUrl] }
-  return new Promise((resolve, reject) => {
-    const listener = (requestDetails) => {
-      // TODO Add support for HTTP
-      browser.proxy.onRequest.removeListener(listener)
+    return await new Promise((resolve, reject) => {
+        const listener = (requestDetails) => {
+            // TODO Add support for HTTP
+            browser.proxy.onRequest.removeListener(listener)
 
-      const auth = {}
-      if (proxyConfig.type === 'https') {
-        auth.proxyAuthorizationHeader = generateAuthorizationHeader(proxyConfig.username, proxyConfig.password)
-      }
+            const auth: { proxyAuthorizationHeader?: string } = {}
+            if (proxyConfig.type === 'https') {
+                auth.proxyAuthorizationHeader = generateAuthorizationHeader(proxyConfig.username, proxyConfig.password)
+            }
 
-      return { ...proxyConfig, failoverTimeout: 1, ...auth }
+            return {...proxyConfig, failoverTimeout: 1, ...auth}
     }
 
     const errorListener = (error) => {
@@ -92,16 +92,16 @@ async function fetchProxiedIpData (proxyConfig) {
 const ttlMs = 5000
 
 async function fetchIpData (url) {
-  const fetchParameters = {
-    cache: 'no-cache',
-    credentials: 'omit',
-    redirect: 'error',
-    referrer: 'no-referrer',
-    headers: {
-      Accept: 'application/json',
-      'Accept-Language': 'en-US,en' // Blur the fingerprint a bit
+    const fetchParameters: RequestInit = {
+        cache: 'no-cache',
+        credentials: 'omit',
+        redirect: 'error',
+        referrer: 'no-referrer',
+        headers: {
+            Accept: 'application/json',
+            'Accept-Language': 'en-US,en' // Blur the fingerprint a bit
+        }
     }
-  }
   // TODO Cancel fetch request on timeout
   const ipResponsePromise = fetch(url, fetchParameters)
   const timeout = timeoutPromise(ttlMs)
@@ -112,15 +112,16 @@ async function fetchIpData (url) {
   return toQueryResponse(response)
 }
 
-function timeoutPromise (value) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      reject(new TimeoutError(value))
-    }, value)
-  })
+function timeoutPromise(value): Promise<never> {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            reject(new TimeoutError(value))
+        }, value)
+    })
 }
 
 export class TimeoutError extends Error {
+    readonly timeoutValue: any
   constructor (timeoutValue) {
     super(`Reached timeout of ${timeoutValue} ms`)
     this.timeoutValue = timeoutValue
@@ -128,72 +129,67 @@ export class TimeoutError extends Error {
 }
 
 class IpQueryResponse {
-  constructor ({ ip }) {
-    this.ip = ip
-  }
+    readonly ip: string
+
+    constructor({ip}) {
+        this.ip = ip
+    }
 }
 
-export class TestResult {
+export abstract class TestResult {
 
 }
 
 export class SuccessfulTestResult extends TestResult {
-  /**
-   * @param {IpQueryResponse} direct
-   * @param {IpQueryResponse} proxied
-   */
-  constructor ({ direct, proxied }) {
-    super()
-    this.direct = direct
-    this.proxied = proxied
-  }
+    readonly direct: IpQueryResponse
+    readonly proxied: IpQueryResponse
 
-  get ipsMatch () {
-    return this.direct.ip === this.proxied.ip
-  }
+    constructor({direct, proxied}) {
+        super()
+        this.direct = direct
+        this.proxied = proxied
+    }
+
+    get ipsMatch() {
+        return this.direct.ip === this.proxied.ip
+    }
 }
 
 /**
  * Proxy settings are incorrect
  */
 export class SettingsErrorResult extends TestResult {
-  /**
-   *
-   * @param {IpQueryResponse} directIpQuery
-   * @param {Error} proxiedError
-   */
-  constructor ({ directIpQuery, proxiedError }) {
-    super()
-    this.direct = directIpQuery
-    this.proxiedError = proxiedError
-  }
+    readonly direct: IpQueryResponse
+    readonly proxiedError: Error
+
+    constructor({directIpQuery, proxiedError}) {
+        super()
+        this.direct = directIpQuery
+        this.proxiedError = proxiedError
+    }
 }
 
 export class ConnectionIssueResult extends TestResult {
-  /**
-   *
-   * @param {Error} directError
-   * @param {Error} proxiedError
-   */
-  constructor ({ directError, proxiedError }) {
-    super()
-    this.directError = directError
-    this.proxiedError = proxiedError
-  }
+    readonly directError: Error
+    readonly proxiedError: Error
+
+    constructor({directError, proxiedError}) {
+        super()
+        this.directError = directError
+        this.proxiedError = proxiedError
+    }
 }
 
 /**
  * Probably, not allowed to access internet directly
  */
 export class NoDirectConnectionResult extends TestResult {
-  /**
-   *
-   * @param {Error} directError
-   * @param {IpQueryResponse} proxied
-   */
-  constructor ({ directError, proxied }) {
-    super()
-    this.directError = directError
-    this.proxied = proxied
-  }
+    readonly directError: Error
+    readonly proxied: IpQueryResponse
+
+    constructor({directError, proxied}) {
+        super()
+        this.directError = directError
+        this.proxied = proxied
+    }
 }

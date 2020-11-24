@@ -1,35 +1,40 @@
-import m from '../../lib/mithril.js'
-import { uuidv4 } from './../util.js'
-import { proxyTypes, style } from './../constants.js'
-import { testProxySettings } from './testProxySettings.js'
-import { CheckboxInput, PasswordInput, TrimmedTextInput } from '../ui-components/inputs.js'
-import PortNumberInput from './PortInput.js'
-import HostInput from './HostInput.js'
-import TestResultBlock from './TestResultBlock.js'
-import Select from '../ui-components/Select.js'
+import m, {Vnode} from 'mithril'
+import {uuidv4} from '../util'
+import {proxyTypes, style} from '../constants'
+import {testProxySettings} from './testProxySettings'
+import {CheckboxInput, PasswordInput, TrimmedTextInput} from '../ui-components/inputs'
+import PortNumberInput from './PortInput'
+import HostInput from './HostInput'
+import TestResultBlock from './TestResultBlock'
+import Select from '../ui-components/Select'
+import {Store} from '../../store/Store'
 
 const t = browser.i18n.getMessage
 
 class ProxyModel {
-  constructor () {
+  current
+
+  constructor() {
     this.current = {}
   }
 
-  async load (id) {
-    const newProxy = { id: 'new', doNotProxyLocal: true }
+  async load(id) {
+    const newProxy = {id: 'new', doNotProxyLocal: true}
     if (id === 'new') {
       this.current = newProxy
       m.redraw()
       return
     }
-    this.current = await store.getProxyById(id) || newProxy
+    const store: Store = (window as any).store
+    this.current = await store.getProxyById(id) ?? newProxy
     m.redraw()
   }
 
-  async save () {
+  async save(): Promise<void> {
     if (this.current.id === 'new') {
       this.current.id = uuidv4()
     }
+    const store: Store = (window as any).store
     await store.putProxy(this.current)
   }
 
@@ -53,18 +58,27 @@ class ProxyModel {
       alert('Testing HTTP proxies is not supported for now')
       return
     }
-    return testProxySettings(settings)
+    return await testProxySettings(settings)
   }
 }
 
 export default class ProxyForm {
-  constructor () {
+  model: ProxyModel
+  lastTestResultBlock: TestResultBlock | null
+  titleInput: TrimmedTextInput
+  protocolSelect
+  hostInput
+  portInput
+  usernameInput
+  passwordInput
+  doNotProxyLocalCheckbox
+
+  constructor() {
     const model = new ProxyModel()
     this.model = model
-    /** @type {TestResultBlock} */
     this.lastTestResultBlock = null
 
-    this.titleInput = new TrimmedTextInput({ title: t('ProxyForm_titleFieldLabel'), ...model.accessProperty('title') })
+    this.titleInput = new TrimmedTextInput({title: t('ProxyForm_titleFieldLabel'), ...model.accessProperty('title')})
     this.hostInput = new HostInput({
       title: t('ProxyForm_serverFieldLabel'),
       ...model.accessProperty('host'),
@@ -99,9 +113,10 @@ export default class ProxyForm {
   }
 
   view () {
-    const testResultBlock = []
+    const testResultBlock: Array<Vnode<any, any>> = []
     if (this.lastTestResultBlock) {
-      testResultBlock.push(m(this.lastTestResultBlock))
+      const lastTestResultBlock1: TestResultBlock = this.lastTestResultBlock
+      testResultBlock.push(m(lastTestResultBlock1))
     }
 
     return m(
@@ -125,7 +140,7 @@ export default class ProxyForm {
         ]),
         m('div.ProxyForm__actions', [
           m('button[type=button]', {
-            class: style.button,
+            // class: style.button,
             'data-testid': 'testSettings',
             onclick: async () => {
               const confirmed = confirm(t('ProxyForm_testProxySettingsConfirmationText'))
@@ -142,7 +157,7 @@ export default class ProxyForm {
             }
           }, t('ProxyForm_testProxySettingsLabel') + ' β'),
           m('button[type=button]', {
-            class: style.button,
+            // class: style.button,
             'data-testid': 'save',
             onclick: async () => {
               await this.model.save()

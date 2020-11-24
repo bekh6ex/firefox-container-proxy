@@ -1,4 +1,4 @@
-import { isNotEmpty, isIpV4Address, isIpV6Address, isDomainName } from '../../src/options/predicates.js'
+import { isNotEmpty, isIpV4Address, isIpV6Address, isDomainName } from '../../src/options/predicates.ts'
 
 const { expect } = require('chai')
 
