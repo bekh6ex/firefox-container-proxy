@@ -8,7 +8,7 @@ const typeMapping = {
 export default class FoxyProxyConverter {
   /**
    * @param {object} config FoxyProxy config
-   * @return {Proxy[]}
+   * @return {ProxyDao[]}
    */
   convert (config) {
     // TODO: Add verification that config has a valid structure

@@ -6,7 +6,7 @@
     "test": "npm run test:unit",
     "bundle": "web-ext -s dist build --overwrite-dest",
     "test:func": "npm run build && mocha test/functional/",
-    "test:unit": "ts-mocha --require esm test/unit/",
+    "test:unit": "ts-mocha --require esm test/unit/**/*.test.ts",
     "codeStyle:check": "standardx",
     "codeStyle:fix": "standardx --fix && ts-standard --fix",
     "lint": "addons-linter dist",
