@@ -94,7 +94,7 @@
         }
     },
     "ProxySettingsTestResult_settingsAreCorrect": {
-        "message": "Settings are correct!",
+        "message": "The settings are correct!",
         "description": "Text displayed when result of testing proxy settings was successful in proxy form"
     },
     "ProxySettingsTestResult_error": {
@@ -102,11 +102,11 @@
         "description": "Generic text meaning there is an error"
     },
     "ProxySettingsTestResult_notConnectedToTheInternet": {
-        "message": "Error! Probably, you are not connected to the internet.",
+        "message": "Error! Probably, you are not connected to the Internet.",
         "description": "Text displayed when both direct and proxied requests failed to succeed"
     },
     "ProxySettingsTestResult_noDirectConnection": {
-        "message": "Settings are correct! But it seems that connection to the Internet without a proxy is not possible.",
+        "message": "The settings are correct, but it seems connecting to the Internet without a proxy is not possible.",
         "description": "Text displayed when proxied request succeeded, but direct request failed"
     },
     "ProxySettingsTestResult_incorrectSettings": {
