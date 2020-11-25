@@ -7,11 +7,11 @@ describe('Store', () => {
   const store = new Store()
 
   beforeEach(() => {
-    global.browser = webExtensionsApiFake()
+    (global as any).browser = webExtensionsApiFake()
   })
 
   afterEach(() => {
-    delete global.browser
+    delete (global as any).browser
   })
 
   function someProxyWith (id) {
@@ -52,13 +52,13 @@ describe('Store', () => {
   it('when get, returns doNotProxyLocal `true` if was not set when put', async () => {
     const id = 'someId'
     const proxy = someProxyWith(id)
-    delete proxy.doNotProxyLocal
+    delete (proxy as any).doNotProxyLocal
 
     await store.putProxy(proxy)
 
     const gotProxy = await store.getProxyById(id)
 
-    expect(gotProxy.doNotProxyLocal).to.be.equal(true)
+    expect(gotProxy?.doNotProxyLocal).to.be.equal(true)
   })
 
   it('stores doNotProxyLocal value', async () => {
@@ -70,7 +70,7 @@ describe('Store', () => {
 
     const gotProxy = await store.getProxyById(id)
 
-    expect(gotProxy.doNotProxyLocal).to.be.equal(false)
+    expect(gotProxy?.doNotProxyLocal).to.be.equal(false)
   })
 
   it('should be able to delete proxy', async () => {
@@ -109,7 +109,7 @@ describe('Store', () => {
         [cookieStoreId]: [proxyId]
       }
       const givenProxy = someProxyWith(proxyId)
-      delete givenProxy.doNotProxyLocal
+      delete (givenProxy as any).doNotProxyLocal
       await store.putProxy(givenProxy)
 
       await browser.storage.local.set({ relations: relations })
