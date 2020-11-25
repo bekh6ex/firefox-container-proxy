@@ -5,12 +5,15 @@
     "module": "ES2020",
     "moduleResolution": "node",
     "noEmitOnError": true,
-    "strictNullChecks": true,
     "target": "es6",
     "sourceMap": true,
     "allowJs": true,
     "baseUrl": ".",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "strictPropertyInitialization": true,
+    "strictNullChecks": true,
+    "strictBindCallApply": true,
+    "noImplicitThis": true
   },
   "include": [
     "src/**/*"

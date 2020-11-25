@@ -10,7 +10,6 @@ export default class Select implements Component {
   private readonly id: string
   private readonly props: {}
   private valid: boolean
-  private readonly errorText: string
 
   /**
    *
@@ -65,7 +64,6 @@ export default class Select implements Component {
           class: selectClasses.join(' '),
           id: this.id,
           required: this.required,
-          title: this.errorText,
           value: value,
           onchange: (e) => this.onChange(e.target.value),
           onfocusout: (e) => this.onChange(e.target.value)
