@@ -44,7 +44,9 @@ class ProxyFormPageObject extends PageObject {
   }
 
   async typeInPort (value) {
-    return this.find(this.port).sendKeys(value)
+    const el = this.find(this.port)
+    await el.clear()
+    return el.sendKeys(value)
   }
 
   async typeInUsername (value) {
@@ -65,9 +67,8 @@ class ProxyFormPageObject extends PageObject {
     const directTestResult = await this.waitFor(this.directTestResult, 11000)
     const directText = await directTestResult.getText()
 
-    // TODO: Uncomment when DuckDuckGo IP answer is working again
-    // const testResultPattern = /^Your IP address is/
-    // assert.strictEqual(testResultPattern.test(directText), true)
+    const testResultPattern = /^Your IP address is/
+    assert.strictEqual(testResultPattern.test(directText), true)
 
     const proxiedTestResult = this.find(this.proxiedTestResult)
 
