@@ -48,11 +48,90 @@
         "message": "Support"
     },
     "SupportPage_gitterInvite": {
-        "message": "Bei Fragen, Problemen, oder einfach nur zum Chatten schaut in unserem $GITTER_NAME$ Channel vorbei:",
+        "message": "Bei Fragen, Problemen, oder einfach nur zum Chatten schaut in unserem $GITTER_NAME$ Kanal vorbei:",
         "placeholders": {
             "GITTER_NAME": {
                 "content": "Gitter"
             }
         }
+    },
+    "ProxyForm_testProxySettingsConfirmationText": {
+        "message": "Um Einstellungen zu testen, ist es erforderlich, ein paar Anfragen an $DUCKDUCKGO_NAME$ zu stellen. Fortfahren?",
+        "description": "Text shown when a user clicks Test settings button notifying user about request to 3rd party service",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxySettingsTestResult_proxiedRequest": {
+        "message": "Anfrage mit Proxy:",
+        "description": "Proxied request header"
+    },
+    "ProxyForm_testProxySettingsLabel": {
+        "message": "Test",
+        "description": "Settings test button label in proxy form"
+    },
+    "ProxyForm_doNotProxyLocalFieldLabel": {
+        "message": "Proxy für lokale Adressen nicht verwenden (localhost, 127.0.0.1, ::1)",
+        "description": "`Do not proxy local addresses` field in the proxy form"
+    },
+    "ImportPage_heading": {
+        "message": "Proxys importieren",
+        "description": "Header of import proxies page"
+    },
+    "ProxySettingsTestResult_directRequest": {
+        "message": "Direkte Anfrage:",
+        "description": "Direct request header"
+    },
+    "ProxySettingsTestResult_incorrectSettings": {
+        "message": "Fehler! Es konnte keine Verbindung mit dem Proxy hergestellt werden. Wahrscheinlich sind die Einstellungen falsch.",
+        "description": "Text displayed when direct request is successful, but proxied request failed"
+    },
+    "ProxySettingsTestResult_noDirectConnection": {
+        "message": "Die Einstellungen sind korrekt, aber es scheint, dass eine Verbindung mit dem Internet ohne Proxy nicht möglich ist.",
+        "description": "Text displayed when proxied request succeeded, but direct request failed"
+    },
+    "ProxySettingsTestResult_notConnectedToTheInternet": {
+        "message": "Fehler! Wahrscheinlich sind Sie nicht mit dem Internet verbunden.",
+        "description": "Text displayed when both direct and proxied requests failed to succeed"
+    },
+    "ProxySettingsTestResult_error": {
+        "message": "Fehler!",
+        "description": "Generic text meaning there is an error"
+    },
+    "ProxySettingsTestResult_settingsAreCorrect": {
+        "message": "Die Einstellungen sind korrekt!",
+        "description": "Text displayed when result of testing proxy settings was successful in proxy form"
+    },
+    "ProxyForm_duckduckgoAttribution": {
+        "message": "IP-Ergebnisse aus $DUCKDUCKGO_NAME$",
+        "description": "Attribution to DuckDuckGo for IP query",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxyForm_incorrectServerError": {
+        "message": "Wert sollte entweder eine IP-Adresse oder ein Domainname sein",
+        "description": "Error message displayed when incorrect server is entered"
+    },
+    "ImportPage_foxyProxyInputLabel": {
+        "message": "FoxyProxy-Einstellungen",
+        "description": "Label of FoxyProxy settings file input"
+    },
+    "ImportPage_importButtonDoImport": {
+        "message": "$NUMBER$ Proxys importieren",
+        "description": "Text displayed on Import button when there is something to import",
+        "placeholders": {
+            "NUMBER": {
+                "content": "$1"
+            }
+        }
+    },
+    "ImportPage_importButtonNoFileSelected": {
+        "message": "Wählen Sie eine Datei",
+        "description": "Text displayed on Import button when no file is selected or the file is invalid"
     }
 }
