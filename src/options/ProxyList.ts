@@ -13,7 +13,7 @@ class ProxyListModel {
     this.list = await store.getAllProxies()
   }
 
-  async delete (id) {
+  async delete(id: string) {
     const store: Store = (window as any).store
     await store.deleteProxyById(id)
     await this.loadList()
@@ -47,7 +47,7 @@ export class ProxyList implements Component {
     return [...items, actions]
   }
 
-  renderProxyItem(p): Vnode {
+  renderProxyItem(p: ProxyDao): Vnode {
     const text = m('div.proxy-name', [p.title ? p.title : `${p.host}:${p.port}`])
 
     const editButton = m('button.edit[type=button]', {

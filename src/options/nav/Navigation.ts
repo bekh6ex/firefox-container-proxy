@@ -20,7 +20,7 @@ class NavItem implements Component {
   private readonly text: string
   private readonly classes: string
 
-  constructor(href, text, classes) {
+  constructor(href: string, text: string, classes: string) {
     this.href = href
     this.text = text
     this.classes = classes
@@ -31,7 +31,7 @@ class NavItem implements Component {
     const active = path === this.href
     const classes = this.classes + (active ? ' active' : '')
     // @ts-expect-error
-    return m('div.nav__item', { oncreate: m.route.link, class: classes, href: this.href }, [
+    return m('div.nav__item', {oncreate: m.route.link, class: classes, href: this.href}, [
       m('.nav__item-icon'),
       m('.nav__item-label', this.text)
     ])

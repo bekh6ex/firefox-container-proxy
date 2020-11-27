@@ -6,20 +6,12 @@ export default class Select implements Component {
   private readonly required: boolean
   private readonly getValue: any
   private readonly setValue: any
-  private readonly options: any
+  private readonly options: Array<{ value: string, label: string }>
   private readonly id: string
   private readonly props: {}
   private valid: boolean
 
-  /**
-   *
-   * @param title
-   * @param required
-   * @param getValue
-   * @param setValue
-   * @param {object[]} options
-   */
-  constructor({title, required, getValue, setValue, options, id}: { title: any, required: any, getValue: any, setValue: any, options: object[], id?: string }) {
+  constructor({title, required, getValue, setValue, options, id}: { title: any, required: any, getValue: any, setValue: any, options: Array<{ value: string, label: string }>, id?: string }) {
     this.title = title
     this.required = !!required
     this.getValue = getValue
@@ -30,7 +22,7 @@ export default class Select implements Component {
     this.valid = true
   }
 
-  validate (v) {
+  validate(v: string) {
     if (this.required && !v) {
       this.valid = false
     } else {
@@ -38,7 +30,7 @@ export default class Select implements Component {
     }
   }
 
-  onChange(v): void {
+  onChange(v: string): void {
     this.validate(v)
     this.setValue(v)
     m.redraw()
@@ -56,18 +48,18 @@ export default class Select implements Component {
     })
 
     return m('.select', [
-      m('label.input__label', { for: this.id }, this.title),
+      m('label.input__label', {for: this.id}, this.title),
       m(
-        'select',
-        {
-          ...this.props,
-          class: selectClasses.join(' '),
-          id: this.id,
-          required: this.required,
-          value: value,
-          onchange: (e) => this.onChange(e.target.value),
-          onfocusout: (e) => this.onChange(e.target.value)
-        },
+          'select',
+          {
+            ...this.props,
+            class: selectClasses.join(' '),
+            id: this.id,
+            required: this.required,
+            value: value,
+            onchange: (e: InputEvent) => this.onChange((e.target as HTMLSelectElement).value),
+            onfocusout: (e: InputEvent) => this.onChange((e.target as HTMLSelectElement).value)
+          },
         [
           ...options
         ]

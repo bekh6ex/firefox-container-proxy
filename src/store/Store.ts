@@ -9,7 +9,7 @@ export interface ProxyDao {
   password: string
   proxyDNS?: boolean
   failoverTimeout: number
-  doNotProxyLocal?: boolean
+  doNotProxyLocal: boolean
 }
 
 export class Store {
@@ -18,7 +18,7 @@ export class Store {
     return (result as any).proxies as ProxyDao[] ?? []
   }
 
-  async getProxyById(id): Promise<ProxyDao | null> {
+  async getProxyById(id: string): Promise<ProxyDao | null> {
     const proxies = await this.getAllProxies()
     const index = proxies.findIndex(p => p.id === id)
     if (index === -1) {

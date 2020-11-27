@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
-    //    "noImplicitAny": true,
     "module": "ES2020",
     "moduleResolution": "node",
     "noEmitOnError": true,
@@ -10,10 +9,7 @@
     "allowJs": true,
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
-    "strictPropertyInitialization": true,
-    "strictNullChecks": true,
-    "strictBindCallApply": true,
-    "noImplicitThis": true
+    "strict": true
   },
   "include": [
     "src/**/*"

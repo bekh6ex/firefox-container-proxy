@@ -2,26 +2,19 @@ import m from 'mithril'
 
 import FoxyProxyConverter from './FoxyProxyConverter'
 import {uuidv4} from '../util'
+import {ProxyDao, Store} from '../../store/Store'
 
 const t = browser.i18n.getMessage
 
 export default class ImportPage {
-  /**
-   * @type {Proxy[]}
-   */
+  proxiesToImport: ProxyDao[] = []
+  store: Store
 
-  proxiesToImport
+  cleanUp?: () => void
 
-  /**
-   * @type {Store}
-   */
-  store
+  foxyProxyFileInput: FileInput
 
-  cleanUp
-
-  foxyProxyFileInput
-
-  constructor ({ store }) {
+  constructor({store}: { store: Store }) {
     this.store = store
     this.foxyProxyFileInput = new FileInput({
       title: t('ImportPage_foxyProxyInputLabel'),
@@ -29,17 +22,18 @@ export default class ImportPage {
     })
   }
 
-  onChooseFile (event) {
-    this.proxiesToImport = undefined
-    const input = event.target
+  onChooseFile(event: InputEvent) {
+    this.proxiesToImport = []
+    const input = event.target as HTMLInputElement
     this.cleanUp = () => {
       input.value = ''
     }
 
-    if (input.files.length === 0) {
+    const files = input.files ?? []
+    if (files.length === 0) {
       return
     }
-    const file = input.files[0]
+    const file = files[0]
 
     if (file.size > 1000000) {
       return
@@ -50,6 +44,7 @@ export default class ImportPage {
       // @ts-expect-error
       const fileContents = evt.target.result as string // TODO: `target` might be null, needs verification
       const converter = new FoxyProxyConverter()
+      // @ts-expect-error
       this.proxiesToImport = converter.convert(JSON.parse(fileContents))
 
       m.redraw()
@@ -71,7 +66,7 @@ export default class ImportPage {
   }
 
   reset () {
-    this.proxiesToImport = undefined
+    this.proxiesToImport = []
     if (this.cleanUp) {
       this.cleanUp()
     }
@@ -103,9 +98,9 @@ export default class ImportPage {
 class FileInput {
   id: string
   title: string
-  onChange: any
+  onChange: (e: InputEvent) => void
 
-  constructor({title, onChange}) {
+  constructor({title, onChange}: { title: string, onChange: (e: InputEvent) => void }) {
     this.title = title
     this.id = uuidv4()
     this.onChange = onChange
@@ -117,11 +112,11 @@ class FileInput {
     // TODO Add error handling
 
     const topClasses = ['input', className]
-    return m('div', { class: topClasses.join(' ') }, [
-      m('label', { class: 'input__label', for: this.id }, this.title),
+    return m('div', {class: topClasses.join(' ')}, [
+      m('label', {class: 'input__label', for: this.id}, this.title),
       m(
-        'input',
-        {
+          'input',
+          {
           id: this.id,
           type: 'file',
           class: inputClasses.join(' '),

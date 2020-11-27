@@ -61,7 +61,8 @@
     "addons-linter": "^1.26.0",
     "ts-standard": "^9.0.0",
     "@types/firefox-webext-browser": "^82.0.0",
-    "@types/mithril": "2.0.0"
+    "@types/mithril": "2.0.0",
+    "@types/punycode": "^2.1.0"
   },
   "standardx": {
     "cache": false,

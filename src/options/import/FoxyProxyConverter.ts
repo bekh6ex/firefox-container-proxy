@@ -6,10 +6,7 @@ const typeMapping = {
 }
 
 export default class FoxyProxyConverter {
-  /**
-   * @param {object} config FoxyProxy config
-   * @return {ProxyDao[]}
-   */
+  // @ts-expect-error
   convert (config) {
     // TODO: Add verification that config has a valid structure
     const proxiesToImport = Object.entries(config)

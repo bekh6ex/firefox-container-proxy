@@ -7,19 +7,32 @@ import PortNumberInput from './PortInput'
 import HostInput from './HostInput'
 import TestResultBlock from './TestResultBlock'
 import Select from '../ui-components/Select'
-import {Store} from '../../store/Store'
+import {ProxyDao, Store} from '../../store/Store'
 
 const t = browser.i18n.getMessage
 
+const NEW_PROXY: ProxyDao = {
+  id: 'new',
+  title: '',
+  type: '',
+  host: '',
+  port: 1080,
+  username: '',
+  password: '',
+  proxyDNS: true,
+  failoverTimeout: 5,
+  doNotProxyLocal: true
+}
+
 class ProxyModel {
-  current
+  current: ProxyDao
 
   constructor() {
-    this.current = {}
+    this.current = {...NEW_PROXY}
   }
 
-  async load(id) {
-    const newProxy = {id: 'new', doNotProxyLocal: true}
+  async load(id: string) {
+    const newProxy = {...NEW_PROXY}
     if (id === 'new') {
       this.current = newProxy
       m.redraw()
@@ -38,10 +51,10 @@ class ProxyModel {
     await store.putProxy(this.current)
   }
 
-  accessProperty (property) {
+  accessProperty<K extends keyof ProxyDao>(property: K): { getValue: () => ProxyDao[K], setValue: (v: ProxyDao[K]) => void } {
     return {
       getValue: () => this.current[property],
-      setValue: (v) => {
+      setValue: (v: ProxyDao[K]) => {
         this.current[property] = v
       }
     }
@@ -108,11 +121,11 @@ export default class ProxyForm {
     })
   }
 
-  oninit (vnode) {
-    this.model.load(vnode.attrs.id)
+  oninit(vnode: Vnode) {
+    this.model.load((vnode.attrs as any).id)
   }
 
-  view () {
+  view() {
     const testResultBlock: Array<Vnode<any, any>> = []
     if (this.lastTestResultBlock) {
       const lastTestResultBlock1: TestResultBlock = this.lastTestResultBlock

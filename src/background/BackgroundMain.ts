@@ -1,5 +1,6 @@
 import {generateAuthorizationHeader} from '../options/util'
 import {ProxyDao, Store} from '../store/Store'
+import {ProxyInfo} from '../domain/ProxyInfo'
 import BlockingResponse = browser.webRequest.BlockingResponse
 import _OnAuthRequiredDetails = browser.webRequest._OnAuthRequiredDetails
 import _OnRequestDetails = browser.proxy._OnRequestDetails
@@ -11,11 +12,11 @@ export const doNotProxy = []
 export default class BackgroundMain {
   store: Store
 
-  constructor({store}) {
+  constructor({store}: { store: Store }) {
     this.store = store
   }
 
-  initializeAuthListener(cookieStoreId, proxy): void {
+  initializeAuthListener(cookieStoreId: string, proxy: ProxyDao): void {
     const listener: (details: _OnAuthRequiredDetails) => BlockingResponse = (details) => {
       if (!details.isProxy) return {}
 
@@ -40,7 +41,7 @@ export default class BackgroundMain {
     )
   }
 
-  openPreferences(browser) {
+  openPreferences(browser: { runtime: any }) {
     return () => {
       browser.runtime.openOptionsPage()
     }
@@ -75,7 +76,7 @@ export default class BackgroundMain {
         try {
           const documentUrl = new URL(requestDetails.url)
           const isLocalhost = localhosts.has(documentUrl.hostname)
-          if (isLocalhost && p.doNotProxyLocal as boolean) {
+          if (isLocalhost && p.doNotProxyLocal) {
             return false
           }
         } catch (e) {
@@ -83,7 +84,7 @@ export default class BackgroundMain {
         }
 
         return true
-      }).map(p => {
+      }).map((p: any) => {
         delete p.doNotProxyLocal
         return p
       })
@@ -97,14 +98,14 @@ export default class BackgroundMain {
     return doNotProxy
   }
 
-  run(browser): void {
+  run(browser: { proxy: any, browserAction: any, runtime: any }): void {
     const filter = {urls: ['<all_urls>']}
 
     browser.proxy.onRequest.addListener(this.onRequest.bind(this), filter)
 
     browser.browserAction.onClicked.addListener(this.openPreferences(browser))
 
-    browser.proxy.onError.addListener((e) => {
+    browser.proxy.onError.addListener((e: Error) => {
       console.error('Proxy error', e)
     })
   }

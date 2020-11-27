@@ -7,13 +7,14 @@ import ProxyForm from './ProxyForm/ProxyForm'
 import SupportPage from './pages/SupportPage'
 import ImportPage from './import/ImportPage'
 
-globalThis.store = new Store()
+const store = new Store();
+(globalThis as any).store = store
 
 const layout = new Layout()
 const containerListView = new ContainerListView()
 const proxyList = new ProxyList()
 const proxyForm = new ProxyForm()
-const importPage = new ImportPage({store: globalThis.store})
+const importPage = new ImportPage({store})
 
 m.route(document.body, '/containers', {
   '/containers': {
