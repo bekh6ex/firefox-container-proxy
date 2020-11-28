@@ -4,18 +4,18 @@ import {
   SettingsErrorResult,
   SuccessfulTestResult, TestResult
 } from './testProxySettings'
-import m, {Component, Vnode} from 'mithril'
+import m, { Component, Vnode } from 'mithril'
 
 const t = browser.i18n.getMessage
 
 export default class TestResultBlock implements Component {
   testResult: TestResult
 
-  constructor(testResult: TestResult) {
+  constructor (testResult: TestResult) {
     this.testResult = testResult
   }
 
-  view() {
+  view (): Vnode {
     // TODO Add localization
     // TODO Add ru translations
     // TODO Improve design
@@ -24,8 +24,8 @@ export default class TestResultBlock implements Component {
     const directBlock: Vnode[] = []
     const proxiedBlock: Vnode[] = []
 
-    const direct = (v: string) => m('span[data-testid=directResult]', [v])
-    const proxied = (v: string) => m('span[data-testid=proxiedResult]', [v])
+    const direct = (v: string): Vnode => m('span[data-testid=directResult]', [v])
+    const proxied = (v: string): Vnode => m('span[data-testid=proxiedResult]', [v])
 
     if (result instanceof SuccessfulTestResult) {
       text = t('ProxySettingsTestResult_settingsAreCorrect')

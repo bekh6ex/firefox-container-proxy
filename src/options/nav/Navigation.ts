@@ -1,7 +1,7 @@
-import m, {Component, Vnode} from 'mithril'
+import m, { Component, Vnode } from 'mithril'
 
 export default class Navigation implements Component {
-  view(): Vnode {
+  view (): Vnode {
     return m('nav.nav', [
       m('section.nav__main', [
         m(new NavItem('/containers', browser.i18n.getMessage('OptionsNavigation_assign'), 'assign')),
@@ -20,18 +20,18 @@ class NavItem implements Component {
   private readonly text: string
   private readonly classes: string
 
-  constructor(href: string, text: string, classes: string) {
+  constructor (href: string, text: string, classes: string) {
     this.href = href
     this.text = text
     this.classes = classes
   }
 
-  view() {
+  view (): Vnode {
     const path = m.route.get()
     const active = path === this.href
     const classes = this.classes + (active ? ' active' : '')
     // @ts-expect-error
-    return m('div.nav__item', {oncreate: m.route.link, class: classes, href: this.href}, [
+    return m('div.nav__item', { oncreate: m.route.link, class: classes, href: this.href }, [
       m('.nav__item-icon'),
       m('.nav__item-label', this.text)
     ])

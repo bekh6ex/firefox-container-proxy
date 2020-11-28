@@ -1,6 +1,6 @@
-import { isNotEmpty, isIpV4Address, isIpV6Address, isDomainName } from '../../src/options/predicates.ts'
+import { isNotEmpty, isIpV4Address, isIpV6Address, isDomainName } from '../../src/options/predicates'
 
-const { expect } = require('chai')
+import { expect } from 'chai'
 
 describe('isNotEmpty', () => {
   it('should return true for non-empty strings', () => {

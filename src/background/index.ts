@@ -1,4 +1,4 @@
-import {Store} from '../store/Store'
+import { Store } from '../store/Store'
 import BackgroundMain from './BackgroundMain'
 
 console.log('Background script started')

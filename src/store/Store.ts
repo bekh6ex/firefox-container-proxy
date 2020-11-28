@@ -1,3 +1,8 @@
+import { ProxyInfo } from '../domain/ProxyInfo'
+import { ProxyType } from '../domain/ProxyType'
+import { generateAuthorizationHeader } from '../options/util'
+
+/* eslint-disable @typescript-eslint/no-namespace,no-redeclare,import/export */
 
 export interface ProxyDao {
   id: string
@@ -12,13 +17,54 @@ export interface ProxyDao {
   doNotProxyLocal: boolean
 }
 
+export namespace ProxyDao {
+  export function toProxyInfo (proxy: Pick<ProxyDao, 'type' | 'host' | 'port' | 'username' | 'password'>): ProxyInfo | undefined {
+    const type = ProxyType.tryFromString(proxy.type)
+    if (type === undefined) {
+      return
+    }
+
+    const base = {
+      host: proxy.host,
+      port: proxy.port,
+      failoverTimeout: 5
+    }
+
+    switch (type) {
+      case ProxyType.Socks5:
+        return {
+          type,
+          ...base,
+          username: proxy.username,
+          password: proxy.password,
+          proxyDNS: true
+        }
+      case ProxyType.Socks4:
+        return {
+          type,
+          ...base,
+          proxyDNS: true
+        }
+      case ProxyType.Http:
+      case ProxyType.Https:
+        return {
+          type,
+          ...base,
+          proxyAuthorizationHeader: generateAuthorizationHeader(proxy.username, proxy.password)
+        }
+    }
+  }
+}
+
 export class Store {
-  async getAllProxies(): Promise<ProxyDao[]> {
+  async getAllProxies (): Promise<ProxyDao[]> {
     const result = await browser.storage.local.get('proxies')
-    return (result as any).proxies as ProxyDao[] ?? []
+    const proxies = (result as any).proxies as Array<Partial<ProxyDao>> ?? []
+
+    return proxies.map(fillInDefaults)
   }
 
-  async getProxyById(id: string): Promise<ProxyDao | null> {
+  async getProxyById (id: string): Promise<ProxyDao | null> {
     const proxies = await this.getAllProxies()
     const index = proxies.findIndex(p => p.id === id)
     if (index === -1) {
@@ -28,7 +74,7 @@ export class Store {
     }
   }
 
-  async putProxy(proxy: ProxyDao): Promise<void> {
+  async putProxy (proxy: ProxyDao): Promise<void> {
     proxy.failoverTimeout = 5
 
     if (proxy.type === 'socks' || proxy.type === 'socks4') {
@@ -47,28 +93,28 @@ export class Store {
     await browser.storage.local.set({ proxies: proxies })
   }
 
-  async deleteProxyById(id: string): Promise<void> {
+  async deleteProxyById (id: string): Promise<void> {
     const proxies = await this.getAllProxies()
     const index = proxies.findIndex(p => p.id === id)
     if (index !== -1) {
       proxies.splice(index, 1)
-      await browser.storage.local.set({proxies: proxies})
+      await browser.storage.local.set({ proxies: proxies })
     }
   }
 
-  async getRelations(): Promise<{ [key: string]: string[] }> {
+  async getRelations (): Promise<{ [key: string]: string[] }> {
     const result = await browser.storage.local.get('relations')
     return result.relations as { [key: string]: string[] } ?? {}
   }
 
-  async setContainerProxyRelation(cookieStoreId: string, proxyId: string): Promise<void> {
+  async setContainerProxyRelation (cookieStoreId: string, proxyId: string): Promise<void> {
     const relations = await this.getRelations()
     relations[cookieStoreId] = [proxyId]
 
-    await browser.storage.local.set({relations: relations})
+    await browser.storage.local.set({ relations: relations })
   }
 
-  async getProxiesForContainer(cookieStoreId: string): Promise<ProxyDao[]> {
+  async getProxiesForContainer (cookieStoreId: string): Promise<ProxyDao[]> {
     const relations = await this.getRelations()
 
     const proxyIds: string[] = relations[cookieStoreId] ?? []
@@ -82,14 +128,17 @@ export class Store {
     proxies.forEach(function (p) { proxyById[p.id] = p })
 
     return proxyIds.map(pId => proxyById[pId])
-        .filter(p => p !== undefined)
+      .filter(p => p !== undefined)
       .map(fillInDefaults)
   }
 }
 
-function fillInDefaults(proxy: ProxyDao): ProxyDao {
+function fillInDefaults (proxy: Partial<ProxyDao>): ProxyDao {
+  if (proxy.title === undefined) {
+    proxy.title = ''
+  }
   if (typeof proxy.doNotProxyLocal === 'undefined') {
     proxy.doNotProxyLocal = true
   }
-  return proxy
+  return proxy as ProxyDao
 }

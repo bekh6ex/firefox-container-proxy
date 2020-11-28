@@ -1,17 +1,21 @@
-import BackgroundMain, { doNotProxy } from '../../src/background/BackgroundMain.ts'
-import { Store } from '../../src/store/Store'
+import BackgroundMain, { doNotProxy } from '../../src/background/BackgroundMain'
+import { ProxyDao, Store } from '../../src/store/Store'
 import webExtensionsApiFake from 'webextensions-api-fake'
 
-const { expect } = require('chai')
+import { expect } from 'chai'
+
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 
 const store = new Store()
 
 describe('BackgroundMain', function () {
   beforeEach(() => {
+    // @ts-expect-error
     global.browser = webExtensionsApiFake()
   })
 
   afterEach(() => {
+    // @ts-expect-error
     delete global.browser
   })
 
@@ -92,18 +96,18 @@ describe('BackgroundMain', function () {
   })
 })
 
-async function givenSomeProxyIsSetUpForContainer ({ host, containerId, doNotProxyLocal }) {
+async function givenSomeProxyIsSetUpForContainer ({ host, containerId, doNotProxyLocal }: any): Promise<void> {
   const proxyId = 'proxy1'
-  const proxy = {
+  const proxy: any = {
     id: proxyId,
     type: 'socks',
-    host: host || 'example.com',
+    host: (host as string) ?? 'example.com',
     port: 1080
   }
   if (typeof doNotProxyLocal !== 'undefined') {
     proxy.doNotProxyLocal = doNotProxyLocal
   }
-  await store.putProxy(proxy)
+  await store.putProxy(proxy as ProxyDao)
 
   await store.setContainerProxyRelation(containerId, proxyId)
 }

@@ -7,7 +7,7 @@
     "bundle": "web-ext -s dist build --overwrite-dest",
     "test:func": "npm run build && mocha test/functional/",
     "test:unit": "ts-mocha --require esm test/unit/**/*.test.ts",
-    "codeStyle:check": "standardx",
+    "codeStyle:check": "standardx && ts-standard",
     "codeStyle:fix": "standardx --fix && ts-standard --fix",
     "lint": "addons-linter dist",
     "debug": "web-ext run -s dist --verbose --browser-console --keep-profile-changes -p ./tmpProfile --start-url about:debugging --start-url about:addons  --pref=intl.locale.requested=en #--pref=intl.locale.matchOS=false",
@@ -39,6 +39,8 @@
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "@types/chai": "^4.2.14",
+    "@types/chai-as-promised": "^7.1.3",
     "esm": "^3.2.25",
     "mocha": "^8.1.3",
     "ts-mocha": "^8.0.0",
@@ -87,7 +89,9 @@
     "ignore": [
       "dist",
       "src/**/*.js",
-      "test/**/*.js"
+      "test/**/*.js",
+      "src/options/import/FoxyProxyConverter.ts",
+      "test/unit/options/import/FoxyProxyConverter.test.ts"
     ],
     "cache": false,
     "env": {

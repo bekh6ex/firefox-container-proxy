@@ -1,17 +1,17 @@
-import {toASCII} from 'punycode/'
+import { toASCII } from 'punycode/'
 
-export function isNotEmpty(value: string): boolean {
-  return !!value
+export function isNotEmpty (value: string): boolean {
+  return value !== ''
 }
 
 // TODO: Can we join IP and domain predicates and use URL object to validate if it is locatable?
-export function isIpV4Address(value: string): boolean {
+export function isIpV4Address (value: string): boolean {
   const regex = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
 
   return regex.test(value)
 }
 
-export function isIpV6Address(value: string): boolean {
+export function isIpV6Address (value: string): boolean {
   const lowerCase = value.toLowerCase()
 
   // Taken from https://community.helpsystems.com/forums/intermapper/miscellaneous-topics/5acc4fcf-fa83-e511-80cf-0050568460e4
@@ -20,7 +20,7 @@ export function isIpV6Address(value: string): boolean {
   return regex.test(lowerCase)
 }
 
-export function isDomainName(value: string): boolean {
+export function isDomainName (value: string): boolean {
   const punicodedDomain = toASCII(value).toLowerCase()
 
   const regex = /^(:?[a-z][a-z0-9\-_]*|xn--[a-z0-9]+)(:?\.(:?[a-z][a-z0-9\-_]*|xn--[a-z0-9]+))*$/

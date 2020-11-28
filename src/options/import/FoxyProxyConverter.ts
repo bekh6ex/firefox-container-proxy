@@ -1,3 +1,5 @@
+import { ProxyDao } from '../../store/Store'
+
 const typeMapping = {
   1: 'http',
   2: 'https',
@@ -7,10 +9,10 @@ const typeMapping = {
 
 export default class FoxyProxyConverter {
   // @ts-expect-error
-  convert (config) {
+  convert (config): ProxyDao[] {
     // TODO: Add verification that config has a valid structure
     const proxiesToImport = Object.entries(config)
-        // @ts-expect-error
+      // @ts-expect-error
       .filter(([_key, value]) => typeMapping[value.type])
 
     return proxiesToImport.map(([id, p]) => {
@@ -29,7 +31,8 @@ export default class FoxyProxyConverter {
         username: p.username,
         // @ts-expect-error
         password: p.password,
-        failoverTimeout: 5
+        failoverTimeout: 5,
+        doNotProxyLocal: true, // TODO: Check if can be imported
       }
 
       if (type === 'socks') {

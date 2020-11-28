@@ -9,7 +9,7 @@ module.exports = {
     background: './src/background/index.ts',
     options: './src/options/index.ts',
   },
-  devtool: false,
+  devtool: 'source-map',
   mode: 'development',
   performance: {
     hints: false,

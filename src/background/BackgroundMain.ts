@@ -1,6 +1,5 @@
-import {generateAuthorizationHeader} from '../options/util'
-import {ProxyDao, Store} from '../store/Store'
-import {ProxyInfo} from '../domain/ProxyInfo'
+import { generateAuthorizationHeader } from '../options/util'
+import { ProxyDao, Store } from '../store/Store'
 import BlockingResponse = browser.webRequest.BlockingResponse
 import _OnAuthRequiredDetails = browser.webRequest._OnAuthRequiredDetails
 import _OnRequestDetails = browser.proxy._OnRequestDetails
@@ -12,11 +11,11 @@ export const doNotProxy = []
 export default class BackgroundMain {
   store: Store
 
-  constructor({store}: { store: Store }) {
+  constructor ({ store }: { store: Store }) {
     this.store = store
   }
 
-  initializeAuthListener(cookieStoreId: string, proxy: ProxyDao): void {
+  initializeAuthListener (cookieStoreId: string, proxy: ProxyDao): void {
     const listener: (details: _OnAuthRequiredDetails) => BlockingResponse = (details) => {
       if (!details.isProxy) return {}
 
@@ -27,7 +26,7 @@ export default class BackgroundMain {
       const info = details.proxyInfo
       if (info.host !== proxy.host || info.port !== proxy.port || info.type !== proxy.type) return {}
 
-      const result = {authCredentials: {username: proxy.username, password: proxy.password}}
+      const result = { authCredentials: { username: proxy.username, password: proxy.password } }
 
       browser.webRequest.onAuthRequired.removeListener(listener)
 
@@ -37,18 +36,18 @@ export default class BackgroundMain {
     browser.webRequest.onAuthRequired.addListener(
       listener,
       { urls: ['<all_urls>'] },
-        ['blocking']
+      ['blocking']
     )
   }
 
-  openPreferences(browser: { runtime: any }) {
+  openPreferences (browser: { runtime: any }) {
     return () => {
       browser.runtime.openOptionsPage()
     }
   }
 
   // TODO: Fix in @types/firefox-webext-browser
-  async onRequest(requestDetails: _OnRequestDetails): Promise<any> {
+  async onRequest (requestDetails: Pick<_OnRequestDetails, 'cookieStoreId' | 'url'>): Promise<any> {
     const cookieStoreId = requestDetails.cookieStoreId ?? ''
     if (cookieStoreId === '') {
       console.error('cookieStoreId is not defined', requestDetails)
@@ -68,7 +67,7 @@ export default class BackgroundMain {
         // @ts-expect-error
         if (p.type === 'https' && p.username as boolean && p.password as boolean) {
           const proxyAuthorizationHeader = generateAuthorizationHeader(p.username, p.password)
-          return {proxyAuthorizationHeader, ...p}
+          return { proxyAuthorizationHeader, ...p }
         } else {
           return p
         }
@@ -98,8 +97,8 @@ export default class BackgroundMain {
     return doNotProxy
   }
 
-  run(browser: { proxy: any, browserAction: any, runtime: any }): void {
-    const filter = {urls: ['<all_urls>']}
+  run (browser: { proxy: any, browserAction: any, runtime: any }): void {
+    const filter = { urls: ['<all_urls>'] }
 
     browser.proxy.onRequest.addListener(this.onRequest.bind(this), filter)
 

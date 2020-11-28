@@ -1,19 +1,19 @@
-import m, {Component, Vnode} from 'mithril'
-import {ProxyDao, Store} from '../store/Store'
+import m, { Component, Vnode } from 'mithril'
+import { ProxyDao, Store } from '../store/Store'
 
 class ProxyListModel {
   list: ProxyDao[]
 
-  constructor() {
+  constructor () {
     this.list = []
   }
 
-  async loadList() {
+  async loadList (): Promise<void> {
     const store: Store = (window as any).store
     this.list = await store.getAllProxies()
   }
 
-  async delete(id: string) {
+  async delete (id: string): Promise<void> {
     const store: Store = (window as any).store
     await store.deleteProxyById(id)
     await this.loadList()
@@ -23,16 +23,16 @@ class ProxyListModel {
 export class ProxyList implements Component {
   private readonly model: ProxyListModel
 
-  constructor() {
+  constructor () {
     this.model = new ProxyListModel()
   }
 
-  async oninit() {
+  async oninit (): Promise<void> {
     await this.model.loadList()
     m.redraw()
   }
 
-  view(): Vnode[] {
+  view (): Vnode[] {
     const items: Vnode[] = this.model.list.map(this.renderProxyItem.bind(this))
     const actions = m('div.ProxyList__list-actions', [
       // TODO: Finish import features
@@ -41,14 +41,14 @@ export class ProxyList implements Component {
       // ]),
       m('.proxy-button', [
         // @ts-expect-error
-        m('a[href=/proxies/new]', {oncreate: m.route.link, class: 'button button--primary'}, '+')
+        m('a[href=/proxies/new]', { oncreate: m.route.link, class: 'button button--primary' }, '+')
       ])
     ])
     return [...items, actions]
   }
 
-  renderProxyItem(p: ProxyDao): Vnode {
-    const text = m('div.proxy-name', [p.title ? p.title : `${p.host}:${p.port}`])
+  renderProxyItem (p: ProxyDao): Vnode {
+    const text = m('div.proxy-name', [(p.title !== '') ? p.title : `${p.host}:${p.port}`])
 
     const editButton = m('button.edit[type=button]', {
       href: '/proxies/' + p.id,

@@ -1,12 +1,12 @@
-import m from 'mithril'
+import m, { Component, Vnode } from 'mithril'
 
 import FoxyProxyConverter from './FoxyProxyConverter'
-import {uuidv4} from '../util'
-import {ProxyDao, Store} from '../../store/Store'
+import { uuidv4 } from '../util'
+import { ProxyDao, Store } from '../../store/Store'
 
 const t = browser.i18n.getMessage
 
-export default class ImportPage {
+export default class ImportPage implements Component {
   proxiesToImport: ProxyDao[] = []
   store: Store
 
@@ -14,7 +14,7 @@ export default class ImportPage {
 
   foxyProxyFileInput: FileInput
 
-  constructor({store}: { store: Store }) {
+  constructor ({ store }: { store: Store }) {
     this.store = store
     this.foxyProxyFileInput = new FileInput({
       title: t('ImportPage_foxyProxyInputLabel'),
@@ -22,7 +22,7 @@ export default class ImportPage {
     })
   }
 
-  onChooseFile(event: InputEvent) {
+  onChooseFile (event: InputEvent): void {
     this.proxiesToImport = []
     const input = event.target as HTMLInputElement
     this.cleanUp = () => {
@@ -44,7 +44,6 @@ export default class ImportPage {
       // @ts-expect-error
       const fileContents = evt.target.result as string // TODO: `target` might be null, needs verification
       const converter = new FoxyProxyConverter()
-      // @ts-expect-error
       this.proxiesToImport = converter.convert(JSON.parse(fileContents))
 
       m.redraw()
@@ -54,7 +53,7 @@ export default class ImportPage {
     }
   }
 
-  async doImport () {
+  async doImport (): Promise<void> {
     console.log('Importing: ', this.proxiesToImport)
 
     for (const proxy of this.proxiesToImport) {
@@ -65,17 +64,17 @@ export default class ImportPage {
     this.reset()
   }
 
-  reset () {
+  reset (): void {
     this.proxiesToImport = []
-    if (this.cleanUp) {
+    if (this.cleanUp !== undefined) {
       this.cleanUp()
     }
     m.redraw()
   }
 
-  view () {
+  view (): Vnode {
     let text = t('ImportPage_importButtonNoFileSelected')
-    const canImport = this.proxiesToImport && this.proxiesToImport.length > 0
+    const canImport = this.proxiesToImport.length > 0
     if (canImport) {
       text = t('ImportPage_importButtonDoImport', this.proxiesToImport.length)
     }
@@ -86,8 +85,8 @@ export default class ImportPage {
         m(this.foxyProxyFileInput),
         m('button.button.button--primary', {
           disabled: !canImport,
-          onclick: () => {
-            this.doImport()
+          onclick: async () => {
+            await this.doImport()
           }
         }, text)
       ])
@@ -100,23 +99,23 @@ class FileInput {
   title: string
   onChange: (e: InputEvent) => void
 
-  constructor({title, onChange}: { title: string, onChange: (e: InputEvent) => void }) {
+  constructor ({ title, onChange }: { title: string, onChange: (e: InputEvent) => void }) {
     this.title = title
     this.id = uuidv4()
     this.onChange = onChange
   }
 
-  view({attrs: {class: className = ''}}) {
+  view ({ attrs: { class: className = '' } }): Vnode {
     const inputClasses = ['input__field']
 
     // TODO Add error handling
 
     const topClasses = ['input', className]
-    return m('div', {class: topClasses.join(' ')}, [
-      m('label', {class: 'input__label', for: this.id}, this.title),
+    return m('div', { class: topClasses.join(' ') }, [
+      m('label', { class: 'input__label', for: this.id }, this.title),
       m(
-          'input',
-          {
+        'input',
+        {
           id: this.id,
           type: 'file',
           class: inputClasses.join(' '),

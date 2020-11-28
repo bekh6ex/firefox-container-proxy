@@ -1,5 +1,5 @@
-import {generateAuthorizationHeader} from '../util'
-import {ProxyInfo} from '../../domain/ProxyInfo'
+import { ProxyInfo } from '../../domain/ProxyInfo'
+import { ProxyDao } from '../../store/Store'
 
 export interface SettingsToTest {
   type: string
@@ -14,7 +14,7 @@ export interface SettingsToTest {
  * @param settings
  * @return {Promise<TestResult>}
  */
-export async function testProxySettings(settings: SettingsToTest): Promise<TestResult> {
+export async function testProxySettings (settings: SettingsToTest): Promise<TestResult> {
   // TODO Refine user interaction according to https://extensionworkshop.com/documentation/publish/add-on-policies-2019-12/
 
   let directIpQuery
@@ -33,52 +33,51 @@ export async function testProxySettings(settings: SettingsToTest): Promise<TestR
     proxiedError = e
   }
 
-  if (!directIpQuery) {
-    if (!proxiedIpQuery) {
-      return new ConnectionIssueResult({directError, proxiedError})
+  if (directIpQuery === undefined) {
+    if (proxiedIpQuery === undefined) {
+      return new ConnectionIssueResult({ directError, proxiedError })
     } else {
-      return new NoDirectConnectionResult({directError, proxied: proxiedIpQuery})
+      return new NoDirectConnectionResult({ directError, proxied: proxiedIpQuery })
     }
   } else {
-    if (!proxiedIpQuery) {
-      return new SettingsErrorResult({directIpQuery, proxiedError})
+    if (proxiedIpQuery === undefined) {
+      return new SettingsErrorResult({ directIpQuery, proxiedError })
     } else {
-      return new SuccessfulTestResult({direct: directIpQuery, proxied: proxiedIpQuery})
+      return new SuccessfulTestResult({ direct: directIpQuery, proxied: proxiedIpQuery })
     }
   }
 }
 
 const ipDataUrl: string = 'https://api.duckduckgo.com/?q=ip&no_html=1&format=json&t=firefox-container-proxy-extension'
 
-function toQueryResponse(response: any) {
+function toQueryResponse (response: { AnswerType?: string, Answer: string }): IpQueryResponse {
   if (response.AnswerType === 'ip') {
-    return new IpQueryResponse({ip: response.Answer})
+    return new IpQueryResponse({ ip: response.Answer })
   } else {
-    throw new Error(`Unexpected response type: ${response.AnswerType}`)
+    throw new Error(`Unexpected response type: ${response.AnswerType ?? '<empty>'}`)
   }
 }
 
-async function fetchDirectIpData () {
+async function fetchDirectIpData (): Promise<IpQueryResponse> {
   return await fetchIpData(ipDataUrl)
 }
 
-async function fetchProxiedIpData(proxyConfig: SettingsToTest): Promise<IpQueryResponse> {
+async function fetchProxiedIpData (proxyConfig: SettingsToTest): Promise<IpQueryResponse> {
   const proxiedUrl = ipDataUrl
-  const filter = {urls: [proxiedUrl]}
+  const filter = { urls: [proxiedUrl] }
+  const proxyInfo = ProxyDao.toProxyInfo(proxyConfig)
+  if (proxyInfo === undefined) {
+    throw new Error('Invalid proxy config')
+  }
   return await new Promise((resolve, reject) => {
-    const listener = () => {
+    const listener = (): ProxyInfo => {
       // TODO Add support for HTTP
       browser.proxy.onRequest.removeListener(listener)
 
-      const auth: { proxyAuthorizationHeader?: string } = {}
-      if (proxyConfig.type === 'https') {
-        auth.proxyAuthorizationHeader = generateAuthorizationHeader(proxyConfig.username, proxyConfig.password)
-      }
-
-      return {...proxyConfig, failoverTimeout: 1, ...auth}
+      return proxyInfo
     }
 
-    const errorListener = (error: Error) => {
+    const errorListener = (error: Error): void => {
       browser.proxy.onRequest.removeListener(listener)
       reject(error)
     }
@@ -97,7 +96,7 @@ async function fetchProxiedIpData(proxyConfig: SettingsToTest): Promise<IpQueryR
 
 const ttlMs = 5000
 
-async function fetchIpData(url: string) {
+async function fetchIpData (url: string): Promise<IpQueryResponse> {
   const fetchParameters: RequestInit = {
     cache: 'no-cache',
     credentials: 'omit',
@@ -118,8 +117,8 @@ async function fetchIpData(url: string) {
   return toQueryResponse(response)
 }
 
-function timeoutPromise(value: number): Promise<never> {
-  return new Promise((resolve, reject) => {
+async function timeoutPromise (value: number): Promise<never> {
+  return await new Promise((resolve, reject) => {
     setTimeout(() => {
       reject(new TimeoutError(value))
     }, value)
@@ -129,7 +128,7 @@ function timeoutPromise(value: number): Promise<never> {
 export class TimeoutError extends Error {
   readonly timeoutValue: any
 
-  constructor(timeoutValue: number) {
+  constructor (timeoutValue: number) {
     super(`Reached timeout of ${timeoutValue} ms`)
     this.timeoutValue = timeoutValue
   }
@@ -138,26 +137,23 @@ export class TimeoutError extends Error {
 class IpQueryResponse {
   readonly ip: string
 
-  constructor({ip}: { ip: string }) {
+  constructor ({ ip }: { ip: string }) {
     this.ip = ip
   }
 }
 
-export abstract class TestResult {
+export type TestResult = SuccessfulTestResult | SettingsErrorResult | ConnectionIssueResult | NoDirectConnectionResult
 
-}
-
-export class SuccessfulTestResult extends TestResult {
+export class SuccessfulTestResult {
   readonly direct: IpQueryResponse
   readonly proxied: IpQueryResponse
 
-  constructor({direct, proxied}: { direct: IpQueryResponse, proxied: IpQueryResponse }) {
-    super()
+  constructor ({ direct, proxied }: { direct: IpQueryResponse, proxied: IpQueryResponse }) {
     this.direct = direct
     this.proxied = proxied
   }
 
-  get ipsMatch() {
+  get ipsMatch (): boolean {
     return this.direct.ip === this.proxied.ip
   }
 }
@@ -165,23 +161,21 @@ export class SuccessfulTestResult extends TestResult {
 /**
  * Proxy settings are incorrect
  */
-export class SettingsErrorResult extends TestResult {
+export class SettingsErrorResult {
   readonly direct: IpQueryResponse
   readonly proxiedError: Error
 
-  constructor({directIpQuery, proxiedError}: { directIpQuery: IpQueryResponse, proxiedError: Error }) {
-    super()
+  constructor ({ directIpQuery, proxiedError }: { directIpQuery: IpQueryResponse, proxiedError: Error }) {
     this.direct = directIpQuery
     this.proxiedError = proxiedError
   }
 }
 
-export class ConnectionIssueResult extends TestResult {
+export class ConnectionIssueResult {
   readonly directError: Error
   readonly proxiedError: Error
 
-  constructor({directError, proxiedError}: { directError: Error, proxiedError: Error }) {
-    super()
+  constructor ({ directError, proxiedError }: { directError: Error, proxiedError: Error }) {
     this.directError = directError
     this.proxiedError = proxiedError
   }
@@ -190,12 +184,11 @@ export class ConnectionIssueResult extends TestResult {
 /**
  * Probably, not allowed to access internet directly
  */
-export class NoDirectConnectionResult extends TestResult {
+export class NoDirectConnectionResult {
   readonly directError: Error
   readonly proxied: IpQueryResponse
 
-  constructor({directError, proxied}: { directError: Error, proxied: IpQueryResponse }) {
-    super()
+  constructor ({ directError, proxied }: { directError: Error, proxied: IpQueryResponse }) {
     this.directError = directError
     this.proxied = proxied
   }

@@ -1,7 +1,9 @@
-import { Store } from '../../src/store/Store'
+import { ProxyDao, Store } from '../../src/store/Store'
 import webExtensionsApiFake from 'webextensions-api-fake'
 
-const { expect } = require('chai')
+import { expect } from 'chai'
+
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 
 describe('Store', () => {
   const store = new Store()
@@ -14,7 +16,7 @@ describe('Store', () => {
     delete (global as any).browser
   })
 
-  function someProxyWith (id) {
+  function someProxyWith (id: string): ProxyDao {
     return {
       id: id,
       title: 'some title',

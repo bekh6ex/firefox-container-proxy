@@ -1,13 +1,13 @@
-import m, {Vnode} from 'mithril'
-import {uuidv4} from '../util'
-import {proxyTypes, style} from '../constants'
-import {testProxySettings} from './testProxySettings'
-import {CheckboxInput, PasswordInput, TrimmedTextInput} from '../ui-components/inputs'
+import m, { Vnode } from 'mithril'
+import { uuidv4 } from '../util'
+import { proxyTypes } from '../constants'
+import { SettingsToTest, testProxySettings, TestResult } from './testProxySettings'
+import { CheckboxInput, PasswordInput, TrimmedTextInput } from '../ui-components/inputs'
 import PortNumberInput from './PortInput'
 import HostInput from './HostInput'
 import TestResultBlock from './TestResultBlock'
 import Select from '../ui-components/Select'
-import {ProxyDao, Store} from '../../store/Store'
+import { ProxyDao, Store } from '../../store/Store'
 
 const t = browser.i18n.getMessage
 
@@ -27,12 +27,12 @@ const NEW_PROXY: ProxyDao = {
 class ProxyModel {
   current: ProxyDao
 
-  constructor() {
-    this.current = {...NEW_PROXY}
+  constructor () {
+    this.current = { ...NEW_PROXY }
   }
 
-  async load(id: string) {
-    const newProxy = {...NEW_PROXY}
+  async load (id: string): Promise<void> {
+    const newProxy = { ...NEW_PROXY }
     if (id === 'new') {
       this.current = newProxy
       m.redraw()
@@ -43,7 +43,7 @@ class ProxyModel {
     m.redraw()
   }
 
-  async save(): Promise<void> {
+  async save (): Promise<void> {
     if (this.current.id === 'new') {
       this.current.id = uuidv4()
     }
@@ -60,16 +60,16 @@ class ProxyModel {
     }
   }
 
-  getSettings () {
+  getSettings (): SettingsToTest {
     const { type, host, port, username, password } = this.current
     return { type, host, port, username, password }
   }
 
-  async testSettings () {
+  async testSettings (): Promise<TestResult | null> {
     const settings = this.getSettings()
     if (settings.type === 'http') {
       alert('Testing HTTP proxies is not supported for now')
-      return
+      return null
     }
     return await testProxySettings(settings)
   }
@@ -86,12 +86,12 @@ export default class ProxyForm {
   passwordInput
   doNotProxyLocalCheckbox
 
-  constructor() {
+  constructor () {
     const model = new ProxyModel()
     this.model = model
     this.lastTestResultBlock = null
 
-    this.titleInput = new TrimmedTextInput({title: t('ProxyForm_titleFieldLabel'), ...model.accessProperty('title')})
+    this.titleInput = new TrimmedTextInput({ title: t('ProxyForm_titleFieldLabel'), ...model.accessProperty('title') })
     this.hostInput = new HostInput({
       title: t('ProxyForm_serverFieldLabel'),
       ...model.accessProperty('host'),
@@ -121,13 +121,13 @@ export default class ProxyForm {
     })
   }
 
-  oninit(vnode: Vnode) {
-    this.model.load((vnode.attrs as any).id)
+  async oninit (vnode: Vnode): Promise<void> {
+    await this.model.load((vnode.attrs as any).id)
   }
 
-  view() {
+  view (): Vnode {
     const testResultBlock: Array<Vnode<any, any>> = []
-    if (this.lastTestResultBlock) {
+    if (this.lastTestResultBlock !== null) {
       const lastTestResultBlock1: TestResultBlock = this.lastTestResultBlock
       testResultBlock.push(m(lastTestResultBlock1))
     }
@@ -162,7 +162,7 @@ export default class ProxyForm {
               }
               this.lastTestResultBlock = null
               const result = await this.model.testSettings()
-              if (!result) {
+              if (result === null) {
                 return
               }
               this.lastTestResultBlock = new TestResultBlock(result)
