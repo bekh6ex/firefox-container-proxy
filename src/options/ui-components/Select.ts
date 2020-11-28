@@ -50,19 +50,19 @@ export default class Select implements Component {
     return m('.select', [
       m('label.input__label', { for: this.id }, this.title),
       m(
-          'select',
-          {
-            ...this.props,
-            class: selectClasses.join(' '),
-            id: this.id,
-            required: this.required,
-            value: value,
-            onchange: (e: InputEvent) => this.onChange((e.target as HTMLSelectElement).value),
-            onfocusout: (e: InputEvent) => this.onChange((e.target as HTMLSelectElement).value)
-          },
-          [
-            ...options
-          ]
+        'select',
+        {
+          ...this.props,
+          class: selectClasses.join(' '),
+          id: this.id,
+          required: this.required,
+          value: value,
+          onchange: (e: InputEvent) => this.onChange((e.target as HTMLSelectElement).value),
+          onfocusout: (e: InputEvent) => this.onChange((e.target as HTMLSelectElement).value)
+        },
+        [
+          ...options
+        ]
       )
     ])
   }
