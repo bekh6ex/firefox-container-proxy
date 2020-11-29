@@ -144,7 +144,7 @@
         "description": "Text displayed when direct request is successful, but proxied request failed"
     },
     "ProxySettingsTestResult_noDirectConnection": {
-        "message": "Настройки верные! Но похоже, что подключение к Интернету без прокси невозможно.",
+        "message": "Настройки верные, но похоже, что подключение к Интернету без прокси невозможно.",
         "description": "Text displayed when proxied request succeeded, but direct request failed"
     },
     "ProxySettingsTestResult_notConnectedToTheInternet": {

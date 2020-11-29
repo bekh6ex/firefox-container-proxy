@@ -37,30 +37,30 @@
     },
     "ProxyForm_protocolFieldLabel": {
         "message": "Protocol",
-      "description": "Protocol field in proxy form"
+        "description": "Protocol field in proxy form"
     },
-  "ProxyForm_titleFieldLabel": {
-    "message": "Title (Optional)",
-    "description": "Title field in proxy form"
-  },
-  "ProxyForm_serverFieldLabel": {
-    "message": "Server",
-    "description": "Server field in proxy form"
-  },
-  "ProxyForm_doNotProxyLocalFieldLabel": {
-    "message": "Do not proxy local addresses (localhost, 127.0.0.1, ::1)",
-    "description": "`Do not proxy local addresses` field in the proxy form"
-  },
-  "ProxyForm_incorrectServerError": {
-    "message": "Value should be either IP address or domain name",
-    "description": "Error message displayed when incorrect server is entered"
-  },
-  "ProxyForm_portFieldLabel": {
-    "message": "Port",
-    "description": "Port field in proxy form"
-  },
-  "ProxyForm_usernameFieldLabel": {
-    "message": "Username",
+    "ProxyForm_titleFieldLabel": {
+        "message": "Title (Optional)",
+        "description": "Title field in proxy form"
+    },
+    "ProxyForm_serverFieldLabel": {
+        "message": "Server",
+        "description": "Server field in proxy form"
+    },
+    "ProxyForm_doNotProxyLocalFieldLabel": {
+        "message": "Do not proxy local addresses (localhost, 127.0.0.1, ::1)",
+        "description": "`Do not proxy local addresses` field in the proxy form"
+    },
+    "ProxyForm_incorrectServerError": {
+        "message": "Value should be either IP address or domain name",
+        "description": "Error message displayed when incorrect server is entered"
+    },
+    "ProxyForm_portFieldLabel": {
+        "message": "Port",
+        "description": "Port field in proxy form"
+    },
+    "ProxyForm_usernameFieldLabel": {
+        "message": "Username",
         "description": "Username field in proxy form"
     },
     "ProxyForm_passwordFieldLabel": {
@@ -70,14 +70,14 @@
     "ProxyForm_testProxySettingsConfirmationText": {
         "message": "To test settings it is required to make a couple of requests to $DUCKDUCKGO_NAME$. Proceed?",
         "description": "Text shown when a user clicks Test settings button notifying user about request to 3rd party service",
-      "placeholders": {
-        "DUCKDUCKGO_NAME": {
-          "content": "DuckDuckGo"
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
         }
-      }
     },
     "ProxyForm_testProxySettingsLabel": {
-        "message": "Test settings",
+        "message": "Test",
         "description": "Settings test button label in proxy form"
     },
     "ProxyForm_save": {
@@ -93,62 +93,62 @@
             }
         }
     },
-  "ProxySettingsTestResult_settingsAreCorrect": {
-    "message": "Settings are correct!",
-    "description": "Text displayed when result of testing proxy settings was successful in proxy form"
-  },
-  "ProxySettingsTestResult_error": {
-    "message": "Error!",
-    "description": "Generic text meaning there is an error"
-  },
-  "ProxySettingsTestResult_notConnectedToTheInternet": {
-    "message": "Error! Probably, you are not connected to the internet.",
-    "description": "Text displayed when both direct and proxied requests failed to succeed"
-  },
-  "ProxySettingsTestResult_noDirectConnection": {
-    "message": "Settings are correct! But it seems that connection to the Internet without a proxy is not possible.",
-    "description": "Text displayed when proxied request succeeded, but direct request failed"
-  },
-  "ProxySettingsTestResult_incorrectSettings": {
-    "message": "Error! Could not connect to the proxy. Probably the settings are incorrect.",
-    "description": "Text displayed when direct request is successful, but proxied request failed"
-  },
-  "ProxySettingsTestResult_directRequest": {
-    "message": "Direct request:",
-    "description": "Direct request header"
-  },
-  "ProxySettingsTestResult_proxiedRequest": {
-    "message": "Proxied request:",
-    "description": "Proxied request header"
-  },
-  "SupportPage_gitterInvite": {
-    "message": "If you have any questions, have a problem or just want to chat you are welcome in our channel in $GITTER_NAME$:",
-    "description": "Gitter welcome message displayed on Support page",
-    "placeholders": {
-      "GITTER_NAME": {
-        "content": "Gitter"
-      }
+    "ProxySettingsTestResult_settingsAreCorrect": {
+        "message": "The settings are correct!",
+        "description": "Text displayed when result of testing proxy settings was successful in proxy form"
+    },
+    "ProxySettingsTestResult_error": {
+        "message": "Error!",
+        "description": "Generic text meaning there is an error"
+    },
+    "ProxySettingsTestResult_notConnectedToTheInternet": {
+        "message": "Error! Probably, you are not connected to the Internet.",
+        "description": "Text displayed when both direct and proxied requests failed to succeed"
+    },
+    "ProxySettingsTestResult_noDirectConnection": {
+        "message": "The settings are correct, but it seems connecting to the Internet without a proxy is not possible.",
+        "description": "Text displayed when proxied request succeeded, but direct request failed"
+    },
+    "ProxySettingsTestResult_incorrectSettings": {
+        "message": "Error! Could not connect to the proxy. Probably the settings are incorrect.",
+        "description": "Text displayed when direct request is successful, but proxied request failed"
+    },
+    "ProxySettingsTestResult_directRequest": {
+        "message": "Direct request:",
+        "description": "Direct request header"
+    },
+    "ProxySettingsTestResult_proxiedRequest": {
+        "message": "Proxied request:",
+        "description": "Proxied request header"
+    },
+    "SupportPage_gitterInvite": {
+        "message": "If you have any questions, have a problem or just want to chat you are welcome in our channel in $GITTER_NAME$:",
+        "description": "Gitter welcome message displayed on Support page",
+        "placeholders": {
+            "GITTER_NAME": {
+                "content": "Gitter"
+            }
+        }
+    },
+    "ImportPage_heading": {
+        "message": "Import proxies",
+        "description": "Header of import proxies page"
+    },
+    "ImportPage_foxyProxyInputLabel": {
+        "message": "FoxyProxy settings",
+        "description": "Label of FoxyProxy settings file input"
+    },
+    "ImportPage_importButtonNoFileSelected": {
+        "message": "Select a file",
+        "description": "Text displayed on Import button when no file is selected or the file is invalid"
+    },
+    "ImportPage_importButtonDoImport": {
+        "message": "Import $NUMBER$ proxies",
+        "description": "Text displayed on Import button when there is something to import",
+        "placeholders": {
+            "NUMBER": {
+                "content": "$1"
+            }
+        }
     }
-  },
-  "ImportPage_heading": {
-    "message": "Import proxies",
-    "description": "Header of import proxies page"
-  },
-  "ImportPage_foxyProxyInputLabel": {
-    "message": "FoxyProxy settings",
-    "description": "Label of FoxyProxy settings file input"
-  },
-  "ImportPage_importButtonNoFileSelected": {
-    "message": "Select a file",
-    "description": "Text displayed on Import button when no file is selected or the file is invalid"
-  },
-  "ImportPage_importButtonDoImport": {
-    "message": "Import $NUMBER$ proxies",
-    "description": "Text displayed on Import button when there is something to import",
-    "placeholders": {
-      "NUMBER": {
-        "content": "$1"
-      }
-    }
-  }
 }

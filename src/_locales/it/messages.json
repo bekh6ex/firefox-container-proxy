@@ -1,0 +1,154 @@
+{
+    "ImportPage_importButtonDoImport": {
+        "message": "Importa $NUMBER$ proxy",
+        "description": "Text displayed on Import button when there is something to import",
+        "placeholders": {
+            "NUMBER": {
+                "content": "$1"
+            }
+        }
+    },
+    "ImportPage_importButtonNoFileSelected": {
+        "message": "Seleziona un file",
+        "description": "Text displayed on Import button when no file is selected or the file is invalid"
+    },
+    "ImportPage_foxyProxyInputLabel": {
+        "message": "Impostazioni FoxyProxy",
+        "description": "Label of FoxyProxy settings file input"
+    },
+    "ImportPage_heading": {
+        "message": "Importa i proxy",
+        "description": "Header of import proxies page"
+    },
+    "SupportPage_gitterInvite": {
+        "message": "Se hai domande, problemi o desideri semplicemente chiacchierare, sei il/la benvenuto/a nel nostro canale in $GITTER_NAME$:",
+        "description": "Gitter welcome message displayed on Support page",
+        "placeholders": {
+            "GITTER_NAME": {
+                "content": "Gitter"
+            }
+        }
+    },
+    "ProxySettingsTestResult_proxiedRequest": {
+        "message": "Richiesta con proxy:",
+        "description": "Proxied request header"
+    },
+    "ProxySettingsTestResult_directRequest": {
+        "message": "Richiesta diretta:",
+        "description": "Direct request header"
+    },
+    "ProxySettingsTestResult_incorrectSettings": {
+        "message": "Errore! Impossibile connettersi al proxy. Probabilmente le impostazioni non sono corrette.",
+        "description": "Text displayed when direct request is successful, but proxied request failed"
+    },
+    "ProxySettingsTestResult_noDirectConnection": {
+        "message": "Le impostazioni sono corrette! Ma sembra che la connessione a Internet senza un proxy non sia possibile.",
+        "description": "Text displayed when proxied request succeeded, but direct request failed"
+    },
+    "ProxySettingsTestResult_notConnectedToTheInternet": {
+        "message": "Errore! Probabilmente non sei connesso/a a Internet.",
+        "description": "Text displayed when both direct and proxied requests failed to succeed"
+    },
+    "ProxySettingsTestResult_error": {
+        "message": "Errore!",
+        "description": "Generic text meaning there is an error"
+    },
+    "ProxySettingsTestResult_settingsAreCorrect": {
+        "message": "Le impostazioni sono corrette!",
+        "description": "Text displayed when result of testing proxy settings was successful in proxy form"
+    },
+    "ProxyForm_duckduckgoAttribution": {
+        "message": "Risultati IP da $DUCKDUCKGO_NAME$",
+        "description": "Attribution to DuckDuckGo for IP query",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxyForm_save": {
+        "message": "Salva",
+        "description": "Save button in proxy form"
+    },
+    "ProxyForm_testProxySettingsLabel": {
+        "message": "Test",
+        "description": "Settings test button label in proxy form"
+    },
+    "ProxyForm_testProxySettingsConfirmationText": {
+        "message": "Per testare le impostazioni è necessario fare un paio di richieste a $DUCKDUCKGO_NAME$. Continuare?",
+        "description": "Text shown when a user clicks Test settings button notifying user about request to 3rd party service",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxyForm_passwordFieldLabel": {
+        "message": "Password",
+        "description": "Password field in proxy form"
+    },
+    "ProxyForm_usernameFieldLabel": {
+        "message": "Nome utente",
+        "description": "Username field in proxy form"
+    },
+    "ProxyForm_portFieldLabel": {
+        "message": "Porta",
+        "description": "Port field in proxy form"
+    },
+    "ProxyForm_incorrectServerError": {
+        "message": "Il valore deve essere un indirizzo IP o un nome di dominio",
+        "description": "Error message displayed when incorrect server is entered"
+    },
+    "ProxyForm_doNotProxyLocalFieldLabel": {
+        "message": "Non usare proxy per gli indirizzi locali (localhost, 127.0.0.1, ::1)",
+        "description": "`Do not proxy local addresses` field in the proxy form"
+    },
+    "ProxyForm_serverFieldLabel": {
+        "message": "Server",
+        "description": "Server field in proxy form"
+    },
+    "ProxyForm_titleFieldLabel": {
+        "message": "Titolo (facoltativo)",
+        "description": "Title field in proxy form"
+    },
+    "ProxyForm_protocolFieldLabel": {
+        "message": "Protocollo",
+        "description": "Protocol field in proxy form"
+    },
+    "ProxyList_delete": {
+        "message": "Elimina",
+        "description": "Delete button in proxy list"
+    },
+    "ProxyList_edit": {
+        "message": "Modifica",
+        "description": "Edit button in proxy list"
+    },
+    "ContainerList_proxyDisabled": {
+        "message": "Direttamente",
+        "description": "Config containers to not use proxy"
+    },
+    "OptionsNavigation_support": {
+        "message": "Supporto",
+        "description": "Navigation link title for support information page"
+    },
+    "OptionsNavigation_proxies": {
+        "message": "Proxy",
+        "description": "Navigation link title for config proxy list"
+    },
+    "OptionsNavigation_assign": {
+        "message": "Assegna",
+        "description": "Navigation link title for assign proxy for containers"
+    },
+    "OptionsPage_browserTabTitle": {
+        "message": "Impostazioni per l'estensione Container Proxy",
+        "description": "Title of option page"
+    },
+    "ContainerList_defaultContainerName": {
+        "message": "Predefinito",
+        "description": "Name of default container"
+    },
+    "General_extensionDescription": {
+        "message": "Assegna un proxy a un contenitore",
+        "description": "Description of the extension."
+    }
+}

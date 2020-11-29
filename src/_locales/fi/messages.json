@@ -1,0 +1,62 @@
+{
+    "ImportPage_importButtonNoFileSelected": {
+        "message": "Valitse tiedosto",
+        "description": "Text displayed on Import button when no file is selected or the file is invalid"
+    },
+    "ProxySettingsTestResult_notConnectedToTheInternet": {
+        "message": "Virhe! Et todennäköisesti ole yhteydessä Internetiin.",
+        "description": "Text displayed when both direct and proxied requests failed to succeed"
+    },
+    "ProxySettingsTestResult_error": {
+        "message": "Virhe!",
+        "description": "Generic text meaning there is an error"
+    },
+    "ProxySettingsTestResult_settingsAreCorrect": {
+        "message": "Asetukset ovat oikein!",
+        "description": "Text displayed when result of testing proxy settings was successful in proxy form"
+    },
+    "ProxyForm_save": {
+        "message": "Tallenna",
+        "description": "Save button in proxy form"
+    },
+    "ProxyForm_passwordFieldLabel": {
+        "message": "Salasana",
+        "description": "Password field in proxy form"
+    },
+    "ProxyForm_usernameFieldLabel": {
+        "message": "Käyttäjänimi",
+        "description": "Username field in proxy form"
+    },
+    "ProxyForm_portFieldLabel": {
+        "message": "Portti",
+        "description": "Port field in proxy form"
+    },
+    "ProxyForm_serverFieldLabel": {
+        "message": "Palvelin",
+        "description": "Server field in proxy form"
+    },
+    "ProxyForm_titleFieldLabel": {
+        "message": "Otsikko (valinnainen)",
+        "description": "Title field in proxy form"
+    },
+    "ProxyList_delete": {
+        "message": "Poista",
+        "description": "Delete button in proxy list"
+    },
+    "ProxyList_edit": {
+        "message": "Muokkaa",
+        "description": "Edit button in proxy list"
+    },
+    "OptionsNavigation_support": {
+        "message": "Tuki",
+        "description": "Navigation link title for support information page"
+    },
+    "OptionsNavigation_proxies": {
+        "message": "Välityspalvelimet",
+        "description": "Navigation link title for config proxy list"
+    },
+    "OptionsPage_browserTabTitle": {
+        "message": "Container Proxy -laajennuksen asetukset",
+        "description": "Title of option page"
+    }
+}

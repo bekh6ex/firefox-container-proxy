@@ -1,0 +1,154 @@
+{
+    "ProxyForm_testProxySettingsLabel": {
+        "message": "Test",
+        "description": "Settings test button label in proxy form"
+    },
+    "ProxySettingsTestResult_noDirectConnection": {
+        "message": "Innstillingene stemmer, men det ser ut til at tilkobling til Internett uten mellomtjener ikke er mulig.",
+        "description": "Text displayed when proxied request succeeded, but direct request failed"
+    },
+    "SupportPage_gitterInvite": {
+        "message": "Hvis du har noen spørsmål, har et problem eller kun ønsker å sludre, er du velkommen i vår kanal, $GITTER_NAME$:",
+        "description": "Gitter welcome message displayed on Support page",
+        "placeholders": {
+            "GITTER_NAME": {
+                "content": "Gitter"
+            }
+        }
+    },
+    "ProxyForm_duckduckgoAttribution": {
+        "message": "IP-resultater fra $DUCKDUCKGO_NAME$",
+        "description": "Attribution to DuckDuckGo for IP query",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxySettingsTestResult_settingsAreCorrect": {
+        "message": "Innstillingene stemmer!",
+        "description": "Text displayed when result of testing proxy settings was successful in proxy form"
+    },
+    "ProxySettingsTestResult_notConnectedToTheInternet": {
+        "message": "Feil! Antagelig er du ikke koblet til Internett.",
+        "description": "Text displayed when both direct and proxied requests failed to succeed"
+    },
+    "ImportPage_importButtonDoImport": {
+        "message": "Importer $NUMBER$ mellomtjenere",
+        "description": "Text displayed on Import button when there is something to import",
+        "placeholders": {
+            "NUMBER": {
+                "content": "$1"
+            }
+        }
+    },
+    "ImportPage_importButtonNoFileSelected": {
+        "message": "Velg en fil",
+        "description": "Text displayed on Import button when no file is selected or the file is invalid"
+    },
+    "ImportPage_foxyProxyInputLabel": {
+        "message": "FoxyProxy-innstillingere",
+        "description": "Label of FoxyProxy settings file input"
+    },
+    "ImportPage_heading": {
+        "message": "Importer mellomtjenere",
+        "description": "Header of import proxies page"
+    },
+    "ProxySettingsTestResult_proxiedRequest": {
+        "message": "Mellomtjent forespørsel:",
+        "description": "Proxied request header"
+    },
+    "ProxySettingsTestResult_directRequest": {
+        "message": "Direkteforespørsel:",
+        "description": "Direct request header"
+    },
+    "ProxySettingsTestResult_incorrectSettings": {
+        "message": "Feil. Kunne ikke koble til mellomtjeneren. Antagelig er innstillingene feil.",
+        "description": "Text displayed when direct request is successful, but proxied request failed"
+    },
+    "ProxySettingsTestResult_error": {
+        "message": "Feil!",
+        "description": "Generic text meaning there is an error"
+    },
+    "ProxyForm_save": {
+        "message": "Lagre",
+        "description": "Save button in proxy form"
+    },
+    "ProxyForm_testProxySettingsConfirmationText": {
+        "message": "For å teste innstillingene kreves det at du sender noen forespørsler til $DUCKDUCKGO_NAME$. Fortsett?",
+        "description": "Text shown when a user clicks Test settings button notifying user about request to 3rd party service",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxyForm_passwordFieldLabel": {
+        "message": "Passord",
+        "description": "Password field in proxy form"
+    },
+    "ProxyForm_usernameFieldLabel": {
+        "message": "Brukernavn",
+        "description": "Username field in proxy form"
+    },
+    "ProxyForm_portFieldLabel": {
+        "message": "Port",
+        "description": "Port field in proxy form"
+    },
+    "ProxyForm_incorrectServerError": {
+        "message": "Verdien skal være enten en IP-adresse eller et domenenavn",
+        "description": "Error message displayed when incorrect server is entered"
+    },
+    "ProxyForm_doNotProxyLocalFieldLabel": {
+        "message": "Ikke mellomtjen lokale adresser (localhost, 127.0.0.1, ::1)",
+        "description": "`Do not proxy local addresses` field in the proxy form"
+    },
+    "ProxyForm_serverFieldLabel": {
+        "message": "Tjener",
+        "description": "Server field in proxy form"
+    },
+    "ProxyForm_titleFieldLabel": {
+        "message": "Tittel (valgfritt)",
+        "description": "Title field in proxy form"
+    },
+    "ProxyForm_protocolFieldLabel": {
+        "message": "Protokoll",
+        "description": "Protocol field in proxy form"
+    },
+    "ProxyList_delete": {
+        "message": "Slett",
+        "description": "Delete button in proxy list"
+    },
+    "ProxyList_edit": {
+        "message": "Rediger",
+        "description": "Edit button in proxy list"
+    },
+    "ContainerList_proxyDisabled": {
+        "message": "Direkte",
+        "description": "Config containers to not use proxy"
+    },
+    "OptionsNavigation_support": {
+        "message": "Støtte",
+        "description": "Navigation link title for support information page"
+    },
+    "OptionsNavigation_proxies": {
+        "message": "Mellomtjenere",
+        "description": "Navigation link title for config proxy list"
+    },
+    "OptionsNavigation_assign": {
+        "message": "Tildel",
+        "description": "Navigation link title for assign proxy for containers"
+    },
+    "OptionsPage_browserTabTitle": {
+        "message": "Mellomtjener-utvidelsesinnstillinger for beholder",
+        "description": "Title of option page"
+    },
+    "ContainerList_defaultContainerName": {
+        "message": "Forvalg",
+        "description": "Name of default container"
+    },
+    "General_extensionDescription": {
+        "message": "Tildel en mellomtjener til en beholder",
+        "description": "Description of the extension."
+    }
+}

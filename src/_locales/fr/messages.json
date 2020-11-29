@@ -1,87 +1,148 @@
 {
-  "ContainerList_defaultContainerName": {
-    "message": "Par défaut",
-    "description": "Nom du conteneur par défaut"
-  },
-  "OptionsPage_browserTabTitle": {
-    "message": "Container Proxy extension - Paramètres",
-    "description": "Titre de la page d'option"
-  },
-  "OptionsNavigation_assign": {
-    "message": "Assigner"
-  },
-  "OptionsNavigation_proxies": {
-    "message": "Mandataire"
-  },
-  "ContainerList_proxyDisabled": {
-    "message": "Accès direct",
-    "description": "Configurer les container pour ne pas utiliser de mandataire"
-  },
-  "ProxyList_edit": {
-    "message": "Éditer",
-    "description": "Bouton éditer dans le formulaire d'ajout de mandataire"
-  },
-  "ProxyList_delete": {
-    "message": "Supprimer",
-    "description": "Bouton supprimer dans le formulaire d'ajout de mandataire"
-  },
-  "ProxyForm_protocolFieldLabel": {
-    "message": "Protocole",
-    "description": "Champ protocole dans le formulaire d'ajout de mandataire"
-  },
-  "ProxyForm_titleFieldLabel": {
-    "message": "Titre (optionnel)",
-    "description": "Champ titre dans le formulaire d'ajout de mandataire"
-  },
-  "ProxyForm_serverFieldLabel": {
-    "message": "Serveur"
-  },
-  "ProxyForm_portFieldLabel": {
-    "message": "Port",
-    "description": "Champ port dans le formulaire d'ajout de mandataire"
-  },
-  "ProxyForm_usernameFieldLabel": {
-    "message": "Utilisateur",
-    "description": "Champ utilisateur dans le formulaire d'ajout de mandataire"
-  },
-  "ProxyForm_passwordFieldLabel": {
-    "message": "Mot de passe"
-  },
-  "ProxyForm_save": {
-    "message": "Sauvegarder"
-  },
-  "General_extensionDescription": {
-    "message": "Assigner un mandataire à un conteneur",
-    "description": "Description de l'extension"
-  },
-  "SupportPage_gitterInvite": {
-    "message": "Si vous avez une question, avez un problème ou voulez discuter, vous êtes le bienvenus sur notre discussion sur $GITTER_NAME$ :",
-    "description": "Message de bienvenue affiché sur la page de support",
-    "placeholders": {
-      "GITTER_NAME": {
-        "content": "Gitter"
-      }
+    "ContainerList_defaultContainerName": {
+        "message": "Par défaut",
+        "description": "Nom du conteneur par défaut"
+    },
+    "OptionsPage_browserTabTitle": {
+        "message": "Paramètres pour l’extension Container Proxy",
+        "description": "Titre de la page d'option"
+    },
+    "OptionsNavigation_assign": {
+        "message": "Assigner"
+    },
+    "OptionsNavigation_proxies": {
+        "message": "Mandataires"
+    },
+    "ContainerList_proxyDisabled": {
+        "message": "Accès direct",
+        "description": "Configurer les container pour ne pas utiliser de mandataire"
+    },
+    "ProxyList_edit": {
+        "message": "Modifier",
+        "description": "Bouton éditer dans le formulaire d'ajout de mandataire"
+    },
+    "ProxyList_delete": {
+        "message": "Supprimer",
+        "description": "Bouton supprimer dans le formulaire d'ajout de mandataire"
+    },
+    "ProxyForm_protocolFieldLabel": {
+        "message": "Protocole",
+        "description": "Champ protocole dans le formulaire d'ajout de mandataire"
+    },
+    "ProxyForm_titleFieldLabel": {
+        "message": "Titre (optionnel)",
+        "description": "Champ titre dans le formulaire d'ajout de mandataire"
+    },
+    "ProxyForm_serverFieldLabel": {
+        "message": "Serveur"
+    },
+    "ProxyForm_portFieldLabel": {
+        "message": "Port",
+        "description": "Champ port dans le formulaire d'ajout de mandataire"
+    },
+    "ProxyForm_usernameFieldLabel": {
+        "message": "Nom d’utilisateur",
+        "description": "Champ utilisateur dans le formulaire d'ajout de mandataire"
+    },
+    "ProxyForm_passwordFieldLabel": {
+        "message": "Mot de passe"
+    },
+    "ProxyForm_save": {
+        "message": "Enregistrer"
+    },
+    "General_extensionDescription": {
+        "message": "Assigner un mandataire à un conteneur",
+        "description": "Description de l'extension"
+    },
+    "SupportPage_gitterInvite": {
+        "message": "Si vous avez une question, avez un problème ou voulez discuter, vous êtes le/la bienvenu·e sur notre discussion sur $GITTER_NAME$ :",
+        "description": "Message de bienvenue affiché sur la page de support",
+        "placeholders": {
+            "GITTER_NAME": {
+                "content": "Gitter"
+            }
+        }
+    },
+    "ProxyForm_testProxySettingsConfirmationText": {
+        "message": "Pour tester les paramètres, il est nécessaire de faire quelques requêtes à $DUCKDUCKGO_NAME$. Continuer ?",
+        "description": "Texte affiché quand un utilisateur clique sur le bouton Tester les paramètres afin de le notifier qu'il va lancer une requête à un service tiers.",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxyForm_testProxySettingsLabel": {
+        "message": "Test",
+        "description": "Bouton de test des paramètres dans le formulaire d'ajout de mandataire"
+    },
+    "ProxyForm_duckduckgoAttribution": {
+        "message": "IP donnée par $DUCKDUCKGO_NAME$",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxySettingsTestResult_noDirectConnection": {
+        "message": "Les paramètres sont corrects, mais il semble que se connecter à Internet sans mandataire ne soit pas possible.",
+        "description": "Text displayed when proxied request succeeded, but direct request failed"
+    },
+    "ProxySettingsTestResult_notConnectedToTheInternet": {
+        "message": "Erreur ! Vous n’êtes probablement pas connecté·e à Internet.",
+        "description": "Text displayed when both direct and proxied requests failed to succeed"
+    },
+    "ProxySettingsTestResult_settingsAreCorrect": {
+        "message": "Les paramètres sont corrects !",
+        "description": "Text displayed when result of testing proxy settings was successful in proxy form"
+    },
+    "ProxyForm_doNotProxyLocalFieldLabel": {
+        "message": "Ne pas utiliser de mandataire pour les adresses locales (localhost, 127.0.0.1, ::1)",
+        "description": "`Do not proxy local addresses` field in the proxy form"
+    },
+    "ImportPage_importButtonDoImport": {
+        "message": "Importer $NUMBER$ mandataires",
+        "description": "Text displayed on Import button when there is something to import",
+        "placeholders": {
+            "NUMBER": {
+                "content": "$1"
+            }
+        }
+    },
+    "ImportPage_heading": {
+        "message": "Importer les mandataires",
+        "description": "Header of import proxies page"
+    },
+    "ProxySettingsTestResult_proxiedRequest": {
+        "message": "Requête par mandataire :",
+        "description": "Proxied request header"
+    },
+    "ProxySettingsTestResult_directRequest": {
+        "message": "Requête directe :",
+        "description": "Direct request header"
+    },
+    "ProxySettingsTestResult_incorrectSettings": {
+        "message": "Erreur ! Impossible de se connecter au mandataire. Les paramètres sont probablement incorrects.",
+        "description": "Text displayed when direct request is successful, but proxied request failed"
+    },
+    "ImportPage_importButtonNoFileSelected": {
+        "message": "Sélectionnez un fichier",
+        "description": "Text displayed on Import button when no file is selected or the file is invalid"
+    },
+    "ImportPage_foxyProxyInputLabel": {
+        "message": "Paramètres FoxyProxy",
+        "description": "Label of FoxyProxy settings file input"
+    },
+    "ProxySettingsTestResult_error": {
+        "message": "Erreur !",
+        "description": "Generic text meaning there is an error"
+    },
+    "ProxyForm_incorrectServerError": {
+        "message": "La valeur doit être soit une adresse IP, soit un nom de domaine",
+        "description": "Error message displayed when incorrect server is entered"
+    },
+    "OptionsNavigation_support": {
+        "message": "Assistance",
+        "description": "Navigation link title for support information page"
     }
-  },
-  "ProxyForm_testProxySettingsConfirmationText": {
-    "message": "Pour tester les paramètres il est nécessaire de faire quelques requêtes à $DUCKDUCKGO_NAME$. Continuer ?",
-    "description": "Texte affiché quand un utilisateur clique sur le bouton Tester les paramètres afin de le notifier qu'il va lancer une requête à un service tiers.",
-    "placeholders": {
-      "DUCKDUCKGO_NAME": {
-        "content": "DuckDuckGo"
-      }
-    }
-  },
-  "ProxyForm_testProxySettingsLabel": {
-    "message": "Tester les paramètres",
-    "description": "Bouton de test des paramètres dans le formulaire d'ajout de mandataire"
-  },
-  "ProxyForm_duckduckgoAttribution": {
-    "message": "IP donnée par $DUCKDUCKGO_NAME$",
-    "placeholders": {
-      "DUCKDUCKGO_NAME": {
-        "content": "DuckDuckGo"
-      }
-    }
-  }
 }
