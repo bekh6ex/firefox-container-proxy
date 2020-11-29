@@ -26,7 +26,7 @@
         }
     },
     "ProxySettingsTestResult_settingsAreCorrect": {
-        "message": "Innstillingene stemmer.",
+        "message": "Innstillingene stemmer!",
         "description": "Text displayed when result of testing proxy settings was successful in proxy form"
     },
     "ProxySettingsTestResult_notConnectedToTheInternet": {
