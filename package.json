@@ -5,6 +5,7 @@
   "scripts": {
     "test": "npm run test:unit",
     "bundle": "web-ext -s dist build --overwrite-dest",
+    "bundle:src": "V=$(cat src/manifest.json | jq -r .version) && zip -r -X source-artifacts/container-proxy-v${V}.zip src babel.config.js LICENSE package.json package-lock.json README.md tsconfig.json webpack.config.js",
     "test:func": "npm run build && mocha test/functional/",
     "test:unit": "ts-mocha --require esm test/unit/**/*.test.ts",
     "codeStyle:check": "standardx && ts-standard",

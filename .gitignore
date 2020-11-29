@@ -2,5 +2,6 @@
 *.iml
 dist
 web-ext-artifacts
+source-artifacts
 node_modules
 tmpProfile
