@@ -1,1 +1,137 @@
-{}
+{
+    "OptionsPage_browserTabTitle": {
+        "message": "Configuración de la extensión Container Proxy",
+        "description": "Title of option page"
+    },
+    "General_extensionDescription": {
+        "message": "Asignar un proxy a un contenedor",
+        "description": "Description of the extension."
+    },
+    "ImportPage_importButtonDoImport": {
+        "message": "Importar $NUMBER$ proxies",
+        "description": "Text displayed on Import button when there is something to import",
+        "placeholders": {
+            "NUMBER": {
+                "content": "$1"
+            }
+        }
+    },
+    "ImportPage_importButtonNoFileSelected": {
+        "message": "Seleccione un archivo",
+        "description": "Text displayed on Import button when no file is selected or the file is invalid"
+    },
+    "ImportPage_foxyProxyInputLabel": {
+        "message": "Configuracion de FoxyProxy",
+        "description": "Label of FoxyProxy settings file input"
+    },
+    "ImportPage_heading": {
+        "message": "Importar proxies",
+        "description": "Header of import proxies page"
+    },
+    "ProxySettingsTestResult_directRequest": {
+        "message": "Petición Directa:",
+        "description": "Direct request header"
+    },
+    "ProxySettingsTestResult_incorrectSettings": {
+        "message": "Error! No se pudo conectar al proxy. Probablemente la configuración es incorrecta.",
+        "description": "Text displayed when direct request is successful, but proxied request failed"
+    },
+    "ProxySettingsTestResult_noDirectConnection": {
+        "message": "La configuración es correcta, pero parece que conectarse a internet sin un proxy no es posible.",
+        "description": "Text displayed when proxied request succeeded, but direct request failed"
+    },
+    "ProxySettingsTestResult_notConnectedToTheInternet": {
+        "message": "Error! Probablemente no tienes conexión a Internet.",
+        "description": "Text displayed when both direct and proxied requests failed to succeed"
+    },
+    "ProxySettingsTestResult_error": {
+        "message": "Error!",
+        "description": "Generic text meaning there is an error"
+    },
+    "ProxySettingsTestResult_settingsAreCorrect": {
+        "message": "La configuración es correcta!",
+        "description": "Text displayed when result of testing proxy settings was successful in proxy form"
+    },
+    "ProxyForm_duckduckgoAttribution": {
+        "message": "Resultados IP desde $DUCKDUCKGO_NAME$",
+        "description": "Attribution to DuckDuckGo for IP query",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxyForm_save": {
+        "message": "Guardar",
+        "description": "Save button in proxy form"
+    },
+    "ProxyForm_testProxySettingsLabel": {
+        "message": "Probar",
+        "description": "Settings test button label in proxy form"
+    },
+    "ProxyForm_testProxySettingsConfirmationText": {
+        "message": "Para probar la configuración se requiere hacer algunas peticiones a $DUCKDUCKGO_NAME$. Continuar?",
+        "description": "Text shown when a user clicks Test settings button notifying user about request to 3rd party service",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxyForm_passwordFieldLabel": {
+        "message": "Contraseña",
+        "description": "Password field in proxy form"
+    },
+    "ProxyForm_usernameFieldLabel": {
+        "message": "Nombre de usuario",
+        "description": "Username field in proxy form"
+    },
+    "ProxyForm_portFieldLabel": {
+        "message": "Puerto",
+        "description": "Port field in proxy form"
+    },
+    "ProxyForm_incorrectServerError": {
+        "message": "Los valores deberían ser una dirección IP o un nombre de dominio",
+        "description": "Error message displayed when incorrect server is entered"
+    },
+    "ProxyForm_serverFieldLabel": {
+        "message": "Servidor",
+        "description": "Server field in proxy form"
+    },
+    "ProxyForm_titleFieldLabel": {
+        "message": "Título (Opcional)",
+        "description": "Title field in proxy form"
+    },
+    "ProxyForm_protocolFieldLabel": {
+        "message": "Protocolo",
+        "description": "Protocol field in proxy form"
+    },
+    "ProxyList_delete": {
+        "message": "Borrar",
+        "description": "Delete button in proxy list"
+    },
+    "ProxyList_edit": {
+        "message": "Editar",
+        "description": "Edit button in proxy list"
+    },
+    "ContainerList_proxyDisabled": {
+        "message": "Directamente",
+        "description": "Config containers to not use proxy"
+    },
+    "OptionsNavigation_support": {
+        "message": "Soporte",
+        "description": "Navigation link title for support information page"
+    },
+    "OptionsNavigation_proxies": {
+        "message": "Proxies",
+        "description": "Navigation link title for config proxy list"
+    },
+    "OptionsNavigation_assign": {
+        "message": "Asignar",
+        "description": "Navigation link title for assign proxy for containers"
+    },
+    "ContainerList_defaultContainerName": {
+        "message": "Predeterminado",
+        "description": "Name of default container"
+    }
+}
