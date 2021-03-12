@@ -1,1 +1,154 @@
-{}
+{
+    "SupportPage_gitterInvite": {
+        "message": "Se vi havas demandojn, havas problemon aŭ simple volas babili, vi estas bonvena en nia kanalo ĉe $GITTER_NAME$:",
+        "description": "Gitter welcome message displayed on Support page",
+        "placeholders": {
+            "GITTER_NAME": {
+                "content": "Gitter"
+            }
+        }
+    },
+    "ProxySettingsTestResult_noDirectConnection": {
+        "message": "La agordoj estas ĝustaj, sed ŝajnas ke ne eblas konekti al Interreto sen retperanto.",
+        "description": "Text displayed when proxied request succeeded, but direct request failed"
+    },
+    "ProxySettingsTestResult_incorrectSettings": {
+        "message": "Eraro! Ne povis konektiĝi al la retperanto. Probable la agordoj estas malĝustaj.",
+        "description": "Text displayed when direct request is successful, but proxied request failed"
+    },
+    "ProxyForm_testProxySettingsConfirmationText": {
+        "message": "Por testi agordojn, necesas fari kelkajn petojn al $DUCKDUCKGO_NAME$. Ĉu daŭrigi?",
+        "description": "Text shown when a user clicks Test settings button notifying user about request to 3rd party service",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxySettingsTestResult_notConnectedToTheInternet": {
+        "message": "Eraro! Probable, vi ne estas konektita al Interreto.",
+        "description": "Text displayed when both direct and proxied requests failed to succeed"
+    },
+    "ProxySettingsTestResult_settingsAreCorrect": {
+        "message": "La agordoj estas ĝustaj!",
+        "description": "Text displayed when result of testing proxy settings was successful in proxy form"
+    },
+    "ImportPage_foxyProxyInputLabel": {
+        "message": "Preferoj pri FoxyProxy",
+        "description": "Label of FoxyProxy settings file input"
+    },
+    "OptionsPage_browserTabTitle": {
+        "message": "Preferoj pri la etendaĵo Container Proxy",
+        "description": "Title of option page"
+    },
+    "General_extensionDescription": {
+        "message": "Asigni retperanton al ingo",
+        "description": "Description of the extension."
+    },
+    "ImportPage_importButtonDoImport": {
+        "message": "Importi $NUMBER$ retperantojn",
+        "description": "Text displayed on Import button when there is something to import",
+        "placeholders": {
+            "NUMBER": {
+                "content": "$1"
+            }
+        }
+    },
+    "ImportPage_importButtonNoFileSelected": {
+        "message": "Elektu dosieron",
+        "description": "Text displayed on Import button when no file is selected or the file is invalid"
+    },
+    "ImportPage_heading": {
+        "message": "Importi retperantojn",
+        "description": "Header of import proxies page"
+    },
+    "ProxySettingsTestResult_proxiedRequest": {
+        "message": "Perita peto:",
+        "description": "Proxied request header"
+    },
+    "ProxySettingsTestResult_directRequest": {
+        "message": "Rekta peto:",
+        "description": "Direct request header"
+    },
+    "ProxySettingsTestResult_error": {
+        "message": "Eraro!",
+        "description": "Generic text meaning there is an error"
+    },
+    "ProxyForm_duckduckgoAttribution": {
+        "message": "IP-rezultoj el $DUCKDUCKGO_NAME$",
+        "description": "Attribution to DuckDuckGo for IP query",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxyForm_save": {
+        "message": "Konservi",
+        "description": "Save button in proxy form"
+    },
+    "ProxyForm_testProxySettingsLabel": {
+        "message": "Testi",
+        "description": "Settings test button label in proxy form"
+    },
+    "ProxyForm_passwordFieldLabel": {
+        "message": "Pasvorto",
+        "description": "Password field in proxy form"
+    },
+    "ProxyForm_usernameFieldLabel": {
+        "message": "Salutnomo",
+        "description": "Username field in proxy form"
+    },
+    "ProxyForm_portFieldLabel": {
+        "message": "Pordo",
+        "description": "Port field in proxy form"
+    },
+    "ProxyForm_incorrectServerError": {
+        "message": "Valoro devas esti aŭ IP-adreso aŭ reteja nomo",
+        "description": "Error message displayed when incorrect server is entered"
+    },
+    "ProxyForm_doNotProxyLocalFieldLabel": {
+        "message": "Ne peri lokajn adresojn (localhost, 127.0.0.1, ::1)",
+        "description": "`Do not proxy local addresses` field in the proxy form"
+    },
+    "ProxyForm_serverFieldLabel": {
+        "message": "Servilo",
+        "description": "Server field in proxy form"
+    },
+    "ProxyForm_titleFieldLabel": {
+        "message": "Titolo (Ne deviga)",
+        "description": "Title field in proxy form"
+    },
+    "ProxyForm_protocolFieldLabel": {
+        "message": "Protokolo",
+        "description": "Protocol field in proxy form"
+    },
+    "ProxyList_delete": {
+        "message": "Forviŝi",
+        "description": "Delete button in proxy list"
+    },
+    "ProxyList_edit": {
+        "message": "Redakti",
+        "description": "Edit button in proxy list"
+    },
+    "ContainerList_proxyDisabled": {
+        "message": "Rekte",
+        "description": "Config containers to not use proxy"
+    },
+    "OptionsNavigation_support": {
+        "message": "Subteno",
+        "description": "Navigation link title for support information page"
+    },
+    "OptionsNavigation_proxies": {
+        "message": "Retperantoj",
+        "description": "Navigation link title for config proxy list"
+    },
+    "OptionsNavigation_assign": {
+        "message": "Asigni",
+        "description": "Navigation link title for assign proxy for containers"
+    },
+    "ContainerList_defaultContainerName": {
+        "message": "Apriora",
+        "description": "Name of default container"
+    }
+}
