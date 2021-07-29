@@ -1,1 +1,154 @@
-{}
+{
+    "ImportPage_importButtonDoImport": {
+        "message": "$NUMBER$ proxy'leri içe aktar",
+        "description": "Text displayed on Import button when there is something to import",
+        "placeholders": {
+            "NUMBER": {
+                "content": "$1"
+            }
+        }
+    },
+    "ImportPage_importButtonNoFileSelected": {
+        "message": "Bir dosya seçin",
+        "description": "Text displayed on Import button when no file is selected or the file is invalid"
+    },
+    "ImportPage_foxyProxyInputLabel": {
+        "message": "FoxyProxy ayarları",
+        "description": "Label of FoxyProxy settings file input"
+    },
+    "ImportPage_heading": {
+        "message": "Proxy'leri içe aktar",
+        "description": "Header of import proxies page"
+    },
+    "SupportPage_gitterInvite": {
+        "message": "Herhangi bir sorunuz varsa, bir sorununuz varsa veya sadece sohbet etmek istiyorsanız $GITTER_NAME$ adlı kanalımızda hoş geldiniz:",
+        "description": "Gitter welcome message displayed on Support page",
+        "placeholders": {
+            "GITTER_NAME": {
+                "content": "Gitter"
+            }
+        }
+    },
+    "ProxySettingsTestResult_proxiedRequest": {
+        "message": "Proxy'lenmiş istek:",
+        "description": "Proxied request header"
+    },
+    "ProxySettingsTestResult_directRequest": {
+        "message": "Doğrudan istek:",
+        "description": "Direct request header"
+    },
+    "ProxySettingsTestResult_incorrectSettings": {
+        "message": "Hata! Proxy'ye bağlanılamadı. Muhtemelen ayarlar yanlış.",
+        "description": "Text displayed when direct request is successful, but proxied request failed"
+    },
+    "ProxySettingsTestResult_noDirectConnection": {
+        "message": "Ayarlar doğru, ancak internete proxy olmadan bağlanmak mümkün değil gibi görünüyor.",
+        "description": "Text displayed when proxied request succeeded, but direct request failed"
+    },
+    "ProxySettingsTestResult_notConnectedToTheInternet": {
+        "message": "Hata! Muhtemelen internete bağlı değilsin.",
+        "description": "Text displayed when both direct and proxied requests failed to succeed"
+    },
+    "ProxySettingsTestResult_error": {
+        "message": "Hata!",
+        "description": "Generic text meaning there is an error"
+    },
+    "ProxySettingsTestResult_settingsAreCorrect": {
+        "message": "Ayarlar doğru!",
+        "description": "Text displayed when result of testing proxy settings was successful in proxy form"
+    },
+    "ProxyForm_duckduckgoAttribution": {
+        "message": "$DUCKDUCKGO_NAME$'dan IP sonuçları",
+        "description": "Attribution to DuckDuckGo for IP query",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxyForm_save": {
+        "message": "Kaydet",
+        "description": "Save button in proxy form"
+    },
+    "ProxyForm_testProxySettingsLabel": {
+        "message": "Test",
+        "description": "Settings test button label in proxy form"
+    },
+    "ProxyForm_testProxySettingsConfirmationText": {
+        "message": "Bu ayarları test etmek için $DUCKDUCKGO_NAME$'e birkaç istekte bulunmak gerekiyor. Devam et?",
+        "description": "Text shown when a user clicks Test settings button notifying user about request to 3rd party service",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxyForm_passwordFieldLabel": {
+        "message": "Şifre",
+        "description": "Password field in proxy form"
+    },
+    "ProxyForm_usernameFieldLabel": {
+        "message": "Kullanıcı Adı",
+        "description": "Username field in proxy form"
+    },
+    "ProxyForm_portFieldLabel": {
+        "message": "Port",
+        "description": "Port field in proxy form"
+    },
+    "ProxyForm_incorrectServerError": {
+        "message": "Değer bir IP Adresi veya alan adı olmalıdır",
+        "description": "Error message displayed when incorrect server is entered"
+    },
+    "ProxyForm_doNotProxyLocalFieldLabel": {
+        "message": "Yerel adresleri proxy yapmayın (localhost, 127.0.0.1, ::1)",
+        "description": "`Do not proxy local addresses` field in the proxy form"
+    },
+    "ProxyForm_serverFieldLabel": {
+        "message": "Sunucu",
+        "description": "Server field in proxy form"
+    },
+    "ProxyForm_titleFieldLabel": {
+        "message": "Başlık (İsteğe Bağlı)",
+        "description": "Title field in proxy form"
+    },
+    "ProxyForm_protocolFieldLabel": {
+        "message": "Protokol",
+        "description": "Protocol field in proxy form"
+    },
+    "ProxyList_delete": {
+        "message": "Kaldır",
+        "description": "Delete button in proxy list"
+    },
+    "ProxyList_edit": {
+        "message": "Düzenle",
+        "description": "Edit button in proxy list"
+    },
+    "ContainerList_proxyDisabled": {
+        "message": "Doğrudan",
+        "description": "Config containers to not use proxy"
+    },
+    "OptionsNavigation_support": {
+        "message": "Destek",
+        "description": "Navigation link title for support information page"
+    },
+    "OptionsNavigation_proxies": {
+        "message": "Proxy'ler",
+        "description": "Navigation link title for config proxy list"
+    },
+    "General_extensionDescription": {
+        "message": "Bir kapsayıcıya proxy ata",
+        "description": "Description of the extension."
+    },
+    "OptionsNavigation_assign": {
+        "message": "Ata",
+        "description": "Navigation link title for assign proxy for containers"
+    },
+    "OptionsPage_browserTabTitle": {
+        "message": "Kapsayıcı Proxy uzantısı ayarları",
+        "description": "Title of option page"
+    },
+    "ContainerList_defaultContainerName": {
+        "message": "Varsayılan",
+        "description": "Name of default container"
+    }
+}
