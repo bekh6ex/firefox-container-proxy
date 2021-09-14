@@ -153,6 +153,6 @@ class Helper extends PageObject {
     }
     const text = await this._driver.getPageSource()
 
-    expect(text).to.include('The proxy server is refusing connections')
+    expect(text).to.include('Firefox is configured to use a proxy server that is refusing connections.')
   }
 }
