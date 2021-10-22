@@ -35,6 +35,7 @@
     padding-inline-start: 10px;
     transition: background-color 150ms;
     display: flex;
+    text-decoration: none;
 }
 
 .nav .nav__item.assign {
@@ -78,7 +79,6 @@
     padding-inline-start: 9px;
     margin: 0;
     -moz-user-select: none;
-    cursor: default;
     margin-inline-start: 6px;
     margin-inline-end: 5px;
 

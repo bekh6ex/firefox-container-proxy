@@ -9,7 +9,7 @@ export class Layout implements Component {
     const headerText = m('.header-text', [title, desc])
     const header = m('header', [logo, headerText])
     const main = m('main', [
-      m(new Navigation()),
+      m(Navigation),
       m('section.content', vnode.children)
     ])
     return [header, main]
