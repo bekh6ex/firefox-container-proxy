@@ -153,7 +153,6 @@ export default class ProxyForm {
         ]),
         m('div.ProxyForm__actions', [
           m('button[type=button]', {
-            // class: style.button,
             'data-testid': 'testSettings',
             onclick: async () => {
               const confirmed = confirm(t('ProxyForm_testProxySettingsConfirmationText'))

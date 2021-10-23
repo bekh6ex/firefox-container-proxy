@@ -1,25 +1,26 @@
 import m, { ClassComponent, FactoryComponent, Vnode } from 'mithril'
+import s from './Navigation.module.scss'
 
 export default class Navigation implements ClassComponent {
   view (): Vnode {
-    return m('nav.nav', [
-      m('section.nav__main', [
+    return m('nav', {class: s.nav}, [
+      m('section', {class: s.main}, [
         m(NavItem, {
           href: '/containers',
-          text: browser.i18n.getMessage('OptionsNavigation_assign'),
-          classes: 'assign'
+          text: 'OptionsNavigation_assign',
+          classes: s.assign
         }),
         m(NavItem, {
           href: '/proxies',
-          text: browser.i18n.getMessage('OptionsNavigation_proxies'),
-          classes: 'proxies'
+          text: 'OptionsNavigation_proxies',
+          classes: s.proxies
         }),
       ]),
-      m('section.nav__support', [
+      m('section', {class: s.support},  [
         m(NavItem, {
           href: '/support',
-          text: browser.i18n.getMessage('OptionsNavigation_support'),
-          classes: 'help'
+          text: 'OptionsNavigation_support',
+          classes: s.help
         })
       ])
 
@@ -30,16 +31,17 @@ export default class Navigation implements ClassComponent {
 type NavItemProps = { readonly href: string, text: string, classes: string }
 
 const NavItem: FactoryComponent<NavItemProps> = () => {
+  const t = browser.i18n.getMessage
   return {
     view: ({ attrs: { href, text, classes } }): Vnode => {
       const path = m.route.get()
       const active = path === href
-      classes = classes + (active ? ' active' : '')
+      classes = classes + (active ? ' ' + s.active : '')
       href = '#!' + href
-      return m('a.nav__item', { class: classes, href }, [
-        m('.nav__item-icon'),
-        m('.nav__item-label', text)
-      ])
+      return <a class={[s.item, classes].join(' ')} href={href}>
+        <div class={s['item-icon']}/>
+        <div class={s['item-label']}>{t(text)}</div>
+      </a>
     }
   }
 }

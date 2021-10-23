@@ -1,0 +1,89 @@
+.nav {
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+
+    -moz-appearance: none;
+    background-color: initial;
+    border-width: 0;
+    width: 240px;
+    padding: 1px;
+
+
+    .main {
+        flex-grow: 1;
+        font-size: var(--title-20);
+
+        --item-height: 48px;
+    }
+
+
+
+    .item {
+        --color: var(--text-color);
+        color: var(--color);
+
+        min-height: var(--item-height);
+        -moz-appearance: none;
+        margin-inline-start: 34px;
+        padding-inline-end: 10px;
+        padding-inline-start: 10px;
+        transition: background-color 150ms;
+        display: flex;
+        text-decoration: none;
+    }
+
+    .item.assign {
+        --nav-icon:url("Top Sites.svg");
+    }
+    .item.proxies {
+        --nav-icon:url("Secure.svg");
+    }
+    .item.help {
+        --nav-icon:url("Help.svg");
+    }
+
+    .item .item-icon {
+        width: 1.43em; /*24px*/
+
+        background-image: var(--nav-icon);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+
+        margin-right: 4px;
+
+        fill: var(--color);
+        filter: url("../icons/filter.svg#fill");
+    }
+
+    .item:hover {
+        background-color: var(--in-content-category-background-hover);
+        border-radius: 2px;
+    }
+
+    .item.active {
+        --color: var(--in-content-category-text-selected);
+    }
+
+    .item-label {
+        align-self: center;
+
+        line-height: 1.4em;
+        padding-bottom: 2px;
+        padding-inline-start: 9px;
+        margin: 0;
+        -moz-user-select: none;
+        margin-inline-start: 6px;
+        margin-inline-end: 5px;
+
+    }
+
+    .support {
+        font-size: .9em;
+        --item-height: 36px;
+        margin-bottom: 36px;
+    }
+
+}

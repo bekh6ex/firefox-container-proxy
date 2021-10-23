@@ -1,7 +1,7 @@
-import m, { Component, Vnode } from 'mithril'
+import m, { ClassComponent, Component, Vnode } from 'mithril'
 import Navigation from './nav/Navigation'
 
-export class Layout implements Component {
+export class Layout implements ClassComponent {
   view (vnode: Vnode): Vnode[] {
     const title = m('h1', browser.runtime.getManifest().name)
     const desc = m('p.header-description', browser.i18n.getMessage('General_extensionDescription'))
@@ -9,9 +9,10 @@ export class Layout implements Component {
     const headerText = m('.header-text', [title, desc])
     const header = m('header', [logo, headerText])
     const main = m('main', [
-      m(Navigation),
+      <Navigation></Navigation>,
       m('section.content', vnode.children)
     ])
     return [header, main]
+
   }
 }

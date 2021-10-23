@@ -1,4 +1,4 @@
-import m, { Component, Vnode } from 'mithril'
+import m, { ClassComponent, Vnode } from 'mithril'
 import { ProxyDao, Store } from '../store/Store'
 
 class ProxyListModel {
@@ -20,7 +20,7 @@ class ProxyListModel {
   }
 }
 
-export class ProxyList implements Component {
+export class ProxyList implements ClassComponent {
   private readonly model: ProxyListModel
 
   constructor () {

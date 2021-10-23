@@ -1,5 +1,5 @@
 import { Store } from '../store/Store'
-import m from 'mithril'
+import m, { Component } from 'mithril'
 import { Layout } from './Layout'
 import { ContainerListView } from './ContainerListView'
 import { ProxyList } from './ProxyList'
@@ -19,19 +19,19 @@ const supportPage = new SupportPage()
 
 m.route(document.body, '/containers', {
   '/containers': {
-    render: () => m(layout, m(containerListView))
+    render: () => m(Layout, m(containerListView))
   },
   '/proxies': {
-    render: () => m(layout, m(proxyList))
+    render: () => <Layout><ProxyList/></Layout>
   },
   '/proxies/import': {
-    render: vnode => m(layout, m(importPage, vnode.attrs))
+    render: vnode => m(Layout, m(importPage, {...vnode.attrs}))
   },
   '/proxies/:id': {
-    render: vnode => m(layout, m(proxyForm, vnode.attrs))
+    render: vnode => m(Layout, m(proxyForm, vnode.attrs))
   },
   '/support': {
-    render: () => m(layout, m(supportPage))
+    render: () => m(Layout, m(supportPage))
   }
 })
 

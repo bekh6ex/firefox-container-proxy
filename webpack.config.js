@@ -7,7 +7,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 module.exports = {
   entry: {
     background: './src/background/index.ts',
-    options: './src/options/index.ts',
+    options: './src/options/index.tsx',
   },
   devtool: 'source-map',
   mode: 'development',
@@ -27,7 +27,7 @@ module.exports = {
     // },
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.tsx', '.js', '.module.scss'],
     plugins: [new TsconfigPathsPlugin()],
   },
   output: {
@@ -40,6 +40,17 @@ module.exports = {
         test: /\.ts$/,
         loader: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.tsx$/,
+        use: {
+          loader: 'babel-loader'
+        },
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.module\.scss$/i,
+        use: ["style-loader","css-modules-typescript-loader","css-loader","postcss-loader", "sass-loader"],
       },
     ]
   },
@@ -55,7 +66,7 @@ module.exports = {
         'LICENSE',
         'src/manifest.json',
         { from: '**/*.html', context: 'src' },
-        { from: '**/*.css', context: 'src' },
+        { from: '**/*.css', context: 'src',  },
         { from: '**/*.svg', context: 'src' },
         { from: 'src/_locales', to: '_locales' },
         // { from: 'src/ui/vendor', to: 'vendor' },

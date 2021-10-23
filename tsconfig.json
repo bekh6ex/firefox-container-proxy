@@ -9,7 +9,9 @@
     "allowJs": true,
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
-    "strict": true
+    "strict": true,
+    "jsx": "preserve",
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "include": [
     "src/**/*",

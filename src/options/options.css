@@ -3,7 +3,7 @@
 @import "css/button.css";
 @import "css/input.css";
 @import "css/checkbox.css";
-@import "nav/Navigation.css";
+@import "nav/Navigation.module.scss";
 /*noinspection CssUnknownTarget*/
 @import "chrome://browser/skin/preferences/containers.css";
 @import "ProxyForm/ProxyForm.css";
