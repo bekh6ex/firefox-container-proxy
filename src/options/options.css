@@ -22,6 +22,17 @@
     text-rendering: optimizeLegibility;
     -moz-control-character-visibility: visible;
 }
+:root {
+    --text-color: var(--grey-90);
+    --bg-color: var(--grey-10);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: var(--grey-10);
+        --bg-color: var(--grey-90);
+    }
+}
 
 :root {
     --in-content-category-outline-focus: 1px dotted #0a84ff;
@@ -54,6 +65,9 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: stretch;
+
+    color: var(--text-color);
+    background-color: var(--bg-color);
 }
 
 
@@ -120,8 +134,8 @@ main {
     width: 24px;
 
     background-image: var(--identity-icon);
-    -moz-context-properties: fill;
     fill: var(--identity-icon-color);
+    filter: url("icons/filter.svg#fill");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;

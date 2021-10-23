@@ -25,7 +25,7 @@
 
 
 .nav .nav__item {
-    --color: var(--grey-90);
+    --color: var(--text-color);
     color: var(--color);
 
     min-height: var(--item-height);
@@ -58,8 +58,8 @@
 
     margin-right: 4px;
 
-    -moz-context-properties: fill, fill-opacity;
     fill: var(--color);
+    filter: url("../icons/filter.svg#fill");
 }
 
 .nav .nav__item:hover {
