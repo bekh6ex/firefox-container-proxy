@@ -11,10 +11,12 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "jsx": "preserve",
+//    "jsxFactory": "m",
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "include": [
     "src/**/*",
-    "test/unit/**/*"
+    "test/unit/**/*",
+    "declarations.d.ts"
   ]
 }

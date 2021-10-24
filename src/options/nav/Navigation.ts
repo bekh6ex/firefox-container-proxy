@@ -1,7 +1,7 @@
 import m, { ClassComponent, FactoryComponent, Vnode } from 'mithril'
 import s from './Navigation.module.scss'
 
-export default class Navigation implements ClassComponent {
+class Navigation implements ClassComponent {
   view (): Vnode {
     return m('nav', {class: s.nav}, [
       m('section', {class: s.main}, [
@@ -28,6 +28,8 @@ export default class Navigation implements ClassComponent {
   }
 }
 
+export default Navigation
+
 type NavItemProps = { readonly href: string, text: string, classes: string }
 
 const NavItem: FactoryComponent<NavItemProps> = () => {
@@ -38,10 +40,10 @@ const NavItem: FactoryComponent<NavItemProps> = () => {
       const active = path === href
       classes = classes + (active ? ' ' + s.active : '')
       href = '#!' + href
-      return <a class={[s.item, classes].join(' ')} href={href}>
-        <div class={s['item-icon']}/>
-        <div class={s['item-label']}>{t(text)}</div>
-      </a>
+      return m('a', {class: [s.item, classes].join(' '), href}, [
+        m('div', {class: s['item-icon']}),
+        m('div', {class: s['item-label']}, [t(text)]),
+      ])
     }
   }
 }

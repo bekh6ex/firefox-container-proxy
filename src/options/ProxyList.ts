@@ -20,6 +20,7 @@ class ProxyListModel {
   }
 }
 
+
 export class ProxyList implements ClassComponent {
   private readonly model: ProxyListModel
 
@@ -32,7 +33,7 @@ export class ProxyList implements ClassComponent {
     m.redraw()
   }
 
-  view (): Vnode[] {
+  view () {
     const items: Vnode[] = this.model.list.map(this.renderProxyItem.bind(this))
     const actions = m('div.ProxyList__list-actions', [
       // TODO: Finish import features

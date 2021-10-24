@@ -7,7 +7,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 module.exports = {
   entry: {
     background: './src/background/index.ts',
-    options: './src/options/index.tsx',
+    options: './src/options/index.ts',
   },
   devtool: 'source-map',
   mode: 'development',
@@ -50,7 +50,7 @@ module.exports = {
       },
       {
         test: /\.module\.scss$/i,
-        use: ["style-loader","css-modules-typescript-loader","css-loader","postcss-loader", "sass-loader"],
+        use: ["style-loader","css-modules-typescript-loader","css-loader", "sass-loader"],
       },
     ]
   },

@@ -1,5 +1,5 @@
 import { Store } from '../store/Store'
-import m, { Component } from 'mithril'
+import m from 'mithril'
 import { Layout } from './Layout'
 import { ContainerListView } from './ContainerListView'
 import { ProxyList } from './ProxyList'
@@ -10,9 +10,7 @@ import ImportPage from './import/ImportPage'
 const store = new Store();
 (globalThis as any).store = store
 
-const layout = new Layout()
 const containerListView = new ContainerListView()
-const proxyList = new ProxyList()
 const proxyForm = new ProxyForm()
 const importPage = new ImportPage({ store })
 const supportPage = new SupportPage()
@@ -22,7 +20,7 @@ m.route(document.body, '/containers', {
     render: () => m(Layout, m(containerListView))
   },
   '/proxies': {
-    render: () => <Layout><ProxyList/></Layout>
+    render: () => m(Layout, [m(ProxyList)])
   },
   '/proxies/import': {
     render: vnode => m(Layout, m(importPage, {...vnode.attrs}))

@@ -26,21 +26,25 @@ export async function testProxySettings (settings: SettingsToTest): Promise<Test
   }
 
   let proxiedIpQuery
-  let proxiedError
+  let proxiedError: Error|undefined = undefined
   try {
     proxiedIpQuery = await fetchProxiedIpData(settings)
   } catch (e) {
+    // @ts-expect-error
     proxiedError = e
   }
 
   if (directIpQuery === undefined) {
     if (proxiedIpQuery === undefined) {
+      // @ts-expect-error
       return new ConnectionIssueResult({ directError, proxiedError })
     } else {
+      // @ts-expect-error
       return new NoDirectConnectionResult({ directError, proxied: proxiedIpQuery })
     }
   } else {
     if (proxiedIpQuery === undefined) {
+      // @ts-expect-error
       return new SettingsErrorResult({ directIpQuery, proxiedError })
     } else {
       return new SuccessfulTestResult({ direct: directIpQuery, proxied: proxiedIpQuery })

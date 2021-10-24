@@ -1,5 +1,7 @@
-import m, { ClassComponent, Component, Vnode } from 'mithril'
+import m, { ClassComponent, ClosureComponent, Component, FactoryComponent, Vnode } from 'mithril'
 import Navigation from './nav/Navigation'
+
+
 
 export class Layout implements ClassComponent {
   view (vnode: Vnode): Vnode[] {
@@ -9,10 +11,9 @@ export class Layout implements ClassComponent {
     const headerText = m('.header-text', [title, desc])
     const header = m('header', [logo, headerText])
     const main = m('main', [
-      <Navigation></Navigation>,
+      m(Navigation),
       m('section.content', vnode.children)
     ])
     return [header, main]
-
   }
 }
