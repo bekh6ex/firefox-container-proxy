@@ -24,13 +24,22 @@
 }
 :root {
     --text-color: var(--grey-90);
+    --text-color-a10: var(--grey-90-a10);
+    --text-color-a20: var(--grey-90-a20);
+    --text-color-a30: var(--grey-90-a30);
+    --text-color-a80: var(--grey-90-a80);
     --bg-color: var(--grey-10);
+    --input-bg: #fff
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         --text-color: var(--grey-10);
+        --text-color-a10: var(--grey-10-a10);
+        --text-color-a20: var(--grey-10-a20);
+        --text-color-a30: rgba(249, 249, 250, 0.3); /*--grey-10-a30 not defined*/
         --bg-color: var(--grey-90);
+        --input-bg: #000
     }
 }
 
@@ -109,7 +118,7 @@ main {
     margin-right: 8px;
     padding-top: 4px;
     padding-bottom: 4px;
-    border-bottom: 1px solid var(--grey-90-a30);
+    border-bottom: 1px solid var(--text-color-a30);
 }
 
 .container-item:last-of-type {

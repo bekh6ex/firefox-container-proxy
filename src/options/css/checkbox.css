@@ -1,20 +1,20 @@
 .checkbox {
   -moz-appearance: none;
   -webkit-appearance: none;
-  background-color: var(--grey-90-a10);
+  background-color: var(--text-color-a10);
   border-radius: 2px;
-  border: 1px solid var(--grey-90-a30);
+  border: 1px solid var(--text-color-a30);
   height: 16px;
   margin: -2px 4px;
   width: 16px;
 }
 
 .checkbox:hover {
-  background-color: var(--grey-90-a20);
+  background-color: var(--text-color-a20);
 }
 
 .checkbox:active {
-  background-color: var(--grey-90-a30);
+  background-color: var(--text-color-a30);
 }
 
 .checkbox:focus {
@@ -41,7 +41,7 @@
 }
 
 .checkbox:disabled:hover {
-  background-color: var(--grey-90-a10);
+  background-color: var(--text-color-a10);
 }
 
 .checkbox:disabled:checked:hover {

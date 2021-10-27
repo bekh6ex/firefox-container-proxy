@@ -1,8 +1,7 @@
 select {
-  background-color: var(--grey-90-a10);
   border: 0 none;
   border-radius: 2px;
-  color: var(--grey-90);
+  color: var(--text-color);
 
   font-family: inherit;
   font-weight: 400;
@@ -13,10 +12,17 @@ select {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
+  background-color: var(--input-bg);
 
-  background-image: url("icons/Arrowhead Down.svg");
+  background-image: url("icons/Arrowhead Down-dark.svg");
   background-repeat: no-repeat;
   background-position: calc(100% - 4px) center;
+}
+
+@media (prefers-color-scheme: dark) {
+  select {
+    background-image: url("icons/Arrowhead Down-bright.svg");
+  }
 }
 
 /* Hover, Active states */
@@ -31,12 +37,12 @@ select:focus {
 select:hover,
 a.select:hover {
   box-shadow: none;
-  background-color: var(--grey-90-a20);
+  background-color: var(--text-color-a20);
 }
 
 select:active {
   box-shadow: none;
-  background-color: var(--grey-90-a30);
+  background-color: var(--input-bg);
 }
 
 select::-moz-focusring {

@@ -3,11 +3,12 @@
 }
 
 .input__field {
-  border-color: var(--grey-90-a20);
+  border-color: var(--text-color-a20);
   border-width: 1.5px;
   border-radius: 2px;
   border-style: solid;
-  color: var(--grey-90);
+  color: var(--text-color);
+  background-color: var(--input-bg);
   font-size: .833rem/1.4;
   height: 32px;
   padding: 8px;
@@ -23,7 +24,7 @@
 }
 
 .input__field:hover {
-  border-color: var(--grey-90-a30);
+  border-color: var(--text-color-a20);
 }
 
 .input__field:focus {

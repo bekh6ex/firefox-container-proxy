@@ -1,9 +1,9 @@
 button,
 a.button {
-  background-color: var(--grey-90-a10);
+  background-color: var(--text-color-a10);
   border: 0 none;
   border-radius: 2px;
-  color: var(--grey-90);
+  color: var(--text-color);
   display: inline-flex;
   flex-direction: row;
   align-items: center;
@@ -47,7 +47,7 @@ a.button.button--ghost {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 16px 16px;
-  color: var(--grey-90-a80);
+  color: var(--text-color-a80);
   height: 32px;
   min-width: auto;
   padding: 8px;
@@ -89,23 +89,23 @@ a.button:focus {
 button:hover,
 a.button:hover {
   box-shadow: none;
-  background-color: var(--grey-90-a20);
+  background-color: var(--text-color-a20);
 }
 
 button:active,
 a.button:active {
   box-shadow: none;
-  background-color: var(--grey-90-a30);
+  background-color: var(--text-color-a30);
 }
 
 button.button--ghost:hover,
 a.button.button--ghost:hover {
-  background-color: var(--grey-90-a10);
+  background-color: var(--text-color-a10);
 }
 
 button.button--ghost:active,
 a.button.button--ghost:active {
-  background-color: var(--grey-90-a20);
+  background-color: var(--text-color-a20);
 }
 
 button::-moz-focusring {
