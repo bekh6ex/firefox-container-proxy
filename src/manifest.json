@@ -7,7 +7,7 @@
   "applications": {
     "gecko": {
       "id": "contaner-proxy@bekh-ivanov.me",
-      "strict_min_version": "77.0"
+      "strict_min_version": "91.1"
     }
   },
   "browser_action": {
