@@ -19,8 +19,8 @@ class OptionsPageObject extends PageObject {
   }
 
   header = '.header-text h1'
-  proxies = '.nav__item.proxies'
-  assign = '.nav__item.assign'
+  proxies = '[test-id=proxies]'
+  assign = '[test-id=assign]'
 
   /**
    * @return {Promise<ProxyListPageObject>}
