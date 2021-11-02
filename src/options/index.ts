@@ -13,7 +13,6 @@ const store = new Store();
 const containerListView = new ContainerListView()
 const proxyForm = new ProxyForm()
 const importPage = new ImportPage({ store })
-const supportPage = new SupportPage()
 
 m.route(document.body, '/containers', {
   '/containers': {
@@ -29,7 +28,9 @@ m.route(document.body, '/containers', {
     render: vnode => m(Layout, m(proxyForm, vnode.attrs))
   },
   '/support': {
-    render: () => m(Layout, m(supportPage))
+    render: () => {
+      return m(Layout, m(SupportPage))
+    }
   }
 })
 

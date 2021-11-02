@@ -1,9 +1,0 @@
-{
-    "presets": ["@babel/preset-typescript"],
-    "plugins": [
-        ["@babel/plugin-transform-react-jsx", {
-            "pragma": "m",
-            "pragmaFrag": "'['"
-        }]
-    ]
-}

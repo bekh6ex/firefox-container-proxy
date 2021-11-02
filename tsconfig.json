@@ -10,8 +10,8 @@
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "jsx": "preserve",
-//    "jsxFactory": "m",
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "include": [

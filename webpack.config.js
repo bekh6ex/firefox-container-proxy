@@ -1,7 +1,6 @@
 /* eslint-disable */
 const path = require('path')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
@@ -20,11 +19,6 @@ module.exports = {
     moduleIds: 'named',
     chunkIds: 'named',
     concatenateModules: false,
-    // splitChunks: {
-    //   chunks: (chunk) => {
-    //     return ['options', 'background'].includes(chunk.name)
-    //   },
-    // },
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.module.scss'],
@@ -37,15 +31,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.ts$/,
+        test: /\.tsx?$/,
         loader: 'ts-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.tsx$/,
-        use: {
-          loader: 'babel-loader'
-        },
         exclude: /node_modules/,
       },
       {
@@ -55,11 +42,6 @@ module.exports = {
     ]
   },
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   template: 'src/options/options.html',
-    //   filename: 'options.html',
-    //   chunks: ['options'],
-    // }),
     new CopyPlugin({
       patterns: [
         'README.md',
