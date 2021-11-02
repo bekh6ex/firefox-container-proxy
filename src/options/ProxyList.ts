@@ -41,8 +41,7 @@ export class ProxyList implements ClassComponent {
       //   m('a[href=/proxies/import]', { oncreate: m.route.link, class: 'button' }, 'Import')
       // ]),
       m('.proxy-button', [
-        // @ts-expect-error
-        m('a[href=/proxies/new]', { oncreate: m.route.link, class: 'button button--primary' }, '+')
+        m('a[href=#!/proxies/new]', { class: 'button button--primary' }, '+')
       ])
     ])
     return [...items, actions]
@@ -51,10 +50,8 @@ export class ProxyList implements ClassComponent {
   renderProxyItem (p: ProxyDao): Vnode {
     const text = m('div.proxy-name', [(p.title !== '') ? p.title : `${p.host}:${p.port}`])
 
-    const editButton = m('button.edit[type=button]', {
-      href: '/proxies/' + p.id,
-      // @ts-expect-error
-      oncreate: m.route.link
+    const editButton = m('a.button.edit', {
+      href: '#!/proxies/' + p.id,
     }, browser.i18n.getMessage('ProxyList_edit'))
     const deleteButton = m('button.delete[type=button]', {
       onclick: async () => {
