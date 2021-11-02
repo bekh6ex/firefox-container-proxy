@@ -27,6 +27,8 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "pnpm-lock.yaml" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run: npm install --prefix=$HOME/.local --global pnpm
       - run: pnpm install
       - save_cache:
