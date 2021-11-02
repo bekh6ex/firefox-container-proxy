@@ -29,7 +29,7 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-      - run: curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6
+      - run: npm install --prefix=$HOME/.local --global pnpm
       - run: pnpm install
       - save_cache:
           paths:
