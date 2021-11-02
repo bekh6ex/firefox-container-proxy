@@ -27,6 +27,7 @@ class OptionsPageObject extends PageObject {
    */
   async openProxyList () {
     await this.click(this.proxies)
+    await this.pause(1000) // TODO: Waiting for loading
     return this.createPageObject(ProxyListPageObject)
   }
 
@@ -35,6 +36,7 @@ class OptionsPageObject extends PageObject {
    */
   async openAssignProxy () {
     await this.click(this.assign)
+    await this.pause(1000) // TODO: Waiting for loading
     return this.createPageObject(AssignPageObject)
   }
 }
