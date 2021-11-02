@@ -15,7 +15,7 @@
     "ci:test-unit": "pnpm run test:unit",
     "ci:test-func": "pnpm run test:func",
     "ci:style-check": "pnpm run codeStyle:check",
-    "ci:lint": "pnpm run build && ls dist && pnpm run lint",
+    "ci:lint": "pnpm run build && cat dist/options/index.js && pnpm run lint",
     "build": "webpack",
     "build:watch": "webpack --watch",
     "clean": "rm -rf ./dist"
