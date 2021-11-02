@@ -29,14 +29,15 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-      - run: npm install
+      - run: npm install -g pnpm
+      - run: pnpm install
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: npm run ci:test-unit
-      - run: npm run ci:test-func
-      - run: npm run ci:style-check
-      - run: npm run ci:lint
+      - run: pnpm run ci:test-unit
+      - run: pnpm run ci:test-func
+      - run: pnpm run ci:style-check
+      - run: pnpm run ci:lint
