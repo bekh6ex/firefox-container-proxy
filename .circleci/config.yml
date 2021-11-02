@@ -26,15 +26,13 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+            - v1-dependencies-{{ checksum "pnpm-lock.yaml" }}
       - run: npm install --prefix=$HOME/.local --global pnpm
       - run: pnpm install
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v1-dependencies-{{ checksum "pnpm-lock.yaml" }}
 
       # run tests!
       - run: pnpm run ci:test-unit
