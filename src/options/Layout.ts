@@ -1,7 +1,5 @@
-import m, { ClassComponent, ClosureComponent, Component, FactoryComponent, Vnode } from 'mithril'
+import m, { ClassComponent, Vnode } from 'mithril'
 import Navigation from './nav/Navigation'
-
-
 
 export class Layout implements ClassComponent {
   view (vnode: Vnode): Vnode[] {

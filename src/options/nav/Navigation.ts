@@ -16,7 +16,7 @@ class Navigation implements ClassComponent {
           testId: 'proxies',
           text: 'OptionsNavigation_proxies',
           classes: s.proxies
-        }),
+        })
       ]),
       m('section', { class: s.support }, [
         m(NavItem, {
@@ -33,7 +33,7 @@ class Navigation implements ClassComponent {
 
 export default Navigation
 
-type NavItemProps = { readonly href: string, text: string, classes: string, readonly testId: string }
+interface NavItemProps { readonly href: string, text: string, classes: string, readonly testId: string }
 
 const NavItem: FactoryComponent<NavItemProps> = () => {
   const t = browser.i18n.getMessage
@@ -45,7 +45,7 @@ const NavItem: FactoryComponent<NavItemProps> = () => {
       href = '#!' + href
       return m('a', { class: [s.item, classes].join(' '), href, 'test-id': testId }, [
         m('div', { class: s['item-icon'] }),
-        m('div', { class: s['item-label'] }, [t(text)]),
+        m('div', { class: s['item-label'] }, [t(text)])
       ])
     }
   }

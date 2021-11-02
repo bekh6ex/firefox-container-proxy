@@ -26,7 +26,7 @@ export async function testProxySettings (settings: SettingsToTest): Promise<Test
   }
 
   let proxiedIpQuery
-  let proxiedError: Error|undefined = undefined
+  let proxiedError: Error|undefined
   try {
     proxiedIpQuery = await fetchProxiedIpData(settings)
   } catch (e) {

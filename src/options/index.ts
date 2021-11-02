@@ -23,7 +23,7 @@ m.route(document.body, '/containers', {
     render: () => m(Layout, [m(ProxyList)])
   },
   '/proxies/import': {
-    render: vnode => m(Layout, m(importPage, {...vnode.attrs}))
+    render: vnode => m(Layout, m(importPage, { ...vnode.attrs }))
   },
   '/proxies/:id': {
     render: vnode => m(Layout, m(proxyForm, vnode.attrs))

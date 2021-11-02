@@ -20,7 +20,6 @@ class ProxyListModel {
   }
 }
 
-
 export class ProxyList implements ClassComponent {
   private readonly model: ProxyListModel
 
@@ -33,7 +32,7 @@ export class ProxyList implements ClassComponent {
     m.redraw()
   }
 
-  view () {
+  view (): Vnode[] {
     const items: Vnode[] = this.model.list.map(this.renderProxyItem.bind(this))
     const actions = m('div.ProxyList__list-actions', [
       // TODO: Finish import features
@@ -51,7 +50,7 @@ export class ProxyList implements ClassComponent {
     const text = m('div.proxy-name', [(p.title !== '') ? p.title : `${p.host}:${p.port}`])
 
     const editButton = m('a.button.edit', {
-      href: '#!/proxies/' + p.id,
+      href: '#!/proxies/' + p.id
     }, browser.i18n.getMessage('ProxyList_edit'))
     const deleteButton = m('button.delete[type=button]', {
       onclick: async () => {
