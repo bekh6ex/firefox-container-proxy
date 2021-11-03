@@ -1,6 +1,10 @@
-name: test
+name: Test
 
-on: ['push']
+on:
+  workflow_call:
+    secrets:
+      token:
+        required: false
 
 jobs:
   test:

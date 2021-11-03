@@ -1,0 +1,12 @@
+name: test
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    name: Test
+    uses:
+      bekh6ex/firefox-container-proxy/.github/workflows/test.yaml@master
