@@ -18,7 +18,7 @@ jobs:
     steps:
       - run: firefox --version
       - run: |
-          container_id = $(docker ps -q)
+          container_id=$(docker ps -q)
           docker exec $container_id -- bash -c "eval 'useradd user && echo user:password | chpasswd && sockd -f /etc/dante/sockd.conf -p /tmp/sockd.pid'"
           docker restart $container_id
       - run: node --version && npm --version
