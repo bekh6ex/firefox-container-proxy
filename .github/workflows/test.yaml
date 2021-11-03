@@ -19,7 +19,7 @@ jobs:
       - run: firefox --version
       - run: |
           container_id=$(docker ps -q)
-          docker exec $container_id bash -c "eval 'useradd user && echo user:password | chpasswd"
+          docker exec $container_id bash -c "eval 'useradd user && echo user:password | chpasswd'"
           docker restart $container_id
       - run: node --version && npm --version
       - run: npm install -g pnpm
