@@ -152,3 +152,7 @@ main {
     margin-right: 4px;
 }
 
+.container-item.identity-icon-private-browsing {
+    --identity-icon-color:#8000D7;
+    --identity-icon: url('icons/Private browsing.svg');
+}

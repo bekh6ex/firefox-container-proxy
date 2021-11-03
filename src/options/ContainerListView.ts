@@ -7,6 +7,7 @@ class ContainerListModel {
   proxies: ProxyDao[] = []
   proxiesById: { [key: string]: ProxyDao } = {}
   relations: Map<string, string[]> = new Map<string, string[]>()
+  enableIncognito: boolean = false
 
   async loadAll (): Promise<void> {
     this.containers = await browser.contextualIdentities.query({})
@@ -17,6 +18,7 @@ class ContainerListModel {
     })
     const result = await browser.storage.local.get('relations')
     this.relations = new Map<string, string[]>(Object.entries(result.relations ?? {}))
+    this.enableIncognito = await browser.extension.isAllowedIncognitoAccess()
     m.redraw()
   }
 
@@ -46,7 +48,16 @@ export class ContainerListView implements Component {
       icon: '',
       iconUrl: ''
     })
-    return m('.containers', [...items, defaultContainer])
+
+    const privateContainer = this.model.enableIncognito ? this.renderContainerItem({
+      cookieStoreId: 'firefox-private',
+      name: 'Private Browsing', //TODO: Translate
+      color: '',
+      colorCode: '',
+      icon: 'private-browsing',
+      iconUrl: ''
+    }) : []
+    return m('.containers', [...items, defaultContainer, privateContainer])
   }
 
   renderSelectProxy (cookieStoreId: string, proxyId: string): Vnode {
