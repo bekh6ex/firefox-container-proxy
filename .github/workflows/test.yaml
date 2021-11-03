@@ -21,10 +21,20 @@ jobs:
           container_id=$(docker ps -q)
           docker exec $container_id bash -c "eval 'useradd user && echo user:password | chpasswd'"
           docker restart $container_id
-      - run: node --version && npm --version
-      - run: npm install -g pnpm
       - uses: actions/checkout@v2
-      - run: pnpm install
+      - name: Cache pnpm modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.20.1
+          run_install:  |
+            - args: [--frozen-lockfile, --strict-peer-dependencies]
+      - run: node --version
       - run: pnpm run ci:test-unit
       - run: pnpm run ci:test-func
       - run: pnpm run ci:style-check
