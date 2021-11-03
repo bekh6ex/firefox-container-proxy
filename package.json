@@ -13,7 +13,7 @@
     "lint": "addons-linter dist",
     "debug": "web-ext run -s dist --verbose --browser-console --keep-profile-changes -p ./tmpProfile --start-url about:debugging --start-url about:addons  --pref=intl.locale.requested=en #--pref=intl.locale.matchOS=false",
     "ci:test-unit": "pnpm run test:unit",
-    "ci:test-func": "pnpm run test:func",
+    "ci:test-func": "HEADLESS=true pnpm run test:func",
     "ci:style-check": "pnpm run codeStyle:check",
     "ci:lint": "pnpm run build && pnpm run lint",
     "build": "webpack",

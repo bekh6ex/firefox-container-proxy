@@ -16,7 +16,13 @@ describe('Container Proxy extension', function () {
   this.timeout(30000)
 
   before(async () => {
-    const webExtension = await webExtensionsGeckoDriver(manifestPath)
+    const fxOptions = new firefox.Options()
+    if (process.env.HEADLESS) {
+      fxOptions.headless()
+        .windowSize({ height: 1080, width: 1920 })
+    }
+
+    const webExtension = await webExtensionsGeckoDriver(manifestPath, { fxOptions })
     geckodriver = webExtension.geckodriver
   })
 
