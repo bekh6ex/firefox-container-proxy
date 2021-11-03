@@ -7,6 +7,10 @@
         "message": "Default",
         "description": "Name of default container"
     },
+    "ContainerList_privateBrowsingContainerName": {
+        "message": "Private Browsing",
+        "description": "Name of container for private browsing window"
+    },
     "OptionsPage_browserTabTitle": {
         "message": "Container Proxy extension settings",
         "description": "Title of option page"

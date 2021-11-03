@@ -51,7 +51,7 @@ export class ContainerListView implements Component {
 
     const privateContainer = this.model.enableIncognito ? this.renderContainerItem({
       cookieStoreId: 'firefox-private',
-      name: 'Private Browsing', //TODO: Translate Приватный режим
+      name: browser.i18n.getMessage('ContainerList_privateBrowsingContainerName'),
       color: '',
       colorCode: '',
       icon: 'private-browsing',

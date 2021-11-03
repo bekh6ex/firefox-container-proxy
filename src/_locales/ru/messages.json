@@ -7,6 +7,10 @@
         "message": "По умолчанию",
         "description": "Имя контейнера по умолчанию"
     },
+    "ContainerList_privateBrowsingContainerName": {
+        "message": "Приватный режим",
+        "description": "Имя контейнера для приватного режима"
+    },
     "OptionsPage_browserTabTitle": {
         "message": "Container Proxy - настройки расширения",
         "description": "Заголовок страницы параметров"
