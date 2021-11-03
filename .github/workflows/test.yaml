@@ -1,0 +1,21 @@
+name: test
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    services:
+      proxy-for-test:
+        image: vimagick/dante
+        ports:
+          - 1080:1080
+
+    steps:
+      - run: firefox --version
+
+#      - uses: actions/checkout@v2
