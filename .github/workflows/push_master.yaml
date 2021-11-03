@@ -10,3 +10,15 @@ jobs:
     name: Test
     uses:
       bekh6ex/firefox-container-proxy/.github/workflows/test.yaml@master
+  tagged-release:
+    name: "Tagged Release"
+    runs-on: "ubuntu-latest"
+    needs: test
+    steps:
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          draft: true
+          automatic_release_tag: "v${{ github.run_number }}"
+          files: |
+            README.md
