@@ -17,5 +17,8 @@ jobs:
 
     steps:
       - run: firefox --version
+      - run: docker ps
+      - run: npm --version
+      - run: npm install -g pnpm
 
 #      - uses: actions/checkout@v2
