@@ -156,3 +156,13 @@ main {
     --identity-icon-color:#8000D7;
     --identity-icon: url('icons/Private browsing.svg');
 }
+
+.container-item.identity-icon-default {
+    --identity-icon-color: var(--text-color);
+    --identity-icon: url('chrome://branding/content/about-logo.svg');
+}
+
+.container-item.identity-icon-default .container-icon {
+    filter: none;
+    fill: none;
+}
