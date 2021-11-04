@@ -150,5 +150,9 @@
     "ContainerList_defaultContainerName": {
         "message": "Apriora",
         "description": "Name of default container"
+    },
+    "ContainerList_privateBrowsingContainerName": {
+        "message": "Privata retumo",
+        "description": "Name of container for private browsing window"
     }
 }
