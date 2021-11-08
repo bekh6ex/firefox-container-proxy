@@ -55,6 +55,10 @@
         "message": "Do not proxy local addresses (localhost, 127.0.0.1, ::1)",
         "description": "`Do not proxy local addresses` field in the proxy form"
     },
+    "ProxyForm_proxyDnsFieldLabel": {
+        "message": "Proxy DNS requests",
+        "description": "`Proxy DNS requests` field in the proxy form"
+    },
     "ProxyForm_incorrectServerError": {
         "message": "Value should be either IP address or domain name",
         "description": "Error message displayed when incorrect server is entered"

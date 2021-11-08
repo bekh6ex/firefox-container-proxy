@@ -3,12 +3,12 @@ const { webdriver: { until, By } } = require('webextensions-geckodriver')
 const assert = require('assert')
 
 class ProxyFormPageObject extends PageObject {
-  protocol = '.ProxyForm__connectionSettings select'
-  title = '.ProxyForm__titleInput input'
-  server = '.ProxyForm__hostInput input'
-  port = '.ProxyForm__portInput input'
-  username = '.ProxyForm__credentials .input:first-of-type input'
-  password = '.ProxyForm__credentials .input:last-of-type input'
+  protocol = '[data-testid=ProxyForm] select'
+  title = '[data-testid=ProxyForm] input[data-testid=title]'
+  server = '[data-testid=ProxyForm] input[data-testid=host]'
+  port = '[data-testid=ProxyForm] input[data-testid=port]'
+  username = '[data-testid=ProxyForm] input[data-testid=username]'
+  password = '[data-testid=ProxyForm] input[data-testid=password]'
   testSettingsButton = 'button[data-testid=testSettings]'
   saveButton = 'button[data-testid=save]'
   directTestResult = '[data-testid=directResult]'

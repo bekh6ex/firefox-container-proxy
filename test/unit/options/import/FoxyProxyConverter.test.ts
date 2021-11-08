@@ -39,7 +39,6 @@ describe('FoxyProxy converter', () => {
     expect(result.username).to.be.equal('socks5-username')
     expect(result.password).to.be.equal('socks5-password')
     expect(result.proxyDNS).to.be.equal(true)
-    expect(result.failoverTimeout).to.be.equal(defaultFailoverTimeout)
   })
 
   it('should convert SOCKS4 settings to Container Proxy format', () => {
@@ -73,7 +72,6 @@ describe('FoxyProxy converter', () => {
     expect(result.username).to.be.equal('socks4-username')
     expect(result.password).to.be.equal('socks4-password')
     expect(result.proxyDNS).to.be.undefined
-    expect(result.failoverTimeout).to.be.equal(defaultFailoverTimeout)
   })
 
   it('should convert HTTP settings to Container Proxy format', () => {
@@ -107,7 +105,6 @@ describe('FoxyProxy converter', () => {
     expect(result.username).to.be.equal('http-username')
     expect(result.password).to.be.equal('http-password')
     expect(result.proxyDNS).to.be.undefined
-    expect(result.failoverTimeout).to.be.equal(defaultFailoverTimeout)
   })
 
   it('should convert HTTP settings to Container Proxy format', () => {
@@ -141,7 +138,6 @@ describe('FoxyProxy converter', () => {
     expect(result.username).to.be.equal('https-username')
     expect(result.password).to.be.equal('https-password')
     expect(result.proxyDNS).to.be.undefined
-    expect(result.failoverTimeout).to.be.equal(defaultFailoverTimeout)
   })
 
   it('should ignore the Direct "proxy"', () => {
@@ -179,7 +175,6 @@ describe('FoxyProxy converter', () => {
       expect(result.port).to.be.a('number')
       expect(result.username).to.be.a('string')
       expect(result.password).to.be.a('string')
-      expect(result.failoverTimeout).to.be.equal(defaultFailoverTimeout)
     })
   })
 })

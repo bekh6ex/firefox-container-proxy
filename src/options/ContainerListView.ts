@@ -1,11 +1,12 @@
 import m, { Component, Vnode } from 'mithril'
-import { ProxyDao, Store } from '../store/Store'
+import { Store } from '../store/Store'
 import ContextualIdentity = browser.contextualIdentities.ContextualIdentity
+import { ProxySettings } from '../domain/ProxySettings'
 
 class ContainerListModel {
   containers: ContextualIdentity[] = []
-  proxies: ProxyDao[] = []
-  proxiesById: { [key: string]: ProxyDao } = {}
+  proxies: ProxySettings[] = []
+  proxiesById: { [key: string]: ProxySettings } = {}
   relations: Map<string, string[]> = new Map<string, string[]>()
   enableIncognito: boolean = false
 
@@ -64,7 +65,7 @@ export class ContainerListView implements Component {
     const proxyOptions = this.model.proxies.map(p => m('option', {
       value: p.id,
       selected: p.id === proxyId
-    }, p.title !== '' ? p.title : `${p.host}:${p.port}`))
+    }, p.title !== '' ? p.title : p.url))
     const defaultOption = m('option', {
       value: '',
       selected: proxyId === ''

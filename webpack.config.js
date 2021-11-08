@@ -37,7 +37,10 @@ module.exports = {
       },
       {
         test: /\.module\.scss$/i,
-        use: ["style-loader","css-modules-typescript-loader","css-loader", "sass-loader"],
+        use: ['style-loader', 'css-modules-typescript-loader', {
+          loader: 'css-loader',
+          options: { modules: { localIdentName: '[name]__[local]--[hash:base64:5]' } }
+        }, 'sass-loader'],
       },
     ]
   },
@@ -48,7 +51,7 @@ module.exports = {
         'LICENSE',
         'src/manifest.json',
         { from: '**/*.html', context: 'src' },
-        { from: '**/*.css', context: 'src',  },
+        { from: '**/*.css', context: 'src', },
         { from: '**/*.svg', context: 'src' },
         { from: 'src/_locales', to: '_locales' },
         // { from: 'src/ui/vendor', to: 'vendor' },

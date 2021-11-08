@@ -57,6 +57,7 @@ export default class ImportPage implements Component {
     console.log('Importing: ', this.proxiesToImport)
 
     for (const proxy of this.proxiesToImport) {
+      // @ts-expect-error
       await this.store.putProxy(proxy)
     }
 

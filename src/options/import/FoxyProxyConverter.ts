@@ -15,6 +15,7 @@ export default class FoxyProxyConverter {
       // @ts-expect-error
       .filter(([_key, value]) => typeMapping[value.type])
 
+    // @ts-ignore
     return proxiesToImport.map(([id, p]) => {
       // @ts-expect-error
       const type = typeMapping[p.type]

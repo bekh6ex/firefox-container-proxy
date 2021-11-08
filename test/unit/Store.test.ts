@@ -2,6 +2,8 @@ import { ProxyDao, Store } from '../../src/store/Store'
 import webExtensionsApiFake from 'webextensions-api-fake'
 
 import { expect } from 'chai'
+import { ProxySettings } from '../../src/domain/ProxySettings'
+const tryFromDao = ProxySettings.tryFromDao
 
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 
@@ -16,8 +18,8 @@ describe('Store', () => {
     delete (global as any).browser
   })
 
-  function someProxyWith (id: string): ProxyDao {
-    return {
+  function someProxyWith (id: string, props: Partial<ProxyDao> = {}): ProxySettings {
+    const dao = {
       id: id,
       title: 'some title',
       type: 'socks',
@@ -29,6 +31,7 @@ describe('Store', () => {
       failoverTimeout: 5,
       doNotProxyLocal: true
     }
+    return tryFromDao({ ...dao, ...props }) as ProxySettings
   }
 
   describe('getAllProxies', function () {
@@ -65,8 +68,7 @@ describe('Store', () => {
 
   it('stores doNotProxyLocal value', async () => {
     const id = 'someId'
-    const proxy = someProxyWith(id)
-    proxy.doNotProxyLocal = false
+    const proxy = someProxyWith(id, { doNotProxyLocal: false })
 
     await store.putProxy(proxy)
 

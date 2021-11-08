@@ -1,8 +1,10 @@
 import BackgroundMain, { doNotProxy } from '../../src/background/BackgroundMain'
-import { ProxyDao, Store } from '../../src/store/Store'
+import { Store } from '../../src/store/Store'
 import webExtensionsApiFake from 'webextensions-api-fake'
 
 import { expect } from 'chai'
+import { ProxySettings } from '../../src/domain/ProxySettings'
+import tryFromDao = ProxySettings.tryFromDao
 
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 
@@ -20,6 +22,8 @@ describe('BackgroundMain', function () {
   })
 
   const backgroundMain = new BackgroundMain({ store: store })
+
+  // TODO: Add test for proxyDNS property
 
   describe('onRequest', function () {
     it('should return empty array if no proxy is set up', async () => {
@@ -42,7 +46,7 @@ describe('BackgroundMain', function () {
 
       const result = await backgroundMain.onRequest({ cookieStoreId: 'firefox-default', url: 'https://google.com' })
 
-      expect(result[0].doNotProxyLocal).to.be.undefined
+      expect((result[0] as any).doNotProxyLocal).to.be.undefined
     })
 
     it('should return proxy for the container if url is invalid', async () => {
@@ -107,7 +111,7 @@ async function givenSomeProxyIsSetUpForContainer ({ host, containerId, doNotProx
   if (typeof doNotProxyLocal !== 'undefined') {
     proxy.doNotProxyLocal = doNotProxyLocal
   }
-  await store.putProxy(proxy as ProxyDao)
+  await store.putProxy(tryFromDao(proxy) as ProxySettings)
 
   await store.setContainerProxyRelation(containerId, proxyId)
 }

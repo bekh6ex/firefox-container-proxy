@@ -1,8 +1,9 @@
 import m, { ClassComponent, Vnode } from 'mithril'
-import { ProxyDao, Store } from '../store/Store'
+import { Store } from '../store/Store'
+import { ProxySettings } from '../domain/ProxySettings'
 
 class ProxyListModel {
-  list: ProxyDao[]
+  list: ProxySettings[]
 
   constructor () {
     this.list = []
@@ -46,8 +47,8 @@ export class ProxyList implements ClassComponent {
     return [...items, actions]
   }
 
-  renderProxyItem (p: ProxyDao): Vnode {
-    const text = m('div.proxy-name', [(p.title !== '') ? p.title : `${p.host}:${p.port}`])
+  renderProxyItem (p: ProxySettings): Vnode {
+    const text = m('div.proxy-name', [(p.title !== '') ? p.title : p.url])
 
     const editButton = m('a.button.edit', {
       href: '#!/proxies/' + p.id

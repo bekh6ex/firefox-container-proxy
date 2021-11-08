@@ -7,6 +7,7 @@ export interface Props<ValueType> {
   getValue: () => ValueType
   setValue: (v: ValueType) => void
   id?: string
+  'data-testid'?: string
 }
 
 export abstract class BaseInput<ValueType> implements Component {
@@ -17,14 +18,16 @@ export abstract class BaseInput<ValueType> implements Component {
   id: string
   props: { [key: string]: string | number }
   errorText: string | null
+  testId?: string
 
-  constructor ({ title, required = false, getValue, setValue, id }: Props<ValueType>) {
+  constructor ({ title, required = false, getValue, setValue, id, ...rest }: Props<ValueType>) {
     this.title = title
     this.required = Boolean(required)
     this.getValue = getValue
     this.setValue = setValue
     this.id = id ?? uuidv4()
     this.props = {}
+    this.testId = rest['data-testid']
     this.errorText = null
   }
 
@@ -55,11 +58,13 @@ export abstract class BaseInput<ValueType> implements Component {
     return null
   }
 
-  view ({ attrs: { class: className = '' } }): Vnode {
+  view ({ attrs: { class: className = '', ...rest } }): Vnode {
     const inputClasses = ['input__field']
     if (!this.valid) {
       inputClasses.push('input--error__field')
     }
+
+    const testId = this.testId !== undefined ? { 'data-testid': this.testId } : {}
 
     const topClasses = ['input', className]
     return m('div', { class: topClasses.join(' ') }, [
@@ -68,6 +73,8 @@ export abstract class BaseInput<ValueType> implements Component {
         'input',
         {
           ...this.props,
+          ...rest,
+          ...testId,
           id: this.id,
           type: this.type,
           class: inputClasses.join(' '),
@@ -114,7 +121,7 @@ export class CheckboxInput extends BaseInput<boolean> {
     return (event.target as HTMLInputElement).checked
   }
 
-  view ({ attrs: { class: className = '' } }): Vnode {
+  view ({ attrs: { class: className = '', disabled = false, ...rest } }): Vnode {
     const inputClasses = ['checkbox']
     if (!this.valid) {
       inputClasses.push('input--error__field')
@@ -127,18 +134,20 @@ export class CheckboxInput extends BaseInput<boolean> {
         'input',
         {
           ...this.props,
+          ...rest,
           id: this.id,
           type: 'checkbox',
           class: inputClasses.join(' '),
           required: this.required,
           title: this.errorText,
+          disabled,
           checked: this.getValue(),
           oninput: (e: InputEvent) => this.setValue(this.extractValueFromEvent(e)),
           onchange: (e: InputEvent) => this.onChange(this.extractValueFromEvent(e)),
           onfocusout: (e: InputEvent) => this.onChange(this.extractValueFromEvent(e))
         }
       ),
-      m('label', { class: 'input__label', for: this.id, style: 'display: inline' }, this.title)
+      m('label', { class: `input__label ${disabled ? 'checkbox--disabled__label__text' : ''}`, for: this.id, style: 'display: inline' }, this.title)
     ])
   }
 }

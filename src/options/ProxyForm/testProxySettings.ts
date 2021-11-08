@@ -7,6 +7,7 @@ export interface SettingsToTest {
   port: number
   username: string
   password: string
+  proxyDns?: boolean
 }
 
 /**
@@ -77,6 +78,13 @@ async function fetchProxiedIpData (proxyConfig: SettingsToTest): Promise<IpQuery
     const listener = (): ProxyInfo => {
       // TODO Add support for HTTP
       browser.proxy.onRequest.removeListener(listener)
+
+      // @ts-expect-error
+      delete proxyInfo.proxyDNS
+      // @ts-expect-error
+      delete proxyInfo.username
+      // @ts-expect-error
+      delete proxyInfo.password
 
       return proxyInfo
     }

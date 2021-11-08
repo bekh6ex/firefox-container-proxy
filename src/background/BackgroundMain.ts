@@ -1,8 +1,9 @@
-import { generateAuthorizationHeader } from '../options/util'
 import { ProxyDao, Store } from '../store/Store'
 import BlockingResponse = browser.webRequest.BlockingResponse
 import _OnAuthRequiredDetails = browser.webRequest._OnAuthRequiredDetails
 import _OnRequestDetails = browser.proxy._OnRequestDetails
+import { ProxySettings } from '../domain/ProxySettings'
+import { ProxyInfo } from '../domain/ProxyInfo'
 
 const localhosts = new Set(['localhost', '127.0.0.1', '[::1]'])
 
@@ -47,7 +48,7 @@ export default class BackgroundMain {
   }
 
   // TODO: Fix in @types/firefox-webext-browser
-  async onRequest (requestDetails: Pick<_OnRequestDetails, 'cookieStoreId' | 'url'>): Promise<any> {
+  async onRequest (requestDetails: Pick<_OnRequestDetails, 'cookieStoreId' | 'url'>): Promise<ProxyInfo[]> {
     const cookieStoreId = requestDetails.cookieStoreId ?? ''
     if (cookieStoreId === '') {
       console.error('cookieStoreId is not defined', requestDetails)
@@ -57,21 +58,7 @@ export default class BackgroundMain {
     const proxies = await this.store.getProxiesForContainer(cookieStoreId)
 
     if (proxies.length > 0) {
-      proxies.forEach(p => {
-        if (p.type === 'http' || p.type === 'https') {
-          this.initializeAuthListener(cookieStoreId, p)
-        }
-      })
-
-      const result = proxies.map((p: ProxyDao) => {
-        // @ts-expect-error
-        if (p.type === 'https' && p.username as boolean && p.password as boolean) {
-          const proxyAuthorizationHeader = generateAuthorizationHeader(p.username, p.password)
-          return { proxyAuthorizationHeader, ...p }
-        } else {
-          return p
-        }
-      }).filter(p => {
+      const result: ProxyInfo[] = proxies.filter((p: ProxySettings) => {
         try {
           const documentUrl = new URL(requestDetails.url)
           const isLocalhost = localhosts.has(documentUrl.hostname)
@@ -83,10 +70,7 @@ export default class BackgroundMain {
         }
 
         return true
-      }).map((p: any) => {
-        delete p.doNotProxyLocal
-        return p
-      })
+      }).map(p => p.asProxyInfo())
 
       if (result.length === 0) {
         return doNotProxy

@@ -1,6 +1,8 @@
 import { ProxyInfo } from '../domain/ProxyInfo'
 import { ProxyType } from '../domain/ProxyType'
 import { generateAuthorizationHeader } from '../options/util'
+import { ProxySettings } from '../domain/ProxySettings'
+import tryFromDao = ProxySettings.tryFromDao
 
 /* eslint-disable @typescript-eslint/no-namespace,no-redeclare,import/export */
 
@@ -10,15 +12,14 @@ export interface ProxyDao {
   type: string
   host: string
   port: number
-  username: string
-  password: string
+  username?: string
+  password?: string
   proxyDNS?: boolean
-  failoverTimeout: number
   doNotProxyLocal: boolean
 }
 
 export namespace ProxyDao {
-  export function toProxyInfo (proxy: Pick<ProxyDao, 'type' | 'host' | 'port' | 'username' | 'password'>): ProxyInfo | undefined {
+  export function toProxyInfo (proxy: Pick<ProxyDao, 'type' | 'host' | 'port' | 'username' | 'password' | 'proxyDNS'>): ProxyInfo | undefined {
     const type = ProxyType.tryFromString(proxy.type)
     if (type === undefined) {
       return
@@ -35,70 +36,62 @@ export namespace ProxyDao {
         return {
           type,
           ...base,
-          username: proxy.username,
-          password: proxy.password,
-          proxyDNS: true
+          username: proxy.username ?? '',
+          password: proxy.password ?? '',
+          proxyDNS: proxy.proxyDNS ?? true
         }
       case ProxyType.Socks4:
         return {
           type,
           ...base,
-          proxyDNS: true
+          proxyDNS: proxy.proxyDNS ?? true
         }
       case ProxyType.Http:
       case ProxyType.Https:
         return {
           type,
           ...base,
-          proxyAuthorizationHeader: generateAuthorizationHeader(proxy.username, proxy.password)
+          proxyAuthorizationHeader: generateAuthorizationHeader(proxy.username ?? '', proxy.password ?? '')
         }
     }
   }
 }
 
 export class Store {
-  async getAllProxies (): Promise<ProxyDao[]> {
-    const result = await browser.storage.local.get('proxies')
-    const proxies = (result as any).proxies as Array<Partial<ProxyDao>> ?? []
-
-    return proxies.map(fillInDefaults)
+  async getAllProxies (): Promise<ProxySettings[]> {
+    const proxyDaos = await this.getAllProxyDaos()
+    const result: ProxySettings[] = proxyDaos.map(tryFromDao).filter(p => p !== undefined) as ProxySettings[]
+    return result
   }
 
-  async getProxyById (id: string): Promise<ProxyDao | null> {
+  async getProxyById (id: string): Promise<ProxySettings | null> {
     const proxies = await this.getAllProxies()
     const index = proxies.findIndex(p => p.id === id)
     if (index === -1) {
       return null
     } else {
-      return fillInDefaults(proxies[index])
+      return proxies[index]
     }
   }
 
-  async putProxy (proxy: ProxyDao): Promise<void> {
-    proxy.failoverTimeout = 5
-
-    if (proxy.type === 'socks' || proxy.type === 'socks4') {
-      proxy.proxyDNS = true
-    } else {
-      delete proxy.proxyDNS
-    }
-
-    const proxies = await this.getAllProxies()
+  async putProxy (proxy: ProxySettings): Promise<void> {
+    const proxies = await this.getAllProxyDaos()
     const index = proxies.findIndex(p => p.id === proxy.id)
     if (index !== -1) {
-      proxies[index] = proxy
+      proxies[index] = proxy.asDao()
     } else {
-      proxies.push(proxy)
+      proxies.push(proxy.asDao())
     }
-    await browser.storage.local.set({ proxies: proxies })
+
+    await this.saveProxyDaos(proxies)
   }
 
   async deleteProxyById (id: string): Promise<void> {
-    const proxies = await this.getAllProxies()
+    const proxies = await this.getAllProxyDaos()
     const index = proxies.findIndex(p => p.id === id)
     if (index !== -1) {
       proxies.splice(index, 1)
-      await browser.storage.local.set({ proxies: proxies })
+      await this.saveProxyDaos(proxies)
     }
   }
 
@@ -114,7 +107,7 @@ export class Store {
     await browser.storage.local.set({ relations: relations })
   }
 
-  async getProxiesForContainer (cookieStoreId: string): Promise<ProxyDao[]> {
+  async getProxiesForContainer (cookieStoreId: string): Promise<ProxySettings[]> {
     const relations = await this.getRelations()
 
     const proxyIds: string[] = relations[cookieStoreId] ?? []
@@ -124,12 +117,26 @@ export class Store {
     }
 
     const proxies = await this.getAllProxies()
-    const proxyById: { [key: string]: ProxyDao } = {}
+    const proxyById: { [key: string]: ProxySettings } = {}
     proxies.forEach(function (p) { proxyById[p.id] = p })
 
     return proxyIds.map(pId => proxyById[pId])
       .filter(p => p !== undefined)
       .map(fillInDefaults)
+      .map(tryFromDao)
+      .filter(p => p !== undefined) as ProxySettings[]
+  }
+
+  private async saveProxyDaos (p: ProxyDao[]): Promise<void> {
+    await browser.storage.local.set({ proxies: p })
+  }
+
+  private async getAllProxyDaos (): Promise<ProxyDao[]> {
+    const fetched = await browser.storage.local.get('proxies')
+    const proxies = (fetched as any).proxies as Array<Partial<ProxyDao>> ?? []
+
+    const proxyDaoList = proxies.map(fillInDefaults)
+    return proxyDaoList
   }
 }
 
@@ -139,6 +146,11 @@ function fillInDefaults (proxy: Partial<ProxyDao>): ProxyDao {
   }
   if (typeof proxy.doNotProxyLocal === 'undefined') {
     proxy.doNotProxyLocal = true
+  }
+  if (typeof proxy.proxyDNS === 'undefined') {
+    if (proxy.type === 'socks' || proxy.type === 'socks4') {
+      proxy.proxyDNS = true
+    }
   }
   return proxy as ProxyDao
 }

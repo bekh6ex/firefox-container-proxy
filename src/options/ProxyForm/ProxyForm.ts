@@ -8,10 +8,28 @@ import HostInput from './HostInput'
 import TestResultBlock from './TestResultBlock'
 import Select from '../ui-components/Select'
 import { ProxyDao, Store } from '../../store/Store'
+import { ProxySettings } from '../../domain/ProxySettings'
+import tryFromDao = ProxySettings.tryFromDao
+import { ProxyType } from '../../domain/ProxyType'
+import s from './ProxyForm.module.scss'
 
 const t = browser.i18n.getMessage
 
-const NEW_PROXY: ProxyDao = {
+const tid = (s: string): {'data-testid': string} => ({ 'data-testid': s })
+
+export interface ModelData extends ProxyDao {
+  id: string
+  title: string
+  type: string
+  host: string
+  port: number
+  username: string
+  password: string
+  proxyDNS: boolean
+  doNotProxyLocal: boolean
+}
+
+const NEW_PROXY: ModelData = {
   id: 'new',
   title: '',
   type: '',
@@ -20,12 +38,11 @@ const NEW_PROXY: ProxyDao = {
   username: '',
   password: '',
   proxyDNS: true,
-  failoverTimeout: 5,
   doNotProxyLocal: true
 }
 
 class ProxyModel {
-  current: ProxyDao
+  current: ModelData
 
   constructor () {
     this.current = { ...NEW_PROXY }
@@ -39,24 +56,36 @@ class ProxyModel {
       return
     }
     const store: Store = (window as any).store
-    this.current = await store.getProxyById(id) ?? newProxy
+    const settings = await store.getProxyById(id)
+    if (settings !== null) {
+      this.current = { ...NEW_PROXY, ...settings.asDao() }
+    } else {
+      this.current = newProxy
+    }
     m.redraw()
   }
 
-  async save (): Promise<void> {
+  async save (): Promise<boolean> {
     if (this.current.id === 'new') {
       this.current.id = uuidv4()
     }
     const store: Store = (window as any).store
-    await store.putProxy(this.current)
+    const settings = tryFromDao(this.current)
+    if (settings === undefined) {
+      return false
+    } else {
+      await store.putProxy(settings)
+      return true
+    }
   }
 
-  accessProperty<K extends keyof ProxyDao>(property: K): { getValue: () => ProxyDao[K], setValue: (v: ProxyDao[K]) => void } {
+  accessProperty<K extends keyof ModelData> (property: K): { getValue: () => ModelData[K], setValue: (v: ModelData[K]) => void, 'data-testid': string } {
     return {
       getValue: () => this.current[property],
-      setValue: (v: ProxyDao[K]) => {
+      setValue: (v: ModelData[K]) => {
         this.current[property] = v
-      }
+      },
+      ...tid(property)
     }
   }
 
@@ -85,6 +114,7 @@ export default class ProxyForm {
   usernameInput
   passwordInput
   doNotProxyLocalCheckbox
+  proxyDNSCheckbox
 
   constructor () {
     const model = new ProxyModel()
@@ -119,6 +149,10 @@ export default class ProxyForm {
       title: t('ProxyForm_doNotProxyLocalFieldLabel'),
       ...model.accessProperty('doNotProxyLocal')
     })
+    this.proxyDNSCheckbox = new CheckboxInput({
+      title: t('ProxyForm_proxyDnsFieldLabel'),
+      ...model.accessProperty('proxyDNS')
+    })
   }
 
   async oninit (vnode: Vnode): Promise<void> {
@@ -132,28 +166,32 @@ export default class ProxyForm {
       testResultBlock.push(m(lastTestResultBlock1))
     }
 
+    const isSocks = this.model.current.type === ProxyType.Socks4 || this.model.current.type === ProxyType.Socks5
+    const isSocks4 = this.model.current.type === ProxyType.Socks4
     return m(
       'form',
-      {},
+      { ...tid('ProxyForm'), class: s.ProxyForm },
       [
         m('div', [m(this.titleInput, { class: 'ProxyForm__titleInput' })]),
-        m('div.ProxyForm__connectionSettings', [
+        m(`div.${s.connectionSettings}`, [
           m(this.protocolSelect),
-          m('span.ProxyForm__separator', '://'),
-          m(this.hostInput, { class: 'ProxyForm__hostInput' }),
-          m('span.ProxyForm__separator', ':'),
-          m(this.portInput, { class: 'ProxyForm__portInput' })
+          m(`span.${s.separator}`, '://'),
+          m(this.hostInput, { class: s.hostInput }),
+          m(`span.${s.separator}`, ':'),
+          m(this.portInput, { class: s.portInput })
         ]),
-        m('div.ProxyForm__credentials', [
-          m(this.usernameInput),
-          m(this.passwordInput)
+        (isSocks4
+          ? [] : m(`div.${s.credentials}`, [
+            m(this.usernameInput),
+            m(this.passwordInput)
+          ])
+        ),
+        m(`div.${s.advanced}`, [
+          m(this.doNotProxyLocalCheckbox), (isSocks ? m(this.proxyDNSCheckbox) : [])
         ]),
-        m('div.ProxyForm__advanced', [
-          m(this.doNotProxyLocalCheckbox)
-        ]),
-        m('div.ProxyForm__actions', [
+        m(`div.${s.actions}`, [
           m('button[type=button]', {
-            'data-testid': 'testSettings',
+            ...tid('testSettings'),
             onclick: async () => {
               const confirmed = confirm(t('ProxyForm_testProxySettingsConfirmationText'))
               if (!confirmed) {
@@ -169,11 +207,12 @@ export default class ProxyForm {
             }
           }, t('ProxyForm_testProxySettingsLabel') + ' β'),
           m('button[type=button]', {
-            // class: style.button,
-            'data-testid': 'save',
+            ...tid('save'),
             onclick: async () => {
-              await this.model.save()
-              m.route.set('/proxies')
+              const success = await this.model.save()
+              if (success) {
+                m.route.set('/proxies')
+              }
             }
           }, t('ProxyForm_save')),
           ...testResultBlock

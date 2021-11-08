@@ -1,0 +1,64 @@
+.ProxyForm {
+    .connectionSettings {
+        display: flex;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+
+    .hostInput {
+        flex-grow: 1;
+    }
+
+    .portInput {
+        flex-basis: 4em;
+    }
+
+    .separator {
+        color: var(--grey-50);
+        align-self: end;
+        padding: 4px;
+    }
+
+    .credentials {
+        display: flex;
+        margin-bottom: 8px;
+        justify-content: stretch;
+    }
+
+    .credentials > * {
+        flex-grow: 1;
+    }
+
+    .credentials > :first-child {
+        padding-right: 4px;
+    }
+
+    .advanced {
+        display: flex;
+        margin-bottom: 8px;
+        justify-content: stretch;
+        flex-direction: column;
+    }
+
+    .advanced > * {
+        flex-grow: 1;
+    }
+
+    .advanced > :first-child {
+        padding-right: 4px;
+    }
+
+    .actions > *:not(:first-child) {
+        margin-left: var(--baseline-grid);
+    }
+
+    .duckduckgo-attribution {
+        background-image: url("../icons/DuckDuckGo_logo.v107.min.svg");
+        background-repeat: no-repeat no-repeat;
+        background-position: 100%;
+        background-size: contain;
+        padding-right: 1.3em;
+
+        font-size: 80%;
+    }
+}

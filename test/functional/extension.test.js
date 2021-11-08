@@ -45,6 +45,7 @@ describe('Container Proxy extension', function () {
 
     proxyList = await proxyForm.saveSettings()
 
+    const proxyLabel = 'socks://localhost:1080'
     await geckodriver.wait(async () => {
       const row = await geckodriver.wait(until.elementLocated(
         By.css('.proxy-list-item:first-of-type')
@@ -53,12 +54,12 @@ describe('Container Proxy extension', function () {
       const label = row.findElement(By.css('.proxy-name'))
 
       const text = await label.getText()
-      return text === 'localhost:1080'
+      return text === proxyLabel
     }, 1000, 'Should show proxy in the list')
 
     const assign = await options.openAssignProxy()
     const defaultContainerSelect = await assign.defaultContainerSelect()
-    await defaultContainerSelect.selectByLabel('localhost:1080')
+    await defaultContainerSelect.selectByLabel(proxyLabel)
   })
 
   it.skip('should contain IP address text', async () => {
