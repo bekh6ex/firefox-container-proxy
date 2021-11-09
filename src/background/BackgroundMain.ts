@@ -1,13 +1,25 @@
-import { ProxyDao, Store } from '../store/Store'
+import { Store } from '../store/Store'
+import { HttpProxySettings, HttpsProxySettings, ProxySettings } from '../domain/ProxySettings'
+import { ProxyInfo, Socks5ProxyInfo } from '../domain/ProxyInfo'
+import { ProxyType } from '../domain/ProxyType'
 import BlockingResponse = browser.webRequest.BlockingResponse
 import _OnAuthRequiredDetails = browser.webRequest._OnAuthRequiredDetails
 import _OnRequestDetails = browser.proxy._OnRequestDetails
-import { ProxySettings } from '../domain/ProxySettings'
-import { ProxyInfo } from '../domain/ProxyInfo'
 
 const localhosts = new Set(['localhost', '127.0.0.1', '[::1]'])
 
-export const doNotProxy = []
+type DoNotProxy = never[]
+export const doNotProxy: DoNotProxy = []
+
+const emergencyBreak: Socks5ProxyInfo = {
+  type: ProxyType.Socks5,
+  host: 'emergency-break-proxy.localhost',
+  port: 1,
+  failoverTimeout: 1,
+  username: 'nonexistent user',
+  password: 'dummy password',
+  proxyDNS: true
+}
 
 export default class BackgroundMain {
   store: Store
@@ -16,7 +28,7 @@ export default class BackgroundMain {
     this.store = store
   }
 
-  initializeAuthListener (cookieStoreId: string, proxy: ProxyDao): void {
+  initializeAuthListener (cookieStoreId: string, proxy: HttpProxySettings | HttpsProxySettings): void {
     const listener: (details: _OnAuthRequiredDetails) => BlockingResponse = (details) => {
       if (!details.isProxy) return {}
 
@@ -48,37 +60,48 @@ export default class BackgroundMain {
   }
 
   // TODO: Fix in @types/firefox-webext-browser
-  async onRequest (requestDetails: Pick<_OnRequestDetails, 'cookieStoreId' | 'url'>): Promise<ProxyInfo[]> {
-    const cookieStoreId = requestDetails.cookieStoreId ?? ''
-    if (cookieStoreId === '') {
-      console.error('cookieStoreId is not defined', requestDetails)
-      return doNotProxy
-    }
-
-    const proxies = await this.store.getProxiesForContainer(cookieStoreId)
-
-    if (proxies.length > 0) {
-      const result: ProxyInfo[] = proxies.filter((p: ProxySettings) => {
-        try {
-          const documentUrl = new URL(requestDetails.url)
-          const isLocalhost = localhosts.has(documentUrl.hostname)
-          if (isLocalhost && p.doNotProxyLocal) {
-            return false
-          }
-        } catch (e) {
-          console.error(e)
-        }
-
-        return true
-      }).map(p => p.asProxyInfo())
-
-      if (result.length === 0) {
+  async onRequest (requestDetails: Pick<_OnRequestDetails, 'cookieStoreId' | 'url'>): Promise<DoNotProxy | ProxyInfo[]> {
+    try {
+      const cookieStoreId = requestDetails.cookieStoreId ?? ''
+      if (cookieStoreId === '') {
+        console.error('cookieStoreId is not defined', requestDetails)
         return doNotProxy
       }
-      return result
-    }
 
-    return doNotProxy
+      const proxies = await this.store.getProxiesForContainer(cookieStoreId)
+
+      if (proxies.length > 0) {
+        proxies.forEach(p => {
+          if (p.type === ProxyType.Http || p.type === ProxyType.Https) {
+            this.initializeAuthListener(cookieStoreId, p)
+          }
+        })
+
+        const result: ProxyInfo[] = proxies.filter((p: ProxySettings) => {
+          try {
+            const documentUrl = new URL(requestDetails.url)
+            const isLocalhost = localhosts.has(documentUrl.hostname)
+            if (isLocalhost && p.doNotProxyLocal) {
+              return false
+            }
+          } catch (e) {
+            console.error(e)
+          }
+
+          return true
+        }).map(p => p.asProxyInfo())
+
+        if (result.length === 0) {
+          return doNotProxy
+        }
+        return result
+      }
+
+      return doNotProxy
+    } catch (e: unknown) {
+      console.error(`Error in onRequest listener: ${e as string}`)
+      return [emergencyBreak]
+    }
   }
 
   run (browser: { proxy: any, browserAction: any, runtime: any }): void {

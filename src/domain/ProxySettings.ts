@@ -165,7 +165,6 @@ export class HttpProxySettings extends HttpBasedProxySettings<HttpProxyInfo> {
       type: this.type,
       host: this.host,
       port: this.port,
-      proxyAuthorizationHeader: generateAuthorizationHeader(this.username ?? '', this.password ?? ''),
       failoverTimeout
     }
   }

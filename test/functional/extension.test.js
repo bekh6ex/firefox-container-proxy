@@ -85,6 +85,7 @@ describe('Container Proxy extension', function () {
       username: 'user',
       password: 'password'
     })
+    // TODO: Check if username and password are actually verified by "dante"
 
     const assignProxy = await optionsPage.openAssignProxy()
     await assignProxy.selectForDefaultContainer(title)

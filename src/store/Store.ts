@@ -47,6 +47,10 @@ export namespace ProxyDao {
           proxyDNS: proxy.proxyDNS ?? true
         }
       case ProxyType.Http:
+        return {
+          type,
+          ...base
+        }
       case ProxyType.Https:
         return {
           type,
