@@ -10,6 +10,10 @@
   * **cookies**: needed to identify to which container request belongs
   * **webRequest** and  **webRequestBlocking**: to supply credentials for proxy authorization (but not for normal web authorization)
 
+## Good to know
+
+There is a known issue with DNS leak happening in non-default containers when uBlock is installed. The issue is not resolvable by this extension, but can be resolved adjusting in uBlock settings. See [comment](https://github.com/bekh6ex/firefox-container-proxy/issues/23#issuecomment-773249909)
+
 ## Translation
 [![Translation status](https://hosted.weblate.org/widgets/firefox-container-proxy/-/firefox-container-proxy/multi-auto.svg)](https://hosted.weblate.org/engage/firefox-container-proxy/)
 
