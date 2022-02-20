@@ -133,5 +133,30 @@
     "ContainerList_defaultContainerName": {
         "message": "Predeterminado",
         "description": "Name of default container"
+    },
+    "ProxyForm_doNotProxyLocalFieldLabel": {
+        "message": "No usar proxy para las direcciones locales (localhost, 127.0.0.1, ::1)",
+        "description": "`Do not proxy local addresses` field in the proxy form"
+    },
+    "ProxySettingsTestResult_proxiedRequest": {
+        "message": "Petición pasada por proxy:",
+        "description": "Proxied request header"
+    },
+    "ProxyForm_proxyDnsFieldLabel": {
+        "message": "Usar proxy para las peticiones DNS",
+        "description": "`Proxy DNS requests` field in the proxy form"
+    },
+    "SupportPage_gitterInvite": {
+        "message": "Si tienes preguntas, algún problema o simplemente quieres charlar, estás invitado a nuestro canal en $GITTER_NAME$:",
+        "description": "Gitter welcome message displayed on Support page",
+        "placeholders": {
+            "GITTER_NAME": {
+                "content": "Gitter"
+            }
+        }
+    },
+    "ContainerList_privateBrowsingContainerName": {
+        "message": "Navegación privada",
+        "description": "Name of container for private browsing window"
     }
 }
