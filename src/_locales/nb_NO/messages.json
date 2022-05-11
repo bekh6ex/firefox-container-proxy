@@ -124,8 +124,8 @@
         "description": "Edit button in proxy list"
     },
     "ContainerList_proxyDisabled": {
-        "message": "Direkte",
-        "description": "Config containers to not use proxy"
+        "message": "using Firefox preferences",
+        "description": "Config containers to use Firefox's proxy preferences"
     },
     "OptionsNavigation_support": {
         "message": "Støtte",

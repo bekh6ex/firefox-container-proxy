@@ -28,8 +28,8 @@
         "description": "Navigation link title for support information page"
     },
     "ContainerList_proxyDisabled": {
-        "message": "Directly",
-        "description": "Config containers to not use proxy"
+        "message": "using Firefox preferences",
+        "description": "Config containers to use Firefox's proxy preferences"
     },
     "ProxyList_edit": {
         "message": "Edit",

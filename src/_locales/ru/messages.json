@@ -28,8 +28,8 @@
         "description": "Название элемента меню для страницы помощи"
     },
     "ContainerList_proxyDisabled": {
-        "message": "Напрямую",
-        "description": "Настройка контейнера чтобы тот не использовал прокси"
+        "message": "using Firefox preferences",
+        "description": "Config containers to use Firefox's proxy preferences"
     },
     "ProxyList_edit": {
         "message": "Редактировать",
