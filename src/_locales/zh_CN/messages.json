@@ -15,7 +15,7 @@
         "message": "配置代理服务器"
     },
     "ContainerList_proxyDisabled": {
-        "message": "直接连接"
+        "message": "using Firefox preferences"
     },
     "ProxyList_edit": {
         "message": "编辑"

@@ -12,7 +12,7 @@
         "message": "Proxies"
     },
     "ContainerList_proxyDisabled": {
-        "message": "Direkt"
+        "message": "Firefox Einstellungen benutzen"
     },
     "ProxyList_edit": {
         "message": "Bearbeiten"
