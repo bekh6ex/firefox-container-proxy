@@ -3,7 +3,7 @@
         "message": "为每个容器分配代理服务器"
     },
     "ContainerList_defaultContainerName": {
-        "message": "Default"
+        "message": "默认"
     },
     "OptionsPage_browserTabTitle": {
         "message": "Container Proxy 扩展设置"
