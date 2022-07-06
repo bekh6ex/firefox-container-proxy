@@ -47,5 +47,22 @@
     "ContainerList_privateBrowsingContainerName": {
         "message": "隐私浏览",
         "description": "Name of container for private browsing window"
+    },
+    "ProxyForm_testProxySettingsConfirmationText": {
+        "message": "要测试设置，需要向 $DUCKDUCKGO_NAME$ 发出几个请求。继续？",
+        "description": "Text shown when a user clicks Test settings button notifying user about request to 3rd party service",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxyForm_testProxySettingsLabel": {
+        "message": "测试",
+        "description": "Settings test button label in proxy form"
+    },
+    "ProxyForm_doNotProxyLocalFieldLabel": {
+        "message": "不代理本地地址(localhost, 127.0.0.1, ::1)",
+        "description": "`Do not proxy local addresses` field in the proxy form"
     }
 }
