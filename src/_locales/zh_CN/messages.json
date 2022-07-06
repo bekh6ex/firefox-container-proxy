@@ -43,5 +43,9 @@
     },
     "ProxyForm_save": {
         "message": "保存"
+    },
+    "ContainerList_privateBrowsingContainerName": {
+        "message": "隐私浏览",
+        "description": "Name of container for private browsing window"
     }
 }
