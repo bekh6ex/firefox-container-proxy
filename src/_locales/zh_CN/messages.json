@@ -64,5 +64,59 @@
     "ProxyForm_doNotProxyLocalFieldLabel": {
         "message": "不代理本地地址(localhost, 127.0.0.1, ::1)",
         "description": "`Do not proxy local addresses` field in the proxy form"
+    },
+    "ProxyForm_incorrectServerError": {
+        "message": "所输入值应该是 IP 地址或域名",
+        "description": "Error message displayed when incorrect server is entered"
+    },
+    "ImportPage_heading": {
+        "message": "导入代理",
+        "description": "Header of import proxies page"
+    },
+    "OptionsNavigation_support": {
+        "message": "支持我们",
+        "description": "Navigation link title for support information page"
+    },
+    "ProxySettingsTestResult_error": {
+        "message": "错误！",
+        "description": "Generic text meaning there is an error"
+    },
+    "ProxyForm_proxyDnsFieldLabel": {
+        "message": "代理 DNS 请求",
+        "description": "`Proxy DNS requests` field in the proxy form"
+    },
+    "ProxySettingsTestResult_incorrectSettings": {
+        "message": "错误！无法连接到代理。可能设置有误。",
+        "description": "Text displayed when direct request is successful, but proxied request failed"
+    },
+    "ImportPage_importButtonDoImport": {
+        "message": "导入 $NUMBER$ 个代理",
+        "description": "Text displayed on Import button when there is something to import",
+        "placeholders": {
+            "NUMBER": {
+                "content": "$1"
+            }
+        }
+    },
+    "ProxySettingsTestResult_settingsAreCorrect": {
+        "message": "设置正确！",
+        "description": "Text displayed when result of testing proxy settings was successful in proxy form"
+    },
+    "ImportPage_foxyProxyInputLabel": {
+        "message": "FoxyProxy 设置",
+        "description": "Label of FoxyProxy settings file input"
+    },
+    "ImportPage_importButtonNoFileSelected": {
+        "message": "选择一个文件",
+        "description": "Text displayed on Import button when no file is selected or the file is invalid"
+    },
+    "SupportPage_gitterInvite": {
+        "message": "如果您有任何问题，或只是想聊一聊天，请加入我们的频道 $GITTER_NAME$：",
+        "description": "Gitter welcome message displayed on Support page",
+        "placeholders": {
+            "GITTER_NAME": {
+                "content": "Gitter"
+            }
+        }
     }
 }
