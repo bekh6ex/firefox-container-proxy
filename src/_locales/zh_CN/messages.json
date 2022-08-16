@@ -118,5 +118,30 @@
                 "content": "Gitter"
             }
         }
+    },
+    "ProxyForm_duckduckgoAttribution": {
+        "message": "$DUCKDUCKGO_NAME$ 返回的 IP 结果",
+        "description": "Attribution to DuckDuckGo for IP query",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxySettingsTestResult_noDirectConnection": {
+        "message": "设置是正确的，但是不使用代理链接互联网看起来不太可行。",
+        "description": "Text displayed when proxied request succeeded, but direct request failed"
+    },
+    "ProxySettingsTestResult_directRequest": {
+        "message": "直接请求：",
+        "description": "Direct request header"
+    },
+    "ProxySettingsTestResult_notConnectedToTheInternet": {
+        "message": "错误！您很有可能没有网络连接。",
+        "description": "Text displayed when both direct and proxied requests failed to succeed"
+    },
+    "ProxySettingsTestResult_proxiedRequest": {
+        "message": "代理请求：",
+        "description": "Proxied request header"
     }
 }
