@@ -1,1 +1,162 @@
-{}
+{
+    "ProxyForm_testProxySettingsConfirmationText": {
+        "message": "اختبار الإعدادات هو مطلوب لتقديم بضعة طلبات$DUCKDUCKGO_NAME$.للمتابعة؟",
+        "description": "Text shown when a user clicks Test settings button notifying user about request to 3rd party service",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ContainerList_defaultContainerName": {
+        "message": "إفتراضي",
+        "description": "Name of default container"
+    },
+    "OptionsNavigation_assign": {
+        "message": "تعيين",
+        "description": "Navigation link title for assign proxy for containers"
+    },
+    "OptionsNavigation_proxies": {
+        "message": "الوكلاء",
+        "description": "Navigation link title for config proxy list"
+    },
+    "OptionsNavigation_support": {
+        "message": "الدعم",
+        "description": "Navigation link title for support information page"
+    },
+    "ContainerList_proxyDisabled": {
+        "message": "مباشرة",
+        "description": "Config containers to not use proxy"
+    },
+    "ProxyList_edit": {
+        "message": "تعديل",
+        "description": "Edit button in proxy list"
+    },
+    "ProxyList_delete": {
+        "message": "حذف",
+        "description": "Delete button in proxy list"
+    },
+    "ProxyForm_protocolFieldLabel": {
+        "message": "بروتوكول",
+        "description": "Protocol field in proxy form"
+    },
+    "ProxyForm_serverFieldLabel": {
+        "message": "الخادم",
+        "description": "Server field in proxy form"
+    },
+    "ProxyForm_portFieldLabel": {
+        "message": "المنفذ",
+        "description": "Port field in proxy form"
+    },
+    "ProxyForm_usernameFieldLabel": {
+        "message": "اسم المستخدم",
+        "description": "Username field in proxy form"
+    },
+    "ProxyForm_passwordFieldLabel": {
+        "message": "كلمة المرور",
+        "description": "Password field in proxy form"
+    },
+    "ProxyForm_save": {
+        "message": "حفظ",
+        "description": "Save button in proxy form"
+    },
+    "ProxyForm_duckduckgoAttribution": {
+        "message": "نتائج IP من $DUCKDUCKGO_NAME$",
+        "description": "Attribution to DuckDuckGo for IP query",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxySettingsTestResult_settingsAreCorrect": {
+        "message": "الإعدادات صحيحة!",
+        "description": "Text displayed when result of testing proxy settings was successful in proxy form"
+    },
+    "ProxySettingsTestResult_error": {
+        "message": "خطأ!",
+        "description": "Generic text meaning there is an error"
+    },
+    "ProxySettingsTestResult_noDirectConnection": {
+        "message": "الإعدادات صحيحة ، لكن يبدو أن الاتصال بالإنترنت بدون وكيل غير ممكن.",
+        "description": "Text displayed when proxied request succeeded, but direct request failed"
+    },
+    "ProxySettingsTestResult_directRequest": {
+        "message": "طلب مباشر:",
+        "description": "Direct request header"
+    },
+    "ProxySettingsTestResult_proxiedRequest": {
+        "message": "طلب الوكيل:",
+        "description": "Proxied request header"
+    },
+    "SupportPage_gitterInvite": {
+        "message": "إذا كانت لديك أي أسئلة ، أو لديك مشكلة أو تريد فقط الدردشة ، فنحن نرحب بك في قناتنا $GITTER_NAME$:",
+        "description": "Gitter welcome message displayed on Support page",
+        "placeholders": {
+            "GITTER_NAME": {
+                "content": "Gitter"
+            }
+        }
+    },
+    "ImportPage_heading": {
+        "message": "استيراد وكلاء",
+        "description": "Header of import proxies page"
+    },
+    "ImportPage_foxyProxyInputLabel": {
+        "message": "إعدادات FoxyProxy",
+        "description": "Label of FoxyProxy settings file input"
+    },
+    "ImportPage_importButtonNoFileSelected": {
+        "message": "حدد ملف",
+        "description": "Text displayed on Import button when no file is selected or the file is invalid"
+    },
+    "ImportPage_importButtonDoImport": {
+        "message": "استيراد $NUMBER$ وكلاء",
+        "description": "Text displayed on Import button when there is something to import",
+        "placeholders": {
+            "NUMBER": {
+                "content": "$1"
+            }
+        }
+    },
+    "General_extensionDescription": {
+        "message": "قم بتعيين وكيل للحاوية",
+        "description": "Description of the extension."
+    },
+    "OptionsPage_browserTabTitle": {
+        "message": "إعدادات ملحق وكيل الحاوية",
+        "description": "Title of option page"
+    },
+    "ProxyForm_titleFieldLabel": {
+        "message": "العنوان (اختياري)",
+        "description": "Title field in proxy form"
+    },
+    "ProxyForm_testProxySettingsLabel": {
+        "message": "اختبار",
+        "description": "Settings test button label in proxy form"
+    },
+    "ContainerList_privateBrowsingContainerName": {
+        "message": "تصفح خاص",
+        "description": "Name of container for private browsing window"
+    },
+    "ProxyForm_doNotProxyLocalFieldLabel": {
+        "message": "لا توكيل العناوين المحلية (localhost, 127.0.0.1, ::1)",
+        "description": "`Do not proxy local addresses` field in the proxy form"
+    },
+    "ProxyForm_proxyDnsFieldLabel": {
+        "message": "طلبات وكيل DNS",
+        "description": "`Proxy DNS requests` field in the proxy form"
+    },
+    "ProxyForm_incorrectServerError": {
+        "message": "يجب أن تكون القيمة إما عنوان IP أو اسم المجال",
+        "description": "Error message displayed when incorrect server is entered"
+    },
+    "ProxySettingsTestResult_incorrectSettings": {
+        "message": "خطأ! تعذر الاتصال بالوكيل. ربما الإعدادات غير صحيحة.",
+        "description": "Text displayed when direct request is successful, but proxied request failed"
+    },
+    "ProxySettingsTestResult_notConnectedToTheInternet": {
+        "message": "خطأ! ربما ، أنت غير متصل بالإنترنت.",
+        "description": "Text displayed when both direct and proxied requests failed to succeed"
+    }
+}
