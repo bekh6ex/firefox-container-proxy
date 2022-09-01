@@ -110,7 +110,7 @@
         "description": "Generic text meaning there is an error"
     },
     "ProxySettingsTestResult_notConnectedToTheInternet": {
-        "message": "Error! Probably, you are not connected to the Internet.",
+        "message": "Error! maybe, you are not connected to the Internet.",
         "description": "Text displayed when both direct and proxied requests failed to succeed"
     },
     "ProxySettingsTestResult_noDirectConnection": {
