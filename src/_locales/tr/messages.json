@@ -46,7 +46,7 @@
         "description": "Text displayed when proxied request succeeded, but direct request failed"
     },
     "ProxySettingsTestResult_notConnectedToTheInternet": {
-        "message": "Hata! Muhtemelen internete bağlı değilsin.",
+        "message": "Hata! Muhtemelen internete bağlı değilsiniz.",
         "description": "Text displayed when both direct and proxied requests failed to succeed"
     },
     "ProxySettingsTestResult_error": {
