@@ -1,1 +1,10 @@
-{}
+{
+    "General_extensionDescription": {
+        "message": "Tilldela en proxy till en behållare",
+        "description": "Description of the extension."
+    },
+    "ContainerList_defaultContainerName": {
+        "message": "Standard",
+        "description": "Name of default container"
+    }
+}
