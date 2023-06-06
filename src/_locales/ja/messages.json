@@ -1,1 +1,162 @@
-{}
+{
+    "ProxySettingsTestResult_notConnectedToTheInternet": {
+        "message": "エラー！もしかしたら、インターネットに接続されていないかもしれません。",
+        "description": "Text displayed when both direct and proxied requests failed to succeed"
+    },
+    "SupportPage_gitterInvite": {
+        "message": "もし、何か質問や問題がある場合、もしくはただチャットしたいだけなら、$GITTER_NAME$ の私たちのチャンネルで歓迎されます：",
+        "description": "Gitter welcome message displayed on Support page",
+        "placeholders": {
+            "GITTER_NAME": {
+                "content": "Gitter"
+            }
+        }
+    },
+    "ContainerList_privateBrowsingContainerName": {
+        "message": "プライベートブラウジング",
+        "description": "Name of container for private browsing window"
+    },
+    "ContainerList_proxyDisabled": {
+        "message": "直接",
+        "description": "Config containers to not use proxy"
+    },
+    "ProxyForm_passwordFieldLabel": {
+        "message": "パスワード",
+        "description": "Password field in proxy form"
+    },
+    "ProxyForm_protocolFieldLabel": {
+        "message": "プロトコル",
+        "description": "Protocol field in proxy form"
+    },
+    "ProxyForm_testProxySettingsConfirmationText": {
+        "message": "設定を試すには、$DUCKDUCKGO_NAME$ にいくつかのリクエストをする必要があります。進みますか？",
+        "description": "Text shown when a user clicks Test settings button notifying user about request to 3rd party service",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ImportPage_importButtonDoImport": {
+        "message": "$NUMBER$プロキシをインポート",
+        "description": "Text displayed on Import button when there is something to import",
+        "placeholders": {
+            "NUMBER": {
+                "content": "$1"
+            }
+        }
+    },
+    "General_extensionDescription": {
+        "message": "コンテナにプロキシを割り当てる",
+        "description": "Description of the extension."
+    },
+    "ContainerList_defaultContainerName": {
+        "message": "デフォルト",
+        "description": "Name of default container"
+    },
+    "OptionsPage_browserTabTitle": {
+        "message": "コンテナプロキシーの拡張機能の設定",
+        "description": "Title of option page"
+    },
+    "OptionsNavigation_assign": {
+        "message": "割り当てる",
+        "description": "Navigation link title for assign proxy for containers"
+    },
+    "OptionsNavigation_proxies": {
+        "message": "プロキシ",
+        "description": "Navigation link title for config proxy list"
+    },
+    "OptionsNavigation_support": {
+        "message": "サポート",
+        "description": "Navigation link title for support information page"
+    },
+    "ProxyList_edit": {
+        "message": "編集",
+        "description": "Edit button in proxy list"
+    },
+    "ProxyList_delete": {
+        "message": "削除",
+        "description": "Delete button in proxy list"
+    },
+    "ProxyForm_titleFieldLabel": {
+        "message": "タイトル（オプション）",
+        "description": "Title field in proxy form"
+    },
+    "ProxyForm_serverFieldLabel": {
+        "message": "サーバー",
+        "description": "Server field in proxy form"
+    },
+    "ProxyForm_doNotProxyLocalFieldLabel": {
+        "message": "ローカルアドレス（localhost, 127.0.0.1, ::1）をプロキシしない",
+        "description": "`Do not proxy local addresses` field in the proxy form"
+    },
+    "ProxyForm_proxyDnsFieldLabel": {
+        "message": "プロキシDNSのリクエスト",
+        "description": "`Proxy DNS requests` field in the proxy form"
+    },
+    "ProxyForm_incorrectServerError": {
+        "message": "値は IP アドレスまたはドメイン名のいずれかである必要があります",
+        "description": "Error message displayed when incorrect server is entered"
+    },
+    "ProxyForm_portFieldLabel": {
+        "message": "ポート",
+        "description": "Port field in proxy form"
+    },
+    "ProxyForm_usernameFieldLabel": {
+        "message": "ユーザー名",
+        "description": "Username field in proxy form"
+    },
+    "ProxyForm_testProxySettingsLabel": {
+        "message": "テスト",
+        "description": "Settings test button label in proxy form"
+    },
+    "ProxyForm_save": {
+        "message": "保存",
+        "description": "Save button in proxy form"
+    },
+    "ProxyForm_duckduckgoAttribution": {
+        "message": "IP の結果 $DUCKDUCKGO_NAME$",
+        "description": "Attribution to DuckDuckGo for IP query",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxySettingsTestResult_settingsAreCorrect": {
+        "message": "設定は正しいです！",
+        "description": "Text displayed when result of testing proxy settings was successful in proxy form"
+    },
+    "ProxySettingsTestResult_error": {
+        "message": "エラー！",
+        "description": "Generic text meaning there is an error"
+    },
+    "ProxySettingsTestResult_noDirectConnection": {
+        "message": "設定は正しいのですが、プロキシなしでインターネットに接続するのは無理なようです。",
+        "description": "Text displayed when proxied request succeeded, but direct request failed"
+    },
+    "ProxySettingsTestResult_incorrectSettings": {
+        "message": "エラー！プロキシに接続できませんでした。恐らく設定が間違っているのでしょう。",
+        "description": "Text displayed when direct request is successful, but proxied request failed"
+    },
+    "ProxySettingsTestResult_directRequest": {
+        "message": "直接依頼する：",
+        "description": "Direct request header"
+    },
+    "ProxySettingsTestResult_proxiedRequest": {
+        "message": "プロキシされたリクエスト：",
+        "description": "Proxied request header"
+    },
+    "ImportPage_heading": {
+        "message": "プロキシのインポート",
+        "description": "Header of import proxies page"
+    },
+    "ImportPage_foxyProxyInputLabel": {
+        "message": "FoxyProxyの設定",
+        "description": "Label of FoxyProxy settings file input"
+    },
+    "ImportPage_importButtonNoFileSelected": {
+        "message": "ファイルを選択",
+        "description": "Text displayed on Import button when no file is selected or the file is invalid"
+    }
+}
