@@ -67,7 +67,7 @@
     "web-ext": "^6.5.0",
     "webextensions-api-fake": "^1.2.0",
     "webextensions-geckodriver": "^0.6.1",
-    "webpack": "^5.59.1",
+    "webpack": "^5.76.0",
     "webpack-cli": "^4.9.1"
   },
   "standardx": {
