@@ -41,7 +41,7 @@
         "description": "Text displayed when proxied request succeeded, but direct request failed"
     },
     "ProxySettingsTestResult_notConnectedToTheInternet": {
-        "message": "Error! Probablemente no tienes conexión a Internet.",
+        "message": "¡Error! tal vez, no estás conectado a Internet.",
         "description": "Text displayed when both direct and proxied requests failed to succeed"
     },
     "ProxySettingsTestResult_error": {

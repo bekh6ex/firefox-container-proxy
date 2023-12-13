@@ -133,5 +133,13 @@
     "ImportPage_importButtonNoFileSelected": {
         "message": "Wählen Sie eine Datei",
         "description": "Text displayed on Import button when no file is selected or the file is invalid"
+    },
+    "ProxyForm_proxyDnsFieldLabel": {
+        "message": "Proxy DNS Anfragen",
+        "description": "`Proxy DNS requests` field in the proxy form"
+    },
+    "ContainerList_privateBrowsingContainerName": {
+        "message": "Privates Surfen",
+        "description": "Name of container for private browsing window"
     }
 }

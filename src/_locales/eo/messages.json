@@ -26,7 +26,7 @@
         }
     },
     "ProxySettingsTestResult_notConnectedToTheInternet": {
-        "message": "Eraro! Probable, vi ne estas konektita al Interreto.",
+        "message": "Eraro! Eble, vi ne estas konektita al Interreto.",
         "description": "Text displayed when both direct and proxied requests failed to succeed"
     },
     "ProxySettingsTestResult_settingsAreCorrect": {

@@ -1,0 +1,162 @@
+{
+    "General_extensionDescription": {
+        "message": "為每個容器分配代理服務器",
+        "description": "Description of the extension."
+    },
+    "OptionsPage_browserTabTitle": {
+        "message": "Container Proxy 擴展設定",
+        "description": "Title of option page"
+    },
+    "ContainerList_defaultContainerName": {
+        "message": "預設",
+        "description": "Name of default container"
+    },
+    "ContainerList_privateBrowsingContainerName": {
+        "message": "私隱瀏覽",
+        "description": "Name of container for private browsing window"
+    },
+    "OptionsNavigation_assign": {
+        "message": "分配",
+        "description": "Navigation link title for assign proxy for containers"
+    },
+    "OptionsNavigation_support": {
+        "message": "支援",
+        "description": "Navigation link title for support information page"
+    },
+    "ContainerList_proxyDisabled": {
+        "message": "直接連接",
+        "description": "Config containers to not use proxy"
+    },
+    "ProxyList_edit": {
+        "message": "編輯",
+        "description": "Edit button in proxy list"
+    },
+    "ProxyForm_protocolFieldLabel": {
+        "message": "協議",
+        "description": "Protocol field in proxy form"
+    },
+    "ProxyForm_titleFieldLabel": {
+        "message": "名稱（選填）",
+        "description": "Title field in proxy form"
+    },
+    "ProxyForm_serverFieldLabel": {
+        "message": "伺服器",
+        "description": "Server field in proxy form"
+    },
+    "ProxyForm_incorrectServerError": {
+        "message": "輸入值應為 IP 地址或域名",
+        "description": "Error message displayed when incorrect server is entered"
+    },
+    "ProxyForm_portFieldLabel": {
+        "message": "端口",
+        "description": "Port field in proxy form"
+    },
+    "ProxyForm_usernameFieldLabel": {
+        "message": "用戶名",
+        "description": "Username field in proxy form"
+    },
+    "ProxyForm_passwordFieldLabel": {
+        "message": "密碼",
+        "description": "Password field in proxy form"
+    },
+    "ProxyForm_testProxySettingsLabel": {
+        "message": "測試",
+        "description": "Settings test button label in proxy form"
+    },
+    "ProxyForm_save": {
+        "message": "儲存",
+        "description": "Save button in proxy form"
+    },
+    "ProxyForm_duckduckgoAttribution": {
+        "message": "$DUCKDUCKGO_NAME$ 的 IP搜尋結果",
+        "description": "Attribution to DuckDuckGo for IP query",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxySettingsTestResult_settingsAreCorrect": {
+        "message": "設定正確!",
+        "description": "Text displayed when result of testing proxy settings was successful in proxy form"
+    },
+    "ProxySettingsTestResult_error": {
+        "message": "錯誤!",
+        "description": "Generic text meaning there is an error"
+    },
+    "ProxySettingsTestResult_notConnectedToTheInternet": {
+        "message": "錯誤！ 也許，您沒有連接到網路。",
+        "description": "Text displayed when both direct and proxied requests failed to succeed"
+    },
+    "ProxyList_delete": {
+        "message": "刪除",
+        "description": "Delete button in proxy list"
+    },
+    "OptionsNavigation_proxies": {
+        "message": "配置代理伺服器",
+        "description": "Navigation link title for config proxy list"
+    },
+    "ProxySettingsTestResult_proxiedRequest": {
+        "message": "代理請求：",
+        "description": "Proxied request header"
+    },
+    "ImportPage_heading": {
+        "message": "導入代理",
+        "description": "Header of import proxies page"
+    },
+    "ProxySettingsTestResult_incorrectSettings": {
+        "message": "錯誤！ 無法連線到代理程式。 可能是設定不正確。",
+        "description": "Text displayed when direct request is successful, but proxied request failed"
+    },
+    "ImportPage_foxyProxyInputLabel": {
+        "message": "FoxyProxy 設定",
+        "description": "Label of FoxyProxy settings file input"
+    },
+    "ImportPage_importButtonNoFileSelected": {
+        "message": "選擇一個文件",
+        "description": "Text displayed on Import button when no file is selected or the file is invalid"
+    },
+    "ProxyForm_testProxySettingsConfirmationText": {
+        "message": "要測試設置，需要向 $DUCKDUCKGO_NAME$ 發出幾個請求。 繼續？",
+        "description": "Text shown when a user clicks Test settings button notifying user about request to 3rd party service",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ImportPage_importButtonDoImport": {
+        "message": "導入 $NUMBER$ 個代理",
+        "description": "Text displayed on Import button when there is something to import",
+        "placeholders": {
+            "NUMBER": {
+                "content": "$1"
+            }
+        }
+    },
+    "SupportPage_gitterInvite": {
+        "message": "如果您有任何疑問、問題或只是想聊天，歡迎造訪我們的 $GITTER_NAME$ 頻道：",
+        "description": "Gitter welcome message displayed on Support page",
+        "placeholders": {
+            "GITTER_NAME": {
+                "content": "Gitter"
+            }
+        }
+    },
+    "ProxyForm_proxyDnsFieldLabel": {
+        "message": "代理 DNS 請求",
+        "description": "`Proxy DNS requests` field in the proxy form"
+    },
+    "ProxySettingsTestResult_directRequest": {
+        "message": "直接請求：",
+        "description": "Direct request header"
+    },
+    "ProxyForm_doNotProxyLocalFieldLabel": {
+        "message": "不代理本地位址(localhost, 127.0.0.1, ::1)",
+        "description": "`Do not proxy local addresses` field in the proxy form"
+    },
+    "ProxySettingsTestResult_noDirectConnection": {
+        "message": "設定正確，但似乎無法在沒有代理的情況下連接到互聯網。",
+        "description": "Text displayed when proxied request succeeded, but direct request failed"
+    }
+}

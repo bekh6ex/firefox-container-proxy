@@ -150,5 +150,13 @@
     "General_extensionDescription": {
         "message": "Tildel en mellomtjener til en beholder",
         "description": "Description of the extension."
+    },
+    "ProxyForm_proxyDnsFieldLabel": {
+        "message": "Mellomtjen DNS-forespørsler",
+        "description": "`Proxy DNS requests` field in the proxy form"
+    },
+    "ContainerList_privateBrowsingContainerName": {
+        "message": "Privat surfing",
+        "description": "Name of container for private browsing window"
     }
 }

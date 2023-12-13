@@ -1,50 +1,50 @@
 {
     "General_extensionDescription": {
-        "message": "Assign a proxy to a container",
+        "message": "Tilldela en proxy till en behållare",
         "description": "Description of the extension."
     },
     "ContainerList_defaultContainerName": {
-        "message": "Default",
+        "message": "Standard",
         "description": "Name of default container"
     },
     "ContainerList_privateBrowsingContainerName": {
-        "message": "Private Browsing",
+        "message": "Privatbläddring",
         "description": "Name of container for private browsing window"
     },
     "OptionsPage_browserTabTitle": {
-        "message": "Container Proxy extension settings",
+        "message": "Inställningar för tillägget Container Proxy",
         "description": "Title of option page"
     },
     "OptionsNavigation_assign": {
-        "message": "Assign",
+        "message": "Tilldela",
         "description": "Navigation link title for assign proxy for containers"
     },
     "OptionsNavigation_proxies": {
         "message": "Proxies",
         "description": "Navigation link title for config proxy list"
     },
+    "ContainerList_proxyDisabled": {
+        "message": "Direkt",
+        "description": "Config containers to not use proxy"
+    },
     "OptionsNavigation_support": {
         "message": "Support",
         "description": "Navigation link title for support information page"
     },
-    "ContainerList_proxyDisabled": {
-        "message": "Directly",
-        "description": "Config containers to not use proxy"
-    },
     "ProxyList_edit": {
-        "message": "Edit",
+        "message": "Redigera",
         "description": "Edit button in proxy list"
     },
     "ProxyList_delete": {
-        "message": "Delete",
+        "message": "Ta bort",
         "description": "Delete button in proxy list"
     },
     "ProxyForm_protocolFieldLabel": {
-        "message": "Protocol",
+        "message": "Protokoll",
         "description": "Protocol field in proxy form"
     },
     "ProxyForm_titleFieldLabel": {
-        "message": "Title (Optional)",
+        "message": "Titel (valfritt)",
         "description": "Title field in proxy form"
     },
     "ProxyForm_serverFieldLabel": {
@@ -52,15 +52,15 @@
         "description": "Server field in proxy form"
     },
     "ProxyForm_doNotProxyLocalFieldLabel": {
-        "message": "Do not proxy local addresses (localhost, 127.0.0.1, ::1)",
+        "message": "Använd inte proxy på lokala adresser (localhost, 127.0.0.1, ::1)",
         "description": "`Do not proxy local addresses` field in the proxy form"
     },
     "ProxyForm_proxyDnsFieldLabel": {
-        "message": "Proxy DNS requests",
+        "message": "Proxy DNS-förfrågningar",
         "description": "`Proxy DNS requests` field in the proxy form"
     },
     "ProxyForm_incorrectServerError": {
-        "message": "Value should be either IP address or domain name",
+        "message": "Värdet ska vara antingen IP-adress eller domännamn",
         "description": "Error message displayed when incorrect server is entered"
     },
     "ProxyForm_portFieldLabel": {
@@ -68,15 +68,15 @@
         "description": "Port field in proxy form"
     },
     "ProxyForm_usernameFieldLabel": {
-        "message": "Username",
+        "message": "Användarnamn",
         "description": "Username field in proxy form"
     },
     "ProxyForm_passwordFieldLabel": {
-        "message": "Password",
+        "message": "Lösenord",
         "description": "Password field in proxy form"
     },
     "ProxyForm_testProxySettingsConfirmationText": {
-        "message": "To test settings it is required to make a couple of requests to $DUCKDUCKGO_NAME$. Proceed?",
+        "message": "För att testa inställningarna måste du göra ett par förfrågningar till $DUCKDUCKGO_NAME$. Fortsätt?",
         "description": "Text shown when a user clicks Test settings button notifying user about request to 3rd party service",
         "placeholders": {
             "DUCKDUCKGO_NAME": {
@@ -89,11 +89,28 @@
         "description": "Settings test button label in proxy form"
     },
     "ProxyForm_save": {
-        "message": "Save",
+        "message": "Spara",
         "description": "Save button in proxy form"
     },
+    "ProxySettingsTestResult_noDirectConnection": {
+        "message": "Inställningarna är korrekta, men det verkar som om det inte går att ansluta till internet utan proxy.",
+        "description": "Text displayed when proxied request succeeded, but direct request failed"
+    },
+    "ImportPage_importButtonNoFileSelected": {
+        "message": "Välj en fil",
+        "description": "Text displayed on Import button when no file is selected or the file is invalid"
+    },
+    "ImportPage_importButtonDoImport": {
+        "message": "Importera $NUMBER$ proxys",
+        "description": "Text displayed on Import button when there is something to import",
+        "placeholders": {
+            "NUMBER": {
+                "content": "$1"
+            }
+        }
+    },
     "ProxyForm_duckduckgoAttribution": {
-        "message": "IP results from $DUCKDUCKGO_NAME$",
+        "message": "IP-resultat från $DUCKDUCKGO_NAME$",
         "description": "Attribution to DuckDuckGo for IP query",
         "placeholders": {
             "DUCKDUCKGO_NAME": {
@@ -102,35 +119,19 @@
         }
     },
     "ProxySettingsTestResult_settingsAreCorrect": {
-        "message": "The settings are correct!",
+        "message": "Inställningarna är korrekta!",
         "description": "Text displayed when result of testing proxy settings was successful in proxy form"
     },
     "ProxySettingsTestResult_error": {
-        "message": "Error!",
+        "message": "Fel!",
         "description": "Generic text meaning there is an error"
     },
-    "ProxySettingsTestResult_notConnectedToTheInternet": {
-        "message": "Error! maybe, you are not connected to the Internet.",
-        "description": "Text displayed when both direct and proxied requests failed to succeed"
-    },
-    "ProxySettingsTestResult_noDirectConnection": {
-        "message": "The settings are correct, but it seems connecting to the Internet without a proxy is not possible.",
-        "description": "Text displayed when proxied request succeeded, but direct request failed"
-    },
-    "ProxySettingsTestResult_incorrectSettings": {
-        "message": "Error! Could not connect to the proxy. Probably the settings are incorrect.",
-        "description": "Text displayed when direct request is successful, but proxied request failed"
-    },
-    "ProxySettingsTestResult_directRequest": {
-        "message": "Direct request:",
-        "description": "Direct request header"
-    },
     "ProxySettingsTestResult_proxiedRequest": {
-        "message": "Proxied request:",
+        "message": "Proxierad begäran:",
         "description": "Proxied request header"
     },
     "SupportPage_gitterInvite": {
-        "message": "If you have any questions, have a problem or just want to chat you are welcome in our channel in $GITTER_NAME$:",
+        "message": "Om du har några frågor, problem eller bara vill chatta är du välkommen till vår kanal på $GITTER_NAME$:",
         "description": "Gitter welcome message displayed on Support page",
         "placeholders": {
             "GITTER_NAME": {
@@ -138,25 +139,24 @@
             }
         }
     },
-    "ImportPage_heading": {
-        "message": "Import proxies",
-        "description": "Header of import proxies page"
-    },
     "ImportPage_foxyProxyInputLabel": {
-        "message": "FoxyProxy settings",
+        "message": "Inställningar för FoxyProxy",
         "description": "Label of FoxyProxy settings file input"
     },
-    "ImportPage_importButtonNoFileSelected": {
-        "message": "Select a file",
-        "description": "Text displayed on Import button when no file is selected or the file is invalid"
+    "ProxySettingsTestResult_notConnectedToTheInternet": {
+        "message": "Fel! Du kanske inte är ansluten till internet.",
+        "description": "Text displayed when both direct and proxied requests failed to succeed"
     },
-    "ImportPage_importButtonDoImport": {
-        "message": "Import $NUMBER$ proxies",
-        "description": "Text displayed on Import button when there is something to import",
-        "placeholders": {
-            "NUMBER": {
-                "content": "$1"
-            }
-        }
+    "ProxySettingsTestResult_directRequest": {
+        "message": "Direktförfrågan:",
+        "description": "Direct request header"
+    },
+    "ImportPage_heading": {
+        "message": "Importera proxys",
+        "description": "Header of import proxies page"
+    },
+    "ProxySettingsTestResult_incorrectSettings": {
+        "message": "Fel! Det gick inte att ansluta till proxyn. Inställningarna är förmodligen felaktiga.",
+        "description": "Text displayed when direct request is successful, but proxied request failed"
     }
 }
